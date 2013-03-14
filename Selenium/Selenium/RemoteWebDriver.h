@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Capabilities.h"
 
 @interface RemoteWebDriver : NSObject
 
-- (id)initWithServerAddress:(NSString*)address port:(NSInteger)port;
-
+- (id)initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites;
 @end

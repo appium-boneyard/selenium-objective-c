@@ -27,9 +27,8 @@
 @property BOOL nativeEvents;
 // TODO: add proxy object
 
--(id)getCapabilityForKey:(NSString*)key;
--(void)addCapabilityForKey:(NSString*)key andValue:(id)value;
--(NSData*)jsonData;
--(NSString*) jsonString;
+-(id) getCapabilityForKey:(NSString*)key;
+-(void) addCapabilityForKey:(NSString*)key andValue:(id)value;
+-(NSDictionary*) dictionary;
 
 @end

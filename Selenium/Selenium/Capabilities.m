@@ -90,24 +90,6 @@ NSMutableDictionary* _dict;
 
 -(id)getCapabilityForKey:(NSString*)key { return [_dict valueForKey:key]; }
 -(void)addCapabilityForKey:(NSString*)key andValue:(id)value { [_dict setValue:value forKey:key]; }
-
-
-#pragma mark - JSON Conversion
-
--(NSData*)jsonData
-{
-	NSError *error;
-	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:_dict
-													  options:0/*NSJSONWritingPrettyPrinted*/
-														error:&error];
-	return jsonData;
-}
-
--(NSString*) jsonString
-{
-	NSData *jsonData = [self jsonData];
-	NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-	return jsonString;
-}
+-(NSDictionary*)dictionary { return _dict; }
 
 @end
