@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Selenium' target in the 'Selenium' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
