@@ -8,13 +8,14 @@
 
 #import "RemoteWebDriver.h"
 #import "RemoteWebDriverStatus.h"
+#import "RemoteWebDriverSession.h"
 #import "JSONUtils.h"
 
 @implementation RemoteWebDriver
 
 NSString *serverAddress;
 NSInteger serverPort;
-NSString *sessionID;
+RemoteWebDriverSession *session;
 
 -(NSString*)httpCommandExecutor
 {
@@ -28,7 +29,7 @@ NSString *sessionID;
         serverAddress = address;
         serverPort = port;
         [self getStatus];
-		sessionID = [self postSesssionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites];
+		session = [self postSesssionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites];
     }
     return self;
 }
@@ -43,10 +44,16 @@ NSString *sessionID;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
                                     returningResponse:&response
                                                 error:&error];
-    return [[RemoteWebDriverStatus alloc] initWithJSON:urlData];
+	NSError *e;
+	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
+														 options: NSJSONReadingMutableContainers
+														   error: &e];
+	
+	RemoteWebDriverStatus *webdriverStatus = [[RemoteWebDriverStatus alloc] initWithDictionary:json];
+	return webdriverStatus;
 }
 
--(NSString*)postSesssionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities
+-(RemoteWebDriverSession*)postSesssionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", [self httpCommandExecutor]];
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -78,7 +85,32 @@ NSString *sessionID;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
 														 options: NSJSONReadingMutableContainers
 														   error: &e];
-	return [json objectForKey:@"sessionId"];
+	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
+	return session;
+}
+
+-(NSArray*)getSessions
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/sessions", [self httpCommandExecutor]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
+											returningResponse:&response
+														error:&error];
+	NSError *e;
+	NSArray *json = [NSJSONSerialization JSONObjectWithData:urlData
+														 options: NSJSONReadingMutableContainers
+														   error: &e];
+	NSMutableArray *sessions = [NSMutableArray new];
+	NSEnumerator *enumerator = [json objectEnumerator];
+	id object;
+	while (object = [enumerator nextObject]) {
+	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:object];
+		[sessions addObject:session];
+	}
+	return sessions;
 }
 
 @end

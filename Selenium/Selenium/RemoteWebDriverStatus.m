@@ -10,28 +10,23 @@
 
 @implementation RemoteWebDriverStatus
 
--(id)initWithJSON:(NSData*)jsonData
+-(id)initWithDictionary:(NSDictionary*)dict
 {
-    self = [super init];
+	self = [super init];
     if (self) {
-        NSError *e = nil;
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:jsonData options: NSJSONReadingMutableContainers error: &e];
-
-        long status = [[json objectForKey:@"status"] longValue];
-        if (status != 0)
-            return nil;
-        
-        NSDictionary *value = [json objectForKey:@"value"];
-        
-        NSDictionary *build = [value objectForKey:@"build"];
-        [self setBuildVersion:[build objectForKey:@"version"]];
-        [self setBuildRevision:[build objectForKey:@"revision"]];
-        [self setBuildTime:[build objectForKey:@"time"]];
-        
-        NSDictionary *os = [value objectForKey:@"os"];
-        [self setOsArchitecture:[os objectForKey:@"arch"]];
-        [self setOsName:[os objectForKey:@"name"]];
-        [self setOsVersion:[os objectForKey:@"version"]];
+		[self setStatus:[[dict objectForKey:@"status"] longValue]];
+		
+		NSDictionary *value = [dict objectForKey:@"value"];
+		
+		NSDictionary *build = [value objectForKey:@"build"];
+		[self setBuildVersion:[build objectForKey:@"version"]];
+		[self setBuildRevision:[build objectForKey:@"revision"]];
+		[self setBuildTime:[build objectForKey:@"time"]];
+		
+		NSDictionary *os = [value objectForKey:@"os"];
+		[self setOsArchitecture:[os objectForKey:@"arch"]];
+		[self setOsName:[os objectForKey:@"name"]];
+		[self setOsVersion:[os objectForKey:@"version"]];
     }
     return self;
 }

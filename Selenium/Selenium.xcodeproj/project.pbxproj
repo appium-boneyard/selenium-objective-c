@@ -18,6 +18,8 @@
 		3673CD3716F2296300CBE632 /* Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3516F2296300CBE632 /* Capabilities.m */; };
 		3673CD3B16F235B200CBE632 /* JSONUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3673CD3916F235B200CBE632 /* JSONUtils.h */; };
 		3673CD3C16F235B200CBE632 /* JSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3A16F235B200CBE632 /* JSONUtils.m */; };
+		3673CD3F16F256F600CBE632 /* RemoteWebDriverSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */; };
+		3673CD4016F256F600CBE632 /* RemoteWebDriverSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */; };
 		36B7982E16F1813400A21FB3 /* RemoteWebDriverStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */; };
 		36B7982F16F1813400A21FB3 /* RemoteWebDriverStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */; };
 /* End PBXBuildFile section */
@@ -51,6 +53,8 @@
 		3673CD3516F2296300CBE632 /* Capabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capabilities.m; sourceTree = "<group>"; };
 		3673CD3916F235B200CBE632 /* JSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtils.h; sourceTree = "<group>"; };
 		3673CD3A16F235B200CBE632 /* JSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONUtils.m; sourceTree = "<group>"; };
+		3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteWebDriverSession.h; sourceTree = "<group>"; };
+		3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteWebDriverSession.m; sourceTree = "<group>"; };
 		36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteWebDriverStatus.h; sourceTree = "<group>"; };
 		36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteWebDriverStatus.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +172,8 @@
 			children = (
 				3673CD3416F2296300CBE632 /* Capabilities.h */,
 				3673CD3516F2296300CBE632 /* Capabilities.m */,
+				3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */,
+				3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */,
 				36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */,
 				36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */,
 			);
@@ -194,6 +200,7 @@
 				36B7982E16F1813400A21FB3 /* RemoteWebDriverStatus.h in Headers */,
 				3673CD3616F2296300CBE632 /* Capabilities.h in Headers */,
 				3673CD3B16F235B200CBE632 /* JSONUtils.h in Headers */,
+				3673CD3F16F256F600CBE632 /* RemoteWebDriverSession.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +306,7 @@
 				36B7982F16F1813400A21FB3 /* RemoteWebDriverStatus.m in Sources */,
 				3673CD3716F2296300CBE632 /* Capabilities.m in Sources */,
 				3673CD3C16F235B200CBE632 /* JSONUtils.m in Sources */,
+				3673CD4016F256F600CBE632 /* RemoteWebDriverSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

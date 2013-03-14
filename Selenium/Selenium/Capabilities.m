@@ -29,11 +29,34 @@ NSMutableDictionary* _dict;
 
 @implementation Capabilities
 
-- (id)init
+#pragma mark - Constructors
+
+-(id)init
 {
     self = [super init];
     if (self) {
         _dict = [NSMutableDictionary new];
+    }
+    return self;
+}
+
+-(id)initWithDictionary:(NSDictionary*)dict
+{
+    self = [super init];
+    if (self) {
+        [self setBrowserName:[dict objectForKey:BROWSER_NAME]];
+		[self setVersion:[dict objectForKey:VERSION]];
+		[self setPlatform:[dict objectForKey:PLATFORM]];
+		[self setJavascriptEnabled:[[dict objectForKey:JAVASCRIPT_ENABLED] boolValue]];
+		[self setTakesScreenShot:[[dict objectForKey:TAKES_SCREENSHOT] boolValue]];
+		[self setHandlesAlerts:[[dict objectForKey:HANDLES_ALERTS] boolValue]];
+		[self setDatabaseEnabled:[[dict objectForKey:DATABASE_ENABLED] boolValue]];
+		[self setLocationContextEnabled:[[dict objectForKey:LOCATION_CONTEXT_ENABLED] boolValue]];
+		[self setApplicationCacheEnabled:[[dict objectForKey:APPLICATION_CACHE_ENABLED] boolValue]];
+		[self setBrowserConnectionEnabled:[[dict objectForKey:BROWSER_CONNECTION_ENABLED] boolValue]];
+		[self setCssSelectorsEnabled:[[dict objectForKey:CSS_SELECTORS_ENABLED] boolValue]];
+		[self setWebStorageEnabled:[[dict objectForKey:WEB_STORAGE_ENABLED] boolValue]];
+		
     }
     return self;
 }

@@ -10,6 +10,7 @@
 
 @interface RemoteWebDriverStatus : NSObject
 
+@property long status;
 @property NSString *buildVersion;
 @property NSString *buildRevision;
 @property NSString *buildTime;
@@ -17,6 +18,6 @@
 @property NSString *osName;
 @property NSString *osVersion;
 
--(id)initWithJSON:(NSData*)jsonData;
+-(id)initWithDictionary:(NSDictionary*)dict;
 
 @end
