@@ -14,15 +14,15 @@
 		36BB381F16F268C2003A46FD /* Selenium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380116F268C2003A46FD /* Selenium.framework */; };
 		36BB382516F268C2003A46FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36BB382316F268C2003A46FD /* InfoPlist.strings */; };
 		36BB382816F268C2003A46FD /* SeleniumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB382716F268C2003A46FD /* SeleniumTests.m */; };
-		36BB383516F26907003A46FD /* RemoteWebDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383316F26907003A46FD /* RemoteWebDriver.h */; };
+		36BB383516F26907003A46FD /* RemoteWebDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383316F26907003A46FD /* RemoteWebDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36BB383616F26907003A46FD /* RemoteWebDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383416F26907003A46FD /* RemoteWebDriver.m */; };
-		36BB383916F26926003A46FD /* Capabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383716F26926003A46FD /* Capabilities.h */; };
+		36BB383916F26926003A46FD /* Capabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383716F26926003A46FD /* Capabilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36BB383A16F26926003A46FD /* Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383816F26926003A46FD /* Capabilities.m */; };
-		36BB383D16F26945003A46FD /* RemoteWebDriverSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383B16F26945003A46FD /* RemoteWebDriverSession.h */; };
+		36BB383D16F26945003A46FD /* RemoteWebDriverSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383B16F26945003A46FD /* RemoteWebDriverSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36BB383E16F26945003A46FD /* RemoteWebDriverSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383C16F26945003A46FD /* RemoteWebDriverSession.m */; };
-		36BB384116F26951003A46FD /* RemoteWebDriverStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383F16F26951003A46FD /* RemoteWebDriverStatus.h */; };
+		36BB384116F26951003A46FD /* RemoteWebDriverStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383F16F26951003A46FD /* RemoteWebDriverStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36BB384216F26951003A46FD /* RemoteWebDriverStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB384016F26951003A46FD /* RemoteWebDriverStatus.m */; };
-		36BB384616F26974003A46FD /* JSONUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB384416F26974003A46FD /* JSONUtils.h */; };
+		36BB384616F26974003A46FD /* JSONUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB384416F26974003A46FD /* JSONUtils.h */; settings = {ATTRIBUTES = (); }; };
 		36BB384716F26974003A46FD /* JSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB384516F26974003A46FD /* JSONUtils.m */; };
 /* End PBXBuildFile section */
 
@@ -497,6 +497,7 @@
 				36BB382D16F268C2003A46FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		36BB382E16F268C2003A46FD /* Build configuration list for PBXNativeTarget "SeleniumTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +506,7 @@
 				36BB383016F268C2003A46FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
