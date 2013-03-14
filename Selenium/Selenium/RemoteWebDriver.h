@@ -11,5 +11,9 @@
 
 @interface RemoteWebDriver : NSObject
 
-- (id)initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites;
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites;
+-(void) quit;
+
+-(NSString*)getPageSource;
+
 @end

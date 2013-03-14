@@ -28,11 +28,16 @@
 
 - (void)testExample
 {
-	Capabilities *c = [Capabilities new];
+	/*
+	 Capabilities *c = [Capabilities new];
 	[c setVersion:@"6.1"];
 	[c setPlatform:@"Mac"];
 	[c setBrowserName:@"iOS"];
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"127.0.0.1" port:4723 desiredCapabilities:c requiredCapabilities:nil];
+	NSString *pageSource = [driver getPageSource];
+	NSLog(@"%@", pageSource);
+	[driver quit];
+	 */
 	
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
 }
