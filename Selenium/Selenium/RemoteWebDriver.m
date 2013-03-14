@@ -22,18 +22,34 @@ RemoteWebDriverSession *session;
     return [NSString stringWithFormat:@"http://%@:%d/wd/hub", serverAddress, (int)serverPort];
 }
 
-- (id)initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites
+#pragma mark - Public Methods
+
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites
 {
     self = [super init];
     if (self) {
         serverAddress = address;
         serverPort = port;
         [self getStatus];
-		session = [self postSesssionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites];
+		session = [self postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites];
+		[self getSessionWithSession:[session sessionID]];
     }
     return self;
 }
 
+-(void) quit
+{
+	[self deleteSessionWithSession:[session sessionID]];
+}
+
+-(NSString*)getPageSource
+{
+	return [self getSourceWithSessions:[session sessionID]];
+}
+
+#pragma mark - JSON-Wire Protocol Implementation
+
+// GET /status
 -(RemoteWebDriverStatus*)getStatus
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/status", [self httpCommandExecutor]];
@@ -53,7 +69,8 @@ RemoteWebDriverSession *session;
 	return webdriverStatus;
 }
 
--(RemoteWebDriverSession*)postSesssionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities
+// POST /session
+-(RemoteWebDriverSession*)postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", [self httpCommandExecutor]];
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -89,6 +106,7 @@ RemoteWebDriverSession *session;
 	return session;
 }
 
+// GET /sessions
 -(NSArray*)getSessions
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/sessions", [self httpCommandExecutor]];
@@ -111,6 +129,62 @@ RemoteWebDriverSession *session;
 		[sessions addObject:session];
 	}
 	return sessions;
+}
+
+// GET /session/:sessionId
+-(RemoteWebDriverSession*)getSessionWithSession:(NSString*)sessionId
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", [self httpCommandExecutor], sessionId];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
+											returningResponse:&response
+														error:&error];
+	NSError *e;
+	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
+													options: NSJSONReadingMutableContainers
+													  error: &e];
+	
+	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
+	return session;
+}
+
+// DELETE /session/:sessionId
+-(BOOL)deleteSessionWithSession:(NSString*)sessionId
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", [self httpCommandExecutor], sessionId];
+	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+	[request setHTTPMethod:@"DELETE"];
+	
+	NSURLResponse *response;
+	NSError *err;
+	[NSURLConnection sendSynchronousRequest:request
+						  returningResponse:&response
+									  error:&err];
+	
+	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+	return ([httpResponse statusCode] == 200);
+}
+
+// GET /session/:sessionId/source
+-(NSString*)getSourceWithSessions:(NSString*)sessionId
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/source", [self httpCommandExecutor], sessionId];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
+											returningResponse:&response
+														error:&error];
+	NSError *e;
+	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
+													options: NSJSONReadingMutableContainers
+													  error: &e];
+	NSString *source = [json objectForKey:@"value"];
+	return source;
 }
 
 @end
