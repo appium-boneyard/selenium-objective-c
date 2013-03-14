@@ -8,14 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		3639FDA916F179F300E8A7BB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3639FDA816F179F300E8A7BB /* Cocoa.framework */; };
-		3639FDB316F179F300E8A7BB /* WebDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3639FDB216F179F300E8A7BB /* WebDriver.m */; };
+		3639FDB316F179F300E8A7BB /* RemoteWebDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 3639FDB216F179F300E8A7BB /* RemoteWebDriver.m */; };
 		3639FDBB16F179F300E8A7BB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3639FDBA16F179F300E8A7BB /* SenTestingKit.framework */; };
 		3639FDBC16F179F300E8A7BB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3639FDA816F179F300E8A7BB /* Cocoa.framework */; };
 		3639FDBF16F179F300E8A7BB /* Selenium.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3639FDA516F179F300E8A7BB /* Selenium.dylib */; };
 		3639FDC516F179F300E8A7BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3639FDC316F179F300E8A7BB /* InfoPlist.strings */; };
 		3639FDC816F179F400E8A7BB /* SeleniumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3639FDC716F179F400E8A7BB /* SeleniumTests.m */; };
-		36B7982E16F1813400A21FB3 /* Status.h in Headers */ = {isa = PBXBuildFile; fileRef = 36B7982C16F1813400A21FB3 /* Status.h */; };
-		36B7982F16F1813400A21FB3 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B7982D16F1813400A21FB3 /* Status.m */; };
+		3673CD3616F2296300CBE632 /* Capabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 3673CD3416F2296300CBE632 /* Capabilities.h */; };
+		3673CD3716F2296300CBE632 /* Capabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3516F2296300CBE632 /* Capabilities.m */; };
+		3673CD3B16F235B200CBE632 /* JSONUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 3673CD3916F235B200CBE632 /* JSONUtils.h */; };
+		3673CD3C16F235B200CBE632 /* JSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3A16F235B200CBE632 /* JSONUtils.m */; };
+		3673CD3F16F256F600CBE632 /* RemoteWebDriverSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */; };
+		3673CD4016F256F600CBE632 /* RemoteWebDriverSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */; };
+		36B7982E16F1813400A21FB3 /* RemoteWebDriverStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */; };
+		36B7982F16F1813400A21FB3 /* RemoteWebDriverStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,16 +41,22 @@
 		3639FDAC16F179F300E8A7BB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3639FDAD16F179F300E8A7BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3639FDB016F179F300E8A7BB /* Selenium-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Selenium-Prefix.pch"; sourceTree = "<group>"; };
-		3639FDB116F179F300E8A7BB /* WebDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebDriver.h; sourceTree = "<group>"; };
-		3639FDB216F179F300E8A7BB /* WebDriver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebDriver.m; sourceTree = "<group>"; };
+		3639FDB116F179F300E8A7BB /* RemoteWebDriver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RemoteWebDriver.h; sourceTree = "<group>"; };
+		3639FDB216F179F300E8A7BB /* RemoteWebDriver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemoteWebDriver.m; sourceTree = "<group>"; };
 		3639FDB916F179F300E8A7BB /* SeleniumTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeleniumTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3639FDBA16F179F300E8A7BB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		3639FDC216F179F300E8A7BB /* SeleniumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SeleniumTests-Info.plist"; sourceTree = "<group>"; };
 		3639FDC416F179F300E8A7BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3639FDC616F179F400E8A7BB /* SeleniumTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeleniumTests.h; sourceTree = "<group>"; };
 		3639FDC716F179F400E8A7BB /* SeleniumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeleniumTests.m; sourceTree = "<group>"; };
-		36B7982C16F1813400A21FB3 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
-		36B7982D16F1813400A21FB3 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		3673CD3416F2296300CBE632 /* Capabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Capabilities.h; sourceTree = "<group>"; };
+		3673CD3516F2296300CBE632 /* Capabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Capabilities.m; sourceTree = "<group>"; };
+		3673CD3916F235B200CBE632 /* JSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtils.h; sourceTree = "<group>"; };
+		3673CD3A16F235B200CBE632 /* JSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONUtils.m; sourceTree = "<group>"; };
+		3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteWebDriverSession.h; sourceTree = "<group>"; };
+		3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteWebDriverSession.m; sourceTree = "<group>"; };
+		36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteWebDriverStatus.h; sourceTree = "<group>"; };
+		36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteWebDriverStatus.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				3639FDAE16F179F300E8A7BB /* Selenium */,
+				3673CD3816F2359600CBE632 /* Utility */,
 				3639FDC016F179F300E8A7BB /* SeleniumTests */,
 				3639FDA716F179F300E8A7BB /* Frameworks */,
 				3639FDA616F179F300E8A7BB /* Products */,
@@ -111,10 +124,7 @@
 		3639FDAE16F179F300E8A7BB /* Selenium */ = {
 			isa = PBXGroup;
 			children = (
-				36B7982C16F1813400A21FB3 /* Status.h */,
-				36B7982D16F1813400A21FB3 /* Status.m */,
-				3639FDB116F179F300E8A7BB /* WebDriver.h */,
-				3639FDB216F179F300E8A7BB /* WebDriver.m */,
+				3673CD3116F2250D00CBE632 /* RemoteWebDriver */,
 				3639FDAF16F179F300E8A7BB /* Supporting Files */,
 			);
 			path = Selenium;
@@ -147,6 +157,39 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		3673CD3116F2250D00CBE632 /* RemoteWebDriver */ = {
+			isa = PBXGroup;
+			children = (
+				3639FDB116F179F300E8A7BB /* RemoteWebDriver.h */,
+				3639FDB216F179F300E8A7BB /* RemoteWebDriver.m */,
+				3673CD3316F2260700CBE632 /* Types */,
+			);
+			name = RemoteWebDriver;
+			sourceTree = "<group>";
+		};
+		3673CD3316F2260700CBE632 /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				3673CD3416F2296300CBE632 /* Capabilities.h */,
+				3673CD3516F2296300CBE632 /* Capabilities.m */,
+				3673CD3D16F256F600CBE632 /* RemoteWebDriverSession.h */,
+				3673CD3E16F256F600CBE632 /* RemoteWebDriverSession.m */,
+				36B7982C16F1813400A21FB3 /* RemoteWebDriverStatus.h */,
+				36B7982D16F1813400A21FB3 /* RemoteWebDriverStatus.m */,
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
+		3673CD3816F2359600CBE632 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				3673CD3916F235B200CBE632 /* JSONUtils.h */,
+				3673CD3A16F235B200CBE632 /* JSONUtils.m */,
+			);
+			name = Utility;
+			path = Selenium;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -154,7 +197,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36B7982E16F1813400A21FB3 /* Status.h in Headers */,
+				36B7982E16F1813400A21FB3 /* RemoteWebDriverStatus.h in Headers */,
+				3673CD3616F2296300CBE632 /* Capabilities.h in Headers */,
+				3673CD3B16F235B200CBE632 /* JSONUtils.h in Headers */,
+				3673CD3F16F256F600CBE632 /* RemoteWebDriverSession.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3639FDB316F179F300E8A7BB /* WebDriver.m in Sources */,
-				36B7982F16F1813400A21FB3 /* Status.m in Sources */,
+				3639FDB316F179F300E8A7BB /* RemoteWebDriver.m in Sources */,
+				36B7982F16F1813400A21FB3 /* RemoteWebDriverStatus.m in Sources */,
+				3673CD3716F2296300CBE632 /* Capabilities.m in Sources */,
+				3673CD3C16F235B200CBE632 /* JSONUtils.m in Sources */,
+				3673CD4016F256F600CBE632 /* RemoteWebDriverSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
