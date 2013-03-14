@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Status : NSObject
+@interface RemoteWebDriverStatus : NSObject
 
 @property NSString *buildVersion;
 @property NSString *buildRevision;

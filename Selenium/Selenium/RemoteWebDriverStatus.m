@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "Status.h"
+#import "RemoteWebDriverStatus.h"
 
-@implementation Status
+@implementation RemoteWebDriverStatus
 
 -(id)initWithJSON:(NSData*)jsonData
 {
@@ -32,7 +32,6 @@
         [self setOsArchitecture:[os objectForKey:@"arch"]];
         [self setOsName:[os objectForKey:@"name"]];
         [self setOsVersion:[os objectForKey:@"version"]];
-        
     }
     return self;
 }

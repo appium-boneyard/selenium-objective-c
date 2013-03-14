@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WebDriver : NSObject
+@interface RemoteWebDriver : NSObject
 
 - (id)initWithServerAddress:(NSString*)address port:(NSInteger)port;
 

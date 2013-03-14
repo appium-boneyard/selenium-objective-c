@@ -7,7 +7,8 @@
 //
 
 #import "SeleniumTests.h"
-#import "WebDriver.h"
+#import "RemoteWebDriver.h"
+#import "Capabilities.h"
 
 @implementation SeleniumTests
 
@@ -27,8 +28,15 @@
 
 - (void)testExample
 {
-    WebDriver *driver = [[WebDriver alloc] initWithServerAddress:@"127.0.0.1" port:4723];
-    STFail(@"Unit tests are not implemented yet in SeleniumTests");
+    //RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"127.0.0.1" port:4723];
+    /*
+	Capabilities *c = [Capabilities new];
+	[c setVersion:@"6.1"];
+	[c setPlatform:@"Mac"];
+	[c setBrowserName:@"iOS"];
+	 */
+	
+	STFail(@"Unit tests are not implemented yet in SeleniumTests");
 }
 
 @end
