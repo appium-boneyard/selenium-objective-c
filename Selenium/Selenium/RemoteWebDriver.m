@@ -58,8 +58,8 @@ RemoteWebDriverSession *session;
     NSURLResponse *response;
     NSError *error;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
-                                    returningResponse:&response
-                                                error:&error];
+											returningResponse:&response
+														error:&error];
 	NSError *e;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
 														 options: NSJSONReadingMutableContainers
@@ -119,13 +119,13 @@ RemoteWebDriverSession *session;
 														error:&error];
 	NSError *e;
 	NSArray *json = [NSJSONSerialization JSONObjectWithData:urlData
-														 options: NSJSONReadingMutableContainers
-														   error: &e];
+													options: NSJSONReadingMutableContainers
+													  error: &e];
 	NSMutableArray *sessions = [NSMutableArray new];
 	NSEnumerator *enumerator = [json objectEnumerator];
 	id object;
 	while (object = [enumerator nextObject]) {
-	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:object];
+		RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:object];
 		[sessions addObject:session];
 	}
 	return sessions;
@@ -144,8 +144,8 @@ RemoteWebDriverSession *session;
 														error:&error];
 	NSError *e;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-													options: NSJSONReadingMutableContainers
-													  error: &e];
+														 options: NSJSONReadingMutableContainers
+														   error: &e];
 	
 	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
 	return session;
@@ -181,8 +181,8 @@ RemoteWebDriverSession *session;
 														error:&error];
 	NSError *e;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-													options: NSJSONReadingMutableContainers
-													  error: &e];
+														 options: NSJSONReadingMutableContainers
+														   error: &e];
 	NSString *source = [json objectForKey:@"value"];
 	return source;
 }
