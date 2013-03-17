@@ -14,8 +14,6 @@
 {
 	self = [super init];
     if (self) {
-		[self setStatus:[[dict objectForKey:@"status"] longValue]];
-		
 		NSDictionary *value = [dict objectForKey:@"value"];
 		
 		NSDictionary *build = [value objectForKey:@"build"];

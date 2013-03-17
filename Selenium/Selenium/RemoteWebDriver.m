@@ -10,6 +10,7 @@
 #import "RemoteWebDriverStatus.h"
 #import "RemoteWebDriverSession.h"
 #import "JSONUtils.h"
+#import "SeleniumError.h"
 
 @implementation RemoteWebDriver
 
@@ -24,53 +25,81 @@ RemoteWebDriverSession *session;
 
 #pragma mark - Public Methods
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
         serverAddress = address;
         serverPort = port;
-        [self getStatus];
-		session = [self postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites];
-		[self getSessionWithSession:[session sessionID]];
+
+        // get status
+        [self getStatusAndError:error];
+        if ([*error code] != 0)
+            return nil;
+        
+        // get session
+		session = [self postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error];
+        if ([*error code] != 0)
+            return nil;
+        
+		[self getSessionWithSession:[session sessionID] error:error];
     }
     return self;
 }
 
--(void) quit
+-(void)quit
 {
-	[self deleteSessionWithSession:[session sessionID]];
+    NSError *error;
+    [self quitAndError:&error];
+}
+
+-(void) quitAndError:(NSError **)error
+{
+	[self deleteSessionWithSession:[session sessionID] error:error];
 }
 
 -(NSString*)getPageSource
 {
-	return [self getSourceWithSessions:[session sessionID]];
+    NSError *error;
+    return [self getPageSourceAndError:&error];
+}
+
+-(NSString*)getPageSourceAndError:(NSError **)error
+{
+	return [self getSourceWithSessions:[session sessionID] error:error];
 }
 
 #pragma mark - JSON-Wire Protocol Implementation
 
 // GET /status
--(RemoteWebDriverStatus*)getStatus
+-(RemoteWebDriverStatus*)getStatusAndError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/status", [self httpCommandExecutor]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
-    NSError *error;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
 											returningResponse:&response
-														error:&error];
-	NSError *e;
+														error:error];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
 														 options: NSJSONReadingMutableContainers
-														   error: &e];
-	
+														   error: error];
+    if ([*error code] != 0)
+        return nil;
+    
+    *error = [SeleniumError errorWithResponseDict:json];
+    if ([*error code] != 0)
+        return nil;
+    
 	RemoteWebDriverStatus *webdriverStatus = [[RemoteWebDriverStatus alloc] initWithDictionary:json];
 	return webdriverStatus;
 }
 
 // POST /session
--(RemoteWebDriverSession*)postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities
+-(RemoteWebDriverSession*)postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", [self httpCommandExecutor]];
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
@@ -87,10 +116,11 @@ RemoteWebDriverSession *session;
 	[request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	NSURLResponse *response;
-	NSError *err;
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request
 												 returningResponse:&response
-															 error:&err];
+															 error:error];
+    if ([*error code] != 0)
+        return nil;
 	
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
 	if ([httpResponse statusCode] != 200 && [httpResponse statusCode] != 303)
@@ -98,29 +128,39 @@ RemoteWebDriverSession *session;
 		return nil;
 	}
 	
-	NSError *e = nil;
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
 														 options: NSJSONReadingMutableContainers
-														   error: &e];
+														   error: error];
+    if ([*error code] != 0)
+        return nil;
+    
+    *error = [SeleniumError errorWithResponseDict:json];
+    if ([*error code] != 0)
+        return nil;
+    
 	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
 	return session;
 }
 
 // GET /sessions
--(NSArray*)getSessions
+-(NSArray*)getSessionsAndError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/sessions", [self httpCommandExecutor]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
-    NSError *error;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
 											returningResponse:&response
-														error:&error];
-	NSError *e;
+														error:error];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSArray *json = [NSJSONSerialization JSONObjectWithData:urlData
 													options: NSJSONReadingMutableContainers
-													  error: &e];
+													  error: error];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSMutableArray *sessions = [NSMutableArray new];
 	NSEnumerator *enumerator = [json objectEnumerator];
 	id object;
@@ -132,37 +172,45 @@ RemoteWebDriverSession *session;
 }
 
 // GET /session/:sessionId
--(RemoteWebDriverSession*)getSessionWithSession:(NSString*)sessionId
+-(RemoteWebDriverSession*)getSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", [self httpCommandExecutor], sessionId];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
-    NSError *error;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
 											returningResponse:&response
-														error:&error];
-	NSError *e;
+														error:error];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-														 options: NSJSONReadingMutableContainers
-														   error: &e];
+														 options:NSJSONReadingMutableContainers
+														   error:error];
+    if ([*error code] != 0)
+        return nil;
 	
+    *error = [SeleniumError errorWithResponseDict:json];
+    if ([*error code] != 0)
+        return nil;
+    
 	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
 	return session;
 }
 
 // DELETE /session/:sessionId
--(BOOL)deleteSessionWithSession:(NSString*)sessionId
+-(BOOL)deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", [self httpCommandExecutor], sessionId];
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
 	[request setHTTPMethod:@"DELETE"];
 	
 	NSURLResponse *response;
-	NSError *err;
 	[NSURLConnection sendSynchronousRequest:request
 						  returningResponse:&response
-									  error:&err];
+									  error:error];
+    if ([*error code] != 0)
+        return NO;
 	
 	NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
 	return ([httpResponse statusCode] == 200);
@@ -194,20 +242,28 @@ RemoteWebDriverSession *session;
 // /session/:sessionId/cookie/:name
 
 // GET /session/:sessionId/source
--(NSString*)getSourceWithSessions:(NSString*)sessionId
+-(NSString*)getSourceWithSessions:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/source", [self httpCommandExecutor], sessionId];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
-    NSError *error;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
 											returningResponse:&response
-														error:&error];
-	NSError *e;
+														error:error];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
 														 options: NSJSONReadingMutableContainers
-														   error: &e];
+														   error: error];
+    if ([*error code] != 0)
+        return nil;
+    
+    *error = [SeleniumError errorWithResponseDict:json];
+    if ([*error code] != 0)
+        return nil;
+    
 	NSString *source = [json objectForKey:@"value"];
 	return source;
 }
