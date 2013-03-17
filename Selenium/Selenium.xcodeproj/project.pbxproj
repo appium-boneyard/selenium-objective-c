@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360609C316F5657600BADCDE /* SeleniumError.h in Headers */ = {isa = PBXBuildFile; fileRef = 360609C116F5657600BADCDE /* SeleniumError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		360609C416F5657600BADCDE /* SeleniumError.m in Sources */ = {isa = PBXBuildFile; fileRef = 360609C216F5657600BADCDE /* SeleniumError.m */; };
 		36BB380516F268C2003A46FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		36BB380F16F268C2003A46FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36BB380D16F268C2003A46FD /* InfoPlist.strings */; };
 		36BB381B16F268C2003A46FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB381A16F268C2003A46FD /* SenTestingKit.framework */; };
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		360609C116F5657600BADCDE /* SeleniumError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeleniumError.h; sourceTree = "<group>"; };
+		360609C216F5657600BADCDE /* SeleniumError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeleniumError.m; sourceTree = "<group>"; };
 		36BB380116F268C2003A46FD /* Selenium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Selenium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BB380416F268C2003A46FD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		36BB380716F268C2003A46FD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -173,6 +177,8 @@
 				36BB383C16F26945003A46FD /* RemoteWebDriverSession.m */,
 				36BB383F16F26951003A46FD /* RemoteWebDriverStatus.h */,
 				36BB384016F26951003A46FD /* RemoteWebDriverStatus.m */,
+				360609C116F5657600BADCDE /* SeleniumError.h */,
+				360609C216F5657600BADCDE /* SeleniumError.m */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -206,6 +212,7 @@
 				36BB383916F26926003A46FD /* Capabilities.h in Headers */,
 				36BB383D16F26945003A46FD /* RemoteWebDriverSession.h in Headers */,
 				36BB384116F26951003A46FD /* RemoteWebDriverStatus.h in Headers */,
+				360609C316F5657600BADCDE /* SeleniumError.h in Headers */,
 				36BB384616F26974003A46FD /* JSONUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +329,7 @@
 				36BB383E16F26945003A46FD /* RemoteWebDriverSession.m in Sources */,
 				36BB384216F26951003A46FD /* RemoteWebDriverStatus.m in Sources */,
 				36BB384716F26974003A46FD /* JSONUtils.m in Sources */,
+				360609C416F5657600BADCDE /* SeleniumError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
