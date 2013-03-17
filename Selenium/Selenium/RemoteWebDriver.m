@@ -58,13 +58,13 @@ RemoteWebDriverSession *session;
 	[self deleteSessionWithSession:[session sessionID] error:error];
 }
 
--(NSString*)getPageSource
+-(NSString*)pageSource
 {
     NSError *error;
-    return [self getPageSourceAndError:&error];
+    return [self pageSourceAndError:&error];
 }
 
--(NSString*)getPageSourceAndError:(NSError **)error
+-(NSString*)pageSourceAndError:(NSError **)error
 {
 	return [self getSourceWithSessions:[session sessionID] error:error];
 }
