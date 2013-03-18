@@ -33,7 +33,7 @@ RemoteWebDriverSession *session;
         serverPort = port;
 
         // get status
-        [self getStatusAndError:error];
+        [self getStatusAndReturnError:error];
         if ([*error code] != 0)
             return nil;
         
@@ -66,13 +66,13 @@ RemoteWebDriverSession *session;
 
 -(NSString*)pageSourceAndError:(NSError **)error
 {
-	return [self getSourceWithSessions:[session sessionID] error:error];
+	return [self getSourceWithSession:[session sessionID] error:error];
 }
 
 #pragma mark - JSON-Wire Protocol Implementation
 
 // GET /status
--(RemoteWebDriverStatus*)getStatusAndError:(NSError**)error
+-(RemoteWebDriverStatus*)getStatusAndReturnError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/status", [self httpCommandExecutor]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
@@ -145,7 +145,7 @@ RemoteWebDriverSession *session;
 }
 
 // GET /sessions
--(NSArray*)getSessionsAndError:(NSError**)error
+-(NSArray*)getSessionsAndReturnError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/sessions", [self httpCommandExecutor]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
@@ -244,7 +244,7 @@ RemoteWebDriverSession *session;
 // /session/:sessionId/cookie/:name
 
 // GET /session/:sessionId/source
--(NSString*)getSourceWithSessions:(NSString*)sessionId error:(NSError**)error
+-(NSString*)getSourceWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/source", [self httpCommandExecutor], sessionId];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
