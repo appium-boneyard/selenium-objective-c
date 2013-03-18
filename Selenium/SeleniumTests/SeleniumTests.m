@@ -34,7 +34,7 @@
     [c setVersion:@"19.0.2"];
     NSError *error;
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
-    NSString *pageSource = [driver pageSourceAndError:&error];
+    NSString *pageSource = [driver pageSourceAndReturnError:&error];
     NSLog(@"%@", pageSource);
     [driver quitAndError:&error];
 
