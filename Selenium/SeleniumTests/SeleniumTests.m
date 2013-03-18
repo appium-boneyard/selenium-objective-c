@@ -34,8 +34,15 @@
     [c setVersion:@"19.0.2"];
     NSError *error;
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.google.com"]];
+	NSString *url = [[driver url] absoluteString];
     NSString *pageSource = [driver pageSourceAndReturnError:&error];
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.bing.com"]];
+	[driver back];
+	[driver forward];
+	[driver refresh];
     NSLog(@"%@", pageSource);
+	NSLog(@"%@", url);
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
