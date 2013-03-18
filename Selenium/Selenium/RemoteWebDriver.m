@@ -57,6 +57,61 @@ RemoteWebDriverSession *session;
 	[self deleteSessionWithSession:[session sessionID] error:error];
 }
 
+-(NSURL*) url
+{
+	NSError *error;
+	return [self urlAndReturnError:&error];
+}
+
+-(NSURL*) urlAndReturnError:(NSError**)error
+{
+    return [self getURLWithSession:[session sessionID] error:error];
+}
+
+-(void) setUrl:(NSURL*)url
+{
+	NSError *error;
+	return [self setUrl:url error:&error];
+}
+
+-(void) setUrl:(NSURL*)url error:(NSError**)error
+{
+	[self postURL:url session:[session sessionID] error:error];
+}
+
+-(void) forward
+{
+	NSError *error;
+	[self forwardAndReturnError:&error];
+}
+
+-(void) forwardAndReturnError:(NSError**)error
+{
+	[self postForwardWithSession:[session sessionID] error:error];
+}
+
+-(void) back
+{
+	NSError *error;
+	[self backAndReturnError:&error];
+}
+
+-(void) backAndReturnError:(NSError**)error
+{
+	[self postBackWithSession:[session sessionID] error:error];
+}
+
+-(void) refresh
+{
+	NSError *error;
+	[self refreshAndReturnError:&error];
+}
+
+-(void) refreshAndReturnError:(NSError**)error
+{
+	[self postRefreshWithSession:[session sessionID] error:error];
+}
+
 -(NSString*)pageSource
 {
     NSError *error;
@@ -136,13 +191,7 @@ RemoteWebDriverSession *session;
 -(void)deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", [self httpCommandExecutor], sessionId];
-	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-	[request setHTTPMethod:@"DELETE"];
-	
-	NSURLResponse *response;
-	[NSURLConnection sendSynchronousRequest:request
-						  returningResponse:&response
-									  error:error];
+	[HTTPUtils performDeleteRequestToUrl:urlString error:error];
 }
 
 // /session/:sessionId/timeouts
@@ -150,10 +199,46 @@ RemoteWebDriverSession *session;
 // /session/:sessionId/timeouts/implicit_wait
 // /session/:sessionId/window_handle
 // /session/:sessionId/window_handles
-// /session/:sessionId/url
-// /session/:sessionId/forward
-// /session/:sessionId/back
+
+// GET /session/:sessionId/url
+-(NSURL*)getURLWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *url = [json objectForKey:@"value"];
+	return [[NSURL alloc] initWithString:url];
+}
+
+// POST /session/:sessionId/url
+-(void)postURL:(NSURL*)url session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", [self httpCommandExecutor], sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[url absoluteString], @"url", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	
+}
+
+// POST /session/:sessionId/forward
+-(void)postForwardWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/forward", [self httpCommandExecutor], sessionId];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /session/:sessionId/back
+-(void)postBackWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/back", [self httpCommandExecutor], sessionId];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/refresh
+-(void)postRefreshWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/refresh", [self httpCommandExecutor], sessionId];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/execute
 // /session/:sessionId/execute_async
 // /session/:sessionId/screenshot
@@ -187,7 +272,6 @@ RemoteWebDriverSession *session;
 	NSString *title = [json objectForKey:@"value"];
 	return title;
 }
-
 
 // /session/:sessionId/element
 // /session/:sessionId/elements
