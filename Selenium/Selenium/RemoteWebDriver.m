@@ -41,8 +41,6 @@ RemoteWebDriverSession *session;
 		session = [self postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error];
         if ([*error code] != 0)
             return nil;
-        
-		[self getSessionWithSession:[session sessionID] error:error];
     }
     return self;
 }
@@ -115,6 +113,8 @@ RemoteWebDriverSession *session;
 	
     [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+	[request setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
+	
 	[request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	NSURLResponse *response;
@@ -185,7 +185,7 @@ RemoteWebDriverSession *session;
 														error:error];
     if ([*error code] != 0)
         return nil;
-    
+	
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
 														 options:NSJSONReadingMutableContainers
 														   error:error];
