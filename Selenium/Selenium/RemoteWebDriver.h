@@ -16,7 +16,7 @@
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
 
--(NSString*) getPageSource;
--(NSString*) getPageSourceAndError:(NSError**)error;
+-(NSString*) pageSource;
+-(NSString*) pageSourceAndError:(NSError**)error;
 
 @end
