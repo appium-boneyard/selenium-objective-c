@@ -60,12 +60,23 @@ RemoteWebDriverSession *session;
 -(NSString*)pageSource
 {
     NSError *error;
-    return [self pageSourceAndError:&error];
+    return [self pageSourceAndReturnError:&error];
 }
 
--(NSString*)pageSourceAndError:(NSError **)error
+-(NSString*)pageSourceAndReturnError:(NSError **)error
 {
 	return [self getSourceWithSession:[session sessionID] error:error];
+}
+
+-(NSString*)title
+{
+    NSError *error;
+	return [self titleAndReturnError:&error];
+}
+
+-(NSString*)titleAndReturnError:(NSError **)error
+{
+	return [self getTitleWithSession:[session sessionID] error:error];
 }
 
 #pragma mark - JSON-Wire Protocol Implementation
@@ -163,30 +174,21 @@ RemoteWebDriverSession *session;
 -(NSString*)getSourceWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/source", [self httpCommandExecutor], sessionId];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
-    
-    NSURLResponse *response;
-    NSData *urlData = [NSURLConnection sendSynchronousRequest:urlRequest
-											returningResponse:&response
-														error:error];
-    if ([*error code] != 0)
-        return nil;
-    
-	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-														 options: NSJSONReadingMutableContainers
-														   error: error];
-    if ([*error code] != 0)
-        return nil;
-    
-    *error = [SeleniumError errorWithResponseDict:json];
-    if ([*error code] != 0)
-        return nil;
-    
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
 	NSString *source = [json objectForKey:@"value"];
 	return source;
 }
 
-// /session/:sessionId/title
+// GET /session/:sessionId/title
+-(NSString*)getTitleWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/title", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *title = [json objectForKey:@"value"];
+	return title;
+}
+
+
 // /session/:sessionId/element
 // /session/:sessionId/elements
 // /session/:sessionId/element/active
