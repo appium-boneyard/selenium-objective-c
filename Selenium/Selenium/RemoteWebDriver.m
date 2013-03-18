@@ -113,6 +113,8 @@ RemoteWebDriverSession *session;
 	}
 	NSString *post =[JSONUtils jsonStringFromDictionary:postDictionary];
 	
+    [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
 	
 	NSURLResponse *response;
