@@ -42,6 +42,9 @@
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
 	[request setHTTPMethod:@"POST"];
 	
+	if (postParams == nil)
+		postParams = [NSDictionary new];
+	
 	NSString *post =[JSONUtils jsonStringFromDictionary:postParams];
     [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
