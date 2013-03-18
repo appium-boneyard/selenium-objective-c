@@ -14,7 +14,7 @@
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
-    NSMutableURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:request
@@ -79,7 +79,7 @@
 
 +(NSDictionary*) performDeleteRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
-    NSMutableURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
    	[request setHTTPMethod:@"DELETE"];
 	
     NSURLResponse *response;
