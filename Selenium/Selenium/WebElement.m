@@ -99,6 +99,17 @@
 	return [[self client] getElementIsEnabled:self session:[self sessionId] error:error];
 }
 
+-(NSString*) attribute:(NSString*)attributeName
+{
+	NSError *error;
+	return [self attribute:attributeName error:&error];
+}
+
+-(NSString*) attribute:(NSString*)attributeName error:(NSError**)error
+{
+	return [[self client] getAttribute:attributeName element:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

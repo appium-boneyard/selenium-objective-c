@@ -126,7 +126,9 @@
 // GET /session/:sessionId/element/:id/enabled
 -(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/attribute/:name
+// GET /session/:sessionId/element/:id/attribute/:name
+-(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/equals/:other
 // /session/:sessionId/element/:id/displayed
 // /session/:sessionId/element/:id/location

@@ -300,7 +300,16 @@ NSInteger serverPort;
 	BOOL isEnabled = [[json objectForKey:@"value"] boolValue];
 	return isEnabled;
 }
-// /session/:sessionId/element/:id/attribute/:name
+
+// GET /session/:sessionId/element/:id/attribute/:name
+-(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/attribute/%@", [self httpCommandExecutor], sessionId, [element opaqueId], attributeName];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *value = [json objectForKey:@"value"];
+	return value;
+}
+
 // /session/:sessionId/element/:id/equals/:other
 // /session/:sessionId/element/:id/displayed
 // /session/:sessionId/element/:id/location

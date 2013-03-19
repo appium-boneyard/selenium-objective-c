@@ -35,6 +35,8 @@
 -(BOOL) isSelectedAndReturnError:(NSError**)error;
 -(BOOL) isEnabled;
 -(BOOL) isEnabledAndReturnError:(NSError**)error;
+-(NSString*) attribute:(NSString*)attributeName;
+-(NSString*) attribute:(NSString*)attributeName error:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

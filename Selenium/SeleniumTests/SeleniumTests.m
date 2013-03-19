@@ -39,13 +39,10 @@
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
 	WebElement *htmlElement = [driver findElementBy:[By tagName:@"html"]];
-	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"button"]];
+	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
 	for(int i=0; i < [elements count]; i++)
 	{
-		if ([(WebElement*)[elements objectAtIndex:i] isEnabled])
-			NSLog(@"ENABLED");
-		else
-			NSLog(@"DISABLED");
+		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] attribute:@"href"]);
 	}
     [driver quitAndError:&error];
 
