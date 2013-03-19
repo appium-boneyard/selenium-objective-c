@@ -46,13 +46,13 @@
 		postParams = [NSDictionary new];
 	
 	NSString *post =[JSONUtils jsonStringFromDictionary:postParams];
-    [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
 	[request setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
 	
 	[request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
 	
-	NSURLResponse *response;
+	NSURLResponse *response = nil;
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request
 												 returningResponse:&response
 															 error:error];
@@ -64,9 +64,10 @@
 	{
 		return nil;
 	}
+
 	
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
-														 options: NSJSONReadingMutableContainers
+														 options: 0
 														   error: error];
     if ([*error code] != 0)
         return nil;
