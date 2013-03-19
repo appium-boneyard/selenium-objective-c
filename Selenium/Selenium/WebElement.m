@@ -165,6 +165,17 @@
 	return [[self client] getElementSize:self session:[self sessionId] error:error];
 }
 
+-(NSString*) cssProperty:(NSString*)propertyName
+{
+	NSError *error;
+	return [self cssProperty:propertyName error:&error];
+}
+
+-(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error
+{
+	return [[self client] getCSSProperty:propertyName element:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

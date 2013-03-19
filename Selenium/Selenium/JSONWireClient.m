@@ -364,7 +364,15 @@ NSInteger serverPort;
 	return size;
 }
 
-// /session/:sessionId/element/:id/css/:propertyName
+// GET /session/:sessionId/element/:id/css/:propertyName
+-(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/css/%@", [self httpCommandExecutor], sessionId, [element opaqueId], propertyName];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *value = [json objectForKey:@"value"];
+	return value;
+}
+
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text
 // /session/:sessionId/accept_alert

@@ -144,7 +144,9 @@
 // GET /session/:sessionId/element/:id/size
 -(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/css/:propertyName
+// GET /session/:sessionId/element/:id/css/:propertyName
+-(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text
 // /session/:sessionId/accept_alert
