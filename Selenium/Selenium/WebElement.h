@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONWireClient.h"
+#import "By.h"
 
 @class JSONWireClient;
+@class By;
 
 @interface WebElement : NSObject
 
@@ -16,9 +19,22 @@
 @property JSONWireClient *client;
 @property NSString *sessionId;
 
-- (id)initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
+-(void) submit;
+-(void) submitAndReturnError:(NSError**)error;
+-(NSString*) text;
+-(NSString*) textAndReturnError:(NSError**)error;
+-(NSString*) tagName;
+-(NSString*) tagNameAndReturnError:(NSError**)error;
+-(void) clear;
+-(void) clearAndReturnError:(NSError**)error;
+
+-(WebElement*) findElementBy:(By*)by;
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error;
+-(NSArray*) findElementsBy:(By*)by;
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 
 @end

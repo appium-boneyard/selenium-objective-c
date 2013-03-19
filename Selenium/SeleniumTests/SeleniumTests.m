@@ -46,10 +46,11 @@
 	//[driver refresh];
     //NSLog(@"%@", pageSource);
 	//NSLog(@"%@", url);
-	NSArray *elements = [driver findElements:[By tagName:@"a"]];
+	WebElement *htmlElement = [driver findElementBy:[By tagName:@"html"]];
+	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
 	for(int i=0; i < [elements count]; i++)
 	{
-		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] opaqueId]);
+		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] text]);
 	}
     [driver quitAndError:&error];
 
