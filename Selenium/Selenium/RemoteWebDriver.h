@@ -43,7 +43,9 @@
 -(NSString*) titleAndReturnError:(NSError **)error;
 -(WebElement*) findElement:(By*)by;
 -(WebElement*) findElement:(By*)by error:(NSError**)error;
--(NSArray*)findElements:(By*)by;
--(NSArray*)findElements:(By*)by error:(NSError**)error;
+-(NSArray*) findElements:(By*)by;
+-(NSArray*) findElements:(By*)by error:(NSError**)error;
+-(WebElement*) activeElement;
+-(WebElement*) activeElementAndReturnError:(NSError**)error;
 
 @end

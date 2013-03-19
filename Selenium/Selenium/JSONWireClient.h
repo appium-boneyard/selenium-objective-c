@@ -90,7 +90,9 @@
 // /session/:sessionId/elements
 -(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/active
+// POST /session/:sessionId/element/active
+-(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id
 // /session/:sessionId/element/:id/element
 // /session/:sessionId/element/:id/elements

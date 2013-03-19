@@ -202,7 +202,16 @@ NSInteger serverPort;
 	return elements;
 }
 
-// /session/:sessionId/element/active
+// POST /session/:sessionId/element/active
+-(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/active", [self httpCommandExecutor], sessionId];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
+	WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	return element;
+}
+
 // /session/:sessionId/element/:id
 // /session/:sessionId/element/:id/element
 // /session/:sessionId/element/:id/elements

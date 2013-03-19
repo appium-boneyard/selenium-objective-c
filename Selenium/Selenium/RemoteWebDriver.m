@@ -146,4 +146,15 @@ JSONWireClient *jsonWireClient;
 	return [jsonWireClient postElements:by session:[[self session] sessionID] error:error];
 }
 
+-(WebElement*)activeElement
+{
+	NSError *error;
+	return [self activeElementAndReturnError:&error];
+}
+
+-(WebElement*)activeElementAndReturnError:(NSError**)error
+{
+	return [jsonWireClient postActiveElementWithSession:[[self session] sessionID] error:error];
+}
+
 @end
