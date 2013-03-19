@@ -255,7 +255,15 @@ NSInteger serverPort;
 	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/element/:id/text
+// GET /session/:sessionId/element/:id/text
+-(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/text", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *text = [json objectForKey:@"value"];
+	return text;
+}
+
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
 // /session/:sessionId/element/:id/name

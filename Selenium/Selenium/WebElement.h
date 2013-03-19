@@ -19,12 +19,14 @@
 @property JSONWireClient *client;
 @property NSString *sessionId;
 
-- (id)initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
 -(void) submit;
 -(void) submitAndReturnError:(NSError**)error;
+-(NSString*) text;
+-(NSString*) textAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

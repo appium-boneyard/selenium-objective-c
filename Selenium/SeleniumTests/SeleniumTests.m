@@ -50,7 +50,7 @@
 	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
 	for(int i=0; i < [elements count]; i++)
 	{
-		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] opaqueId]);
+		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] text]);
 	}
     [driver quitAndError:&error];
 

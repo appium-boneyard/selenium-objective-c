@@ -44,6 +44,17 @@
 	[[self client] postSubmitElement:self session:[self sessionId] error:error];
 }
 
+-(NSString*) text
+{
+	NSError *error;
+	return [self textAndReturnError:&error];
+}
+
+-(NSString*) textAndReturnError:(NSError**)error
+{
+	return [[self client] getElementText:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

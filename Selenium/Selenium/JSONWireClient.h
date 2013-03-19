@@ -108,7 +108,9 @@
 // POST /session/:sessionId/element/:id/submit
 -(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/text
+// GET /session/:sessionId/element/:id/text
+-(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
 // /session/:sessionId/element/:id/name
