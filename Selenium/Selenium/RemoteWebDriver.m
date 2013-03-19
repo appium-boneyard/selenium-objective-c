@@ -12,6 +12,8 @@
 #import "JSONUtils.h"
 #import "HTTPUtils.h"
 #import "SeleniumError.h"
+#import "By.h"
+#import "WebElement.h"
 
 @implementation RemoteWebDriver
 
@@ -132,6 +134,17 @@ RemoteWebDriverSession *session;
 -(NSString*)titleAndReturnError:(NSError **)error
 {
 	return [self getTitleWithSession:[session sessionID] error:error];
+}
+
+-(WebElement*)findElement:(By*)by
+{
+	NSError *error;
+	return [self findElement:by error:&error];
+}
+
+-(WebElement*)findElement:(By*)by error:(NSError**)error
+{
+	return [self postElement:by session:[session sessionID] error:error];
 }
 
 #pragma mark - JSON-Wire Protocol Implementation
@@ -273,7 +286,17 @@ RemoteWebDriverSession *session;
 	return title;
 }
 
-// /session/:sessionId/element
+// POST /session/:sessionId/element
+-(WebElement*)postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element", [self httpCommandExecutor], sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
+	WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId];
+	return element;
+}
+
 // /session/:sessionId/elements
 // /session/:sessionId/element/active
 // /session/:sessionId/element/:id
