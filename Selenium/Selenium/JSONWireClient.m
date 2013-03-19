@@ -185,7 +185,7 @@ NSInteger serverPort;
 	return element;
 }
 
-// /session/:sessionId/elements
+// POST /session/:sessionId/elements
 -(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/elements", [self httpCommandExecutor], sessionId];
@@ -202,10 +202,44 @@ NSInteger serverPort;
 	return elements;
 }
 
-// /session/:sessionId/element/active
-// /session/:sessionId/element/:id
-// /session/:sessionId/element/:id/element
-// /session/:sessionId/element/:id/elements
+// POST /session/:sessionId/element/active
+-(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/active", [self httpCommandExecutor], sessionId];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
+	WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	return element;
+}
+
+// /session/:sessionId/element/:id (FUTURE)
+
+// POST /session/:sessionId/element/:id/element
+-(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
+	WebElement *foundElement = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	return foundElement;
+}
+// POST /session/:sessionId/element/:id/elements
+-(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSArray *matches = (NSArray*)[json objectForKey:@"value"];
+	NSMutableArray *elements = [NSMutableArray new];
+	for (int i=0; i < [matches count]; i++)
+	{
+		NSString *elementId = [[matches objectAtIndex:i] objectForKey:@"ELEMENT"];
+		WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+		[elements addObject:element];
+	}
+	return elements;
+}
 
 // POST /session/:sessionId/element/:id/click
 -(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
@@ -214,12 +248,40 @@ NSInteger serverPort;
 	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/element/:id/submit
-// /session/:sessionId/element/:id/text
+// POST /session/:sessionId/element/:id/submit
+-(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/submit", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// GET /session/:sessionId/element/:id/text
+-(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/text", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *text = [json objectForKey:@"value"];
+	return text;
+}
+
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
-// /session/:sessionId/element/:id/name
-// /session/:sessionId/element/:id/clear
+
+// GET /session/:sessionId/element/:id/name
+-(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/name", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *name = [json objectForKey:@"value"];
+	return name;
+}
+// POST /session/:sessionId/element/:id/clear
+-(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/clear", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/element/:id/selected
 // /session/:sessionId/element/:id/enabled
 // /session/:sessionId/element/:id/attribute/:name

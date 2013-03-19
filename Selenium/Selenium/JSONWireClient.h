@@ -59,7 +59,7 @@
 // POST /session/:sessionId/back
 -(void)postBackWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/refresh
+// POST /session/:sessionId/refresh
 -(void)postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/execute
@@ -87,23 +87,39 @@
 // POST /session/:sessionId/element
 -(WebElement*)postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/elements
+// POST /session/:sessionId/elements
 -(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/active
-// /session/:sessionId/element/:id
-// /session/:sessionId/element/:id/element
-// /session/:sessionId/element/:id/elements
+// POST /session/:sessionId/element/active
+-(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/element/:id
+// FUTURE (NOT YET IMPLEMENTED)
+
+// POST /session/:sessionId/element/:id/element
+-(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/element/:id/elements
+-(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/click
 -(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/submit
-// /session/:sessionId/element/:id/text
+// POST /session/:sessionId/element/:id/submit
+-(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/text
+-(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
-// /session/:sessionId/element/:id/name
-// /session/:sessionId/element/:id/clear
+
+// GET /session/:sessionId/element/:id/name
+-(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/element/:id/clear
+-(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/selected
 // /session/:sessionId/element/:id/enabled
 // /session/:sessionId/element/:id/attribute/:name

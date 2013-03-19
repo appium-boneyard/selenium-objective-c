@@ -35,17 +35,17 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/title**
 * &#10003; **/session/:sessionId/element**
 * &#10003; **/session/:sessionId/elements**
-* /session/:sessionId/element/active
+* &#10003; **/session/:sessionId/element/active**
 * /session/:sessionId/element/:id
-* /session/:sessionId/element/:id/element
-* /session/:sessionId/element/:id/elements
+* &#10003; **/session/:sessionId/element/:id/element**
+* &#10003; **/session/:sessionId/element/:id/elements**
 * &#10003; **/session/:sessionId/element/:id/click**
-* /session/:sessionId/element/:id/submit
-* /session/:sessionId/element/:id/text
+* &#10003; **/session/:sessionId/element/:id/submit**
+* &#10003; **/session/:sessionId/element/:id/text**
 * /session/:sessionId/element/:id/value
 * /session/:sessionId/keys
-* /session/:sessionId/element/:id/name
-* /session/:sessionId/element/:id/clear
+* &#10003; **/session/:sessionId/element/:id/name**
+* &#10003; **/session/:sessionId/element/:id/clear**
 * /session/:sessionId/element/:id/selected
 * /session/:sessionId/element/:id/enabled
 * /session/:sessionId/element/:id/attribute/:name
@@ -67,13 +67,13 @@ Selenium WebDriver Bindings for Objective-C
 * /session/:sessionId/touch/click
 * /session/:sessionId/touch/down
 * /session/:sessionId/touch/up
-* session/:sessionId/touch/move
-* session/:sessionId/touch/scroll
-* session/:sessionId/touch/scroll
-* session/:sessionId/touch/doubleclick
-* session/:sessionId/touch/longclick
-* session/:sessionId/touch/flick
-* session/:sessionId/touch/flick
+* /session/:sessionId/touch/move
+* /session/:sessionId/touch/scroll
+* /session/:sessionId/touch/scroll
+* /session/:sessionId/touch/doubleclick
+* /session/:sessionId/touch/longclick
+* /session/:sessionId/touch/flick
+* /session/:sessionId/touch/flick
 * /session/:sessionId/location
 * /session/:sessionId/local_storage
 * /session/:sessionId/local_storage/key/:key

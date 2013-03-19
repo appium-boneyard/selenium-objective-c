@@ -11,7 +11,7 @@
 
 @implementation WebElement
 
-- (id)initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId
 {
     self = [super init];
     if (self) {
@@ -31,6 +31,72 @@
 -(void) clickAndReturnError:(NSError**)error
 {
 	[[self client] postClickElement:self session:[self sessionId] error:error];
+}
+
+-(void) submit
+{
+	NSError *error;
+	[self submitAndReturnError:&error];
+}
+
+-(void) submitAndReturnError:(NSError**)error
+{
+	[[self client] postSubmitElement:self session:[self sessionId] error:error];
+}
+
+-(NSString*) text
+{
+	NSError *error;
+	return [self textAndReturnError:&error];
+}
+
+-(NSString*) textAndReturnError:(NSError**)error
+{
+	return [[self client] getElementText:self session:[self sessionId] error:error];
+}
+
+-(NSString*) tagName
+{
+	NSError *error;
+	return [self tagNameAndReturnError:&error];
+}
+
+-(NSString*) tagNameAndReturnError:(NSError**)error
+{
+	return [[self client] getElementName:self session:[self sessionId] error:error];
+}
+
+-(void) clear
+{
+	NSError *error;
+	[self clearAndReturnError:&error];
+}
+
+-(void) clearAndReturnError:(NSError**)error
+{
+	[[self client] postClearElement:self session:[self sessionId] error:error];
+}
+
+-(WebElement*) findElementBy:(By*)by
+{
+	NSError *error;
+	return [self findElementBy:by error:&error];
+}
+
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error
+{
+	return [[self client] postElementFromElement:self by:by session:[self sessionId] error:error];
+}
+
+-(NSArray*) findElementsBy:(By*)by
+{
+	NSError *error;
+	return [self findElementsBy:by error:&error];
+}
+
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error
+{
+	return [[self client] postElementsFromElement:self by:by session:[self sessionId] error:error];
 }
 
 @end
