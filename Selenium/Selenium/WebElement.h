@@ -8,10 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class JSONWireClient;
+
 @interface WebElement : NSObject
 
 @property NSString *opaqueId;
+@property JSONWireClient *client;
+@property NSString *sessionId;
 
-- (id)initWithOpaqueId:(NSString*)opaqueId;
+- (id)initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
+
+-(void) click;
+-(void) clickAndReturnError:(NSError**)error;
 
 @end
