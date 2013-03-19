@@ -11,7 +11,7 @@
 
 @implementation WebElement
 
-- (id)initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId
 {
     self = [super init];
     if (self) {
@@ -31,6 +31,28 @@
 -(void) clickAndReturnError:(NSError**)error
 {
 	[[self client] postClickElement:self session:[self sessionId] error:error];
+}
+
+-(WebElement*) findElementBy:(By*)by
+{
+	NSError *error;
+	return [self findElementBy:by error:&error];
+}
+
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error
+{
+	return [[self client] postElementFromElement:self by:by session:[self sessionId] error:error];
+}
+
+-(NSArray*) findElementsBy:(By*)by
+{
+	NSError *error;
+	return [self findElementsBy:by error:&error];
+}
+
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error
+{
+	return [[self client] postElementsFromElement:self by:by session:[self sessionId] error:error];
 }
 
 @end

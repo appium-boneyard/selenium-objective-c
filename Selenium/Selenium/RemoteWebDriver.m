@@ -124,24 +124,24 @@ JSONWireClient *jsonWireClient;
 	return [jsonWireClient getTitleWithSession:[[self session] sessionID] error:error];
 }
 
--(WebElement*)findElement:(By*)by
+-(WebElement*)findElementBy:(By*)by
 {
 	NSError *error;
-	return [self findElement:by error:&error];
+	return [self findElementBy:by error:&error];
 }
 
--(WebElement*)findElement:(By*)by error:(NSError**)error
+-(WebElement*)findElementBy:(By*)by error:(NSError**)error
 {
 	return [jsonWireClient postElement:by session:[[self session] sessionID] error:error];
 }
 
--(NSArray*)findElements:(By*)by
+-(NSArray*)findElementsBy:(By*)by
 {
 	NSError *error;
-	return [self findElements:by error:&error];
+	return [self findElementsBy:by error:&error];
 }
 
--(NSArray*)findElements:(By*)by error:(NSError**)error
+-(NSArray*)findElementsBy:(By*)by error:(NSError**)error
 {
 	return [jsonWireClient postElements:by session:[[self session] sessionID] error:error];
 }

@@ -41,10 +41,10 @@
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
 -(NSString*) title;
 -(NSString*) titleAndReturnError:(NSError **)error;
--(WebElement*) findElement:(By*)by;
--(WebElement*) findElement:(By*)by error:(NSError**)error;
--(NSArray*) findElements:(By*)by;
--(NSArray*) findElements:(By*)by error:(NSError**)error;
+-(WebElement*) findElementBy:(By*)by;
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error;
+-(NSArray*) findElementsBy:(By*)by;
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 -(WebElement*) activeElement;
 -(WebElement*) activeElementAndReturnError:(NSError**)error;
 

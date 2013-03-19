@@ -212,9 +212,34 @@ NSInteger serverPort;
 	return element;
 }
 
-// /session/:sessionId/element/:id
+// /session/:sessionId/element/:id (FUTURE)
+
 // /session/:sessionId/element/:id/element
+-(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
+	WebElement *foundElement = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	return foundElement;
+}
 // /session/:sessionId/element/:id/elements
+-(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSArray *matches = (NSArray*)[json objectForKey:@"value"];
+	NSMutableArray *elements = [NSMutableArray new];
+	for (int i=0; i < [matches count]; i++)
+	{
+		NSString *elementId = [[matches objectAtIndex:i] objectForKey:@"ELEMENT"];
+		WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+		[elements addObject:element];
+	}
+	return elements;
+}
 
 // POST /session/:sessionId/element/:id/click
 -(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error

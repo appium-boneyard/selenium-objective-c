@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JSONWireClient.h"
+#import "By.h"
 
 @class JSONWireClient;
+@class By;
 
 @interface WebElement : NSObject
 
@@ -20,5 +23,9 @@
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
+-(WebElement*) findElementBy:(By*)by;
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error;
+-(NSArray*) findElementsBy:(By*)by;
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 
 @end

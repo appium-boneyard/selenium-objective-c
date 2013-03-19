@@ -94,8 +94,13 @@
 -(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/element/:id
+// FUTURE (NOT YET IMPLEMENTED)
+
 // /session/:sessionId/element/:id/element
+-(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/elements
+-(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/click
 -(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
