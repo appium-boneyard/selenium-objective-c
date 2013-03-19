@@ -33,13 +33,13 @@ Selenium WebDriver Bindings for Objective-C
 * /session/:sessionId/cookie/:name
 * &#10003; **/session/:sessionId/source**
 * &#10003; **/session/:sessionId/title**
-* /session/:sessionId/element
-* /session/:sessionId/elements
+* &#10003; **/session/:sessionId/element**
+* &#10003; **/session/:sessionId/elements**
 * /session/:sessionId/element/active
 * /session/:sessionId/element/:id
 * /session/:sessionId/element/:id/element
 * /session/:sessionId/element/:id/elements
-* /session/:sessionId/element/:id/click
+* &#10003; **/session/:sessionId/element/:id/click**
 * /session/:sessionId/element/:id/submit
 * /session/:sessionId/element/:id/text
 * /session/:sessionId/element/:id/value
