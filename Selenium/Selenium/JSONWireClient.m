@@ -275,6 +275,7 @@ NSInteger serverPort;
 	NSString *name = [json objectForKey:@"value"];
 	return name;
 }
+
 // POST /session/:sessionId/element/:id/clear
 -(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
@@ -282,8 +283,23 @@ NSInteger serverPort;
 	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/element/:id/selected
-// /session/:sessionId/element/:id/enabled
+// GET /session/:sessionId/element/:id/selected
+-(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/selected", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isSelected = [[json objectForKey:@"value"] boolValue];
+	return isSelected;
+}
+
+// GET /session/:sessionId/element/:id/enabled
+-(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/enabled", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isEnabled = [[json objectForKey:@"value"] boolValue];
+	return isEnabled;
+}
 // /session/:sessionId/element/:id/attribute/:name
 // /session/:sessionId/element/:id/equals/:other
 // /session/:sessionId/element/:id/displayed

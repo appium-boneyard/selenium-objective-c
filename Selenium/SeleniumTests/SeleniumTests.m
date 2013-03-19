@@ -37,20 +37,15 @@
     NSError *error;
 	
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
-	//[driver setUrl:[[NSURL alloc] initWithString:@"http://www.google.com"]];
-	//NSString *url = [[driver url] absoluteString];
-    //NSString *pageSource = [driver pageSourceAndReturnError:&error];
-	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.bing.com"]];
-	//[driver back];
-	//[driver forward];
-	//[driver refresh];
-    //NSLog(@"%@", pageSource);
-	//NSLog(@"%@", url);
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
 	WebElement *htmlElement = [driver findElementBy:[By tagName:@"html"]];
-	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
+	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"button"]];
 	for(int i=0; i < [elements count]; i++)
 	{
-		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] text]);
+		if ([(WebElement*)[elements objectAtIndex:i] isEnabled])
+			NSLog(@"ENABLED");
+		else
+			NSLog(@"DISABLED");
 	}
     [driver quitAndError:&error];
 

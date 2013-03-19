@@ -31,6 +31,10 @@
 -(NSString*) tagNameAndReturnError:(NSError**)error;
 -(void) clear;
 -(void) clearAndReturnError:(NSError**)error;
+-(BOOL) isSelected;
+-(BOOL) isSelectedAndReturnError:(NSError**)error;
+-(BOOL) isEnabled;
+-(BOOL) isEnabledAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

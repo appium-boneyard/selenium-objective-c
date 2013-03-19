@@ -120,8 +120,12 @@
 // POST /session/:sessionId/element/:id/clear
 -(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/selected
-// /session/:sessionId/element/:id/enabled
+// GET /session/:sessionId/element/:id/selected
+-(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/enabled
+-(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/attribute/:name
 // /session/:sessionId/element/:id/equals/:other
 // /session/:sessionId/element/:id/displayed

@@ -77,6 +77,28 @@
 	[[self client] postClearElement:self session:[self sessionId] error:error];
 }
 
+-(BOOL) isSelected
+{
+	NSError *error;
+	return [self isSelectedAndReturnError:&error];
+}
+
+-(BOOL) isSelectedAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsSelected:self session:[self sessionId] error:error];
+}
+
+-(BOOL) isEnabled
+{
+	NSError *error;
+	return [self isEnabledAndReturnError:&error];
+}
+
+-(BOOL) isEnabledAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsEnabled:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;
