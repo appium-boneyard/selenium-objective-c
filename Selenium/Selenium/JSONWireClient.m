@@ -186,6 +186,22 @@ NSInteger serverPort;
 }
 
 // /session/:sessionId/elements
+-(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/elements", [self httpCommandExecutor], sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
+	NSDictionary *json = [HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSArray *matches = (NSArray*)[json objectForKey:@"value"];
+	NSMutableArray *elements = [NSMutableArray new];
+	for (int i=0; i < [matches count]; i++)
+	{
+		NSString *elementId = [[matches objectAtIndex:i] objectForKey:@"ELEMENT"];
+		WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+		[elements addObject:element];
+	}
+	return elements;
+}
+
 // /session/:sessionId/element/active
 // /session/:sessionId/element/:id
 // /session/:sessionId/element/:id/element
