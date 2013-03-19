@@ -10,8 +10,16 @@
 #import "Capabilities.h"
 #import "By.h"
 #import "WebElement.h"
+#import "RemoteWebDriverSession.h"
+
+@class Capabilities;
+@class By;
+@class WebElement;
+@class RemoteWebDriverSession;
 
 @interface RemoteWebDriver : NSObject
+
+@property RemoteWebDriverSession *session;
 
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error;
 
@@ -33,7 +41,7 @@
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
 -(NSString*) title;
 -(NSString*) titleAndReturnError:(NSError **)error;
--(WebElement*)findElement:(By*)by;
--(WebElement*)findElement:(By*)by error:(NSError**)error;
+-(WebElement*) findElement:(By*)by;
+-(WebElement*) findElement:(By*)by error:(NSError**)error;
 
 @end

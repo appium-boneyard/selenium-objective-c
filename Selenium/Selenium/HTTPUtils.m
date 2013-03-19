@@ -46,9 +46,8 @@
 		postParams = [NSDictionary new];
 	
 	NSString *post =[JSONUtils jsonStringFromDictionary:postParams];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Accept"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
-	[request setValue:@"keep-alive" forHTTPHeaderField:@"Connection"];
+    [request setValue:@"application/json, image/png" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 	
 	[request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
 	

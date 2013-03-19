@@ -46,8 +46,9 @@
 	//[driver refresh];
     //NSLog(@"%@", pageSource);
 	//NSLog(@"%@", url);
-	WebElement *element = [driver findElement:[By tagName:@"html"]];
-	NSLog(@"%@", [element opaqueId]);
+	WebElement *htmlElement = [driver findElement:[By tagName:@"html"]];
+	WebElement *aElement = [driver findElement:[By xPath:@"//a[contains(@href, 'TOU')]"]];
+	[aElement click];
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
