@@ -136,6 +136,8 @@
 -(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/element/:id/location
+-(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/location_in_view
 // /session/:sessionId/element/:id/size
 // /session/:sessionId/element/:id/css/:propertyName

@@ -38,9 +38,9 @@
 	
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
-	WebElement *a = [driver findElementBy:[By tagName:@"html"]];
-	WebElement *b = [driver findElementBy:[By xPath:@"//body"]];
-	NSLog([a isEqualToElement:b] ? @"YES":  @"NO");
+	WebElement *a = [driver findElementBy:[By tagName:@"input"]];
+	NSPoint point = [a location];
+	NSLog(@"(%f,%f)", point.x, point.y);
 	
     [driver quitAndError:&error];
 

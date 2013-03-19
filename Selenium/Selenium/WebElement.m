@@ -132,6 +132,17 @@
 	return [[self client] getElementIsDisplayed:self session:[self sessionId] error:error];
 }
 
+-(NSPoint) location
+{
+	NSError *error;
+	return [self locationAndReturnError:&error];
+}
+
+-(NSPoint) locationAndReturnError:(NSError**)error
+{
+	return [[self client] getElementLocation:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

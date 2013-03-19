@@ -327,7 +327,19 @@ NSInteger serverPort;
 	BOOL isDisplayed = [[json objectForKey:@"value"] boolValue];
 	return isDisplayed;
 }
+
 // /session/:sessionId/element/:id/location
+-(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"x"] floatValue];
+	float y = [[valueJson objectForKey:@"y"] floatValue];
+	NSPoint point = NSMakePoint(x,y);
+	return point;
+}
+
 // /session/:sessionId/element/:id/location_in_view
 // /session/:sessionId/element/:id/size
 // /session/:sessionId/element/:id/css/:propertyName

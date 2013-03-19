@@ -41,6 +41,8 @@
 -(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error;
 -(BOOL) isDisplayed;
 -(BOOL) isDisplayedAndReturnError:(NSError**)error;
+-(NSPoint) location;
+-(NSPoint) locationAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;
