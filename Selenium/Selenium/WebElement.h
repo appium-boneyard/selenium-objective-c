@@ -43,6 +43,10 @@
 -(BOOL) isDisplayedAndReturnError:(NSError**)error;
 -(NSPoint) location;
 -(NSPoint) locationAndReturnError:(NSError**)error;
+-(NSPoint) locationInView;
+-(NSPoint) locationInViewAndReturnError:(NSError**)error;
+-(NSSize) size;
+-(NSSize) sizeAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

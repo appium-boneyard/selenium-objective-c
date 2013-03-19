@@ -143,6 +143,28 @@
 	return [[self client] getElementLocation:self session:[self sessionId] error:error];
 }
 
+-(NSPoint) locationInView
+{
+	NSError *error;
+	return [self locationInViewAndReturnError:&error];
+}
+
+-(NSPoint) locationInViewAndReturnError:(NSError**)error
+{
+	return [[self client] getElementLocationInView:self session:[self sessionId] error:error];
+}
+
+-(NSSize) size
+{
+	NSError *error;
+	return [self sizeAndReturnError:&error];
+}
+
+-(NSSize) sizeAndReturnError:(NSError**)error
+{
+	return [[self client] getElementSize:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

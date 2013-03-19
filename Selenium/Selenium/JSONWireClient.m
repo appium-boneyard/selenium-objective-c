@@ -328,7 +328,7 @@ NSInteger serverPort;
 	return isDisplayed;
 }
 
-// /session/:sessionId/element/:id/location
+// GET /session/:sessionId/element/:id/location
 -(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location", [self httpCommandExecutor], sessionId, [element opaqueId]];
@@ -340,8 +340,30 @@ NSInteger serverPort;
 	return point;
 }
 
-// /session/:sessionId/element/:id/location_in_view
-// /session/:sessionId/element/:id/size
+// GET /session/:sessionId/element/:id/location_in_view
+-(NSPoint) getElementLocationInView:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location_in_view", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"x"] floatValue];
+	float y = [[valueJson objectForKey:@"y"] floatValue];
+	NSPoint point = NSMakePoint(x,y);
+	return point;
+}
+
+// GET /session/:sessionId/element/:id/size
+-(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/size", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"width"] floatValue];
+	float y = [[valueJson objectForKey:@"height"] floatValue];
+	NSSize size = NSMakeSize(x,y);
+	return size;
+}
+
 // /session/:sessionId/element/:id/css/:propertyName
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text

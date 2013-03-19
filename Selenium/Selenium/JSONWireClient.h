@@ -135,11 +135,15 @@
 // GET /session/:sessionId/element/:id/displayed
 -(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/location
+// GET /session/:sessionId/element/:id/location
 -(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/location_in_view
-// /session/:sessionId/element/:id/size
+// GET /session/:sessionId/element/:id/location_in_view
+-(NSPoint) getElementLocationInView:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/size
+-(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/css/:propertyName
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text
