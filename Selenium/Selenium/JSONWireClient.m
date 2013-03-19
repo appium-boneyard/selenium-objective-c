@@ -319,7 +319,14 @@ NSInteger serverPort;
 	return isEqual;
 }
 
-// /session/:sessionId/element/:id/displayed
+// GET /session/:sessionId/element/:id/displayed
+-(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/displayed", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isDisplayed = [[json objectForKey:@"value"] boolValue];
+	return isDisplayed;
+}
 // /session/:sessionId/element/:id/location
 // /session/:sessionId/element/:id/location_in_view
 // /session/:sessionId/element/:id/size

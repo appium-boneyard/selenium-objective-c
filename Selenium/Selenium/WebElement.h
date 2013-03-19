@@ -39,6 +39,8 @@
 -(NSString*) attribute:(NSString*)attributeName error:(NSError**)error;
 -(BOOL) isEqualToElement:(WebElement*)element;
 -(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error;
+-(BOOL) isDisplayed;
+-(BOOL) isDisplayedAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

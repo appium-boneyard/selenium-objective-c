@@ -132,7 +132,9 @@
 // GET /session/:sessionId/element/:id/equals/:other
 -(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/displayed
+// GET /session/:sessionId/element/:id/displayed
+-(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/location
 // /session/:sessionId/element/:id/location_in_view
 // /session/:sessionId/element/:id/size

@@ -121,6 +121,17 @@
 	return [[self client] getEqualityForElement:self element:element session:[self sessionId] error:error];
 }
 
+-(BOOL) isDisplayed
+{
+	NSError *error;
+	return [self isDisplayedAndReturnError:&error];
+}
+
+-(BOOL) isDisplayedAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsDisplayed:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;
