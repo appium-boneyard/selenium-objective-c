@@ -31,6 +31,22 @@
 -(NSString*) tagNameAndReturnError:(NSError**)error;
 -(void) clear;
 -(void) clearAndReturnError:(NSError**)error;
+-(BOOL) isSelected;
+-(BOOL) isSelectedAndReturnError:(NSError**)error;
+-(BOOL) isEnabled;
+-(BOOL) isEnabledAndReturnError:(NSError**)error;
+-(NSString*) attribute:(NSString*)attributeName;
+-(NSString*) attribute:(NSString*)attributeName error:(NSError**)error;
+-(BOOL) isEqualToElement:(WebElement*)element;
+-(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error;
+-(BOOL) isDisplayed;
+-(BOOL) isDisplayedAndReturnError:(NSError**)error;
+-(NSPoint) location;
+-(NSPoint) locationAndReturnError:(NSError**)error;
+-(NSPoint) locationInView;
+-(NSPoint) locationInViewAndReturnError:(NSError**)error;
+-(NSSize) size;
+-(NSSize) sizeAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

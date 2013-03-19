@@ -37,21 +37,11 @@
     NSError *error;
 	
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
-	//[driver setUrl:[[NSURL alloc] initWithString:@"http://www.google.com"]];
-	//NSString *url = [[driver url] absoluteString];
-    //NSString *pageSource = [driver pageSourceAndReturnError:&error];
-	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.bing.com"]];
-	//[driver back];
-	//[driver forward];
-	//[driver refresh];
-    //NSLog(@"%@", pageSource);
-	//NSLog(@"%@", url);
-	WebElement *htmlElement = [driver findElementBy:[By tagName:@"html"]];
-	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
-	for(int i=0; i < [elements count]; i++)
-	{
-		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] text]);
-	}
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
+	WebElement *a = [driver findElementBy:[By tagName:@"input"]];
+	NSSize size = [a size];
+	NSLog(@"(%f,%f)", size.width, size.height);
+	
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
