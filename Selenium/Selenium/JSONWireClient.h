@@ -117,7 +117,9 @@
 // GET /session/:sessionId/element/:id/name
 -(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/clear
+// POST /session/:sessionId/element/:id/clear
+-(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/selected
 // /session/:sessionId/element/:id/enabled
 // /session/:sessionId/element/:id/attribute/:name

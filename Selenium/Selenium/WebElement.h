@@ -29,6 +29,8 @@
 -(NSString*) textAndReturnError:(NSError**)error;
 -(NSString*) tagName;
 -(NSString*) tagNameAndReturnError:(NSError**)error;
+-(void) clear;
+-(void) clearAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

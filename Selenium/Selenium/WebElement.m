@@ -66,6 +66,17 @@
 	return [[self client] getElementName:self session:[self sessionId] error:error];
 }
 
+-(void) clear
+{
+	NSError *error;
+	[self clearAndReturnError:&error];
+}
+
+-(void) clearAndReturnError:(NSError**)error
+{
+	[[self client] postClearElement:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;
