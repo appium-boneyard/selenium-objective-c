@@ -37,6 +37,8 @@
 -(BOOL) isEnabledAndReturnError:(NSError**)error;
 -(NSString*) attribute:(NSString*)attributeName;
 -(NSString*) attribute:(NSString*)attributeName error:(NSError**)error;
+-(BOOL) isEqualToElement:(WebElement*)element;
+-(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

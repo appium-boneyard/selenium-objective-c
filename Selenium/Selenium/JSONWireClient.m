@@ -310,7 +310,15 @@ NSInteger serverPort;
 	return value;
 }
 
-// /session/:sessionId/element/:id/equals/:other
+// GET /session/:sessionId/element/:id/equals/:other
+-(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/equals/%@", [self httpCommandExecutor], sessionId, [element opaqueId],[otherElement opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isEqual = [[json objectForKey:@"value"] boolValue];
+	return isEqual;
+}
+
 // /session/:sessionId/element/:id/displayed
 // /session/:sessionId/element/:id/location
 // /session/:sessionId/element/:id/location_in_view

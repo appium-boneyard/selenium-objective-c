@@ -129,7 +129,9 @@
 // GET /session/:sessionId/element/:id/attribute/:name
 -(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/equals/:other
+// GET /session/:sessionId/element/:id/equals/:other
+-(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/displayed
 // /session/:sessionId/element/:id/location
 // /session/:sessionId/element/:id/location_in_view

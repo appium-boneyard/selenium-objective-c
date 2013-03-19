@@ -110,6 +110,17 @@
 	return [[self client] getAttribute:attributeName element:self session:[self sessionId] error:error];
 }
 
+-(BOOL) isEqualToElement:(WebElement*)element
+{
+	NSError *error;
+	return [self isEqualToElement:element error:&error];
+}
+
+-(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error
+{
+	return [[self client] getEqualityForElement:self element:element session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

@@ -38,12 +38,10 @@
 	
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
-	WebElement *htmlElement = [driver findElementBy:[By tagName:@"html"]];
-	NSArray *elements = [htmlElement findElementsBy:[By tagName:@"a"]];
-	for(int i=0; i < [elements count]; i++)
-	{
-		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] attribute:@"href"]);
-	}
+	WebElement *a = [driver findElementBy:[By tagName:@"html"]];
+	WebElement *b = [driver findElementBy:[By xPath:@"//body"]];
+	NSLog([a isEqualToElement:b] ? @"YES":  @"NO");
+	
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
