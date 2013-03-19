@@ -77,6 +77,94 @@
 	[[self client] postClearElement:self session:[self sessionId] error:error];
 }
 
+-(BOOL) isSelected
+{
+	NSError *error;
+	return [self isSelectedAndReturnError:&error];
+}
+
+-(BOOL) isSelectedAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsSelected:self session:[self sessionId] error:error];
+}
+
+-(BOOL) isEnabled
+{
+	NSError *error;
+	return [self isEnabledAndReturnError:&error];
+}
+
+-(BOOL) isEnabledAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsEnabled:self session:[self sessionId] error:error];
+}
+
+-(NSString*) attribute:(NSString*)attributeName
+{
+	NSError *error;
+	return [self attribute:attributeName error:&error];
+}
+
+-(NSString*) attribute:(NSString*)attributeName error:(NSError**)error
+{
+	return [[self client] getAttribute:attributeName element:self session:[self sessionId] error:error];
+}
+
+-(BOOL) isEqualToElement:(WebElement*)element
+{
+	NSError *error;
+	return [self isEqualToElement:element error:&error];
+}
+
+-(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error
+{
+	return [[self client] getEqualityForElement:self element:element session:[self sessionId] error:error];
+}
+
+-(BOOL) isDisplayed
+{
+	NSError *error;
+	return [self isDisplayedAndReturnError:&error];
+}
+
+-(BOOL) isDisplayedAndReturnError:(NSError**)error
+{
+	return [[self client] getElementIsDisplayed:self session:[self sessionId] error:error];
+}
+
+-(NSPoint) location
+{
+	NSError *error;
+	return [self locationAndReturnError:&error];
+}
+
+-(NSPoint) locationAndReturnError:(NSError**)error
+{
+	return [[self client] getElementLocation:self session:[self sessionId] error:error];
+}
+
+-(NSPoint) locationInView
+{
+	NSError *error;
+	return [self locationInViewAndReturnError:&error];
+}
+
+-(NSPoint) locationInViewAndReturnError:(NSError**)error
+{
+	return [[self client] getElementLocationInView:self session:[self sessionId] error:error];
+}
+
+-(NSSize) size
+{
+	NSError *error;
+	return [self sizeAndReturnError:&error];
+}
+
+-(NSSize) sizeAndReturnError:(NSError**)error
+{
+	return [[self client] getElementSize:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

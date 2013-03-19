@@ -275,6 +275,7 @@ NSInteger serverPort;
 	NSString *name = [json objectForKey:@"value"];
 	return name;
 }
+
 // POST /session/:sessionId/element/:id/clear
 -(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
@@ -282,14 +283,87 @@ NSInteger serverPort;
 	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/element/:id/selected
-// /session/:sessionId/element/:id/enabled
-// /session/:sessionId/element/:id/attribute/:name
-// /session/:sessionId/element/:id/equals/:other
-// /session/:sessionId/element/:id/displayed
-// /session/:sessionId/element/:id/location
-// /session/:sessionId/element/:id/location_in_view
-// /session/:sessionId/element/:id/size
+// GET /session/:sessionId/element/:id/selected
+-(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/selected", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isSelected = [[json objectForKey:@"value"] boolValue];
+	return isSelected;
+}
+
+// GET /session/:sessionId/element/:id/enabled
+-(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/enabled", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isEnabled = [[json objectForKey:@"value"] boolValue];
+	return isEnabled;
+}
+
+// GET /session/:sessionId/element/:id/attribute/:name
+-(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/attribute/%@", [self httpCommandExecutor], sessionId, [element opaqueId], attributeName];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *value = [json objectForKey:@"value"];
+	return value;
+}
+
+// GET /session/:sessionId/element/:id/equals/:other
+-(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/equals/%@", [self httpCommandExecutor], sessionId, [element opaqueId],[otherElement opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isEqual = [[json objectForKey:@"value"] boolValue];
+	return isEqual;
+}
+
+// GET /session/:sessionId/element/:id/displayed
+-(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/displayed", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	BOOL isDisplayed = [[json objectForKey:@"value"] boolValue];
+	return isDisplayed;
+}
+
+// GET /session/:sessionId/element/:id/location
+-(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"x"] floatValue];
+	float y = [[valueJson objectForKey:@"y"] floatValue];
+	NSPoint point = NSMakePoint(x,y);
+	return point;
+}
+
+// GET /session/:sessionId/element/:id/location_in_view
+-(NSPoint) getElementLocationInView:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location_in_view", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"x"] floatValue];
+	float y = [[valueJson objectForKey:@"y"] floatValue];
+	NSPoint point = NSMakePoint(x,y);
+	return point;
+}
+
+// GET /session/:sessionId/element/:id/size
+-(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/size", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"width"] floatValue];
+	float y = [[valueJson objectForKey:@"height"] floatValue];
+	NSSize size = NSMakeSize(x,y);
+	return size;
+}
+
 // /session/:sessionId/element/:id/css/:propertyName
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text

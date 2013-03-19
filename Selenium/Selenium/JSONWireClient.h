@@ -120,14 +120,30 @@
 // POST /session/:sessionId/element/:id/clear
 -(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/selected
-// /session/:sessionId/element/:id/enabled
-// /session/:sessionId/element/:id/attribute/:name
-// /session/:sessionId/element/:id/equals/:other
-// /session/:sessionId/element/:id/displayed
-// /session/:sessionId/element/:id/location
-// /session/:sessionId/element/:id/location_in_view
-// /session/:sessionId/element/:id/size
+// GET /session/:sessionId/element/:id/selected
+-(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/enabled
+-(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/attribute/:name
+-(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/equals/:other
+-(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/displayed
+-(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/location
+-(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/location_in_view
+-(NSPoint) getElementLocationInView:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/element/:id/size
+-(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/css/:propertyName
 // /session/:sessionId/orientation
 // /session/:sessionId/alert_text
