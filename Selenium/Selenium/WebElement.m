@@ -33,6 +33,17 @@
 	[[self client] postClickElement:self session:[self sessionId] error:error];
 }
 
+-(void) submit
+{
+	NSError *error;
+	[self submitAndReturnError:&error];
+}
+
+-(void) submitAndReturnError:(NSError**)error
+{
+	[[self client] postSubmitElement:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

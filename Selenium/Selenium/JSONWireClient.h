@@ -59,7 +59,7 @@
 // POST /session/:sessionId/back
 -(void)postBackWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/refresh
+// POST /session/:sessionId/refresh
 -(void)postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/execute
@@ -87,25 +87,27 @@
 // POST /session/:sessionId/element
 -(WebElement*)postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/elements
+// POST /session/:sessionId/elements
 -(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/active
 -(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id
+// POST /session/:sessionId/element/:id
 // FUTURE (NOT YET IMPLEMENTED)
 
-// /session/:sessionId/element/:id/element
+// POST /session/:sessionId/element/:id/element
 -(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/elements
+// POST /session/:sessionId/element/:id/elements
 -(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/click
 -(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/submit
+// POST /session/:sessionId/element/:id/submit
+-(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/text
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys

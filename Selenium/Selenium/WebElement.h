@@ -23,6 +23,9 @@
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
+-(void) submit;
+-(void) submitAndReturnError:(NSError**)error;
+
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;
 -(NSArray*) findElementsBy:(By*)by;

@@ -185,7 +185,7 @@ NSInteger serverPort;
 	return element;
 }
 
-// /session/:sessionId/elements
+// POST /session/:sessionId/elements
 -(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/elements", [self httpCommandExecutor], sessionId];
@@ -214,7 +214,7 @@ NSInteger serverPort;
 
 // /session/:sessionId/element/:id (FUTURE)
 
-// /session/:sessionId/element/:id/element
+// POST /session/:sessionId/element/:id/element
 -(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
@@ -224,7 +224,7 @@ NSInteger serverPort;
 	WebElement *foundElement = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 	return foundElement;
 }
-// /session/:sessionId/element/:id/elements
+// POST /session/:sessionId/element/:id/elements
 -(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", [self httpCommandExecutor], sessionId, [element opaqueId]];
@@ -248,7 +248,13 @@ NSInteger serverPort;
 	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/element/:id/submit
+// POST /session/:sessionId/element/:id/submit
+-(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/submit", [self httpCommandExecutor], sessionId, [element opaqueId]];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/element/:id/text
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
