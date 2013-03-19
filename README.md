@@ -49,11 +49,11 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/element/:id/selected**
 * &#10003; **/session/:sessionId/element/:id/enabled**
 * &#10003; **/session/:sessionId/element/:id/attribute/:name**
-* /session/:sessionId/element/:id/equals/:other
-* /session/:sessionId/element/:id/displayed
-* /session/:sessionId/element/:id/location
-* /session/:sessionId/element/:id/location_in_view
-* /session/:sessionId/element/:id/size
+* &#10003; **/session/:sessionId/element/:id/equals/:other**
+* &#10003; **/session/:sessionId/element/:id/displayed**
+* &#10003; **/session/:sessionId/element/:id/location**
+* &#10003; **/session/:sessionId/element/:id/location_in_view**
+* &#10003; **/session/:sessionId/element/:id/size**
 * /session/:sessionId/element/:id/css/:propertyName
 * /session/:sessionId/orientation
 * /session/:sessionId/alert_text
