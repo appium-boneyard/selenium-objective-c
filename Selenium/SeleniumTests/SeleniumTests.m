@@ -46,9 +46,11 @@
 	//[driver refresh];
     //NSLog(@"%@", pageSource);
 	//NSLog(@"%@", url);
-	WebElement *htmlElement = [driver findElement:[By tagName:@"html"]];
-	WebElement *aElement = [driver findElement:[By xPath:@"//a[contains(@href, 'TOU')]"]];
-	[aElement click];
+	NSArray *elements = [driver findElements:[By tagName:@"a"]];
+	for(int i=0; i < [elements count]; i++)
+	{
+		NSLog(@"%@", [(WebElement*)[elements objectAtIndex:i] opaqueId]);
+	}
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");

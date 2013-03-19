@@ -135,4 +135,15 @@ JSONWireClient *jsonWireClient;
 	return [jsonWireClient postElement:by session:[[self session] sessionID] error:error];
 }
 
+-(NSArray*)findElements:(By*)by
+{
+	NSError *error;
+	return [self findElements:by error:&error];
+}
+
+-(NSArray*)findElements:(By*)by error:(NSError**)error
+{
+	return [jsonWireClient postElements:by session:[[self session] sessionID] error:error];
+}
+
 @end

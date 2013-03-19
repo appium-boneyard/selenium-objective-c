@@ -88,6 +88,8 @@
 -(WebElement*)postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/elements
+-(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/active
 // /session/:sessionId/element/:id
 // /session/:sessionId/element/:id/element
