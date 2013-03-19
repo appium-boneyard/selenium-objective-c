@@ -55,6 +55,17 @@
 	return [[self client] getElementText:self session:[self sessionId] error:error];
 }
 
+-(NSString*) tagName
+{
+	NSError *error;
+	return [self tagNameAndReturnError:&error];
+}
+
+-(NSString*) tagNameAndReturnError:(NSError**)error
+{
+	return [[self client] getElementName:self session:[self sessionId] error:error];
+}
+
 -(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;

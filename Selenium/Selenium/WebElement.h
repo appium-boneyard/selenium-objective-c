@@ -27,6 +27,8 @@
 -(void) submitAndReturnError:(NSError**)error;
 -(NSString*) text;
 -(NSString*) textAndReturnError:(NSError**)error;
+-(NSString*) tagName;
+-(NSString*) tagNameAndReturnError:(NSError**)error;
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;

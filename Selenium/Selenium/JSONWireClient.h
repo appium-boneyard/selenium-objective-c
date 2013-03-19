@@ -113,7 +113,10 @@
 
 // /session/:sessionId/element/:id/value
 // /session/:sessionId/keys
-// /session/:sessionId/element/:id/name
+
+// GET /session/:sessionId/element/:id/name
+-(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/element/:id/clear
 // /session/:sessionId/element/:id/selected
 // /session/:sessionId/element/:id/enabled
