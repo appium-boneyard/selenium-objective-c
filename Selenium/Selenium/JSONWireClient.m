@@ -700,6 +700,15 @@
 // /session/:sessionId/session_storage/size
 // /session/:sessionId/log
 // /session/:sessionId/log/types
-// /session/:sessionId/application_cache/status
+
+// GET /session/:sessionId/application_cache/status
+-(SeleniumApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/application_cache/status", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	 NSInteger appCacheStatus = [[json objectForKey:@"value"] integerValue];
+    return [SeleniumEnums applicationCacheStatusWithInt:appCacheStatus];
+
+}
 
 @end

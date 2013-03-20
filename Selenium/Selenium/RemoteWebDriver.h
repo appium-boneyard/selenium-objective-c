@@ -109,5 +109,7 @@
 -(void) acceptAlertAndReturnError:(NSError**)error;
 -(void) dismissAlert;
 -(void) dismissAlertAndReturnError:(NSError**)error;
+-(SeleniumApplicationCacheStatus) applicationCacheStatus;
+-(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
 
 @end
