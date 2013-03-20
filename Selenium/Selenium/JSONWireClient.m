@@ -324,7 +324,7 @@
 // POST /session/:sessionId/window/:windowHandle/maximize
 -(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/mazimize", self.httpCommandExecutor, sessionId, windowHandle];
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/maximize", self.httpCommandExecutor, sessionId, windowHandle];
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 

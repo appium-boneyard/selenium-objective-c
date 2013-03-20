@@ -39,6 +39,8 @@
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 	NSString *oldUrl = [[driver url] absoluteString];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
+	NSString *windowHandle = [driver windowHandle];
+	[driver maximizeWindow:windowHandle];
 	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Checking URL changed");
 	WebElement *a = [driver findElementBy:[By tagName:@"input"]];
 	NSSize size = [a size];

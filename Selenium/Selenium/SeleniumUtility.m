@@ -13,7 +13,8 @@
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
     
     NSURLResponse *response;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:request
@@ -37,7 +38,7 @@
 
 +(NSDictionary*) performPostRequestToUrl:(NSString*)urlString postParams:(NSDictionary*)postParams error:(NSError**)error
 {
-	NSURL *url = [NSURL URLWithString:urlString];
+	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
 	[request setHTTPMethod:@"POST"];
 	
@@ -78,7 +79,8 @@
 
 +(NSDictionary*) performDeleteRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString: urlString] cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
    	[request setHTTPMethod:@"DELETE"];
 	
     NSURLResponse *response;
