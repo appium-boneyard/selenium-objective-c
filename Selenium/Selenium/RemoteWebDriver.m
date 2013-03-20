@@ -47,6 +47,28 @@ JSONWireClient *jsonWireClient;
 	[jsonWireClient deleteSessionWithSession:[[self session] sessionID] error:error];
 }
 
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds
+{
+	NSError *error;
+	[self setAsyncScriptTimeout:timeoutInMilliseconds error:&error];
+}
+
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
+{
+	[jsonWireClient postAsyncScriptWaitTimeout:timeoutInMilliseconds session:[[self session] sessionID] error:error];
+}
+
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds
+{
+	NSError *error;
+	[self setImplicitWaitTimeout:timeoutInMilliseconds error:&error];
+}
+
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
+{
+	[jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:[[self session] sessionID] error:error];
+}
+
 -(NSString*) windowHandle
 {
 	NSError *error;

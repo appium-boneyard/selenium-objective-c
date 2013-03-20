@@ -96,8 +96,25 @@ NSInteger serverPort;
 }
 
 // /session/:sessionId/timeouts
-// /session/:sessionId/timeouts/async_script
-// /session/:sessionId/timeouts/implicit_wait
+//
+// IMPLEMENT ME
+//
+
+// POST /session/:sessionId/timeouts/async_script
+-(void)postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/async_script", [self httpCommandExecutor], sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// POST /session/:sessionId/timeouts/implicit_wait
+-(void)postImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/implicit_wait", [self httpCommandExecutor], sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
 
 // GET /session/:sessionId/window_handle
 -(NSString*)getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error
@@ -139,7 +156,6 @@ NSInteger serverPort;
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", [self httpCommandExecutor], sessionId];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[url absoluteString], @"url", nil];
 	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
-	
 }
 
 // POST /session/:sessionId/forward
