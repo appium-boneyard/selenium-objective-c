@@ -10,15 +10,15 @@
 
 @implementation SeleniumEnums
 
-+(NSString*) stringForTimeoutType:(TimeoutType)type
++(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type
 {
     switch (type)
     {
-        case TIMEOUT_IMPLICIT:
+        case SELENIUM_TIMEOUT_IMPLICIT:
             return @"implicit";
-        case TIMEOUT_SCRIPT:
+        case SELENIUM_TIMEOUT_SCRIPT:
             return @"script";
-        case TIMEOUT_PAGELOAD:
+        case SELENIUM_TIMEOUT_PAGELOAD:
             return @"page load";
         default:
             return nil;

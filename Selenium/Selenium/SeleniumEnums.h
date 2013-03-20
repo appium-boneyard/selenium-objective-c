@@ -10,20 +10,20 @@
 
 @interface SeleniumEnums : NSObject
 
-typedef enum screenOrientationTypes
+typedef enum seleniumScreenOrientationTypes
 {
-	SCREEN_ORIENTATION_PORTRAIT,
-	SCREEN_ORIENTATION_LANDSCAPE,
-	SCREEN_ORIENTATION_NA
-} ScreenOrientation;
+	SELENIUM_SCREEN_ORIENTATION_PORTRAIT,
+	SELENIUM_SCREEN_ORIENTATION_LANDSCAPE,
+	SELENIUM_SCREEN_ORIENTATION_UNKOWN
+} SeleniumScreenOrientation;
 
-typedef enum timeoutTypes
+typedef enum seleniumTimeoutTypes
 {
-	TIMEOUT_IMPLICIT,
-	TIMEOUT_SCRIPT,
-	TIMEOUT_PAGELOAD
-} TimeoutType;
+	SELENIUM_TIMEOUT_IMPLICIT,
+	SELENIUM_TIMEOUT_SCRIPT,
+	SELENIUM_TIMEOUT_PAGELOAD
+} SeleniumTimeoutType;
 
-+(NSString*) stringForTimeoutType:(TimeoutType)type;
++(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type;
 
 @end

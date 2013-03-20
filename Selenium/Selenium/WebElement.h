@@ -16,10 +16,9 @@
 @interface WebElement : NSObject
 
 @property NSString *opaqueId;
-@property JSONWireClient *client;
 @property NSString *sessionId;
 
--(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)remoteSessionId;
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)sessionId;
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;

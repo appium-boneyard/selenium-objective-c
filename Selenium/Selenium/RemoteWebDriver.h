@@ -26,8 +26,8 @@
 
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type;
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type error:(NSError**)error;
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type;
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type error:(NSError**)error;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
@@ -58,10 +58,10 @@
 -(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 -(WebElement*) activeElement;
 -(WebElement*) activeElementAndReturnError:(NSError**)error;
--(ScreenOrientation) orientation;
--(ScreenOrientation) orientationAndReturnError:(NSError**)error;
--(void) setOrientation:(ScreenOrientation)orientation;
--(void) setOrientation:(ScreenOrientation)orientation error:(NSError**)error;
+-(SeleniumScreenOrientation) orientation;
+-(SeleniumScreenOrientation) orientationAndReturnError:(NSError**)error;
+-(void) setOrientation:(SeleniumScreenOrientation)orientation;
+-(void) setOrientation:(SeleniumScreenOrientation)orientation error:(NSError**)error;
 -(NSString*)alertText;
 -(NSString*)alertTextAndReturnError:(NSError **)error;
 -(void) setAlertText:(NSString*)text;

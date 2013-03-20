@@ -1,5 +1,5 @@
 //
-//  HTTPUtils.h
+//  SeleniumUtility.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HTTPUtils : NSObject
+@interface SeleniumUtility : NSObject
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error;
 +(NSDictionary*) performPostRequestToUrl:(NSString*)urlString postParams:(NSDictionary*)postParams error:(NSError**)error;

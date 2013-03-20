@@ -21,56 +21,54 @@
 
 @interface JSONWireClient : NSObject
 
-@property (readonly) NSString *httpCommandExecutor;
-
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error;
 
 #pragma mark - JSON-Wire Protocol Implementation
 
 // GET /status
--(RemoteWebDriverStatus*)getStatusAndReturnError:(NSError**)error;
+-(RemoteWebDriverStatus*) getStatusAndReturnError:(NSError**)error;
 
 // POST /session
--(RemoteWebDriverSession*)postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error;
+-(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error;
 
 // GET /sessions
--(NSArray*)getSessionsAndReturnError:(NSError**)error;
+-(NSArray*) getSessionsAndReturnError:(NSError**)error;
 
 // GET /session/:sessionId
--(RemoteWebDriverSession*)getSessionWithSession:(NSString*)sessionId error:(NSError**)error;
+-(RemoteWebDriverSession*) getSessionWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // DELETE /session/:sessionId
--(void)deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/timeouts
--(void)postTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type session:(NSString*)sessionId error:(NSError**)error;
+-(void) postTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/timeouts/async_script
--(void)postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error;
+-(void) postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/timeouts/implicit_wait
--(void)postImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error;
+-(void) postImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/window_handle
--(NSString*)getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error;
+-(NSString*) getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/window_handles
--(NSArray*)getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error;
+-(NSArray*) getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/url
--(NSURL*)getURLWithSession:(NSString*)sessionId error:(NSError**)error;
+-(NSURL*) getURLWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/url
--(void)postURL:(NSURL*)url session:(NSString*)sessionId error:(NSError**)error;
+-(void) postURL:(NSURL*)url session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/forward
--(void)postForwardWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) postForwardWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/back
--(void)postBackWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) postBackWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/refresh
--(void)postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/execute
 // /session/:sessionId/execute_async
@@ -89,34 +87,34 @@
 // /session/:sessionId/cookie/:name
 
 // GET /session/:sessionId/source
--(NSString*)getSourceWithSession:(NSString*)sessionId error:(NSError**)error;
+-(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/title
--(NSString*)getTitleWithSession:(NSString*)sessionId error:(NSError**)error;
+-(NSString*) getTitleWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element
--(WebElement*)postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+-(WebElement*) postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/elements
--(NSArray*)postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+-(NSArray*) postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/active
--(WebElement*)postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
+-(WebElement*) postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id
 // FUTURE (NOT YET IMPLEMENTED)
 
 // POST /session/:sessionId/element/:id/element
--(WebElement*)postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+-(WebElement*) postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/elements
--(NSArray*)postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
+-(NSArray*) postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/click
--(void)postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(void) postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/submit
--(void)postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(void) postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/text
 -(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
@@ -128,7 +126,7 @@
 -(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/element/:id/clear
--(void)postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(void) postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/selected
 -(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
@@ -158,10 +156,10 @@
 -(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/orientation
--(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error;
+-(SeleniumScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/orientation
--(void) postOrientation:(ScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error;
+-(void) postOrientation:(SeleniumScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/alert_text
 -(NSString*) getAlertTextWithSession:(NSString*)sessionId error:(NSError**)error;
@@ -170,10 +168,10 @@
 -(void) postAlertText:(NSString*)text session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/accept_alert
--(void)postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/dismiss_alert
--(void)postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+-(void) postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/moveto
 // /session/:sessionId/click

@@ -1,15 +1,15 @@
 //
-//  HTTPUtils.m
+//  SeleniumUtility.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "HTTPUtils.h"
+#import "SeleniumUtility.h"
 #import "SeleniumError.h"
 
-@implementation HTTPUtils
+@implementation SeleniumUtility
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {

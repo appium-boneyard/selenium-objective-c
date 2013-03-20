@@ -31,7 +31,7 @@ NSMutableDictionary* _dict;
 
 #pragma mark - Constructors
 
--(id)init
+-(id) init
 {
     self = [super init];
     if (self) {
@@ -40,7 +40,7 @@ NSMutableDictionary* _dict;
     return self;
 }
 
--(id)initWithDictionary:(NSDictionary*)dict
+-(id) initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
     if (self) {
@@ -63,13 +63,13 @@ NSMutableDictionary* _dict;
 
 #pragma mark - Built-in Capabilities
 
--(NSString*)browserName { return [_dict objectForKey:BROWSER_NAME];}
+-(NSString*) browserName { return [_dict objectForKey:BROWSER_NAME];}
 -(void) setBrowserName:(NSString *)browserName { [_dict setValue:browserName forKey:BROWSER_NAME]; }
 
--(NSString*)version { return [_dict objectForKey:VERSION];}
+-(NSString*) version { return [_dict objectForKey:VERSION];}
 -(void) setVersion:(NSString *)version { [_dict setValue:version forKey:VERSION]; }
 
--(NSString*)platform { return [_dict objectForKey:PLATFORM];}
+-(NSString*) platform { return [_dict objectForKey:PLATFORM];}
 -(void) setPlatform:(NSString *)platform { [_dict setValue:platform forKey:PLATFORM]; }
 
 -(BOOL) javascriptEnabled { return [[_dict objectForKey:JAVASCRIPT_ENABLED] boolValue]; }
@@ -111,8 +111,8 @@ NSMutableDictionary* _dict;
 
 #pragma mark - Custom Capabilities
 
--(id)getCapabilityForKey:(NSString*)key { return [_dict valueForKey:key]; }
--(void)addCapabilityForKey:(NSString*)key andValue:(id)value { [_dict setValue:value forKey:key]; }
--(NSDictionary*)dictionary { return _dict; }
+-(id) getCapabilityForKey:(NSString*)key { return [_dict valueForKey:key]; }
+-(void) addCapabilityForKey:(NSString*)key andValue:(id)value { [_dict setValue:value forKey:key]; }
+-(NSDictionary*) dictionary { return _dict; }
 
 @end

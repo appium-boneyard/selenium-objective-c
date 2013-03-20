@@ -7,17 +7,13 @@
 //
 
 #import "RemoteWebDriver.h"
-#import "RemoteWebDriverStatus.h"
-#import "RemoteWebDriverSession.h"
-#import "HTTPUtils.h"
-#import "SeleniumError.h"
-#import "By.h"
-#import "WebElement.h"
-#import "JSONWireClient.h"
+
+@interface RemoteWebDriver ()
+	@property JSONWireClient *jsonWireClient;
+@end
+
 
 @implementation RemoteWebDriver
-
-JSONWireClient *jsonWireClient;
 
 #pragma mark - Public Methods
 
@@ -25,10 +21,10 @@ JSONWireClient *jsonWireClient;
 {
     self = [super init];
     if (self) {
-        jsonWireClient = [[JSONWireClient alloc] initWithServerAddress:address port:port desiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:error];
+        [self setJsonWireClient:[[JSONWireClient alloc] initWithServerAddress:address port:port desiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:error]];
 		
 		// get session
-		[self setSession:[jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error]];
+		[self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error]];
         if ([*error code] != 0)
             return nil;
     }
@@ -43,18 +39,18 @@ JSONWireClient *jsonWireClient;
 
 -(void) quitAndError:(NSError **)error
 {
-	[jsonWireClient deleteSessionWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient deleteSessionWithSession:self.session.sessionId error:error];
 }
 
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type
 {
     NSError *error;
     [self setTimeout:timeoutInMilliseconds forType:type error:&error];
 }
 
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type error:(NSError**)error
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type error:(NSError**)error
 {
-    [jsonWireClient postTimeout:timeoutInMilliseconds forType:type session:[[self session] sessionID] error:error];
+    [self.jsonWireClient postTimeout:timeoutInMilliseconds forType:type session:self.session.sessionId error:error];
 }
 
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds
@@ -65,7 +61,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
 {
-	[jsonWireClient postAsyncScriptWaitTimeout:timeoutInMilliseconds session:[[self session] sessionID] error:error];
+	[self.jsonWireClient postAsyncScriptWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:error];
 }
 
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds
@@ -76,7 +72,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
 {
-	[jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:[[self session] sessionID] error:error];
+	[self.jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:error];
 }
 
 -(NSString*) windowHandle
@@ -87,7 +83,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSString*) windowHandleAndReturnError:(NSError**)error
 {
-	return [jsonWireClient getWindowHandleWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:error];
 }
 
 -(NSArray*) windowHandles
@@ -98,7 +94,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSArray*) windowHandlesAndReturnError:(NSError**)error
 {
-	return [jsonWireClient getWindowHandlesWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getWindowHandlesWithSession:self.session.sessionId error:error];
 }
 
 -(NSURL*) url
@@ -109,7 +105,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSURL*) urlAndReturnError:(NSError**)error
 {
-    return [jsonWireClient getURLWithSession:[[self session] sessionID] error:error];
+    return [self.jsonWireClient getURLWithSession:self.session.sessionId error:error];
 }
 
 -(void) setUrl:(NSURL*)url
@@ -120,7 +116,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) setUrl:(NSURL*)url error:(NSError**)error
 {
-	[jsonWireClient postURL:url session:[[self session] sessionID] error:error];
+	[self.jsonWireClient postURL:url session:self.session.sessionId error:error];
 }
 
 -(void) forward
@@ -131,7 +127,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) forwardAndReturnError:(NSError**)error
 {
-	[jsonWireClient postForwardWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient postForwardWithSession:self.session.sessionId error:error];
 }
 
 -(void) back
@@ -142,7 +138,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) backAndReturnError:(NSError**)error
 {
-	[jsonWireClient postBackWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient postBackWithSession:self.session.sessionId error:error];
 }
 
 -(void) refresh
@@ -153,7 +149,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) refreshAndReturnError:(NSError**)error
 {
-	[jsonWireClient postRefreshWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient postRefreshWithSession:self.session.sessionId error:error];
 }
 
 -(NSString*)pageSource
@@ -164,7 +160,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSString*)pageSourceAndReturnError:(NSError **)error
 {
-	return [jsonWireClient getSourceWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getSourceWithSession:self.session.sessionId error:error];
 }
 
 -(NSString*)title
@@ -175,7 +171,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSString*)titleAndReturnError:(NSError **)error
 {
-	return [jsonWireClient getTitleWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getTitleWithSession:self.session.sessionId error:error];
 }
 
 -(WebElement*)findElementBy:(By*)by
@@ -186,7 +182,7 @@ JSONWireClient *jsonWireClient;
 
 -(WebElement*)findElementBy:(By*)by error:(NSError**)error
 {
-	return [jsonWireClient postElement:by session:[[self session] sessionID] error:error];
+	return [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
 }
 
 -(NSArray*)findElementsBy:(By*)by
@@ -197,7 +193,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSArray*)findElementsBy:(By*)by error:(NSError**)error
 {
-	return [jsonWireClient postElements:by session:[[self session] sessionID] error:error];
+	return [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
 }
 
 -(WebElement*)activeElement
@@ -208,29 +204,29 @@ JSONWireClient *jsonWireClient;
 
 -(WebElement*)activeElementAndReturnError:(NSError**)error
 {
-	return [jsonWireClient postActiveElementWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient postActiveElementWithSession:self.session.sessionId error:error];
 }
 
--(ScreenOrientation) orientation
+-(SeleniumScreenOrientation) orientation
 {
 	NSError *error;
 	return [self orientationAndReturnError:&error];
 }
 
--(ScreenOrientation) orientationAndReturnError:(NSError**)error
+-(SeleniumScreenOrientation) orientationAndReturnError:(NSError**)error
 {
-	return [jsonWireClient getOrientationWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getOrientationWithSession:self.session.sessionId error:error];
 }
 
--(void) setOrientation:(ScreenOrientation)orientation
+-(void) setOrientation:(SeleniumScreenOrientation)orientation
 {
 	NSError* error;
 	[self setOrientation:orientation error:&error];
 }
 
--(void) setOrientation:(ScreenOrientation)orientation error:(NSError**)error
+-(void) setOrientation:(SeleniumScreenOrientation)orientation error:(NSError**)error
 {
-	[jsonWireClient postOrientation:orientation session:[[self session] sessionID] error:error];
+	[self.jsonWireClient postOrientation:orientation session:self.session.sessionId error:error];
 }
 
 -(NSString*)alertText
@@ -241,7 +237,7 @@ JSONWireClient *jsonWireClient;
 
 -(NSString*)alertTextAndReturnError:(NSError **)error
 {
-	return [jsonWireClient getAlertTextWithSession:[[self session] sessionID] error:error];
+	return [self.jsonWireClient getAlertTextWithSession:self.session.sessionId error:error];
 }
 
 -(void) setAlertText:(NSString*)text
@@ -252,7 +248,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) setAlertText:(NSString*)text error:(NSError**)error
 {
-	[jsonWireClient postAlertText:text session:[[self session] sessionID] error:error];
+	[self.jsonWireClient postAlertText:text session:self.session.sessionId error:error];
 }
 
 -(void) acceptAlert
@@ -263,7 +259,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) acceptAlertAndReturnError:(NSError**)error
 {
-	[jsonWireClient postAcceptAlertWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient postAcceptAlertWithSession:self.session.sessionId error:error];
 }
 
 -(void) dismissAlert
@@ -274,7 +270,7 @@ JSONWireClient *jsonWireClient;
 
 -(void) dismissAlertAndReturnError:(NSError**)error
 {
-	[jsonWireClient postDismissAlertWithSession:[[self session] sessionID] error:error];
+	[self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:error];
 }
 
 @end

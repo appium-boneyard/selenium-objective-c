@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		360486EF16F7C15100D968D8 /* HTTPUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 360486ED16F7C15100D968D8 /* HTTPUtils.h */; };
-		360486F016F7C15100D968D8 /* HTTPUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 360486EE16F7C15100D968D8 /* HTTPUtils.m */; };
+		360486EF16F7C15100D968D8 /* SeleniumUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 360486ED16F7C15100D968D8 /* SeleniumUtility.h */; };
+		360486F016F7C15100D968D8 /* SeleniumUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 360486EE16F7C15100D968D8 /* SeleniumUtility.m */; };
 		360609C316F5657600BADCDE /* SeleniumError.h in Headers */ = {isa = PBXBuildFile; fileRef = 360609C116F5657600BADCDE /* SeleniumError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		360609C416F5657600BADCDE /* SeleniumError.m in Sources */ = {isa = PBXBuildFile; fileRef = 360609C216F5657600BADCDE /* SeleniumError.m */; };
 		36A5B25C16F8EFAE00AB30AF /* JSONWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* JSONWireClient.h */; };
@@ -47,8 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		360486ED16F7C15100D968D8 /* HTTPUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPUtils.h; sourceTree = "<group>"; };
-		360486EE16F7C15100D968D8 /* HTTPUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPUtils.m; sourceTree = "<group>"; };
+		360486ED16F7C15100D968D8 /* SeleniumUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeleniumUtility.h; sourceTree = "<group>"; };
+		360486EE16F7C15100D968D8 /* SeleniumUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeleniumUtility.m; sourceTree = "<group>"; };
 		360609C116F5657600BADCDE /* SeleniumError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeleniumError.h; sourceTree = "<group>"; };
 		360609C216F5657600BADCDE /* SeleniumError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeleniumError.m; sourceTree = "<group>"; };
 		36A5B25A16F8EFAE00AB30AF /* JSONWireClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONWireClient.h; sourceTree = "<group>"; };
@@ -219,8 +219,8 @@
 		36BB384316F2695D003A46FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				360486ED16F7C15100D968D8 /* HTTPUtils.h */,
-				360486EE16F7C15100D968D8 /* HTTPUtils.m */,
+				360486ED16F7C15100D968D8 /* SeleniumUtility.h */,
+				360486EE16F7C15100D968D8 /* SeleniumUtility.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -240,7 +240,7 @@
 				36F3D75216F7DFE700A5DD70 /* By.h in Headers */,
 				36F3D75616F7E39100A5DD70 /* WebElement.h in Headers */,
 				36C3AFA216F9379C000E73C6 /* SeleniumEnums.h in Headers */,
-				360486EF16F7C15100D968D8 /* HTTPUtils.h in Headers */,
+				360486EF16F7C15100D968D8 /* SeleniumUtility.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* JSONWireClient.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,7 +357,7 @@
 				36BB383E16F26945003A46FD /* RemoteWebDriverSession.m in Sources */,
 				36BB384216F26951003A46FD /* RemoteWebDriverStatus.m in Sources */,
 				360609C416F5657600BADCDE /* SeleniumError.m in Sources */,
-				360486F016F7C15100D968D8 /* HTTPUtils.m in Sources */,
+				360486F016F7C15100D968D8 /* SeleniumUtility.m in Sources */,
 				36F3D75316F7DFE700A5DD70 /* By.m in Sources */,
 				36F3D75716F7E39100A5DD70 /* WebElement.m in Sources */,
 				36A5B25D16F8EFAE00AB30AF /* JSONWireClient.m in Sources */,
