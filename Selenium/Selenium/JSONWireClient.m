@@ -96,10 +96,50 @@ NSInteger serverPort;
 }
 
 // /session/:sessionId/timeouts
-// /session/:sessionId/timeouts/async_script
-// /session/:sessionId/timeouts/implicit_wait
-// /session/:sessionId/window_handle
-// /session/:sessionId/window_handles
+//
+// IMPLEMENT ME
+//
+
+// POST /session/:sessionId/timeouts/async_script
+-(void)postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/async_script", [self httpCommandExecutor], sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// POST /session/:sessionId/timeouts/implicit_wait
+-(void)postImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/implicit_wait", [self httpCommandExecutor], sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// GET /session/:sessionId/window_handle
+-(NSString*)getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handle", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *handle = [[NSString alloc] initWithString:(NSString*)[json objectForKey:@"value"]];
+	return handle;
+}
+
+// GET /session/:sessionId/window_handles
+-(NSArray*)getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handles", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	
+	NSMutableArray *handles = [NSMutableArray new];
+	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+	for(int i =0; i < [jsonItems count]; i++)
+	{
+		NSString *handle = [[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+		[handles addObject:handle];
+	}
+	return handles;
+}
 
 // GET /session/:sessionId/url
 -(NSURL*)getURLWithSession:(NSString*)sessionId error:(NSError**)error
@@ -116,7 +156,6 @@ NSInteger serverPort;
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", [self httpCommandExecutor], sessionId];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[url absoluteString], @"url", nil];
 	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
-	
 }
 
 // POST /session/:sessionId/forward
