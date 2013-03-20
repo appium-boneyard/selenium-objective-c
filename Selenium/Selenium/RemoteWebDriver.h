@@ -60,6 +60,20 @@
 -(void) deactivateInputMethodEngineAndReturnError:(NSError **)error;
 -(void) activateInputMethodEngine:(NSString*)engine;
 -(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error;
+-(void) setWindow:(NSString*)windowHandle;
+-(void) setWindow:(NSString*)windowHandle error:(NSError**)error;
+-(void) closeWindow:(NSString*)windowHandle;
+-(void) closeWindow:(NSString*)windowHandle error:(NSError**)error;
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle;
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle error:(NSError**)error;
+-(NSSize) windowSizeWithWindow:(NSString*)windowHandle;
+-(NSSize) windowSizeWithWindow:(NSString*)windowHandle error:(NSError**)error;
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle;
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle error:(NSError**)error;
+-(NSPoint) windowPositionWithWindow:(NSString*)windowHandle;
+-(NSPoint) windowPositionWithWindow:(NSString*)windowHandle error:(NSError**)error;
+-(void) maximizeWindow:(NSString*)windowHandle;
+-(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
