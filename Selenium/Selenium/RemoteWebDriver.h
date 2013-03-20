@@ -27,6 +27,15 @@
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
 
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
+-(NSString*) windowHandle;
+-(NSString*) windowHandleAndReturnError:(NSError**)error;
+-(NSArray*) windowHandles;
+-(NSArray*) windowHandlesAndReturnError:(NSError**)error;
+
 -(NSURL*) url;
 -(NSURL*) urlAndReturnError:(NSError**)error;
 -(void) setUrl:(NSURL*)url;
