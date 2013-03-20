@@ -85,6 +85,8 @@
 -(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 -(WebElement*) activeElement;
 -(WebElement*) activeElementAndReturnError:(NSError**)error;
+-(void) sendKeys:(NSString*)keyString;
+-(void) sendKeys:(NSString*)keyString error:(NSError**)error;
 -(SeleniumScreenOrientation) orientation;
 -(SeleniumScreenOrientation) orientationAndReturnError:(NSError**)error;
 -(void) setOrientation:(SeleniumScreenOrientation)orientation;

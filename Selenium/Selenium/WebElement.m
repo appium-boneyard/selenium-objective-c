@@ -58,6 +58,21 @@
 	return [self.jsonWireClient getElementText:self session:self.sessionId error:error];
 }
 
+-(void) sendKeys:(NSString*)keyString
+{
+	NSError *error;
+	[self sendKeys:keyString error:&error];
+}
+
+-(void) sendKeys:(NSString*)keyString error:(NSError**)error
+{
+	unichar keys[keyString.length+1];
+	for(int i=0; i < keyString.length; i++)
+		keys[i] = [keyString characterAtIndex:i];
+	keys[keyString.length] = '\0';
+	return [self.jsonWireClient postKeys:keys element:self session:self.sessionId error:error];
+}
+
 -(NSString*) tagName
 {
 	NSError *error;
