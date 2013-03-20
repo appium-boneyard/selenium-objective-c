@@ -8,20 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "RemoteWebDriverSession.h"
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 #import "WebElement.h"
 #import "By.h"
 #import "SeleniumEnums.h"
 
 @class By;
-@class Capabilities;
+@class SeleniumCapabilities;
 @class RemoteWebDriverStatus;
 @class RemoteWebDriverSession;
 @class WebElement;
 
 @interface JSONWireClient : NSObject
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error;
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error;
 
 #pragma mark - JSON-Wire Protocol Implementation
 
@@ -29,7 +29,7 @@
 -(RemoteWebDriverStatus*) getStatusAndReturnError:(NSError**)error;
 
 // POST /session
--(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error;
+-(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(SeleniumCapabilities*)desiredCapabilities andRequiredCapabilities:(SeleniumCapabilities*)requiredCapabilities error:(NSError**)error;
 
 // GET /sessions
 -(NSArray*) getSessionsAndReturnError:(NSError**)error;
@@ -76,11 +76,21 @@
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/ime/available_engines
-// /session/:sessionId/ime/active_engine
-// /session/:sessionId/ime/activated
-// /session/:sessionId/ime/deactivate
-// /session/:sessionId/ime/activate
+// GET /session/:sessionId/ime/available_engines
+-(NSArray*) getAvailableInputMethodEnginesWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/ime/active_engine
+-(NSString*) getActiveInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/ime/activated
+-(BOOL) getInputMethodEngineIsActivatedWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/ime/deactivate
+-(void) postDeactivateInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/ime/activate
+-(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/frame
 // /session/:sessionId/window
 // /session/:sessionId/window/:windowHandle/size

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Capabilities : NSObject
+@interface SeleniumCapabilities : NSObject
 
 @property NSString* browserName;
 @property NSString* version;

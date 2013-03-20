@@ -21,7 +21,7 @@
 
 
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
@@ -53,7 +53,7 @@
 }
 
 // POST /session
--(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error
+-(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(SeleniumCapabilities*)desiredCapabilities andRequiredCapabilities:(SeleniumCapabilities*)requiredCapabilities error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", self.httpCommandExecutor];
 	
@@ -202,11 +202,55 @@
 	NSImage *image = [[NSImage alloc] initWithData:pngData];
 	return image;
 }
-// /session/:sessionId/ime/available_engines
-// /session/:sessionId/ime/active_engine
-// /session/:sessionId/ime/activated
-// /session/:sessionId/ime/deactivate
-// /session/:sessionId/ime/activate
+
+// GET /session/:sessionId/ime/available_engines
+-(NSArray*) getAvailableInputMethodEnginesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/available_engines", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+	NSMutableArray *engines = [NSMutableArray new];
+	for (int i=0; i < [jsonItems count]; i++)
+	{
+		NSString *engine = [jsonItems objectAtIndex:i];
+		[engines addObject:engine];
+	}
+	return engines;
+}
+
+// GET /session/:sessionId/ime/active_engine
+-(NSString*) getActiveInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/active_engine", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSString *activeEngine = [json objectForKey:@"value"];
+	return activeEngine;
+}
+
+// GET /session/:sessionId/ime/activated
+-(BOOL) getInputMethodEngineIsActivatedWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/activated", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	BOOL isActivated = [[json objectForKey:@"value"] boolValue];
+	return isActivated;
+}
+
+// POST /session/:sessionId/ime/deactivate
+-(void) postDeactivateInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/deactivate", self.httpCommandExecutor, sessionId];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /session/:sessionId/ime/activate
+-(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/activate", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: engine, @"engine", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
 // /session/:sessionId/frame
 // /session/:sessionId/window
 // /session/:sessionId/window/:windowHandle/size
