@@ -25,10 +25,10 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/ime/deactivate**
 * &#10003; **/session/:sessionId/ime/activate**
 * /session/:sessionId/frame
-* /session/:sessionId/window
-* /session/:sessionId/window/:windowHandle/size
-* /session/:sessionId/window/:windowHandle/position
-* /session/:sessionId/window/:windowHandle/maximize
+* &#10003; **/session/:sessionId/window**
+* &#10003; **/session/:sessionId/window/:windowHandle/size**
+* &#10003; **/session/:sessionId/window/:windowHandle/position**
+* &#10003; **/session/:sessionId/window/:windowHandle/maximize**
 * /session/:sessionId/cookie
 * /session/:sessionId/cookie/:name
 * &#10003; **/session/:sessionId/source**
