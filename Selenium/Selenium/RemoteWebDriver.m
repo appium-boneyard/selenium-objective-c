@@ -47,6 +47,28 @@ JSONWireClient *jsonWireClient;
 	[jsonWireClient deleteSessionWithSession:[[self session] sessionID] error:error];
 }
 
+-(NSString*) windowHandle
+{
+	NSError *error;
+	return [self windowHandleAndReturnError:&error];
+}
+
+-(NSString*) windowHandleAndReturnError:(NSError**)error
+{
+	return [jsonWireClient getWindowHandleWithSession:[[self session] sessionID] error:error];
+}
+
+-(NSArray*) windowHandles
+{
+	NSError *error;
+	return [self windowHandlesAndReturnError:&error];
+}
+
+-(NSArray*) windowHandlesAndReturnError:(NSError**)error
+{
+	return [jsonWireClient getWindowHandlesWithSession:[[self session] sessionID] error:error];
+}
+
 -(NSURL*) url
 {
 	NSError *error;

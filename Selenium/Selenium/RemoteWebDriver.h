@@ -27,6 +27,11 @@
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
 
+-(NSString*) windowHandle;
+-(NSString*) windowHandleAndReturnError:(NSError**)error;
+-(NSArray*) windowHandles;
+-(NSArray*) windowHandlesAndReturnError:(NSError**)error;
+
 -(NSURL*) url;
 -(NSURL*) urlAndReturnError:(NSError**)error;
 -(void) setUrl:(NSURL*)url;

@@ -45,8 +45,12 @@
 // /session/:sessionId/timeouts
 // /session/:sessionId/timeouts/async_script
 // /session/:sessionId/timeouts/implicit_wait
-// /session/:sessionId/window_handle
-// /session/:sessionId/window_handles
+
+// GET /session/:sessionId/window_handle
+-(NSString*)getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/window_handles
+-(NSArray*)getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/url
 -(NSURL*)getURLWithSession:(NSString*)sessionId error:(NSError**)error;

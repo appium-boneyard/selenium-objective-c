@@ -98,8 +98,31 @@ NSInteger serverPort;
 // /session/:sessionId/timeouts
 // /session/:sessionId/timeouts/async_script
 // /session/:sessionId/timeouts/implicit_wait
-// /session/:sessionId/window_handle
-// /session/:sessionId/window_handles
+
+// GET /session/:sessionId/window_handle
+-(NSString*)getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handle", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *handle = [[NSString alloc] initWithString:(NSString*)[json objectForKey:@"value"]];
+	return handle;
+}
+
+// GET /session/:sessionId/window_handles
+-(NSArray*)getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handles", [self httpCommandExecutor], sessionId];
+    NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	
+	NSMutableArray *handles = [NSMutableArray new];
+	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+	for(int i =0; i < [jsonItems count]; i++)
+	{
+		NSString *handle = [[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+		[handles addObject:handle];
+	}
+	return handles;
+}
 
 // GET /session/:sessionId/url
 -(NSURL*)getURLWithSession:(NSString*)sessionId error:(NSError**)error
