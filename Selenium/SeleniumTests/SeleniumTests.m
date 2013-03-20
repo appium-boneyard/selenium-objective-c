@@ -37,14 +37,13 @@
     NSError *error;
 	
     RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
+	NSString *oldUrl = [[driver url] absoluteString];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
+	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Checking URL changed");
 	WebElement *a = [driver findElementBy:[By tagName:@"input"]];
 	NSSize size = [a size];
 	NSLog(@"(%f,%f)", size.width, size.height);
-	ScreenOrientation o = [driver orientation];
     [driver quitAndError:&error];
-
-	STFail(@"Unit tests are not implemented yet in SeleniumTests");
 }
 
 @end

@@ -10,12 +10,12 @@
 
 @implementation RemoteWebDriverSession
 
--(id)initWithDictionary:(NSDictionary*)dict
+-(id) initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
     if (self) {
 		[self setCapabilities:[[Capabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
-		[self setSessionID:[dict objectForKey:@"sessionId"]];
+		[self setSessionId:[dict objectForKey:@"sessionId"]];
     }
     return self;
 }

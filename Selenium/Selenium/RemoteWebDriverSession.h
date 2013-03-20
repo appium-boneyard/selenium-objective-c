@@ -12,8 +12,8 @@
 @interface RemoteWebDriverSession : NSObject
 
 @property Capabilities *capabilities;
-@property NSString *sessionID;
+@property NSString *sessionId;
 
--(id)initWithDictionary:(NSDictionary*)dict;
+-(id) initWithDictionary:(NSDictionary*)dict;
 
 @end
