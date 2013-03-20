@@ -335,13 +335,44 @@
 }
 
 
-// /session/:sessionId/cookie
+// GET /session/:sessionId/cookie
+-(NSArray*) getCookiesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+	NSMutableArray *cookies = [NSMutableArray new];
+	for (int i=0; i < [jsonItems count]; i++)
+	{
+		NSMutableDictionary *cookieInfo = (NSMutableDictionary*)[jsonItems objectAtIndex:i];
+		NSHTTPCookie *cookie = [SeleniumUtility cookieWithJson:cookieInfo];
+		[cookies addObject:cookie];
+	}
+	return cookies;
+}
+
+// POST /session/:sessionId/cookie
+-(void) postCookie:(NSHTTPCookie*)cookie session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie", self.httpCommandExecutor, sessionId];
+	NSMutableDictionary *cookieJson = [NSMutableDictionary new];
+	[cookieJson setObject:cookie.name forKey:@"name"];
+	[cookieJson setObject:cookie.value forKey:@"value"];
+	[cookieJson setObject:cookie.path forKey:@"path"];
+	[cookieJson setObject:cookie.domain forKey:@"domain"];
+	[cookieJson setObject:[NSNumber numberWithBool:cookie.isSecure] forKey:@"secure"];
+	[cookieJson setObject:[NSNumber numberWithDouble:[cookie.expiresDate timeIntervalSince1970]] forKey:@"expiry"];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:cookieJson, @"cookie", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// DELETE /session/:sessionId/cookie
 //
 // IMPLEMENT ME
 //
 //
 
-// /session/:sessionId/cookie/:name
+// DELETE /session/:sessionId/cookie/:name
 //
 // IMPLEMENT ME
 //

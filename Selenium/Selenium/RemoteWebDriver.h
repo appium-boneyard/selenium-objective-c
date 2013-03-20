@@ -76,6 +76,10 @@
 -(NSPoint) windowPositionWithWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) maximizeWindow:(NSString*)windowHandle;
 -(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error;
+-(NSArray*) cookies;
+-(NSArray*) cookiesAndReturnError:(NSError**)error;
+-(void) setCookie:(NSHTTPCookie*)cookie;
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;

@@ -124,13 +124,19 @@
 // POST /session/:sessionId/window/:windowHandle/maximize
 -(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/cookie
+// GET /session/:sessionId/cookie
+-(NSArray*) getCookiesWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/cookie
+-(void) postCookie:(NSHTTPCookie*)cookie session:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/cookie
 //
 // IMPLEMENT ME
 //
 //
 
-// /session/:sessionId/cookie/:name
+// DELETE /session/:sessionId/cookie/:name
 //
 // IMPLEMENT ME
 //

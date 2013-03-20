@@ -306,6 +306,28 @@
 	[self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:error];
 }
 
+-(NSArray*) cookies
+{
+	NSError *error;
+	return [self cookiesAndReturnError:&error];
+}
+
+-(NSArray*) cookiesAndReturnError:(NSError**)error
+{
+	return [self.jsonWireClient getCookiesWithSession:self.session.sessionId error:error];
+}
+
+-(void) setCookie:(NSHTTPCookie*)cookie
+{
+	NSError *error;
+	[self setCookie:cookie error:&error];
+}
+
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error
+{
+	[self.jsonWireClient postCookie:cookie session:self.session.sessionId error:error];
+}
+
 -(NSString*) pageSource
 {
     NSError *error;
