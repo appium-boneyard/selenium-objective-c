@@ -151,9 +151,21 @@
 // GET /session/:sessionId/orientation
 -(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/alert_text
-// /session/:sessionId/accept_alert
-// /session/:sessionId/dismiss_alert
+// POST /session/:sessionId/orientation
+-(void) postOrientation:(ScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/alert_text
+-(NSString*) getAlertTextWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/alert_text
+-(void) postAlertText:(NSString*)text session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/accept_alert
+-(void)postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/dismiss_alert
+-(void)postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/moveto
 // /session/:sessionId/click
 // /session/:sessionId/buttondown

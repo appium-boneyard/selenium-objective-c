@@ -50,5 +50,15 @@
 -(WebElement*) activeElementAndReturnError:(NSError**)error;
 -(ScreenOrientation) orientation;
 -(ScreenOrientation) orientationAndReturnError:(NSError**)error;
+-(void) setOrientation:(ScreenOrientation)orientation;
+-(void) setOrientation:(ScreenOrientation)orientation error:(NSError**)error;
+-(NSString*)alertText;
+-(NSString*)alertTextAndReturnError:(NSError **)error;
+-(void) setAlertText:(NSString*)text;
+-(void) setAlertText:(NSString*)text error:(NSError**)error;
+-(void) acceptAlert;
+-(void) acceptAlertAndReturnError:(NSError**)error;
+-(void) dismissAlert;
+-(void) dismissAlertAndReturnError:(NSError**)error;
 
 @end
