@@ -24,7 +24,7 @@
         return nil;
     
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-														 options: NSJSONReadingMutableContainers
+														 options: NSJSONReadingMutableContainers & NSJSONReadingMutableLeaves
 														   error: error];
     if ([*error code] != 0)
         return nil;
@@ -66,7 +66,7 @@
 
 	
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:responseData
-														 options: 0
+														 options: NSJSONReadingMutableContainers & NSJSONReadingMutableLeaves
 														   error: error];
     if ([*error code] != 0)
         return nil;
@@ -91,7 +91,7 @@
         return nil;
     
 	NSDictionary *json = [NSJSONSerialization JSONObjectWithData:urlData
-														 options: NSJSONReadingMutableContainers
+														 options: NSJSONReadingMutableContainers & NSJSONReadingMutableLeaves
 														   error: error];
     if ([*error code] != 0)
         return nil;
@@ -117,6 +117,26 @@
 	NSData *jsonData = [self jsonDataFromDictionary:dictionary];
 	NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 	return jsonString;
+}
+
++(NSHTTPCookie*) cookieWithJson:(NSDictionary*)json
+{
+	NSMutableDictionary *properties = [[NSMutableDictionary alloc] init];
+	
+	double unixTimeStamp = [[json objectForKey:@"expiry"] doubleValue];
+	NSTimeInterval _interval=unixTimeStamp;
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:_interval];
+	
+	[properties setObject:[json objectForKey:@"name"] forKey:NSHTTPCookieName];
+	[properties setObject:[json objectForKey:@"value"] forKey:NSHTTPCookieValue];
+	[properties setObject:[json objectForKey:@"path"] forKey:NSHTTPCookiePath];
+	[properties setObject:[json objectForKey:@"domain"] forKey:NSHTTPCookieDomain];
+	[properties setObject:[json objectForKey:@"secure"] forKey:NSHTTPCookieSecure];
+	[properties setObject:date forKey:NSHTTPCookieExpires];
+
+	
+	NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:properties];
+	return cookie;
 }
 
 @end

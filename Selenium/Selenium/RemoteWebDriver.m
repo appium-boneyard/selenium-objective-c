@@ -218,6 +218,17 @@
 	return [self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:error];
 }
 
+-(void) setFrame:(id)name
+{
+	NSError* error;
+	return [self setFrame:name error:&error];
+}
+
+-(void) setFrame:(id)name error:(NSError**)error
+{
+	return [self.jsonWireClient postSetFrame:name session:self.session.sessionId error:error];
+}
+
 -(void) setWindow:(NSString*)windowHandle
 {
 	NSError* error;
@@ -293,6 +304,50 @@
 -(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error
 {
 	[self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:error];
+}
+
+-(NSArray*) cookies
+{
+	NSError *error;
+	return [self cookiesAndReturnError:&error];
+}
+
+-(NSArray*) cookiesAndReturnError:(NSError**)error
+{
+	return [self.jsonWireClient getCookiesWithSession:self.session.sessionId error:error];
+}
+
+-(void) setCookie:(NSHTTPCookie*)cookie
+{
+	NSError *error;
+	[self setCookie:cookie error:&error];
+}
+
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error
+{
+	[self.jsonWireClient postCookie:cookie session:self.session.sessionId error:error];
+}
+
+-(void) deleteCookies
+{
+	NSError *error;
+	[self deleteCookiesAndReturnError:&error];
+}
+
+-(void) deleteCookiesAndReturnError:(NSError**)error
+{
+	[self.jsonWireClient deleteCookiesWithSession:self.session.sessionId error:error];
+}
+
+-(void) deleteCookie:(NSString*)cookieName
+{
+	NSError *error;
+	[self deleteCookie:cookieName error:&error];
+}
+
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error
+{
+	[self.jsonWireClient deleteCookie:cookieName session:self.session.sessionId error:error];
 }
 
 -(NSString*) pageSource

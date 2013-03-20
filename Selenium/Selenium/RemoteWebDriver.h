@@ -60,6 +60,8 @@
 -(void) deactivateInputMethodEngineAndReturnError:(NSError **)error;
 -(void) activateInputMethodEngine:(NSString*)engine;
 -(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error;
+-(void) setFrame:(id)name;
+-(void) setFrame:(id)name error:(NSError**)error;
 -(void) setWindow:(NSString*)windowHandle;
 -(void) setWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) closeWindow:(NSString*)windowHandle;
@@ -74,6 +76,14 @@
 -(NSPoint) windowPositionWithWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) maximizeWindow:(NSString*)windowHandle;
 -(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error;
+-(NSArray*) cookies;
+-(NSArray*) cookiesAndReturnError:(NSError**)error;
+-(void) setCookie:(NSHTTPCookie*)cookie;
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error;
+-(void) deleteCookies;
+-(void) deleteCookiesAndReturnError:(NSError**)error;
+-(void) deleteCookie:(NSString*)cookieName;
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
