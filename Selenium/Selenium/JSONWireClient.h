@@ -173,7 +173,10 @@
 -(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/element/:id/value
-// /session/:sessionId/keys
+-(void) postKeys:(unichar *)keys element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/keys
+-(void) postKeys:(unichar *)keys session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/name
 -(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;

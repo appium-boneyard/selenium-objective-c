@@ -26,6 +26,8 @@
 -(void) submitAndReturnError:(NSError**)error;
 -(NSString*) text;
 -(NSString*) textAndReturnError:(NSError**)error;
+-(void) sendKeys:(NSString*)keyString;
+-(void) sendKeys:(NSString*)keyString error:(NSError**)error;
 -(NSString*) tagName;
 -(NSString*) tagNameAndReturnError:(NSError**)error;
 -(void) clear;
