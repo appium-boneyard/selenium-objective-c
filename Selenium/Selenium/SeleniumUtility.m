@@ -1,16 +1,15 @@
 //
-//  HTTPUtils.m
+//  SeleniumUtility.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "HTTPUtils.h"
-#import "JSONUtils.h"
+#import "SeleniumUtility.h"
 #import "SeleniumError.h"
 
-@implementation HTTPUtils
+@implementation SeleniumUtility
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
@@ -45,7 +44,7 @@
 	if (postParams == nil)
 		postParams = [NSDictionary new];
 	
-	NSString *post =[JSONUtils jsonStringFromDictionary:postParams];
+	NSString *post =[self jsonStringFromDictionary:postParams];
     [request setValue:@"application/json, image/png" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 	
@@ -100,6 +99,22 @@
         return nil;
     
 	return json;
+}
+
++(NSData*) jsonDataFromDictionary:(NSDictionary*)dictionary
+{
+	NSError *error;
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+													   options:0/*NSJSONWritingPrettyPrinted*/
+														 error:&error];
+	return jsonData;
+}
+
++(NSString*) jsonStringFromDictionary:(NSDictionary*)dictionary
+{
+	NSData *jsonData = [self jsonDataFromDictionary:dictionary];
+	NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+	return jsonString;
 }
 
 @end

@@ -17,6 +17,6 @@
 @property NSString *osName;
 @property NSString *osVersion;
 
--(id)initWithDictionary:(NSDictionary*)dict;
+-(id) initWithDictionary:(NSDictionary*)dict;
 
 @end
