@@ -83,4 +83,4 @@ Selenium WebDriver Bindings for Objective-C
 * /session/:sessionId/session_storage/size
 * /session/:sessionId/log
 * /session/:sessionId/log/types
-* /session/:sessionId/application_cache/status
+* &#10003; **/session/:sessionId/application_cache/status**

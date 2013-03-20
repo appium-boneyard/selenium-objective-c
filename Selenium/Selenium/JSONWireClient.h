@@ -250,6 +250,8 @@
 // /session/:sessionId/session_storage/size
 // /session/:sessionId/log
 // /session/:sessionId/log/types
-// /session/:sessionId/application_cache/status
+
+// GET /session/:sessionId/application_cache/status
+-(SeleniumApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error;
 
 @end
