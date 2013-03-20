@@ -48,6 +48,9 @@
 -(void) refresh;
 -(void) refreshAndReturnError:(NSError**)error;
 
+-(NSImage*) screenshot;
+-(NSImage*) screenshotAndReturnError:(NSError**)error;
+
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
 -(NSString*) title;
