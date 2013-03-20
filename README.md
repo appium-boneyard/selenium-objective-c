@@ -42,8 +42,8 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/element/:id/click**
 * &#10003; **/session/:sessionId/element/:id/submit**
 * &#10003; **/session/:sessionId/element/:id/text**
-* /session/:sessionId/element/:id/value
-* /session/:sessionId/keys
+* &#10003; **/session/:sessionId/element/:id/value**
+* &#10003; **/session/:sessionId/keys**
 * &#10003; **/session/:sessionId/element/:id/name**
 * &#10003; **/session/:sessionId/element/:id/clear**
 * &#10003; **/session/:sessionId/element/:id/selected**

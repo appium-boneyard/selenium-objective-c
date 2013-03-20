@@ -330,7 +330,16 @@
 
 
 // /session/:sessionId/cookie
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/cookie/:name
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error
@@ -389,6 +398,10 @@
 }
 
 // /session/:sessionId/element/:id (FUTURE)
+//
+// IMPLEMENT ME
+//
+//
 
 // POST /session/:sessionId/element/:id/element
 -(WebElement*) postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
@@ -440,8 +453,31 @@
 	return text;
 }
 
-// /session/:sessionId/element/:id/value
-// /session/:sessionId/keys
+// POST /session/:sessionId/element/:id/value
+-(void) postKeys:(unichar *)keys element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/value", self.httpCommandExecutor, sessionId, element.opaqueId];
+	NSMutableArray *keyArray = [NSMutableArray new];
+	for(int i=0; keys[i] != '\0'; i++)
+	{
+		[keyArray addObject:[NSString stringWithFormat:@"%C", keys[i]]];
+	}
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: keyArray, @"value", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/keys
+-(void) postKeys:(unichar *)keys session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/keys", self.httpCommandExecutor, sessionId];
+	NSMutableArray *keyArray = [NSMutableArray new];
+	for(int i=0; keys[i] != '\0'; i++)
+	{
+		[keyArray addObject:[NSString stringWithFormat:@"%C", keys[i]]];
+	}
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: keyArray, @"value", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
 
 // GET /session/:sessionId/element/:id/name
 -(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
