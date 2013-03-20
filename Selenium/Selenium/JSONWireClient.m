@@ -330,7 +330,16 @@
 
 
 // /session/:sessionId/cookie
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/cookie/:name
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error
@@ -389,6 +398,10 @@
 }
 
 // /session/:sessionId/element/:id (FUTURE)
+//
+// IMPLEMENT ME
+//
+//
 
 // POST /session/:sessionId/element/:id/element
 -(WebElement*) postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
@@ -441,7 +454,16 @@
 }
 
 // /session/:sessionId/element/:id/value
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/keys
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/element/:id/name
 -(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error

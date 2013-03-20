@@ -71,7 +71,16 @@
 -(void) postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/execute
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/execute_async
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
