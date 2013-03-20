@@ -92,12 +92,43 @@
 -(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/frame
-// /session/:sessionId/window
-// /session/:sessionId/window/:windowHandle/size
-// /session/:sessionId/window/:windowHandle/position
-// /session/:sessionId/window/:windowHandle/maximize
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/window
+-(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/window
+-(void) deleteWindowWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/window/:windowHandle/size
+-(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/window/:windowHandle/size
+-(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/window/:windowHandle/position
+-(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/window/:windowHandle/position
+-(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/window/:windowHandle/maximize
+-(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/cookie
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/cookie/:name
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error;

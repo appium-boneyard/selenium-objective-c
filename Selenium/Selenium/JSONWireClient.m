@@ -190,7 +190,16 @@
 }
 
 // /session/:sessionId/execute
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/execute_async
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error
@@ -251,11 +260,75 @@
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
-// /session/:sessionId/frame
-// /session/:sessionId/window
-// /session/:sessionId/window/:windowHandle/size
-// /session/:sessionId/window/:windowHandle/position
-// /session/:sessionId/window/:windowHandle/maximize
+// POST /session/:sessionId/frame
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/window
+-(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: windowHandle, @"name", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// DELETE /session/:sessionId/window
+-(void) deleteWindowWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
+	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+// POST /session/:sessionId/window/:windowHandle/size
+-(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(size.width/1)], @"width", [NSNumber numberWithInt:(size.height/1)], @"height", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// GET /session/:sessionId/window/:windowHandle/size
+-(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float width = [[valueJson objectForKey:@"width"] floatValue];
+	float height = [[valueJson objectForKey:@"height"] floatValue];
+	NSSize size = NSMakeSize(width,height);
+	return size;
+}
+
+// POST /session/:sessionId/window/:windowHandle/position
+-(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(position.x / 1)], @"x", [NSNumber numberWithInt:(position.y/1)], @"y", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// GET /session/:sessionId/window/:windowHandle/position
+-(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"x"] floatValue];
+	float y = [[valueJson objectForKey:@"y"] floatValue];
+	NSPoint position = NSMakePoint(x,y);
+	return position;
+}
+
+// POST /session/:sessionId/window/:windowHandle/maximize
+-(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/maximize", self.httpCommandExecutor, sessionId, windowHandle];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+
 // /session/:sessionId/cookie
 // /session/:sessionId/cookie/:name
 
