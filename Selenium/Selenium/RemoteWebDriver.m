@@ -157,4 +157,70 @@ JSONWireClient *jsonWireClient;
 	return [jsonWireClient postActiveElementWithSession:[[self session] sessionID] error:error];
 }
 
+-(ScreenOrientation) orientation
+{
+	NSError *error;
+	return [self orientationAndReturnError:&error];
+}
+
+-(ScreenOrientation) orientationAndReturnError:(NSError**)error
+{
+	return [jsonWireClient getOrientationWithSession:[[self session] sessionID] error:error];
+}
+
+-(void) setOrientation:(ScreenOrientation)orientation
+{
+	NSError* error;
+	[self setOrientation:orientation error:&error];
+}
+
+-(void) setOrientation:(ScreenOrientation)orientation error:(NSError**)error
+{
+	[jsonWireClient postOrientation:orientation session:[[self session] sessionID] error:error];
+}
+
+-(NSString*)alertText
+{
+    NSError *error;
+	return [self alertTextAndReturnError:&error];
+}
+
+-(NSString*)alertTextAndReturnError:(NSError **)error
+{
+	return [jsonWireClient getAlertTextWithSession:[[self session] sessionID] error:error];
+}
+
+-(void) setAlertText:(NSString*)text
+{
+	NSError* error;
+	[self setAlertText:text error:&error];
+}
+
+-(void) setAlertText:(NSString*)text error:(NSError**)error
+{
+	[jsonWireClient postAlertText:text session:[[self session] sessionID] error:error];
+}
+
+-(void) acceptAlert
+{
+	NSError *error;
+	[self acceptAlertAndReturnError:&error];
+}
+
+-(void) acceptAlertAndReturnError:(NSError**)error
+{
+	[jsonWireClient postAcceptAlertWithSession:[[self session] sessionID] error:error];
+}
+
+-(void) dismissAlert
+{
+	NSError *error;
+	[self dismissAlertAndReturnError:&error];
+}
+
+-(void) dismissAlertAndReturnError:(NSError**)error
+{
+	[jsonWireClient postDismissAlertWithSession:[[self session] sessionID] error:error];
+}
+
 @end

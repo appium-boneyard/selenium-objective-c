@@ -364,11 +364,67 @@ NSInteger serverPort;
 	return size;
 }
 
-// /session/:sessionId/element/:id/css/:propertyName
-// /session/:sessionId/orientation
-// /session/:sessionId/alert_text
-// /session/:sessionId/accept_alert
-// /session/:sessionId/dismiss_alert
+// GET /session/:sessionId/element/:id/css/:propertyName
+-(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/css/%@", [self httpCommandExecutor], sessionId, [element opaqueId], propertyName];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *value = [json objectForKey:@"value"];
+	return value;
+}
+
+// GET /session/:sessionId/orientation
+-(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/orientation", [self httpCommandExecutor], sessionId];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	if ([*error code] != 0)
+		return SCREEN_ORIENTATION_NA;
+	NSString *value = [json objectForKey:@"value"];
+	return ([value isEqualToString:@"LANDSCAPE"] ? SCREEN_ORIENTATION_LANDSCAPE : SCREEN_ORIENTATION_PORTRAIT);
+}
+
+// POST /session/:sessionId/orientation
+-(void) postOrientation:(ScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error
+{
+	if (orientation == SCREEN_ORIENTATION_NA)
+		return;
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/orientation", [self httpCommandExecutor], sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:(orientation == SCREEN_ORIENTATION_LANDSCAPE) ? @"LANDSCAPE" : @"PORTRAIT" , @"orientation", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// GET /session/:sessionId/alert_text
+-(NSString*) getAlertTextWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/alert_text", [self httpCommandExecutor], sessionId];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	NSString *alertText = [json objectForKey:@"value"];
+	return alertText;
+}
+
+// POST /session/:sessionId/alert_text
+-(void) postAlertText:(NSString*)text session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/alert_text", [self httpCommandExecutor], sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: text, @"text", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/accept_alert
+-(void)postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/accept_alert", [self httpCommandExecutor], sessionId];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /session/:sessionId/dismiss_alert
+-(void)postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/dismiss_alert", [self httpCommandExecutor], sessionId];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/moveto
 // /session/:sessionId/click
 // /session/:sessionId/buttondown

@@ -47,6 +47,9 @@
 -(NSPoint) locationInViewAndReturnError:(NSError**)error;
 -(NSSize) size;
 -(NSSize) sizeAndReturnError:(NSError**)error;
+-(NSString*) cssProperty:(NSString*)propertyName;
+-(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error;
+
 
 -(WebElement*) findElementBy:(By*)by;
 -(WebElement*) findElementBy:(By*)by error:(NSError**)error;
