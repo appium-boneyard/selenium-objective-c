@@ -23,11 +23,11 @@
 #define NATIVE_EVENTS @"nativeEvents"
 #define PROXY @"proxy"
 
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 
 NSMutableDictionary* _dict;
 
-@implementation Capabilities
+@implementation SeleniumCapabilities
 
 #pragma mark - Constructors
 

@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 #import "By.h"
 #import "WebElement.h"
 #import "RemoteWebDriverSession.h"
 #import "SeleniumEnums.h"
 
-@class Capabilities;
+@class SeleniumCapabilities;
 @class By;
 @class WebElement;
 @class RemoteWebDriverSession;
@@ -22,7 +22,7 @@
 
 @property RemoteWebDriverSession *session;
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error;
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error;
 
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
@@ -50,6 +50,16 @@
 
 -(NSImage*) screenshot;
 -(NSImage*) screenshotAndReturnError:(NSError**)error;
+-(NSArray*) availableInputMethodEngines;
+-(NSArray*) availableInputMethodEnginesAndReturnError:(NSError**)error;
+-(NSString*) activeInputMethodEngine;
+-(NSString*) activeInputMethodEngineAndReturnError:(NSError **)error;
+-(BOOL) inputMethodEngineIsActive;
+-(BOOL) inputMethodEngineIsActiveAndReturnError:(NSError **)error;
+-(void) deactivateInputMethodEngine;
+-(void) deactivateInputMethodEngineAndReturnError:(NSError **)error;
+-(void) activateInputMethodEngine:(NSString*)engine;
+-(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;

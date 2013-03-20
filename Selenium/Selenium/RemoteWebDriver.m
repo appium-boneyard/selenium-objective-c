@@ -17,7 +17,7 @@
 
 #pragma mark - Public Methods
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
@@ -161,6 +161,61 @@
 -(NSImage*) screenshotAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getScreenshotWithSession:self.session.sessionId error:error];
+}
+
+-(NSArray*) availableInputMethodEngines
+{
+	NSError *error;
+	return [self availableInputMethodEnginesAndReturnError:&error];
+}
+
+-(NSArray*) availableInputMethodEnginesAndReturnError:(NSError**)error
+{
+	return [self.jsonWireClient getAvailableInputMethodEnginesWithSession:self.session.sessionId error:error];
+}
+
+-(NSString*) activeInputMethodEngine
+{
+    NSError *error;
+    return [self activeInputMethodEngineAndReturnError:&error];
+}
+
+-(NSString*) activeInputMethodEngineAndReturnError:(NSError **)error
+{
+	return [self.jsonWireClient getActiveInputMethodEngineWithSession:self.session.sessionId error:error];
+}
+
+-(BOOL) inputMethodEngineIsActive
+{
+    NSError *error;
+    return [self inputMethodEngineIsActiveAndReturnError:&error];
+}
+
+-(BOOL) inputMethodEngineIsActiveAndReturnError:(NSError **)error
+{
+	return [self.jsonWireClient getInputMethodEngineIsActivatedWithSession:self.session.sessionId error:error];
+}
+
+-(void) deactivateInputMethodEngine
+{
+    NSError *error;
+    return [self deactivateInputMethodEngineAndReturnError:&error];
+}
+
+-(void) deactivateInputMethodEngineAndReturnError:(NSError **)error
+{
+	return [self.jsonWireClient postDeactivateInputMethodEngineWithSession:self.session.sessionId error:error];
+}
+
+-(void) activateInputMethodEngine:(NSString*)engine
+{
+    NSError *error;
+    return [self activateInputMethodEngine:engine error:&error];
+}
+
+-(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error
+{
+	return [self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:error];
 }
 
 -(NSString*) pageSource
