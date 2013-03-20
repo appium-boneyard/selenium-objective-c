@@ -251,9 +251,43 @@
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
-// /session/:sessionId/frame
-// /session/:sessionId/window
-// /session/:sessionId/window/:windowHandle/size
+// POST /session/:sessionId/frame
+
+// POST /session/:sessionId/window
+-(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: windowHandle, @"name", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// DELETE /session/:sessionId/window
+-(void) deleteWindowWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
+	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+// POST /session/:sessionId/window/:windowHandle/size
+-(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithFloat:size.width], @"width", [NSNumber numberWithFloat:size.height], @"height", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// GET /session/:sessionId/window/:windowHandle/size
+-(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
+	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *valueJson = [json objectForKey:@"value"];
+	float x = [[valueJson objectForKey:@"width"] floatValue];
+	float y = [[valueJson objectForKey:@"height"] floatValue];
+	NSSize size = NSMakeSize(x,y);
+	return size;
+}
+
 // /session/:sessionId/window/:windowHandle/position
 // /session/:sessionId/window/:windowHandle/maximize
 // /session/:sessionId/cookie

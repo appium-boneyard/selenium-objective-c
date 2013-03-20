@@ -218,6 +218,50 @@
 	return [self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:error];
 }
 
+-(void) setWindow:(NSString*)windowHandle
+{
+	NSError* error;
+	return [self setWindow:windowHandle error:&error];
+}
+
+-(void) setWindow:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient postSetWindow:windowHandle session:self.session.sessionId error:error];
+}
+
+-(void) closeWindow:(NSString*)windowHandle
+{
+	NSError* error;
+	return [self closeWindow:windowHandle error:&error];
+}
+
+-(void) closeWindow:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient deleteWindowWithSession:self.session.sessionId error:error];
+}
+
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle
+{
+	NSError *error;
+	return [self setWindowSize:size window:windowHandle error:&error];
+}
+
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:error];
+}
+
+-(NSSize) windowSizeWithWindow:(NSString*)windowHandle
+{
+	NSError *error;
+	return [self windowSizeWithWindow:windowHandle error:&error];
+}
+
+-(NSSize) windowSizeWithWindow:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:error];
+}
+
 -(NSString*) pageSource
 {
     NSError *error;
