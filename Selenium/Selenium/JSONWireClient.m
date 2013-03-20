@@ -21,7 +21,7 @@
 
 
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
@@ -53,7 +53,7 @@
 }
 
 // POST /session
--(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error
+-(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(SeleniumCapabilities*)desiredCapabilities andRequiredCapabilities:(SeleniumCapabilities*)requiredCapabilities error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", self.httpCommandExecutor];
 	

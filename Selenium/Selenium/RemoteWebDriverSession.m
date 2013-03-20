@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-		[self setCapabilities:[[Capabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
+		[self setCapabilities:[[SeleniumCapabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
 		[self setSessionId:[dict objectForKey:@"sessionId"]];
     }
     return self;

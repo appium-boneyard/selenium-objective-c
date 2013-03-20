@@ -8,7 +8,7 @@
 
 #import "SeleniumTests.h"
 #import "RemoteWebDriver.h"
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 #import "By.h"
 #import "WebElement.h"
 
@@ -30,7 +30,7 @@
 
 - (void)testExample
 {
-    Capabilities *c = [Capabilities new];
+    SeleniumCapabilities *c = [SeleniumCapabilities new];
     [c setPlatform:@"ANY"];
     [c setBrowserName:@"firefox"];
     [c setVersion:@"19.0.2"];

@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 
 @interface RemoteWebDriverSession : NSObject
 
-@property Capabilities *capabilities;
+@property SeleniumCapabilities *capabilities;
 @property NSString *sessionId;
 
 -(id) initWithDictionary:(NSDictionary*)dict;

@@ -8,20 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "RemoteWebDriverSession.h"
-#import "Capabilities.h"
+#import "SeleniumCapabilities.h"
 #import "WebElement.h"
 #import "By.h"
 #import "SeleniumEnums.h"
 
 @class By;
-@class Capabilities;
+@class SeleniumCapabilities;
 @class RemoteWebDriverStatus;
 @class RemoteWebDriverSession;
 @class WebElement;
 
 @interface JSONWireClient : NSObject
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(Capabilities*)desiredCapabilities requiredCapabilities:(Capabilities*)requiredCapabilites error:(NSError**)error;
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error;
 
 #pragma mark - JSON-Wire Protocol Implementation
 
@@ -29,7 +29,7 @@
 -(RemoteWebDriverStatus*) getStatusAndReturnError:(NSError**)error;
 
 // POST /session
--(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(Capabilities*)desiredCapabilities andRequiredCapabilities:(Capabilities*)requiredCapabilities error:(NSError**)error;
+-(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(SeleniumCapabilities*)desiredCapabilities andRequiredCapabilities:(SeleniumCapabilities*)requiredCapabilities error:(NSError**)error;
 
 // GET /sessions
 -(NSArray*) getSessionsAndReturnError:(NSError**)error;
