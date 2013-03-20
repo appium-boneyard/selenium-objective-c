@@ -11,7 +11,7 @@
 #import "Capabilities.h"
 #import "WebElement.h"
 #import "By.h"
-#import "Enums.h"
+#import "SeleniumEnums.h"
 
 @class By;
 @class Capabilities;
@@ -42,10 +42,8 @@
 // DELETE /session/:sessionId
 -(void)deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/timeouts
-//
-// IMPLEMENT ME
-//
+// POST /session/:sessionId/timeouts
+-(void)postTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/timeouts/async_script
 -(void)postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error;

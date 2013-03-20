@@ -96,9 +96,13 @@ NSInteger serverPort;
 }
 
 // /session/:sessionId/timeouts
-//
-// IMPLEMENT ME
-//
+-(void)postTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts", [self httpCommandExecutor], sessionId];
+    NSString *timeoutType = [SeleniumEnums stringForTimeoutType:type];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys: timeoutType, @"type", [NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
+	[HTTPUtils performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
 
 // POST /session/:sessionId/timeouts/async_script
 -(void)postAsyncScriptWaitTimeout:(NSInteger)timeoutInMilliseconds session:(NSString*)sessionId error:(NSError**)error

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Enums : NSObject
+@interface SeleniumEnums : NSObject
 
 typedef enum screenOrientationTypes
 {
@@ -16,5 +16,14 @@ typedef enum screenOrientationTypes
 	SCREEN_ORIENTATION_LANDSCAPE,
 	SCREEN_ORIENTATION_NA
 } ScreenOrientation;
+
+typedef enum timeoutTypes
+{
+	TIMEOUT_IMPLICIT,
+	TIMEOUT_SCRIPT,
+	TIMEOUT_PAGELOAD
+} TimeoutType;
+
++(NSString*) stringForTimeoutType:(TimeoutType)type;
 
 @end

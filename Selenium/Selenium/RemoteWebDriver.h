@@ -11,7 +11,7 @@
 #import "By.h"
 #import "WebElement.h"
 #import "RemoteWebDriverSession.h"
-#import "Enums.h"
+#import "SeleniumEnums.h"
 
 @class Capabilities;
 @class By;
@@ -26,7 +26,8 @@
 
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
-
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type;
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(TimeoutType)type error:(NSError**)error;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
