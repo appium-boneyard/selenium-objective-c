@@ -367,16 +367,18 @@
 }
 
 // DELETE /session/:sessionId/cookie
-//
-// IMPLEMENT ME
-//
-//
+-(void) deleteCookiesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie", self.httpCommandExecutor, sessionId];
+	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+}
 
 // DELETE /session/:sessionId/cookie/:name
-//
-// IMPLEMENT ME
-//
-//
+-(void) deleteCookie:(NSString*)cookieName session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie/%@", self.httpCommandExecutor, sessionId, cookieName];
+	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+}
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error

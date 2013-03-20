@@ -131,16 +131,10 @@
 -(void) postCookie:(NSHTTPCookie*)cookie session:(NSString*)sessionId error:(NSError**)error;
 
 // DELETE /session/:sessionId/cookie
-//
-// IMPLEMENT ME
-//
-//
+-(void) deleteCookiesWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // DELETE /session/:sessionId/cookie/:name
-//
-// IMPLEMENT ME
-//
-//
+-(void) deleteCookie:(NSString*)cookieName session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error;

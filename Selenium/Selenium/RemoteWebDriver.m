@@ -328,6 +328,28 @@
 	[self.jsonWireClient postCookie:cookie session:self.session.sessionId error:error];
 }
 
+-(void) deleteCookies
+{
+	NSError *error;
+	[self deleteCookiesAndReturnError:&error];
+}
+
+-(void) deleteCookiesAndReturnError:(NSError**)error
+{
+	[self.jsonWireClient deleteCookiesWithSession:self.session.sessionId error:error];
+}
+
+-(void) deleteCookie:(NSString*)cookieName
+{
+	NSError *error;
+	[self deleteCookie:cookieName error:&error];
+}
+
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error
+{
+	[self.jsonWireClient deleteCookie:cookieName session:self.session.sessionId error:error];
+}
+
 -(NSString*) pageSource
 {
     NSError *error;

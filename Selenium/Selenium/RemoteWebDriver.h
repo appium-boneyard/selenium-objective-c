@@ -80,6 +80,10 @@
 -(NSArray*) cookiesAndReturnError:(NSError**)error;
 -(void) setCookie:(NSHTTPCookie*)cookie;
 -(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error;
+-(void) deleteCookies;
+-(void) deleteCookiesAndReturnError:(NSError**)error;
+-(void) deleteCookie:(NSString*)cookieName;
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
