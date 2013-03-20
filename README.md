@@ -7,7 +7,7 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session**
 * &#10003; **/sessions**
 * &#10003; **/session/:sessionId**
-* /session/:sessionId/timeouts
+* &#10003; **/session/:sessionId/timeouts**
 * &#10003; **/session/:sessionId/timeouts/async_script**
 * &#10003; **/session/:sessionId/timeouts/implicit_wait**
 * &#10003; **/session/:sessionId/window_handle**
