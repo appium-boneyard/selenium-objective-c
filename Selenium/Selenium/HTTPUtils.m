@@ -7,7 +7,6 @@
 //
 
 #import "HTTPUtils.h"
-#import "JSONUtils.h"
 #import "SeleniumError.h"
 
 @implementation HTTPUtils
@@ -45,7 +44,7 @@
 	if (postParams == nil)
 		postParams = [NSDictionary new];
 	
-	NSString *post =[JSONUtils jsonStringFromDictionary:postParams];
+	NSString *post =[self jsonStringFromDictionary:postParams];
     [request setValue:@"application/json, image/png" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"Content-Type"];
 	
@@ -100,6 +99,22 @@
         return nil;
     
 	return json;
+}
+
++(NSData*) jsonDataFromDictionary:(NSDictionary*)dictionary
+{
+	NSError *error;
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+													   options:0/*NSJSONWritingPrettyPrinted*/
+														 error:&error];
+	return jsonData;
+}
+
++(NSString*) jsonStringFromDictionary:(NSDictionary*)dictionary
+{
+	NSData *jsonData = [self jsonDataFromDictionary:dictionary];
+	NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+	return jsonString;
 }
 
 @end

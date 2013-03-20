@@ -9,7 +9,6 @@
 #import "RemoteWebDriver.h"
 #import "RemoteWebDriverStatus.h"
 #import "RemoteWebDriverSession.h"
-#import "JSONUtils.h"
 #import "HTTPUtils.h"
 #import "SeleniumError.h"
 #import "By.h"
