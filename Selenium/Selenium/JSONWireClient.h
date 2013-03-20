@@ -11,6 +11,7 @@
 #import "Capabilities.h"
 #import "WebElement.h"
 #import "By.h"
+#import "Enums.h"
 
 @class By;
 @class Capabilities;
@@ -144,11 +145,27 @@
 // GET /session/:sessionId/element/:id/size
 -(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/element/:id/css/:propertyName
-// /session/:sessionId/orientation
-// /session/:sessionId/alert_text
-// /session/:sessionId/accept_alert
-// /session/:sessionId/dismiss_alert
+// GET /session/:sessionId/element/:id/css/:propertyName
+-(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/orientation
+-(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/orientation
+-(void) postOrientation:(ScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/alert_text
+-(NSString*) getAlertTextWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/alert_text
+-(void) postAlertText:(NSString*)text session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/accept_alert
+-(void)postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/dismiss_alert
+-(void)postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/moveto
 // /session/:sessionId/click
 // /session/:sessionId/buttondown

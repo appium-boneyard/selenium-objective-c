@@ -41,7 +41,7 @@
 	WebElement *a = [driver findElementBy:[By tagName:@"input"]];
 	NSSize size = [a size];
 	NSLog(@"(%f,%f)", size.width, size.height);
-	
+	ScreenOrientation o = [driver orientation];
     [driver quitAndError:&error];
 
 	STFail(@"Unit tests are not implemented yet in SeleniumTests");
