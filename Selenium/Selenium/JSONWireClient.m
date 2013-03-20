@@ -261,10 +261,16 @@
 }
 
 // POST /session/:sessionId/frame
-//
-// IMPLEMENT ME
-//
-//
+-(void) postSetFrame:(id)name session:(NSString*)sessionId error:(NSError**)error
+{
+	if ([name isKindOfClass:[WebElement class]])
+	{
+		name = (WebElement*)[name elementJson];
+	}
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/frame", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"name", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
 
 // POST /session/:sessionId/window
 -(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error

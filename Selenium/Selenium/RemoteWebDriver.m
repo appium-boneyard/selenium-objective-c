@@ -218,6 +218,17 @@
 	return [self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:error];
 }
 
+-(void) setFrame:(id)name
+{
+	NSError* error;
+	return [self setFrame:name error:&error];
+}
+
+-(void) setFrame:(id)name error:(NSError**)error
+{
+	return [self.jsonWireClient postSetFrame:name session:self.session.sessionId error:error];
+}
+
 -(void) setWindow:(NSString*)windowHandle
 {
 	NSError* error;

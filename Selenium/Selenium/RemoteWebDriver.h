@@ -60,6 +60,8 @@
 -(void) deactivateInputMethodEngineAndReturnError:(NSError **)error;
 -(void) activateInputMethodEngine:(NSString*)engine;
 -(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error;
+-(void) setFrame:(id)name;
+-(void) setFrame:(id)name error:(NSError**)error;
 -(void) setWindow:(NSString*)windowHandle;
 -(void) setWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) closeWindow:(NSString*)windowHandle;

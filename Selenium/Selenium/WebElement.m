@@ -216,4 +216,10 @@
 	return [self.jsonWireClient postElementsFromElement:self by:by session:self.sessionId error:error];
 }
 
+-(NSDictionary*)elementJson
+{
+	NSDictionary* json = [[NSDictionary alloc] initWithObjectsAndKeys:self.opaqueId, @"ELEMENT", nil];
+	return json;
+}
+
 @end

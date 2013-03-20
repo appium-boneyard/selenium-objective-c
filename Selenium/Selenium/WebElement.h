@@ -57,4 +57,6 @@
 -(NSArray*) findElementsBy:(By*)by;
 -(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 
+-(NSDictionary*)elementJson;
+
 @end

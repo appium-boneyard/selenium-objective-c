@@ -100,11 +100,8 @@
 // POST /session/:sessionId/ime/activate
 -(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/frame
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/frame
+-(void) postSetFrame:(id)name session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/window
 -(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
