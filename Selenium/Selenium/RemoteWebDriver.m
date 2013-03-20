@@ -157,4 +157,15 @@ JSONWireClient *jsonWireClient;
 	return [jsonWireClient postActiveElementWithSession:[[self session] sessionID] error:error];
 }
 
+-(ScreenOrientation) orientation
+{
+	NSError *error;
+	return [self orientationAndReturnError:&error];
+}
+
+-(ScreenOrientation) orientationAndReturnError:(NSError**)error
+{
+	return [jsonWireClient getOrientationWithSession:[[self session] sessionID] error:error];
+}
+
 @end

@@ -11,6 +11,7 @@
 #import "By.h"
 #import "WebElement.h"
 #import "RemoteWebDriverSession.h"
+#import "Enums.h"
 
 @class Capabilities;
 @class By;
@@ -47,5 +48,7 @@
 -(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
 -(WebElement*) activeElement;
 -(WebElement*) activeElementAndReturnError:(NSError**)error;
+-(ScreenOrientation) orientation;
+-(ScreenOrientation) orientationAndReturnError:(NSError**)error;
 
 @end

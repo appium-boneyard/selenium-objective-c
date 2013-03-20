@@ -373,7 +373,17 @@ NSInteger serverPort;
 	return value;
 }
 
-// /session/:sessionId/orientation
+// GET /session/:sessionId/orientation
+-(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/orientation", [self httpCommandExecutor], sessionId];
+	NSDictionary *json = [HTTPUtils performGetRequestToUrl:urlString error:error];
+	if ([*error code] != 0)
+		return SCREEN_ORIENTATION_NA;
+	NSString *value = [json objectForKey:@"value"];
+	return ([value isEqualToString:@"LANDSCAPE"] ? SCREEN_ORIENTATION_LANDSCAPE : SCREEN_ORIENTATION_PORTRAIT);
+}
+
 // /session/:sessionId/alert_text
 // /session/:sessionId/accept_alert
 // /session/:sessionId/dismiss_alert

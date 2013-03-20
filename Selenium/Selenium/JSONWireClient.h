@@ -11,6 +11,7 @@
 #import "Capabilities.h"
 #import "WebElement.h"
 #import "By.h"
+#import "Enums.h"
 
 @class By;
 @class Capabilities;
@@ -147,7 +148,9 @@
 // GET /session/:sessionId/element/:id/css/:propertyName
 -(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/orientation
+// GET /session/:sessionId/orientation
+-(ScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/alert_text
 // /session/:sessionId/accept_alert
 // /session/:sessionId/dismiss_alert
