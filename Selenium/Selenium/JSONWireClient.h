@@ -92,6 +92,10 @@
 -(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
 
 // /session/:sessionId/frame
+//
+// IMPLEMENT ME
+//
+//
 
 // POST /session/:sessionId/window
 -(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
@@ -105,10 +109,26 @@
 // GET /session/:sessionId/window/:windowHandle/size
 -(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/window/:windowHandle/position
-// /session/:sessionId/window/:windowHandle/maximize
+// POST /session/:sessionId/window/:windowHandle/position
+-(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/window/:windowHandle/position
+-(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/window/:windowHandle/maximize
+-(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/cookie
+//
+// IMPLEMENT ME
+//
+//
+
 // /session/:sessionId/cookie/:name
+//
+// IMPLEMENT ME
+//
+//
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error;

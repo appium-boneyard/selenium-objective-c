@@ -262,6 +262,39 @@
 	return [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:error];
 }
 
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle
+{
+	NSError *error;
+	return [self setWindowPosition:position window:windowHandle error:&error];
+}
+
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:error];
+}
+
+-(NSPoint) windowPositionWithWindow:(NSString*)windowHandle
+{
+	NSError *error;
+	return [self windowPositionWithWindow:windowHandle error:&error];
+}
+
+-(NSPoint) windowPositionWithWindow:(NSString*)windowHandle error:(NSError**)error
+{
+	return [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:error];
+}
+
+-(void) maximizeWindow:(NSString*)windowHandle
+{
+	NSError *error;
+	[self maximizeWindow:windowHandle error:&error];
+}
+
+-(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error
+{
+	[self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:error];
+}
+
 -(NSString*) pageSource
 {
     NSError *error;
