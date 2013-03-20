@@ -100,11 +100,8 @@
 // POST /session/:sessionId/ime/activate
 -(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/frame
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/frame
+-(void) postSetFrame:(id)name session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/window
 -(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
@@ -127,17 +124,17 @@
 // POST /session/:sessionId/window/:windowHandle/maximize
 -(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/cookie
-//
-// IMPLEMENT ME
-//
-//
+// GET /session/:sessionId/cookie
+-(NSArray*) getCookiesWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/cookie/:name
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/cookie
+-(void) postCookie:(NSHTTPCookie*)cookie session:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/cookie
+-(void) deleteCookiesWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/cookie/:name
+-(void) deleteCookie:(NSString*)cookieName session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error;
