@@ -152,57 +152,68 @@
 	[self.jsonWireClient postRefreshWithSession:self.session.sessionId error:error];
 }
 
--(NSString*)pageSource
+-(NSImage*) screenshot
+{
+	NSError *error;
+	return [self screenshotAndReturnError:&error];
+}
+
+-(NSImage*) screenshotAndReturnError:(NSError**)error
+{
+	return [self.jsonWireClient getScreenshotWithSession:self.session.sessionId error:error];
+}
+
+-(NSString*) pageSource
 {
     NSError *error;
     return [self pageSourceAndReturnError:&error];
 }
 
--(NSString*)pageSourceAndReturnError:(NSError **)error
+-(NSString*) pageSourceAndReturnError:(NSError **)error
 {
 	return [self.jsonWireClient getSourceWithSession:self.session.sessionId error:error];
 }
 
--(NSString*)title
+-(NSString*) title
 {
     NSError *error;
 	return [self titleAndReturnError:&error];
 }
 
--(NSString*)titleAndReturnError:(NSError **)error
+-(NSString*) titleAndReturnError:(NSError **)error
 {
 	return [self.jsonWireClient getTitleWithSession:self.session.sessionId error:error];
 }
 
--(WebElement*)findElementBy:(By*)by
+-(WebElement*) findElementBy:(By*)by
 {
 	NSError *error;
 	return [self findElementBy:by error:&error];
 }
 
--(WebElement*)findElementBy:(By*)by error:(NSError**)error
+-(WebElement*) findElementBy:(By*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
 }
 
--(NSArray*)findElementsBy:(By*)by
+-(NSArray*) findElementsBy:(By*)by
 {
 	NSError *error;
 	return [self findElementsBy:by error:&error];
 }
 
--(NSArray*)findElementsBy:(By*)by error:(NSError**)error
+-(NSArray*) findElementsBy:(By*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
 }
 
--(WebElement*)activeElement
+-(WebElement*) activeElement
 {
 	NSError *error;
 	return [self activeElementAndReturnError:&error];
 }
 
--(WebElement*)activeElementAndReturnError:(NSError**)error
+-(WebElement*) activeElementAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient postActiveElementWithSession:self.session.sessionId error:error];
 }

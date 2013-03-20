@@ -9,6 +9,7 @@
 #import "JSONWireClient.h"
 #import "SeleniumUtility.h"
 #import "RemoteWebDriverStatus.h"
+#import "NSData+Base64.h"
 
 @interface JSONWireClient ()
 	@property (readonly) NSString *httpCommandExecutor;
@@ -190,7 +191,17 @@
 
 // /session/:sessionId/execute
 // /session/:sessionId/execute_async
-// /session/:sessionId/screenshot
+
+// GET /session/:sessionId/screenshot
+-(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/screenshot", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSString *pngString = [json objectForKey:@"value"];
+	NSData *pngData = [NSData dataFromBase64String:pngString];
+	NSImage *image = [[NSImage alloc] initWithData:pngData];
+	return image;
+}
 // /session/:sessionId/ime/available_engines
 // /session/:sessionId/ime/active_engine
 // /session/:sessionId/ime/activated
