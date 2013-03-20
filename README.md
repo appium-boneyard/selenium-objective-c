@@ -19,11 +19,11 @@ Selenium WebDriver Bindings for Objective-C
 * /session/:sessionId/execute
 * /session/:sessionId/execute_async
 * &#10003; **/session/:sessionId/screenshot**
-* /session/:sessionId/ime/available_engines
-* /session/:sessionId/ime/active_engine
-* /session/:sessionId/ime/activated
-* /session/:sessionId/ime/deactivate
-* /session/:sessionId/ime/activate
+* &#10003; **/session/:sessionId/ime/available_engines**
+* &#10003; **/session/:sessionId/ime/active_engine**
+* &#10003; **/session/:sessionId/ime/activated**
+* &#10003; **/session/:sessionId/ime/deactivate**
+* &#10003; **/session/:sessionId/ime/activate**
 * /session/:sessionId/frame
 * /session/:sessionId/window
 * /session/:sessionId/window/:windowHandle/size
