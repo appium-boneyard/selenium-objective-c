@@ -72,7 +72,10 @@
 
 // /session/:sessionId/execute
 // /session/:sessionId/execute_async
-// /session/:sessionId/screenshot
+
+// GET /session/:sessionId/screenshot
+-(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/ime/available_engines
 // /session/:sessionId/ime/active_engine
 // /session/:sessionId/ime/activated

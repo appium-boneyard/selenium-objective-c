@@ -11,6 +11,8 @@
 		360486F016F7C15100D968D8 /* SeleniumUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 360486EE16F7C15100D968D8 /* SeleniumUtility.m */; };
 		360609C316F5657600BADCDE /* SeleniumError.h in Headers */ = {isa = PBXBuildFile; fileRef = 360609C116F5657600BADCDE /* SeleniumError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		360609C416F5657600BADCDE /* SeleniumError.m in Sources */ = {isa = PBXBuildFile; fileRef = 360609C216F5657600BADCDE /* SeleniumError.m */; };
+		36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A03F8F16FA0F2A00F61F08 /* NSData+Base64.h */; };
+		36A03F9216FA0F2A00F61F08 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */; };
 		36A5B25C16F8EFAE00AB30AF /* JSONWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* JSONWireClient.h */; };
 		36A5B25D16F8EFAE00AB30AF /* JSONWireClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A5B25B16F8EFAE00AB30AF /* JSONWireClient.m */; };
 		36BB380516F268C2003A46FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
@@ -51,6 +53,8 @@
 		360486EE16F7C15100D968D8 /* SeleniumUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeleniumUtility.m; sourceTree = "<group>"; };
 		360609C116F5657600BADCDE /* SeleniumError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeleniumError.h; sourceTree = "<group>"; };
 		360609C216F5657600BADCDE /* SeleniumError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeleniumError.m; sourceTree = "<group>"; };
+		36A03F8F16FA0F2A00F61F08 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		36A5B25A16F8EFAE00AB30AF /* JSONWireClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONWireClient.h; sourceTree = "<group>"; };
 		36A5B25B16F8EFAE00AB30AF /* JSONWireClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONWireClient.m; sourceTree = "<group>"; };
 		36BB380116F268C2003A46FD /* Selenium.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Selenium.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		36A03F8E16FA0F1A00F61F08 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				36A03F8F16FA0F2A00F61F08 /* NSData+Base64.h */,
+				36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
 		36A5B25916F8EF8F00AB30AF /* WebDriver */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +171,7 @@
 		36BB380A16F268C2003A46FD /* Selenium */ = {
 			isa = PBXGroup;
 			children = (
+				36A03F8E16FA0F1A00F61F08 /* External */,
 				36A5B25916F8EF8F00AB30AF /* WebDriver */,
 				36BB383116F268EF003A46FD /* Types */,
 				36BB384316F2695D003A46FD /* Utility */,
@@ -242,6 +256,7 @@
 				36C3AFA216F9379C000E73C6 /* SeleniumEnums.h in Headers */,
 				360486EF16F7C15100D968D8 /* SeleniumUtility.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* JSONWireClient.h in Headers */,
+				36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +377,7 @@
 				36F3D75716F7E39100A5DD70 /* WebElement.m in Sources */,
 				36A5B25D16F8EFAE00AB30AF /* JSONWireClient.m in Sources */,
 				36C3AFA316F9379C000E73C6 /* SeleniumEnums.m in Sources */,
+				36A03F9216FA0F2A00F61F08 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
