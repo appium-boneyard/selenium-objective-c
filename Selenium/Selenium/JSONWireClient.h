@@ -76,11 +76,21 @@
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/ime/available_engines
-// /session/:sessionId/ime/active_engine
-// /session/:sessionId/ime/activated
-// /session/:sessionId/ime/deactivate
-// /session/:sessionId/ime/activate
+// GET /session/:sessionId/ime/available_engines
+-(NSArray*) getAvailableInputMethodEnginesWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/ime/active_engine
+-(NSString*) getActiveInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/ime/activated
+-(BOOL) getInputMethodEngineIsActivatedWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/ime/deactivate
+-(void) postDeactivateInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/ime/activate
+-(void) postActivateInputMethodEngine:(NSString*)engine session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/frame
 // /session/:sessionId/window
 // /session/:sessionId/window/:windowHandle/size

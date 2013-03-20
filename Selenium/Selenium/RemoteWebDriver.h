@@ -50,6 +50,16 @@
 
 -(NSImage*) screenshot;
 -(NSImage*) screenshotAndReturnError:(NSError**)error;
+-(NSArray*) availableInputMethodEngines;
+-(NSArray*) availableInputMethodEnginesAndReturnError:(NSError**)error;
+-(NSString*) activeInputMethodEngine;
+-(NSString*) activeInputMethodEngineAndReturnError:(NSError **)error;
+-(BOOL) inputMethodEngineIsActive;
+-(BOOL) inputMethodEngineIsActiveAndReturnError:(NSError **)error;
+-(void) deactivateInputMethodEngine;
+-(void) deactivateInputMethodEngineAndReturnError:(NSError **)error;
+-(void) activateInputMethodEngine:(NSString*)engine;
+-(void) activateInputMethodEngine:(NSString*)engine error:(NSError **)error;
 
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
