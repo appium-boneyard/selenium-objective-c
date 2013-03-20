@@ -24,6 +24,18 @@ typedef enum seleniumTimeoutTypes
 	SELENIUM_TIMEOUT_PAGELOAD
 } SeleniumTimeoutType;
 
+
+typedef enum seleniumApplicationCacheStatusTypes
+{
+    SELENIUM_APPLICATION_CACHE_STATUS_UNCACHED,
+    SELENIUM_APPLICATION_CACHE_STATUS_IDLE,
+    SELENIUM_APPLICATION_CACHE_STATUS_CHECKING,
+    SELENIUM_APPLICATION_CACHE_STATUS_DOWNLOADING,
+    SELENIUM_APPLICATION_CACHE_STATUS_UPDATE_READY,
+    SELENIUM_APPLICATION_CACHE_STATUS_OBSOLETE
+} SeleniumApplicationCacheStatus;
+
 +(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type;
++(SeleniumApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt;
 
 @end

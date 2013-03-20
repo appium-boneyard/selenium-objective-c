@@ -486,4 +486,15 @@
 	[self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:error];
 }
 
+-(SeleniumApplicationCacheStatus) applicationCacheStatus
+{
+    NSError* error;
+    return [self applicationCacheStatusAndReturnError:&error];
+}
+
+-(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error
+{
+    return [self.jsonWireClient getApplicationCacheStatusWithSession:self.session.sessionId error:error];
+}
+
 @end
