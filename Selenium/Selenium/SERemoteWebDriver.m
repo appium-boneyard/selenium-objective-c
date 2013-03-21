@@ -17,6 +17,14 @@
 
 #pragma mark - Public Methods
 
+-(id) init
+{
+    @throw [NSException exceptionWithName:NSInternalInconsistencyException
+                                   reason:@"-init is not a valid initializer for the class SERemoteWebDriver"
+                                 userInfo:nil];
+    return nil;
+}
+
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
@@ -75,24 +83,24 @@
 	[self.jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:error];
 }
 
--(NSString*) windowHandle
+-(NSString*) window
 {
 	NSError *error;
-	return [self windowHandleAndReturnError:&error];
+	return [self windowAndReturnError:&error];
 }
 
--(NSString*) windowHandleAndReturnError:(NSError**)error
+-(NSString*) windowAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:error];
 }
 
--(NSArray*) windowHandles
+-(NSArray*) allWindows
 {
 	NSError *error;
-	return [self windowHandlesAndReturnError:&error];
+	return [self allWindowsAndReturnError:&error];
 }
 
--(NSArray*) windowHandlesAndReturnError:(NSError**)error
+-(NSArray*) allWindowsAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getWindowHandlesWithSession:self.session.sessionId error:error];
 }
@@ -306,13 +314,13 @@
 	return [self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:error];
 }
 
--(NSSize) windowSizeWithWindow:(NSString*)windowHandle
+-(NSSize) windowSizeForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-	return [self windowSizeWithWindow:windowHandle error:&error];
+	return [self windowSizeForWindow:windowHandle error:&error];
 }
 
--(NSSize) windowSizeWithWindow:(NSString*)windowHandle error:(NSError**)error
+-(NSSize) windowSizeForWindow:(NSString*)windowHandle error:(NSError**)error
 {
 	return [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:error];
 }
@@ -328,13 +336,13 @@
 	return [self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:error];
 }
 
--(NSPoint) windowPositionWithWindow:(NSString*)windowHandle
+-(NSPoint) windowPositionForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-	return [self windowPositionWithWindow:windowHandle error:&error];
+	return [self windowPositionForWindow:windowHandle error:&error];
 }
 
--(NSPoint) windowPositionWithWindow:(NSString*)windowHandle error:(NSError**)error
+-(NSPoint) windowPositionForWindow:(NSString*)windowHandle error:(NSError**)error
 {
 	return [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:error];
 }
