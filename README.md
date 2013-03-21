@@ -1,7 +1,8 @@
-selenium-objective-c
+Selenium.framework
 ====================
-
 Selenium WebDriver Bindings for Objective-C
+
+**JSON-Wire Implementation Status**
 
 * &#10003; **/status**
 * &#10003; **/session**
