@@ -3,6 +3,8 @@ selenium-objective-c
 
 Selenium WebDriver Bindings for Objective-C
 
+[Download Now!](https://github.com/penguinho/selenium-objective-c/raw/master/publish/Selenium.framework.zip)
+
 * &#10003; **/status**
 * &#10003; **/session**
 * &#10003; **/sessions**
