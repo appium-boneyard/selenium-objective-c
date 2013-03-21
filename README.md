@@ -2,6 +2,8 @@ Selenium.framework
 ====================
 Selenium WebDriver Bindings for Objective-C
 
+[Download Now!](https://github.com/penguinho/selenium-objective-c/raw/master/publish/Selenium.framework.zip)
+
 **JSON-Wire Implementation Status**
 
 * &#10003; **/status**
