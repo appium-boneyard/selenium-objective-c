@@ -457,6 +457,19 @@
 	[self addError:error];
 }
 
+-(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+{
+    NSError *error;
+    [self.jsonWireClient postStartScrollingAtParticularLocation:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) scrollTo:(NSPoint)position
+{
+	    NSError *error;
+	    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:&error];
+}
+
 -(void) doubletapElement:(SEWebElement*)element
 {
 	NSError *error;
