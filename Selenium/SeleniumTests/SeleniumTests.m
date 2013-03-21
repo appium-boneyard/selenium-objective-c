@@ -12,37 +12,41 @@
 #import "By.h"
 #import "WebElement.h"
 
+RemoteWebDriver *driver;
+
 @implementation SeleniumTests
 
-- (void)setUp
+- (void) setUp
 {
     [super setUp];
-    
-    // Set-up code here.
+	SeleniumCapabilities *c = [SeleniumCapabilities new];
+    [c setPlatform:@"ANY"];
+    [c setBrowserName:@"firefox"];
+	[c setVersion:@"19.0.2"];
+    NSError *error;
+    driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 }
 
-- (void)tearDown
+- (void) tearDown
 {
-    // Tear-down code here.
-    
+    [driver quit];
     [super tearDown];
 }
 
-- (void)testExample
+- (void) testUrl
 {
-    SeleniumCapabilities *c = [SeleniumCapabilities new];
-    [c setPlatform:@"ANY"];
-    [c setBrowserName:@"firefox"];
-    [c setVersion:@"19.0.2"];
-    NSError *error;
-	
-    RemoteWebDriver *driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 	NSString *oldUrl = [[driver url] absoluteString];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
-	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Checking URL changed");
+	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Url");
+}
+
+-(void) testSendKeys
+{
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
 	WebElement *a = [driver findElementBy:[By idString:@"signup-firstname"]];
 	[a sendKeys:@"Hello"];
-    [driver quitAndError:&error];
+	NSString *text = [a text];
+	STAssertTrue([text isEqualToString:@"Hello"], @"Send Keys");
 }
 
 @end
