@@ -226,11 +226,21 @@
 // POST /session/:sessionId/dismiss_alert
 -(void) postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/moveto
-// /session/:sessionId/click
-// /session/:sessionId/buttondown
-// /session/:sessionId/buttonup
-// /session/:sessionId/doubleclick
+// POST /session/:sessionId/moveto
+-(void) postMoveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/click
+-(void) postClickMouseButton:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/buttondown
+-(void) postMouseButtonDown:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/buttonup
+-(void) postMouseButtonUp:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/doubleclick
+-(void) postDoubleClickWithSession:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/touch/click
 // /session/:sessionId/touch/down
 // /session/:sessionId/touch/up

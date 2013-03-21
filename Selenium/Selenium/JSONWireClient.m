@@ -676,11 +676,51 @@
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/moveto
-// /session/:sessionId/click
-// /session/:sessionId/buttondown
-// /session/:sessionId/buttonup
-// /session/:sessionId/doubleclick
+// POST /session/:sessionId/moveto
+-(void) postMoveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/move_to", self.httpCommandExecutor, sessionId];
+	NSMutableDictionary *postParams = [NSMutableDictionary new];
+	if (element != nil)
+	{
+		[postParams setObject:element.opaqueId forKey:@"element"];
+	}
+	[postParams setObject:[NSNumber numberWithInteger:xOffset] forKey:@"xoffset"];
+	[postParams setObject:[NSNumber numberWithInteger:yOffset] forKey:@"yoffset"];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/click
+-(void) postClickMouseButton:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/click", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/buttondown
+-(void) postMouseButtonDown:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/buttondown", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/buttonup
+-(void) postMouseButtonUp:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/buttonup", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/doubleclick
+-(void) postDoubleClickWithSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/doubleclick", self.httpCommandExecutor, sessionId];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
 // /session/:sessionId/touch/click
 // /session/:sessionId/touch/down
 // /session/:sessionId/touch/up
