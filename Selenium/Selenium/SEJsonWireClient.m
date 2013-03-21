@@ -1,27 +1,27 @@
 //
-//  JSONWireClient.m
+//  SEJsonWireClient.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/19/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "JSONWireClient.h"
-#import "SeleniumUtility.h"
-#import "RemoteWebDriverStatus.h"
+#import "SEJsonWireClient.h"
+#import "SEUtility.h"
+#import "SEStatus.h"
 #import "NSData+Base64.h"
 
-@interface JSONWireClient ()
+@interface SEJsonWireClient ()
 	@property (readonly) NSString *httpCommandExecutor;
 	@property NSString *serverAddress;
 	@property NSInteger serverPort;
 @end
 
-@implementation JSONWireClient
+@implementation SEJsonWireClient
 
 
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
@@ -44,16 +44,16 @@
 #pragma mark - JSON-Wire Protocol Implementation
 
 // GET /status
--(RemoteWebDriverStatus*) getStatusAndReturnError:(NSError**)error
+-(SEStatus*) getStatusAndReturnError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/status", self.httpCommandExecutor];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
-	RemoteWebDriverStatus *webdriverStatus = [[RemoteWebDriverStatus alloc] initWithDictionary:json];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	SEStatus *webdriverStatus = [[SEStatus alloc] initWithDictionary:json];
 	return webdriverStatus;
 }
 
 // POST /session
--(RemoteWebDriverSession*) postSessionWithDesiredCapabilities:(SeleniumCapabilities*)desiredCapabilities andRequiredCapabilities:(SeleniumCapabilities*)requiredCapabilities error:(NSError**)error
+-(SESession*) postSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities andRequiredCapabilities:(SECapabilities*)requiredCapabilities error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session", self.httpCommandExecutor];
 	
@@ -64,8 +64,8 @@
 		[postDictionary setValue:[requiredCapabilities dictionary] forKey:@"requiredCapabilities"];
 	}
 	
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
-	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	SESession *session = [[SESession alloc] initWithDictionary:json];
 	return session;
 }
 
@@ -73,24 +73,24 @@
 -(NSArray*) getSessionsAndReturnError:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/sessions", self.httpCommandExecutor];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	
 	NSMutableArray *sessions = [NSMutableArray new];
 	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
 	for(int i =0; i < [jsonItems count]; i++)
 	{
-		RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:[jsonItems objectAtIndex:i]];
+		SESession *session = [[SESession alloc] initWithDictionary:[jsonItems objectAtIndex:i]];
 		[sessions addObject:session];
 	}
 	return sessions;
 }
 
 // GET /session/:sessionId
--(RemoteWebDriverSession*) getSessionWithSession:(NSString*)sessionId error:(NSError**)error
+-(SESession*) getSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
-	RemoteWebDriverSession *session = [[RemoteWebDriverSession alloc] initWithDictionary:json];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	SESession *session = [[SESession alloc] initWithDictionary:json];
 	return session;
 }
 
@@ -98,16 +98,16 @@
 -(void) deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+	[SEUtility performDeleteRequestToUrl:urlString error:error];
 }
 
 // /session/:sessionId/timeouts
--(void) postTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type session:(NSString*)sessionId error:(NSError**)error
+-(void) postTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts", self.httpCommandExecutor, sessionId];
-    NSString *timeoutType = [SeleniumEnums stringForTimeoutType:type];
+    NSString *timeoutType = [SEEnums stringForTimeoutType:type];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys: timeoutType, @"type", [NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 // POST /session/:sessionId/timeouts/async_script
@@ -115,7 +115,7 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/async_script", self.httpCommandExecutor, sessionId];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 // POST /session/:sessionId/timeouts/implicit_wait
@@ -123,14 +123,14 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/timeouts/implicit_wait", self.httpCommandExecutor, sessionId];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", ((int)timeoutInMilliseconds)], @"ms", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 // GET /session/:sessionId/window_handle
 -(NSString*) getWindowHandleWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handle", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *handle = [[NSString alloc] initWithString:(NSString*)[json objectForKey:@"value"]];
 	return handle;
 }
@@ -139,7 +139,7 @@
 -(NSArray*) getWindowHandlesWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window_handles", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	
 	NSMutableArray *handles = [NSMutableArray new];
 	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
@@ -155,7 +155,7 @@
 -(NSURL*) getURLWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *url = [json objectForKey:@"value"];
 	return [[NSURL alloc] initWithString:url];
 }
@@ -165,28 +165,28 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/url", self.httpCommandExecutor, sessionId];
 	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[url absoluteString], @"url", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 // POST /session/:sessionId/forward
 -(void) postForwardWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/forward", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/back
 -(void) postBackWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/back", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/refresh
 -(void) postRefreshWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/refresh", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/execute
@@ -200,7 +200,7 @@
 		arguments = [NSArray new];
 	}
 	[postParams setObject:arguments forKey:@"args"];
-	return [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	return [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/execute_async
@@ -214,14 +214,14 @@
 		arguments = [NSArray new];
 	}
 	[postParams setObject:arguments forKey:@"args"];
-	return [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	return [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/screenshot", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *pngString = [json objectForKey:@"value"];
 	NSData *pngData = [NSData dataFromBase64String:pngString];
 	NSImage *image = [[NSImage alloc] initWithData:pngData];
@@ -232,7 +232,7 @@
 -(NSArray*) getAvailableInputMethodEnginesWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/available_engines", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
 	NSMutableArray *engines = [NSMutableArray new];
 	for (int i=0; i < [jsonItems count]; i++)
@@ -247,7 +247,7 @@
 -(NSString*) getActiveInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/active_engine", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *activeEngine = [json objectForKey:@"value"];
 	return activeEngine;
 }
@@ -256,7 +256,7 @@
 -(BOOL) getInputMethodEngineIsActivatedWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/activated", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	BOOL isActivated = [[json objectForKey:@"value"] boolValue];
 	return isActivated;
 }
@@ -265,7 +265,7 @@
 -(void) postDeactivateInputMethodEngineWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/deactivate", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/ime/activate
@@ -273,19 +273,19 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/ime/activate", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: engine, @"engine", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/frame
 -(void) postSetFrame:(id)name session:(NSString*)sessionId error:(NSError**)error
 {
-	if ([name isKindOfClass:[WebElement class]])
+	if ([name isKindOfClass:[SEWebElement class]])
 	{
-		name = (WebElement*)[name elementJson];
+		name = (SEWebElement*)[name elementJson];
 	}
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/frame", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: name, @"name", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/window
@@ -293,14 +293,14 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: windowHandle, @"name", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // DELETE /session/:sessionId/window
 -(void) deleteWindowWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+	[SEUtility performDeleteRequestToUrl:urlString error:error];
 }
 
 // POST /session/:sessionId/window/:windowHandle/size
@@ -308,14 +308,14 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(size.width/1)], @"width", [NSNumber numberWithInt:(size.height/1)], @"height", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // GET /session/:sessionId/window/:windowHandle/size
 -(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float width = [[valueJson objectForKey:@"width"] floatValue];
 	float height = [[valueJson objectForKey:@"height"] floatValue];
@@ -328,14 +328,14 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(position.x / 1)], @"x", [NSNumber numberWithInt:(position.y/1)], @"y", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // GET /session/:sessionId/window/:windowHandle/position
 -(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
@@ -347,7 +347,7 @@
 -(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/maximize", self.httpCommandExecutor, sessionId, windowHandle];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 
@@ -355,13 +355,13 @@
 -(NSArray*) getCookiesWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
 	NSMutableArray *cookies = [NSMutableArray new];
 	for (int i=0; i < [jsonItems count]; i++)
 	{
 		NSMutableDictionary *cookieInfo = (NSMutableDictionary*)[jsonItems objectAtIndex:i];
-		NSHTTPCookie *cookie = [SeleniumUtility cookieWithJson:cookieInfo];
+		NSHTTPCookie *cookie = [SEUtility cookieWithJson:cookieInfo];
 		[cookies addObject:cookie];
 	}
 	return cookies;
@@ -379,28 +379,28 @@
 	[cookieJson setObject:[NSNumber numberWithBool:cookie.isSecure] forKey:@"secure"];
 	[cookieJson setObject:[NSNumber numberWithDouble:[cookie.expiresDate timeIntervalSince1970]] forKey:@"expiry"];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:cookieJson, @"cookie", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // DELETE /session/:sessionId/cookie
 -(void) deleteCookiesWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+	[SEUtility performDeleteRequestToUrl:urlString error:error];
 }
 
 // DELETE /session/:sessionId/cookie/:name
 -(void) deleteCookie:(NSString*)cookieName session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/cookie/%@", self.httpCommandExecutor, sessionId, cookieName];
-	[SeleniumUtility performDeleteRequestToUrl:urlString error:error];
+	[SEUtility performDeleteRequestToUrl:urlString error:error];
 }
 
 // GET /session/:sessionId/source
 -(NSString*) getSourceWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/source", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *source = [json objectForKey:@"value"];
 	return source;
 }
@@ -409,46 +409,46 @@
 -(NSString*) getTitleWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/title", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *title = [json objectForKey:@"value"];
 	return title;
 }
 
 // POST /session/:sessionId/element
--(WebElement*) postElement:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+-(SEWebElement*) postElement:(SEBy*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
-	WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	SEWebElement *element = [[SEWebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 	return element;
 }
 
 // POST /session/:sessionId/elements
--(NSArray*) postElements:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+-(NSArray*) postElements:(SEBy*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/elements", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 	NSArray *matches = (NSArray*)[json objectForKey:@"value"];
 	NSMutableArray *elements = [NSMutableArray new];
 	for (int i=0; i < [matches count]; i++)
 	{
 		NSString *elementId = [[matches objectAtIndex:i] objectForKey:@"ELEMENT"];
-		WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+		SEWebElement *element = [[SEWebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 		[elements addObject:element];
 	}
 	return elements;
 }
 
 // POST /session/:sessionId/element/active
--(WebElement*) postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error
+-(SEWebElement*) postActiveElementWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/active", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
-	WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	SEWebElement *element = [[SEWebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 	return element;
 }
 
@@ -459,57 +459,57 @@
 //
 
 // POST /session/:sessionId/element/:id/element
--(WebElement*) postElementFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+-(SEWebElement*) postElementFromElement:(SEWebElement*)element by:(SEBy*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 	NSString *elementId = [[json objectForKey:@"value"] objectForKey:@"ELEMENT"];
-	WebElement *foundElement = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+	SEWebElement *foundElement = [[SEWebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 	return foundElement;
 }
 // POST /session/:sessionId/element/:id/elements
--(NSArray*) postElementsFromElement:(WebElement*)element by:(By*)locator session:(NSString*)sessionId error:(NSError**)error
+-(NSArray*) postElementsFromElement:(SEWebElement*)element by:(SEBy*)locator session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/elements", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[locator locationStrategy], @"using", [locator value], @"value", nil];
-	NSDictionary *json = [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 	NSArray *matches = (NSArray*)[json objectForKey:@"value"];
 	NSMutableArray *elements = [NSMutableArray new];
 	for (int i=0; i < [matches count]; i++)
 	{
 		NSString *elementId = [[matches objectAtIndex:i] objectForKey:@"ELEMENT"];
-		WebElement *element = [[WebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
+		SEWebElement *element = [[SEWebElement alloc] initWithOpaqueId:elementId jsonWireClient:self session:sessionId];
 		[elements addObject:element];
 	}
 	return elements;
 }
 
 // POST /session/:sessionId/element/:id/click
--(void) postClickElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postClickElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/click", self.httpCommandExecutor, sessionId, element.opaqueId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/element/:id/submit
--(void) postSubmitElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postSubmitElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/submit", self.httpCommandExecutor, sessionId, element.opaqueId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // GET /session/:sessionId/element/:id/text
--(NSString*) getElementText:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSString*) getElementText:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/text", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *text = [json objectForKey:@"value"];
 	return text;
 }
 
 // POST /session/:sessionId/element/:id/value
--(void) postKeys:(unichar *)keys element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postKeys:(unichar *)keys element:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/value", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSMutableArray *keyArray = [NSMutableArray new];
@@ -518,7 +518,7 @@
 		[keyArray addObject:[NSString stringWithFormat:@"%C", keys[i]]];
 	}
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: keyArray, @"value", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/keys
@@ -531,75 +531,75 @@
 		[keyArray addObject:[NSString stringWithFormat:@"%C", keys[i]]];
 	}
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: keyArray, @"value", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // GET /session/:sessionId/element/:id/name
--(NSString*) getElementName:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSString*) getElementName:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/name", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *name = [json objectForKey:@"value"];
 	return name;
 }
 
 // POST /session/:sessionId/element/:id/clear
--(void) postClearElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postClearElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/clear", self.httpCommandExecutor, sessionId, element.opaqueId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // GET /session/:sessionId/element/:id/selected
--(BOOL) getElementIsSelected:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(BOOL) getElementIsSelected:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/selected", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	BOOL isSelected = [[json objectForKey:@"value"] boolValue];
 	return isSelected;
 }
 
 // GET /session/:sessionId/element/:id/enabled
--(BOOL) getElementIsEnabled:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(BOOL) getElementIsEnabled:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/enabled", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	BOOL isEnabled = [[json objectForKey:@"value"] boolValue];
 	return isEnabled;
 }
 
 // GET /session/:sessionId/element/:id/attribute/:name
--(NSString*) getAttribute:(NSString*)attributeName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSString*) getAttribute:(NSString*)attributeName element:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/attribute/%@", self.httpCommandExecutor, sessionId, element.opaqueId, attributeName];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *value = [json objectForKey:@"value"];
 	return value;
 }
 
 // GET /session/:sessionId/element/:id/equals/:other
--(BOOL) getEqualityForElement:(WebElement*)element element:(WebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error
+-(BOOL) getEqualityForElement:(SEWebElement*)element element:(SEWebElement*)otherElement session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/equals/%@", self.httpCommandExecutor, sessionId, element.opaqueId,[otherElement opaqueId]];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	BOOL isEqual = [[json objectForKey:@"value"] boolValue];
 	return isEqual;
 }
 
 // GET /session/:sessionId/element/:id/displayed
--(BOOL) getElementIsDisplayed:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(BOOL) getElementIsDisplayed:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/displayed", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	BOOL isDisplayed = [[json objectForKey:@"value"] boolValue];
 	return isDisplayed;
 }
 
 // GET /session/:sessionId/element/:id/location
--(NSPoint) getElementLocation:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSPoint) getElementLocation:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
@@ -608,10 +608,10 @@
 }
 
 // GET /session/:sessionId/element/:id/location_in_view
--(NSPoint) getElementLocationInView:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSPoint) getElementLocationInView:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location_in_view", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
@@ -620,10 +620,10 @@
 }
 
 // GET /session/:sessionId/element/:id/size
--(NSSize) getElementSize:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSSize) getElementSize:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/size", self.httpCommandExecutor, sessionId, element.opaqueId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"width"] floatValue];
 	float y = [[valueJson objectForKey:@"height"] floatValue];
@@ -632,19 +632,19 @@
 }
 
 // GET /session/:sessionId/element/:id/css/:propertyName
--(NSString*) getCSSProperty:(NSString*)propertyName element:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(NSString*) getCSSProperty:(NSString*)propertyName element:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/css/%@", self.httpCommandExecutor, sessionId, element.opaqueId, propertyName];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *value = [json objectForKey:@"value"];
 	return value;
 }
 
 // GET /session/:sessionId/orientation
--(SeleniumScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error
+-(SEScreenOrientation) getOrientationWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/orientation", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	if ([*error code] != 0)
 		return SELENIUM_SCREEN_ORIENTATION_UNKOWN;
 	NSString *value = [json objectForKey:@"value"];
@@ -652,20 +652,20 @@
 }
 
 // POST /session/:sessionId/orientation
--(void) postOrientation:(SeleniumScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error
+-(void) postOrientation:(SEScreenOrientation)orientation session:(NSString*)sessionId error:(NSError**)error
 {
 	if (orientation == SELENIUM_SCREEN_ORIENTATION_UNKOWN)
 		return;
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/orientation", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:(orientation == SELENIUM_SCREEN_ORIENTATION_LANDSCAPE) ? @"LANDSCAPE" : @"PORTRAIT" , @"orientation", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // GET /session/:sessionId/alert_text
 -(NSString*) getAlertTextWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/alert_text", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *alertText = [json objectForKey:@"value"];
 	return alertText;
 }
@@ -675,25 +675,25 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/alert_text", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: text, @"text", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/accept_alert
 -(void) postAcceptAlertWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/accept_alert", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/dismiss_alert
 -(void) postDismissAlertWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/dismiss_alert", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/moveto
--(void) postMoveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error
+-(void) postMoveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/move_to", self.httpCommandExecutor, sessionId];
 	NSMutableDictionary *postParams = [NSMutableDictionary new];
@@ -703,46 +703,46 @@
 	}
 	[postParams setObject:[NSNumber numberWithInteger:xOffset] forKey:@"xoffset"];
 	[postParams setObject:[NSNumber numberWithInteger:yOffset] forKey:@"yoffset"];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/click
--(void) postClickMouseButton:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+-(void) postClickMouseButton:(SEMouseButton)button session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/click", self.httpCommandExecutor, sessionId];
-	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SEEnums intForMouseButton:button]] , @"button", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/buttondown
--(void) postMouseButtonDown:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+-(void) postMouseButtonDown:(SEMouseButton)button session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/buttondown", self.httpCommandExecutor, sessionId];
-	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SEEnums intForMouseButton:button]] , @"button", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/buttonup
--(void) postMouseButtonUp:(SeleniumMouseButton)button session:(NSString*)sessionId error:(NSError**)error
+-(void) postMouseButtonUp:(SEMouseButton)button session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/buttonup", self.httpCommandExecutor, sessionId];
-	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SeleniumEnums intForMouseButton:button]] , @"button", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInteger:[SEEnums intForMouseButton:button]] , @"button", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/doubleclick
 -(void) postDoubleClickWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/doubleclick", self.httpCommandExecutor, sessionId];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
 // POST /session/:sessionId/touch/click
--(void) postTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postTapElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/click", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/down
@@ -750,7 +750,7 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/down", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/up
@@ -758,7 +758,7 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/up", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/move
@@ -766,7 +766,7 @@
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/move", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/scroll
@@ -782,19 +782,19 @@
 //
 
 // POST /session/:sessionId/touch/doubleclick
--(void) postDoubleTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postDoubleTapElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/doubleclick", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/longclick
--(void) postPressElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(void) postPressElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/longclick", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
-	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/touch/flick
@@ -810,12 +810,12 @@
 // /session/:sessionId/log/types
 
 // GET /session/:sessionId/application_cache/status
--(SeleniumApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error
+-(SEApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/application_cache/status", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SeleniumUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	 NSInteger appCacheStatus = [[json objectForKey:@"value"] integerValue];
-    return [SeleniumEnums applicationCacheStatusWithInt:appCacheStatus];
+    return [SEEnums applicationCacheStatusWithInt:appCacheStatus];
 
 }
 

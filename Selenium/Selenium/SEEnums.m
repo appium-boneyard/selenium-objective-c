@@ -1,16 +1,16 @@
 //
-//  Enums.m
+//  SEEnums.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/19/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "SeleniumEnums.h"
+#import "SEEnums.h"
 
-@implementation SeleniumEnums
+@implementation SEEnums
 
-+(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type
++(NSString*) stringForTimeoutType:(SETimeoutType)type
 {
     switch (type)
     {
@@ -25,7 +25,7 @@
     }
 }
 
-+(SeleniumApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt
++(SEApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt
 {
     switch (applicationCacheStatusInt)
     {
@@ -46,7 +46,7 @@
     }
 }
 
-+(NSInteger) intForMouseButton:(SeleniumMouseButton)button
++(NSInteger) intForMouseButton:(SEMouseButton)button
 {
     switch (button)
     {

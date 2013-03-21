@@ -1,15 +1,15 @@
 //
-//  SeleniumUtility.m
+//  SEUtility.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "SeleniumUtility.h"
-#import "SeleniumError.h"
+#import "SEUtility.h"
+#import "SEError.h"
 
-@implementation SeleniumUtility
+@implementation SEUtility
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
@@ -29,7 +29,7 @@
     if ([*error code] != 0)
         return nil;
     
-    *error = [SeleniumError errorWithResponseDict:json];
+    *error = [SEError errorWithResponseDict:json];
     if ([*error code] != 0)
         return nil;
     
@@ -71,7 +71,7 @@
     if ([*error code] != 0)
         return nil;
     
-    *error = [SeleniumError errorWithResponseDict:json];
+    *error = [SEError errorWithResponseDict:json];
     if ([*error code] != 0)
         return nil;
     return json;
@@ -96,7 +96,7 @@
     if ([*error code] != 0)
         return nil;
     
-    *error = [SeleniumError errorWithResponseDict:json];
+    *error = [SEError errorWithResponseDict:json];
     if ([*error code] != 0)
         return nil;
     

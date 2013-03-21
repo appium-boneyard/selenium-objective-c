@@ -1,5 +1,5 @@
 //
-//  Capabilities.h
+//  SECapabilities.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/14/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SeleniumCapabilities : NSObject
+@interface SECapabilities : NSObject
 
 @property NSString* browserName;
 @property NSString* version;
