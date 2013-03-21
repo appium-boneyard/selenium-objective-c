@@ -182,24 +182,40 @@
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/refresh
+// POST /session/:sessionId/refresh
 -(void) postRefreshWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/refresh", self.httpCommandExecutor, sessionId];
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/execute
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/execute
+-(NSDictionary*) postExecuteScript:(NSString*)script arguments:(NSArray*)arguments session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/execute", self.httpCommandExecutor, sessionId];
+	NSMutableDictionary *postParams = [NSMutableDictionary new];
+	[postParams setObject:script forKey:@"script"];
+	if (arguments == nil || arguments.count < 1)
+	{
+		arguments = [NSArray new];
+	}
+	[postParams setObject:arguments forKey:@"args"];
+	return [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
 
-// /session/:sessionId/execute_async
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/execute_async
+-(NSDictionary*) postExecuteAsyncScript:(NSString*)script arguments:(NSArray*)arguments session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/execute_async", self.httpCommandExecutor, sessionId];
+	NSMutableDictionary *postParams = [NSMutableDictionary new];
+	[postParams setObject:script forKey:@"script"];
+	if (arguments == nil || arguments.count < 1)
+	{
+		arguments = [NSArray new];
+	}
+	[postParams setObject:arguments forKey:@"args"];
+	return [SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
 
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error

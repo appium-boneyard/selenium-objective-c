@@ -36,7 +36,6 @@
 -(NSString*) windowHandleAndReturnError:(NSError**)error;
 -(NSArray*) windowHandles;
 -(NSArray*) windowHandlesAndReturnError:(NSError**)error;
-
 -(NSURL*) url;
 -(NSURL*) urlAndReturnError:(NSError**)error;
 -(void) setUrl:(NSURL*)url;
@@ -47,7 +46,14 @@
 -(void) backAndReturnError:(NSError**)error;
 -(void) refresh;
 -(void) refreshAndReturnError:(NSError**)error;
-
+-(NSDictionary*) executeScript:(NSString*)script;
+-(NSDictionary*) executeScript:(NSString*)script error:(NSError**)error;
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments;
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error;
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script;
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script error:(NSError**)error;
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments;
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error;
 -(NSImage*) screenshot;
 -(NSImage*) screenshotAndReturnError:(NSError**)error;
 -(NSArray*) availableInputMethodEngines;
@@ -84,7 +90,6 @@
 -(void) deleteCookiesAndReturnError:(NSError**)error;
 -(void) deleteCookie:(NSString*)cookieName;
 -(void) deleteCookie:(NSString*)cookieName error:(NSError**)error;
-
 -(NSString*) pageSource;
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
 -(NSString*) title;

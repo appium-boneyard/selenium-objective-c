@@ -70,17 +70,11 @@
 // POST /session/:sessionId/refresh
 -(void) postRefreshWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/execute
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/execute
+-(NSDictionary*) postExecuteScript:(NSString*)script arguments:(NSArray*)arguments session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/execute_async
-//
-// IMPLEMENT ME
-//
-//
+// POST /session/:sessionId/execute_async
+-(NSDictionary*) postExecuteAsyncScript:(NSString*)script arguments:(NSArray*)arguments session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/screenshot
 -(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
