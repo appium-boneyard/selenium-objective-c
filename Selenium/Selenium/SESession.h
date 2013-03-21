@@ -1,5 +1,5 @@
 //
-//  RemoteWebDriverSession.h
+//  SESession.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/14/13.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SeleniumCapabilities.h"
+#import "SECapabilities.h"
 
-@interface RemoteWebDriverSession : NSObject
+@interface SESession : NSObject
 
-@property SeleniumCapabilities *capabilities;
+@property SECapabilities *capabilities;
 @property NSString *sessionId;
 
 -(id) initWithDictionary:(NSDictionary*)dict;

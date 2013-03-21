@@ -1,20 +1,20 @@
 //
-//  RemoteWebDriverSession.m
+//  SESession.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/14/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "RemoteWebDriverSession.h"
+#import "SESession.h"
 
-@implementation RemoteWebDriverSession
+@implementation SESession
 
 -(id) initWithDictionary:(NSDictionary*)dict
 {
     self = [super init];
     if (self) {
-		[self setCapabilities:[[SeleniumCapabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
+		[self setCapabilities:[[SECapabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
 		[self setSessionId:[dict objectForKey:@"sessionId"]];
     }
     return self;

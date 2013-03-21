@@ -1,5 +1,5 @@
 //
-//  Capabilities.m
+//  SECapabilities.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/14/13.
@@ -23,11 +23,11 @@
 #define NATIVE_EVENTS @"nativeEvents"
 #define PROXY @"proxy"
 
-#import "SeleniumCapabilities.h"
+#import "SECapabilities.h"
 
 NSMutableDictionary* _dict;
 
-@implementation SeleniumCapabilities
+@implementation SECapabilities
 
 #pragma mark - Constructors
 

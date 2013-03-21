@@ -1,14 +1,14 @@
 //
-//  Status.m
+//  SEStatus.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/13/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "RemoteWebDriverStatus.h"
+#import "SEStatus.h"
 
-@implementation RemoteWebDriverStatus
+@implementation SEStatus
 
 -(id) initWithDictionary:(NSDictionary*)dict
 {

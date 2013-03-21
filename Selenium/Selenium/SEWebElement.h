@@ -1,5 +1,5 @@
 //
-//  WebElement.h
+//  SEWebElement.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
@@ -7,18 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JSONWireClient.h"
-#import "By.h"
+#import "SEJsonWireClient.h"
+#import "SEBy.h"
 
-@class JSONWireClient;
-@class By;
+@class SEJsonWireClient;
+@class SEBy;
 
-@interface WebElement : NSObject
+@interface SEWebElement : NSObject
 
 @property NSString *opaqueId;
 @property NSString *sessionId;
 
--(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)sessionId;
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(SEJsonWireClient*)jsonWireClient session:(NSString*)sessionId;
 
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
@@ -38,8 +38,8 @@
 -(BOOL) isEnabledAndReturnError:(NSError**)error;
 -(NSString*) attribute:(NSString*)attributeName;
 -(NSString*) attribute:(NSString*)attributeName error:(NSError**)error;
--(BOOL) isEqualToElement:(WebElement*)element;
--(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error;
+-(BOOL) isEqualToElement:(SEWebElement*)element;
+-(BOOL) isEqualToElement:(SEWebElement*)element error:(NSError**)error;
 -(BOOL) isDisplayed;
 -(BOOL) isDisplayedAndReturnError:(NSError**)error;
 -(NSPoint) location;
@@ -52,10 +52,10 @@
 -(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error;
 
 
--(WebElement*) findElementBy:(By*)by;
--(WebElement*) findElementBy:(By*)by error:(NSError**)error;
--(NSArray*) findElementsBy:(By*)by;
--(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
+-(SEWebElement*) findElementBy:(SEBy*)by;
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error;
+-(NSArray*) findElementsBy:(SEBy*)by;
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error;
 
 -(NSDictionary*)elementJson;
 
