@@ -16,8 +16,8 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/forward**
 * &#10003; **/session/:sessionId/back**
 * &#10003; **/session/:sessionId/refresh**
-* /session/:sessionId/execute
-* /session/:sessionId/execute_async
+* &#10003; **/session/:sessionId/execute**
+* &#10003; **/session/:sessionId/execute_async**
 * &#10003; **/session/:sessionId/screenshot**
 * &#10003; **/session/:sessionId/ime/available_engines**
 * &#10003; **/session/:sessionId/ime/active_engine**
