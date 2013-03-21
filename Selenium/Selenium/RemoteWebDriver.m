@@ -152,6 +152,50 @@
 	[self.jsonWireClient postRefreshWithSession:self.session.sessionId error:error];
 }
 
+-(NSDictionary*) executeScript:(NSString*)script
+{
+	NSError *error;
+	return [self executeScript:script arguments:nil error:&error];
+}
+
+-(NSDictionary*) executeScript:(NSString*)script error:(NSError**)error
+{
+	return [self executeScript:script arguments:nil error:error];
+}
+
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments
+{
+	NSError *error;
+	return [self executeScript:script arguments:arguments error:&error];
+}
+
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error
+{
+	return [self.jsonWireClient postExecuteScript:script arguments:arguments session:self.session.sessionId error:error];
+}
+
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script
+{
+	NSError *error;
+	return [self executeAnsynchronousScript:script arguments:nil error:&error];
+}
+
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script error:(NSError**)error
+{
+	return [self executeAnsynchronousScript:script arguments:nil error:error];
+}
+
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments
+{
+	NSError *error;
+	return [self executeAnsynchronousScript:script arguments:arguments error:&error];
+}
+
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error
+{
+	return [self.jsonWireClient postExecuteAsyncScript:script arguments:arguments session:self.session.sessionId error:error];
+}
+
 -(NSImage*) screenshot
 {
 	NSError *error;
