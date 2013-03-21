@@ -123,6 +123,19 @@
 -(void) mouseButtonUp:(SeleniumMouseButton)button error:(NSError**)error;
 -(void) doubleclick;
 -(void) doubleclickAndReturnError:(NSError**)error;
+-(void) tapElement:(WebElement*)element;
+-(void) tapElement:(WebElement*)element error:(NSError**)error;
+-(void) fingerDownAt:(NSPoint)point;
+-(void) fingerDownAt:(NSPoint)point error:(NSError**)error;
+-(void) fingerUpAt:(NSPoint)point;
+-(void) fingerUpAt:(NSPoint)point error:(NSError**)error;
+-(void) moveFingerTo:(NSPoint)point;
+-(void) moveFingerTo:(NSPoint)point error:(NSError**)error;
+-(void) doubletapElement:(WebElement*)element;
+-(void) doubletapElement:(WebElement*)element error:(NSError**)error;
+-(void) pressElement:(WebElement*)element;
+-(void) pressElement:(WebElement*)element error:(NSError**)error;
+
 
 -(SeleniumApplicationCacheStatus) applicationCacheStatus;
 -(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
