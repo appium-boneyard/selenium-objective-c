@@ -561,6 +561,72 @@
 	[self.jsonWireClient postDoubleClickWithSession:self.session.sessionId error:error];
 }
 
+-(void) tapElement:(WebElement*)element
+{
+	NSError *error;
+	[self tapElement:element error:&error];
+}
+
+-(void) tapElement:(WebElement*)element error:(NSError**)error
+{
+	[self.jsonWireClient postTapElement:element session:self.session.sessionId error:error];
+}
+
+-(void) fingerDownAt:(NSPoint)point
+{
+	NSError *error;
+	[self fingerDownAt:point error:&error];
+}
+
+-(void) fingerDownAt:(NSPoint)point error:(NSError**)error
+{
+	[self.jsonWireClient postFingerDownAt:point session:self.session.sessionId error:error];
+}
+
+-(void) fingerUpAt:(NSPoint)point
+{
+	NSError *error;
+	[self fingerUpAt:point error:&error];
+}
+
+-(void) fingerUpAt:(NSPoint)point error:(NSError**)error
+{
+	[self.jsonWireClient postFingerUpAt:point session:self.session.sessionId error:error];
+}
+
+-(void) moveFingerTo:(NSPoint)point
+{
+	NSError *error;
+	[self moveFingerTo:point error:&error];
+}
+
+-(void) moveFingerTo:(NSPoint)point error:(NSError**)error
+{
+	[self.jsonWireClient postMoveFingerTo:point session:self.session.sessionId error:error];
+}
+
+-(void) doubletapElement:(WebElement*)element
+{
+	NSError *error;
+	[self doubletapElement:element error:&error];
+}
+
+-(void) doubletapElement:(WebElement*)element error:(NSError**)error
+{
+	[self.jsonWireClient postDoubleTapElement:element session:self.session.sessionId error:error];
+}
+
+-(void) pressElement:(WebElement*)element
+{
+	NSError *error;
+	[self pressElement:element error:&error];
+}
+
+-(void) pressElement:(WebElement*)element error:(NSError**)error
+{
+	[self.jsonWireClient postPressElement:element session:self.session.sessionId error:error];
+}
+
 -(SeleniumApplicationCacheStatus) applicationCacheStatus
 {
     NSError* error;
