@@ -721,16 +721,68 @@
 	[SeleniumUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// /session/:sessionId/touch/click
-// /session/:sessionId/touch/down
-// /session/:sessionId/touch/up
-// /session/:sessionId/touch/move
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/doubleclick
-// /session/:sessionId/touch/longclick
-// /session/:sessionId/touch/flick
-// /session/:sessionId/touch/flick
+// POST /session/:sessionId/touch/click
+-(void) postTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/click", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/down
+-(void) postFingerDownAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/down", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/up
+-(void) postFingerUpAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/up", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/move
+-(void) postMoveFingerTo:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/move", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/scroll
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/touch/scroll
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/touch/doubleclick
+-(void) postDoubleTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/doubleclick", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/longclick
+-(void) postPressElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/longclick", self.httpCommandExecutor, sessionId];
+	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/flick
+// POST /session/:sessionId/touch/flick
 // /session/:sessionId/location
 // /session/:sessionId/local_storage
 // /session/:sessionId/local_storage/key/:key

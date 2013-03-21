@@ -241,14 +241,36 @@
 // POST /session/:sessionId/doubleclick
 -(void) postDoubleClickWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/touch/click
-// /session/:sessionId/touch/down
-// /session/:sessionId/touch/up
-// /session/:sessionId/touch/move
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/doubleclick
-// /session/:sessionId/touch/longclick
+// POST /session/:sessionId/touch/click
+-(void) postTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/down
+-(void) postFingerDownAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/up
+-(void) postFingerUpAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/move
+-(void) postMoveFingerTo:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/scroll
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/touch/scroll
+//
+// IMPLEMENT ME
+//
+//
+
+// POST /session/:sessionId/touch/doubleclick
+-(void) postDoubleTapElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/longclick
+-(void) postPressElement:(WebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/touch/flick
 // /session/:sessionId/touch/flick
 // /session/:sessionId/location
