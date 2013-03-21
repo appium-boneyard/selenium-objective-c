@@ -71,8 +71,8 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/touch/down**
 * &#10003; **/session/:sessionId/touch/up**
 * &#10003; **/session/:sessionId/touch/move**
-* /session/:sessionId/touch/scroll
-* /session/:sessionId/touch/scroll
+* &#10003; **/session/:sessionId/touch/scroll**
+* &#10003; **/session/:sessionId/touch/scroll**
 * &#10003; **/session/:sessionId/touch/doubleclick**
 * &#10003; **/session/:sessionId/touch/longclick**
 * /session/:sessionId/touch/flick
