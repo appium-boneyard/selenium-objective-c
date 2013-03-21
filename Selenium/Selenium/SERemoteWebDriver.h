@@ -82,6 +82,8 @@
 -(void) fingerDownAt:(NSPoint)point;
 -(void) fingerUpAt:(NSPoint)point;
 -(void) moveFingerTo:(NSPoint)point;
+-(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) scrollTo:(NSPoint)position;
 -(void) doubletapElement:(SEWebElement*)element;
 -(void) pressElement:(SEWebElement*)element;
 

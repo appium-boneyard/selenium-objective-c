@@ -248,16 +248,10 @@
 -(void) postMoveFingerTo:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/scroll
-//
-// IMPLEMENT ME
-//
-//
+-(void) postStartScrollingAtParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/scroll
-//
-// IMPLEMENT ME
-//
-//
+-(void) postScrollfromAnywhereOnTheScreenWithSession:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/doubleclick
 -(void) postDoubleTapElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
