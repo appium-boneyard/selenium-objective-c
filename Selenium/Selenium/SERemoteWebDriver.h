@@ -7,27 +7,27 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SeleniumCapabilities.h"
-#import "By.h"
-#import "WebElement.h"
-#import "RemoteWebDriverSession.h"
-#import "SeleniumEnums.h"
+#import "SECapabilities.h"
+#import "SEBy.h"
+#import "SEWebElement.h"
+#import "SESession.h"
+#import "SEEnums.h"
 
-@class SeleniumCapabilities;
-@class By;
-@class WebElement;
-@class RemoteWebDriverSession;
+@class SECapabilities;
+@class SEBy;
+@class SEWebElement;
+@class SESession;
 
-@interface RemoteWebDriver : NSObject
+@interface SERemoteWebDriver : NSObject
 
-@property RemoteWebDriverSession *session;
+@property SESession *session;
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error;
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error;
 
 -(void) quit;
 -(void) quitAndError:(NSError**)error;
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type;
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type error:(NSError**)error;
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type;
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type error:(NSError**)error;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
@@ -94,18 +94,18 @@
 -(NSString*) pageSourceAndReturnError:(NSError**)error;
 -(NSString*) title;
 -(NSString*) titleAndReturnError:(NSError **)error;
--(WebElement*) findElementBy:(By*)by;
--(WebElement*) findElementBy:(By*)by error:(NSError**)error;
--(NSArray*) findElementsBy:(By*)by;
--(NSArray*) findElementsBy:(By*)by error:(NSError**)error;
--(WebElement*) activeElement;
--(WebElement*) activeElementAndReturnError:(NSError**)error;
+-(SEWebElement*) findElementBy:(SEBy*)by;
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error;
+-(NSArray*) findElementsBy:(SEBy*)by;
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error;
+-(SEWebElement*) activeElement;
+-(SEWebElement*) activeElementAndReturnError:(NSError**)error;
 -(void) sendKeys:(NSString*)keyString;
 -(void) sendKeys:(NSString*)keyString error:(NSError**)error;
--(SeleniumScreenOrientation) orientation;
--(SeleniumScreenOrientation) orientationAndReturnError:(NSError**)error;
--(void) setOrientation:(SeleniumScreenOrientation)orientation;
--(void) setOrientation:(SeleniumScreenOrientation)orientation error:(NSError**)error;
+-(SEScreenOrientation) orientation;
+-(SEScreenOrientation) orientationAndReturnError:(NSError**)error;
+-(void) setOrientation:(SEScreenOrientation)orientation;
+-(void) setOrientation:(SEScreenOrientation)orientation error:(NSError**)error;
 -(NSString*)alertText;
 -(NSString*)alertTextAndReturnError:(NSError **)error;
 -(void) setAlertText:(NSString*)text;
@@ -116,33 +116,33 @@
 -(void) dismissAlertAndReturnError:(NSError**)error;
 -(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
 -(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
--(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
--(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
 -(void) click;
 -(void) clickAndReturnError:(NSError**)error;
--(void) clickMouseButton:(SeleniumMouseButton)button;
--(void) clickMouseButton:(SeleniumMouseButton)button error:(NSError**)error;
--(void) mouseButtonDown:(SeleniumMouseButton)button;
--(void) mouseButtonDown:(SeleniumMouseButton)button error:(NSError**)error;
--(void) mouseButtonUp:(SeleniumMouseButton)button;
--(void) mouseButtonUp:(SeleniumMouseButton)button error:(NSError**)error;
+-(void) clickMouseButton:(SEMouseButton)button;
+-(void) clickMouseButton:(SEMouseButton)button error:(NSError**)error;
+-(void) mouseButtonDown:(SEMouseButton)button;
+-(void) mouseButtonDown:(SEMouseButton)button error:(NSError**)error;
+-(void) mouseButtonUp:(SEMouseButton)button;
+-(void) mouseButtonUp:(SEMouseButton)button error:(NSError**)error;
 -(void) doubleclick;
 -(void) doubleclickAndReturnError:(NSError**)error;
--(void) tapElement:(WebElement*)element;
--(void) tapElement:(WebElement*)element error:(NSError**)error;
+-(void) tapElement:(SEWebElement*)element;
+-(void) tapElement:(SEWebElement*)element error:(NSError**)error;
 -(void) fingerDownAt:(NSPoint)point;
 -(void) fingerDownAt:(NSPoint)point error:(NSError**)error;
 -(void) fingerUpAt:(NSPoint)point;
 -(void) fingerUpAt:(NSPoint)point error:(NSError**)error;
 -(void) moveFingerTo:(NSPoint)point;
 -(void) moveFingerTo:(NSPoint)point error:(NSError**)error;
--(void) doubletapElement:(WebElement*)element;
--(void) doubletapElement:(WebElement*)element error:(NSError**)error;
--(void) pressElement:(WebElement*)element;
--(void) pressElement:(WebElement*)element error:(NSError**)error;
+-(void) doubletapElement:(SEWebElement*)element;
+-(void) doubletapElement:(SEWebElement*)element error:(NSError**)error;
+-(void) pressElement:(SEWebElement*)element;
+-(void) pressElement:(SEWebElement*)element error:(NSError**)error;
 
 
--(SeleniumApplicationCacheStatus) applicationCacheStatus;
--(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
+-(SEApplicationCacheStatus) applicationCacheStatus;
+-(SEApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
 
 @end

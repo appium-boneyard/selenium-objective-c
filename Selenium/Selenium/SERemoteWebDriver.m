@@ -6,22 +6,22 @@
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "RemoteWebDriver.h"
+#import "SERemoteWebDriver.h"
 
-@interface RemoteWebDriver ()
-	@property JSONWireClient *jsonWireClient;
+@interface SERemoteWebDriver ()
+	@property SEJsonWireClient *jsonWireClient;
 @end
 
 
-@implementation RemoteWebDriver
+@implementation SERemoteWebDriver
 
 #pragma mark - Public Methods
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
 {
     self = [super init];
     if (self) {
-        [self setJsonWireClient:[[JSONWireClient alloc] initWithServerAddress:address port:port desiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:error]];
+        [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port desiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:error]];
 		
 		// get session
 		[self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error]];
@@ -42,13 +42,13 @@
 	[self.jsonWireClient deleteSessionWithSession:self.session.sessionId error:error];
 }
 
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type
 {
     NSError *error;
     [self setTimeout:timeoutInMilliseconds forType:type error:&error];
 }
 
--(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SeleniumTimeoutType)type error:(NSError**)error
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type error:(NSError**)error
 {
     [self.jsonWireClient postTimeout:timeoutInMilliseconds forType:type session:self.session.sessionId error:error];
 }
@@ -416,35 +416,35 @@
 	return [self.jsonWireClient getTitleWithSession:self.session.sessionId error:error];
 }
 
--(WebElement*) findElementBy:(By*)by
+-(SEWebElement*) findElementBy:(SEBy*)by
 {
 	NSError *error;
 	return [self findElementBy:by error:&error];
 }
 
--(WebElement*) findElementBy:(By*)by error:(NSError**)error
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
 }
 
--(NSArray*) findElementsBy:(By*)by
+-(NSArray*) findElementsBy:(SEBy*)by
 {
 	NSError *error;
 	return [self findElementsBy:by error:&error];
 }
 
--(NSArray*) findElementsBy:(By*)by error:(NSError**)error
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
 }
 
--(WebElement*) activeElement
+-(SEWebElement*) activeElement
 {
 	NSError *error;
 	return [self activeElementAndReturnError:&error];
 }
 
--(WebElement*) activeElementAndReturnError:(NSError**)error
+-(SEWebElement*) activeElementAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient postActiveElementWithSession:self.session.sessionId error:error];
 }
@@ -464,24 +464,24 @@
 	return [self.jsonWireClient postKeys:keys session:self.session.sessionId error:error];
 }
 
--(SeleniumScreenOrientation) orientation
+-(SEScreenOrientation) orientation
 {
 	NSError *error;
 	return [self orientationAndReturnError:&error];
 }
 
--(SeleniumScreenOrientation) orientationAndReturnError:(NSError**)error
+-(SEScreenOrientation) orientationAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getOrientationWithSession:self.session.sessionId error:error];
 }
 
--(void) setOrientation:(SeleniumScreenOrientation)orientation
+-(void) setOrientation:(SEScreenOrientation)orientation
 {
 	NSError* error;
 	[self setOrientation:orientation error:&error];
 }
 
--(void) setOrientation:(SeleniumScreenOrientation)orientation error:(NSError**)error
+-(void) setOrientation:(SEScreenOrientation)orientation error:(NSError**)error
 {
 	[self.jsonWireClient postOrientation:orientation session:self.session.sessionId error:error];
 }
@@ -540,13 +540,13 @@
 	[self moveMouseToElement:nil xOffset:xOffset yOffset:yOffset error:error];
 }
 
--(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
 {
 	NSError *error;
 	[self moveMouseToElement:element xOffset:xOffset yOffset:yOffset error:&error];
 }
 
--(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error
 {
 	[self.jsonWireClient postMoveMouseToElement:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:error];
 }
@@ -561,35 +561,35 @@
 	[self clickMouseButton:SELENIUM_MOUSE_LEFT_BUTTON error:error];
 }
 
--(void) clickMouseButton:(SeleniumMouseButton)button
+-(void) clickMouseButton:(SEMouseButton)button
 {
 	NSError *error;
 	[self clickMouseButton:button error:&error];
 }
 
--(void) clickMouseButton:(SeleniumMouseButton)button error:(NSError**)error
+-(void) clickMouseButton:(SEMouseButton)button error:(NSError**)error
 {
 	[self.jsonWireClient postClickMouseButton:button session:self.session.sessionId error:error];
 }
 
--(void) mouseButtonDown:(SeleniumMouseButton)button
+-(void) mouseButtonDown:(SEMouseButton)button
 {
 	NSError *error;
 	[self mouseButtonDown:button error:&error];
 }
 
--(void) mouseButtonDown:(SeleniumMouseButton)button error:(NSError**)error
+-(void) mouseButtonDown:(SEMouseButton)button error:(NSError**)error
 {
 	[self.jsonWireClient postMouseButtonDown:button session:self.session.sessionId error:error];
 }
 
--(void) mouseButtonUp:(SeleniumMouseButton)button
+-(void) mouseButtonUp:(SEMouseButton)button
 {
 	NSError *error;
 	[self mouseButtonUp:button error:&error];
 }
 
--(void) mouseButtonUp:(SeleniumMouseButton)button error:(NSError**)error
+-(void) mouseButtonUp:(SEMouseButton)button error:(NSError**)error
 {
 	[self.jsonWireClient postMouseButtonUp:button session:self.session.sessionId error:error];
 }
@@ -605,13 +605,13 @@
 	[self.jsonWireClient postDoubleClickWithSession:self.session.sessionId error:error];
 }
 
--(void) tapElement:(WebElement*)element
+-(void) tapElement:(SEWebElement*)element
 {
 	NSError *error;
 	[self tapElement:element error:&error];
 }
 
--(void) tapElement:(WebElement*)element error:(NSError**)error
+-(void) tapElement:(SEWebElement*)element error:(NSError**)error
 {
 	[self.jsonWireClient postTapElement:element session:self.session.sessionId error:error];
 }
@@ -649,35 +649,35 @@
 	[self.jsonWireClient postMoveFingerTo:point session:self.session.sessionId error:error];
 }
 
--(void) doubletapElement:(WebElement*)element
+-(void) doubletapElement:(SEWebElement*)element
 {
 	NSError *error;
 	[self doubletapElement:element error:&error];
 }
 
--(void) doubletapElement:(WebElement*)element error:(NSError**)error
+-(void) doubletapElement:(SEWebElement*)element error:(NSError**)error
 {
 	[self.jsonWireClient postDoubleTapElement:element session:self.session.sessionId error:error];
 }
 
--(void) pressElement:(WebElement*)element
+-(void) pressElement:(SEWebElement*)element
 {
 	NSError *error;
 	[self pressElement:element error:&error];
 }
 
--(void) pressElement:(WebElement*)element error:(NSError**)error
+-(void) pressElement:(SEWebElement*)element error:(NSError**)error
 {
 	[self.jsonWireClient postPressElement:element session:self.session.sessionId error:error];
 }
 
--(SeleniumApplicationCacheStatus) applicationCacheStatus
+-(SEApplicationCacheStatus) applicationCacheStatus
 {
     NSError* error;
     return [self applicationCacheStatusAndReturnError:&error];
 }
 
--(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error
+-(SEApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error
 {
     return [self.jsonWireClient getApplicationCacheStatusWithSession:self.session.sessionId error:error];
 }

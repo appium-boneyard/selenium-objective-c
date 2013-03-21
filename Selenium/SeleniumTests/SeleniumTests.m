@@ -7,24 +7,24 @@
 //
 
 #import "SeleniumTests.h"
-#import "RemoteWebDriver.h"
-#import "SeleniumCapabilities.h"
-#import "By.h"
-#import "WebElement.h"
+#import "SERemoteWebDriver.h"
+#import "SECapabilities.h"
+#import "SEBy.h"
+#import "SEWebElement.h"
 
-RemoteWebDriver *driver;
+SERemoteWebDriver *driver;
 
 @implementation SeleniumTests
 
 - (void) setUp
 {
     [super setUp];
-	SeleniumCapabilities *c = [SeleniumCapabilities new];
+	SECapabilities *c = [SECapabilities new];
     [c setPlatform:@"ANY"];
     [c setBrowserName:@"firefox"];
 	[c setVersion:@"19.0.2"];
     NSError *error;
-    driver = [[RemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
+    driver = [[SERemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
 }
 
 - (void) tearDown
@@ -43,7 +43,7 @@ RemoteWebDriver *driver;
 -(void) testSendKeys
 {
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
-	WebElement *a = [driver findElementBy:[By idString:@"signup-firstname"]];
+	SEWebElement *a = [driver findElementBy:[SEBy idString:@"signup-firstname"]];
 	[a sendKeys:@"Hello"];
 	NSString *text = [a text];
 	STAssertTrue([text isEqualToString:@"Hello"], @"Send Keys");

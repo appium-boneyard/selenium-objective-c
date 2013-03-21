@@ -1,20 +1,20 @@
 //
-//  WebElement.m
+//  SEWebElement.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/18/13.
 //  Copyright (c) 2013 Appium. All rights reserved.
 //
 
-#import "WebElement.h"
+#import "SEWebElement.h"
 
-@interface WebElement ()
-	@property JSONWireClient *jsonWireClient;
+@interface SEWebElement ()
+	@property SEJsonWireClient *jsonWireClient;
 @end
 
-@implementation WebElement 
+@implementation SEWebElement 
 
--(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(JSONWireClient*)jsonWireClient session:(NSString*)sessionId
+-(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(SEJsonWireClient*)jsonWireClient session:(NSString*)sessionId
 {
     self = [super init];
     if (self) {
@@ -128,13 +128,13 @@
 	return [self.jsonWireClient getAttribute:attributeName element:self session:self.sessionId error:error];
 }
 
--(BOOL) isEqualToElement:(WebElement*)element
+-(BOOL) isEqualToElement:(SEWebElement*)element
 {
 	NSError *error;
 	return [self isEqualToElement:element error:&error];
 }
 
--(BOOL) isEqualToElement:(WebElement*)element error:(NSError**)error
+-(BOOL) isEqualToElement:(SEWebElement*)element error:(NSError**)error
 {
 	return [self.jsonWireClient getEqualityForElement:self element:element session:self.sessionId error:error];
 }
@@ -194,24 +194,24 @@
 	return [self.jsonWireClient getCSSProperty:propertyName element:self session:self.sessionId error:error];
 }
 
--(WebElement*) findElementBy:(By*)by
+-(SEWebElement*) findElementBy:(SEBy*)by
 {
 	NSError *error;
 	return [self findElementBy:by error:&error];
 }
 
--(WebElement*) findElementBy:(By*)by error:(NSError**)error
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElementFromElement:self by:by session:self.sessionId error:error];
 }
 
--(NSArray*) findElementsBy:(By*)by
+-(NSArray*) findElementsBy:(SEBy*)by
 {
 	NSError *error;
 	return [self findElementsBy:by error:&error];
 }
 
--(NSArray*) findElementsBy:(By*)by error:(NSError**)error
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error
 {
 	return [self.jsonWireClient postElementsFromElement:self by:by session:self.sessionId error:error];
 }

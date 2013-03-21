@@ -1,5 +1,5 @@
 //
-//  Enums.h
+//  SEEnums.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/19/13.
@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SeleniumEnums : NSObject
+@interface SEEnums : NSObject
 
 typedef enum seleniumScreenOrientationTypes
 {
 	SELENIUM_SCREEN_ORIENTATION_PORTRAIT,
 	SELENIUM_SCREEN_ORIENTATION_LANDSCAPE,
 	SELENIUM_SCREEN_ORIENTATION_UNKOWN
-} SeleniumScreenOrientation;
+} SEScreenOrientation;
 
 typedef enum seleniumTimeoutTypes
 {
 	SELENIUM_TIMEOUT_IMPLICIT,
 	SELENIUM_TIMEOUT_SCRIPT,
 	SELENIUM_TIMEOUT_PAGELOAD
-} SeleniumTimeoutType;
+} SETimeoutType;
 
 
 typedef enum seleniumApplicationCacheStatusTypes
@@ -33,17 +33,17 @@ typedef enum seleniumApplicationCacheStatusTypes
     SELENIUM_APPLICATION_CACHE_STATUS_DOWNLOADING,
     SELENIUM_APPLICATION_CACHE_STATUS_UPDATE_READY,
     SELENIUM_APPLICATION_CACHE_STATUS_OBSOLETE
-} SeleniumApplicationCacheStatus;
+} SEApplicationCacheStatus;
 
 typedef enum seleniumMouseButtonTypes
 {
 	SELENIUM_MOUSE_LEFT_BUTTON = 0,
 	SELENIUM_MOUSE_MIDDLE_BUTTON = 1,
 	SELENIUM_MOUSE_RIGHT_BUTTON = 2
-} SeleniumMouseButton;
+} SEMouseButton;
 
-+(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type;
-+(SeleniumApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt;
-+(NSInteger) intForMouseButton:(SeleniumMouseButton)button;
++(NSString*) stringForTimeoutType:(SETimeoutType)type;
++(SEApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt;
++(NSInteger) intForMouseButton:(SEMouseButton)button;
 
 @end

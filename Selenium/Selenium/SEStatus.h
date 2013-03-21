@@ -1,5 +1,5 @@
 //
-//  Status.h
+//  SEStatus.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/13/13.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RemoteWebDriverStatus : NSObject
+@interface SEStatus : NSObject
 
 @property NSString *buildVersion;
 @property NSString *buildRevision;
