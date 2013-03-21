@@ -1,5 +1,5 @@
 //
-//  Selenium.h
+//  SERemoteWebDriver.h
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/13/13.
@@ -28,7 +28,6 @@
 
 -(void) quit;
 -(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type;
-
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
 -(NSString*) window;

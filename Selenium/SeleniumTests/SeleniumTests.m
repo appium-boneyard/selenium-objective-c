@@ -20,11 +20,14 @@ SERemoteWebDriver *driver;
 {
     [super setUp];
 	SECapabilities *c = [SECapabilities new];
-    [c setPlatform:@"ANY"];
+    [c setPlatform:@"WINDOWS"];
     [c setBrowserName:@"firefox"];
-	[c setVersion:@"19.0.2"];
+	[c setVersion:@"19"];
+	[c addCapabilityForKey:@"name" andValue:@"Selenium Objective-C Tests"];
+	[c addCapabilityForKey:@"username" andValue:@"appiumci"];
+	[c addCapabilityForKey:@"accessKey" andValue:@"af4fbd21-6aee-4a01-857f-c7ffba2f0a50"];
     NSError *error;
-    driver = [[SERemoteWebDriver alloc] initWithServerAddress:@"0.0.0.0" port:4444 desiredCapabilities:c requiredCapabilities:nil error:&error];
+    driver = [[SERemoteWebDriver alloc] initWithServerAddress:@"ondemand.saucelabs.com" port:80 desiredCapabilities:c requiredCapabilities:nil error:&error];
 }
 
 - (void) tearDown
