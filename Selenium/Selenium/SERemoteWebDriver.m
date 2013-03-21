@@ -1,5 +1,5 @@
 //
-//  Selenium.m
+//  SERemoteWebDriver.m
 //  Selenium
 //
 //  Created by Dan Cuellar on 3/13/13.
