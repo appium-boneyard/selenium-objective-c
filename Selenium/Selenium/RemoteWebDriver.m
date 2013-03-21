@@ -31,6 +31,15 @@
     return self;
 }
 
+-(void)addError:(NSError*)error
+{
+	if (error == nil || error.code == 0)
+		return;
+	NSLog(@"Selenium Error: %ld - %@", error.code, error.description);
+	[self setLastError:error];
+	[[self errors] addObject:error];
+}
+
 -(void)quit
 {
     NSError *error;
@@ -484,6 +493,28 @@
 -(void) dismissAlertAndReturnError:(NSError**)error
 {
 	[self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:error];
+}
+
+
+
+-(void) scrollfromParticularLocation:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+{
+    NSError *error;
+    [self.jsonWireClient postStartScrollingAtParticularLocation:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+
+
+-(void) scrollFromAnywhereOnTheScreen:(NSPoint)position
+{
+    NSError *error;
+    [self scrollFromAnywhereAndReturnError:position error:&error];
+}
+
+-(void) scrollFromAnywhereAndReturnError:(NSPoint)position error:(NSError**)error
+{
+    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:error];
 }
 
 -(SeleniumApplicationCacheStatus) applicationCacheStatus

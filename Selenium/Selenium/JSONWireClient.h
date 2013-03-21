@@ -235,8 +235,12 @@
 // /session/:sessionId/touch/down
 // /session/:sessionId/touch/up
 // /session/:sessionId/touch/move
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/scroll
+// POST /session/:sessionId/touch/scroll
+-(void) postStartScrollingAtParticularLocation:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/scroll
+-(void) postScrollfromAnywhereOnTheScreenWithSession:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+
 // /session/:sessionId/touch/doubleclick
 // /session/:sessionId/touch/longclick
 // /session/:sessionId/touch/flick

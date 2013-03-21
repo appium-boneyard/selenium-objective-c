@@ -685,8 +685,31 @@
 // /session/:sessionId/touch/down
 // /session/:sessionId/touch/up
 // /session/:sessionId/touch/move
-// /session/:sessionId/touch/scroll
-// /session/:sessionId/touch/scroll
+
+
+// POST /session/:sessionId/touch/scroll
+-(void) postStartScrollingAtParticularLocation:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/scroll", self.httpCommandExecutor,sessionId];
+    NSMutableDictionary *postParams = [NSMutableDictionary new];
+    if(element != nil)
+    {
+        [postParams setObject:element.opaqueId forKey:@"element"];
+    }
+    [ postParams setObject: [NSNumber numberWithInteger:xOffset] forKey:@"xoffset"];
+    [ postParams setObject: [NSNumber numberWithInteger:yOffset] forKey:@"yOffset"];
+    [SeleniumUtility performPostRequestToUrl: urlString postParams:postParams error:error];
+}
+
+// POST /session/:sessionId/touch/scroll
+-(void) postScrollfromAnywhereOnTheScreenWithSession:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/touch/scroll", self.httpCommandExecutor, sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:(int)point.x], @"x" ,[NSNumber numberWithInt:(int)point.y],@"y",nil];
+	[SeleniumUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+
 // /session/:sessionId/touch/doubleclick
 // /session/:sessionId/touch/longclick
 // /session/:sessionId/touch/flick

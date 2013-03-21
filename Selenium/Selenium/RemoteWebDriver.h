@@ -21,6 +21,8 @@
 @interface RemoteWebDriver : NSObject
 
 @property RemoteWebDriverSession *session;
+@property NSError *lastError;
+@property NSMutableArray *errors;
 
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SeleniumCapabilities*)desiredCapabilities requiredCapabilities:(SeleniumCapabilities*)requiredCapabilites error:(NSError**)error;
 
@@ -109,6 +111,9 @@
 -(void) acceptAlertAndReturnError:(NSError**)error;
 -(void) dismissAlert;
 -(void) dismissAlertAndReturnError:(NSError**)error;
+-(void) scrollfromParticularLocation:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) scrollFromAnywhereOnTheScreen;
+-(void) scrollFromAnywhereAndReturnError:(NSPoint)position error:(NSError**)error;
 -(SeleniumApplicationCacheStatus) applicationCacheStatus;
 -(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
 
