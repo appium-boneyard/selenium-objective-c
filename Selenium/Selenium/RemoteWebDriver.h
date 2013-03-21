@@ -109,6 +109,21 @@
 -(void) acceptAlertAndReturnError:(NSError**)error;
 -(void) dismissAlert;
 -(void) dismissAlertAndReturnError:(NSError**)error;
+-(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
+-(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
+-(void) click;
+-(void) clickAndReturnError:(NSError**)error;
+-(void) clickMouseButton:(SeleniumMouseButton)button;
+-(void) clickMouseButton:(SeleniumMouseButton)button error:(NSError**)error;
+-(void) mouseButtonDown:(SeleniumMouseButton)button;
+-(void) mouseButtonDown:(SeleniumMouseButton)button error:(NSError**)error;
+-(void) mouseButtonUp:(SeleniumMouseButton)button;
+-(void) mouseButtonUp:(SeleniumMouseButton)button error:(NSError**)error;
+-(void) doubleclick;
+-(void) doubleclickAndReturnError:(NSError**)error;
+
 -(SeleniumApplicationCacheStatus) applicationCacheStatus;
 -(SeleniumApplicationCacheStatus) applicationCacheStatusAndReturnError:(NSError**)error;
 

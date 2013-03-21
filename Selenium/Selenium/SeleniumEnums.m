@@ -46,4 +46,19 @@
     }
 }
 
++(NSInteger) intForMouseButton:(SeleniumMouseButton)button
+{
+    switch (button)
+    {
+        case SELENIUM_MOUSE_LEFT_BUTTON:
+            return 0;
+        case SELENIUM_MOUSE_MIDDLE_BUTTON:
+            return 1;
+        case SELENIUM_MOUSE_RIGHT_BUTTON:
+            return 2;
+        default:
+            return 0;
+    }
+}
+
 @end

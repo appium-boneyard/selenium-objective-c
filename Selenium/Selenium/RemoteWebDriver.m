@@ -486,6 +486,81 @@
 	[self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:error];
 }
 
+-(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+{
+	[self moveMouseToElement:nil xOffset:xOffset yOffset:yOffset];
+}
+
+-(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error
+{
+	[self moveMouseToElement:nil xOffset:xOffset yOffset:yOffset error:error];
+}
+
+-(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+{
+	NSError *error;
+	[self moveMouseToElement:element xOffset:xOffset yOffset:yOffset error:&error];
+}
+
+-(void) moveMouseToElement:(WebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error
+{
+	[self.jsonWireClient postMoveMouseToElement:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:error];
+}
+
+-(void) click
+{
+	[self clickMouseButton:SELENIUM_MOUSE_LEFT_BUTTON];
+}
+
+-(void) clickAndReturnError:(NSError**)error
+{
+	[self clickMouseButton:SELENIUM_MOUSE_LEFT_BUTTON error:error];
+}
+
+-(void) clickMouseButton:(SeleniumMouseButton)button
+{
+	NSError *error;
+	[self clickMouseButton:button error:&error];
+}
+
+-(void) clickMouseButton:(SeleniumMouseButton)button error:(NSError**)error
+{
+	[self.jsonWireClient postClickMouseButton:button session:self.session.sessionId error:error];
+}
+
+-(void) mouseButtonDown:(SeleniumMouseButton)button
+{
+	NSError *error;
+	[self mouseButtonDown:button error:&error];
+}
+
+-(void) mouseButtonDown:(SeleniumMouseButton)button error:(NSError**)error
+{
+	[self.jsonWireClient postMouseButtonDown:button session:self.session.sessionId error:error];
+}
+
+-(void) mouseButtonUp:(SeleniumMouseButton)button
+{
+	NSError *error;
+	[self mouseButtonUp:button error:&error];
+}
+
+-(void) mouseButtonUp:(SeleniumMouseButton)button error:(NSError**)error
+{
+	[self.jsonWireClient postMouseButtonUp:button session:self.session.sessionId error:error];
+}
+
+-(void) doubleclick
+{
+	NSError *error;
+	[self doubleclickAndReturnError:&error];
+}
+
+-(void) doubleclickAndReturnError:(NSError**)error
+{
+	[self.jsonWireClient postDoubleClickWithSession:self.session.sessionId error:error];
+}
+
 -(SeleniumApplicationCacheStatus) applicationCacheStatus
 {
     NSError* error;

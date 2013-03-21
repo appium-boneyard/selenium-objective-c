@@ -59,11 +59,11 @@ Selenium WebDriver Bindings for Objective-C
 * &#10003; **/session/:sessionId/alert_text**
 * &#10003; **/session/:sessionId/accept_alert**
 * &#10003; **/session/:sessionId/dismiss_alert**
-* /session/:sessionId/moveto
-* /session/:sessionId/click
-* /session/:sessionId/buttondown
-* /session/:sessionId/buttonup
-* /session/:sessionId/doubleclick
+* &#10003; **/session/:sessionId/moveto**
+* &#10003; **/session/:sessionId/click**
+* &#10003; **/session/:sessionId/buttondown**
+* &#10003; **/session/:sessionId/buttonup**
+* &#10003; **/session/:sessionId/doubleclick**
 * /session/:sessionId/touch/click
 * /session/:sessionId/touch/down
 * /session/:sessionId/touch/up
