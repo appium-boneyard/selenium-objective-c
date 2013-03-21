@@ -35,7 +35,15 @@ typedef enum seleniumApplicationCacheStatusTypes
     SELENIUM_APPLICATION_CACHE_STATUS_OBSOLETE
 } SeleniumApplicationCacheStatus;
 
+typedef enum seleniumMouseButtonTypes
+{
+	SELENIUM_MOUSE_LEFT_BUTTON = 0,
+	SELENIUM_MOUSE_MIDDLE_BUTTON = 1,
+	SELENIUM_MOUSE_RIGHT_BUTTON = 2
+} SeleniumMouseButton;
+
 +(NSString*) stringForTimeoutType:(SeleniumTimeoutType)type;
 +(SeleniumApplicationCacheStatus) applicationCacheStatusWithInt:(NSInteger)applicationCacheStatusInt;
++(NSInteger) intForMouseButton:(SeleniumMouseButton)button;
 
 @end

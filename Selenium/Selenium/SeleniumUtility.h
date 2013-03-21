@@ -14,4 +14,5 @@
 +(NSDictionary*) performPostRequestToUrl:(NSString*)urlString postParams:(NSDictionary*)postParams error:(NSError**)error;
 +(NSDictionary*) performDeleteRequestToUrl:(NSString*)urlString error:(NSError**)error;
 +(NSHTTPCookie*) cookieWithJson:(NSDictionary*)json;
+
 @end
