@@ -38,18 +38,20 @@ SERemoteWebDriver *driver;
 
 - (void) testUrl
 {
-	NSString *oldUrl = [[driver url] absoluteString];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
+	NSString *oldUrl = [[driver url] absoluteString];
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://appium.io/selenium-objective-c/index.html"]];
 	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Url");
 }
 
 -(void) testSendKeys
 {
-	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
-	SEWebElement *a = [driver findElementBy:[SEBy idString:@"signup-firstname"]];
-	[a sendKeys:@"Hello"];
-	NSString *text = [a text];
-	STAssertTrue([text isEqualToString:@"Hello"], @"Send Keys");
+	[driver setUrl:[[NSURL alloc] initWithString:@"http://appium.io/selenium-objective-c/testpages/textbox.html"]];
+	SEWebElement *a = [driver findElementBy:[SEBy idString:@"text1"]];
+	NSString *textToType = @"Hello World";
+	[a sendKeys:textToType];
+	NSString *typedText = [a text];
+	STAssertTrue([typedText isEqualToString:textToType], @"SendKeys");
 }
 
 @end
