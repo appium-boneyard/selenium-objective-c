@@ -36,6 +36,8 @@
 		36F3D75316F7DFE700A5DD70 /* SEBy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75116F7DFE700A5DD70 /* SEBy.m */; };
 		36F3D75616F7E39100A5DD70 /* SEWebElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 36F3D75416F7E39100A5DD70 /* SEWebElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36F3D75716F7E39100A5DD70 /* SEWebElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75516F7E39100A5DD70 /* SEWebElement.m */; };
+		6B93026317011246003F4CFF /* SELocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B93026217011246003F4CFF /* SELocation.h */; };
+		6B93026517011418003F4CFF /* SELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93026417011418003F4CFF /* SELocation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 		36F3D75116F7DFE700A5DD70 /* SEBy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEBy.m; sourceTree = "<group>"; };
 		36F3D75416F7E39100A5DD70 /* SEWebElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SEWebElement.h; sourceTree = "<group>"; };
 		36F3D75516F7E39100A5DD70 /* SEWebElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEWebElement.m; sourceTree = "<group>"; };
+		6B93026217011246003F4CFF /* SELocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SELocation.h; sourceTree = "<group>"; };
+		6B93026417011418003F4CFF /* SELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SELocation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +220,8 @@
 				36F3D75116F7DFE700A5DD70 /* SEBy.m */,
 				36BB383B16F26945003A46FD /* SESession.h */,
 				36BB383C16F26945003A46FD /* SESession.m */,
+				6B93026217011246003F4CFF /* SELocation.h */,
+				6B93026417011418003F4CFF /* SELocation.m */,
 				36BB383F16F26951003A46FD /* SEStatus.h */,
 				36BB384016F26951003A46FD /* SEStatus.m */,
 				36BB383716F26926003A46FD /* SECapabilities.h */,
@@ -257,6 +263,7 @@
 				360486EF16F7C15100D968D8 /* SEUtility.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */,
 				36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */,
+				6B93026317011246003F4CFF /* SELocation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,6 +385,7 @@
 				36A5B25D16F8EFAE00AB30AF /* SEJsonWireClient.m in Sources */,
 				36C3AFA316F9379C000E73C6 /* SEEnums.m in Sources */,
 				36A03F9216FA0F2A00F61F08 /* NSData+Base64.m in Sources */,
+				6B93026517011418003F4CFF /* SELocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

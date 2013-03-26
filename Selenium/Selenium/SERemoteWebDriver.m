@@ -404,7 +404,6 @@
 {
 	NSError *error;
 	[self.jsonWireClient postClickMouseButton:button session:self.session.sessionId error:&error];
-
 	[self addError:error];
 }
 
@@ -466,8 +465,9 @@
 
 -(void) scrollTo:(NSPoint)position
 {
-	    NSError *error;
-	    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:&error];
+    NSError *error;
+    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:&error];
+    [self addError:error];
 }
 
 -(void) doubletapElement:(SEWebElement*)element
@@ -482,6 +482,142 @@
 	NSError *error;
 	[self.jsonWireClient postPressElement:element session:self.session.sessionId error:&error];
 	[self addError:error];
+}
+
+-(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed
+{
+    NSError *error;
+    [self.jsonWireClient postFlickFromParticularLocation:element xOffset:xOffset yOffset:yOffset speed:speed session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) flickFromAnywhere:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed
+{
+    NSError *error;
+    [self.jsonWireClient postFlickFromAnywhere:xSpeed ySpeed:ySpeed session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(SELocation*) getLocation
+{
+    NSError *error;
+    SELocation *location =[self.jsonWireClient getLocationAndReturnError:self.session.sessionId error:&error];
+    [self addError:error];
+    return location;
+}
+
+-(void) getGeoLocation:(SELocation*)location
+{
+    NSError *error;
+    [self.jsonWireClient postLocation:location session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+
+-(NSArray*) getAllLocalStorageKeys
+{
+    NSError *error;
+    NSArray *allLocalStorageKeys =[self.jsonWireClient getAllLocalStorageKeys:self.session.sessionId error:&error];
+    [self addError:error];
+    return allLocalStorageKeys;
+    
+}
+-(void) postSetLocalStorageItemForKey:(NSString*)key value:(NSString*)value
+{
+    NSError *error;
+    [self.jsonWireClient postSetLocalStorageItemForKey:key value:value session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) deleteLocalStorage
+{
+    NSError *error;
+    [self.jsonWireClient deleteLocalStorage:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+
+-(void) getLocalStorageItemForKey:(NSString*)key
+{
+    NSError *error;
+    [self.jsonWireClient getLocalStorageItemForKey:key  session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) deleteLocalStorageItemForGivenKey:(NSString*)key
+{
+    NSError *error;
+    [self.jsonWireClient deleteLocalStorageItemForGivenKey:key session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(NSInteger) getNumberOfItemsInLocalStorage
+{
+    NSError *error;
+    NSInteger numItems= [self.jsonWireClient getLocalStorageSize:self.session.sessionId error:&error];
+    [self addError:error];
+    return numItems;
+}
+
+-(NSArray*) getAllStorageKeys
+{
+    NSError *error;
+    NSArray *allStorageKeys =[self.jsonWireClient getAllStorageKeys:self.session.sessionId error:&error];
+    [self addError:error];
+    return allStorageKeys;
+    
+}
+-(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value
+{
+    NSError *error;
+    [self.jsonWireClient postSetStorageItemForKey:key value:value session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) deleteStorage
+{
+    NSError *error;
+    [self.jsonWireClient deleteStorage:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) getStorageItemForKey:(NSString*)key
+{
+    NSError *error;
+    [self.jsonWireClient getStorageItemForKey:key  session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) deleteStorageItemForGivenKey:(NSString*)key
+{
+    NSError *error;
+    [self.jsonWireClient deleteStorageItemForGivenKey:key session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(NSInteger) getNumberOfItemsInStorage
+{
+    NSError *error;
+    NSInteger numItems= [self.jsonWireClient getStorageSize:self.session.sessionId error:&error];
+    [self addError:error];
+    return numItems;
+}
+
+
+-(NSArray*) getLogForGivenType:(NSString*)type
+{
+    NSError *error;
+    NSArray *logsForType =[self.jsonWireClient  getLogForGivenLogType:type session:self.session.sessionId error:&error];
+    [self addError:error];
+    return logsForType;
+}
+
+-(NSArray*) allLogTypes
+{
+    NSError *error;
+    NSArray *logTypes =[self.jsonWireClient getLogTypes:self.session.sessionId error:&error];
+    [self addError:error];
+    return logTypes;
 }
 
 -(SEApplicationCacheStatus) applicationCacheStatus
