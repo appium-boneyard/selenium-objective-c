@@ -86,7 +86,24 @@
 -(void) scrollTo:(NSPoint)position;
 -(void) doubletapElement:(SEWebElement*)element;
 -(void) pressElement:(SEWebElement*)element;
-
+-(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed;
+-(void) flickFromAnywhere:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed;
+-(SELocation*) getLocation;
+-(void) getGeoLocation:(SELocation*)location;
+-(NSArray*) getAllLocalStorageKeys;
+-(void) postSetLocalStorageItemForKey:(NSString*)key value:(NSString*)value;
+-(void) deleteLocalStorage;
+-(void) getLocalStorageItemForKey:(NSString*)key;
+-(void) deleteLocalStorageItemForGivenKey:(NSString*)key;
+-(NSInteger) getNumberOfItemsInLocalStorage;
+-(NSArray*) getAllStorageKeys;
+-(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value;
+-(void) deleteStorage;
+-(void) getStorageItemForKey:(NSString*)key;
+-(NSInteger) getNumberOfItemsInStorage;
+-(void) deleteStorageItemForGivenKey:(NSString*)key;
+-(NSArray*) getLogForGivenType:(NSString*)type;
+-(NSArray*) allLogTypes;
 -(SEApplicationCacheStatus) applicationCacheStatus;
 
 @end

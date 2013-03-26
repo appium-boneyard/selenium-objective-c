@@ -769,19 +769,11 @@
 	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
-
-
 // POST /session/:sessionId/touch/scroll
 -(void) postStartScrollingAtParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error
 {
 	    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/scroll", self.httpCommandExecutor,sessionId];
-	    NSMutableDictionary *postParams = [NSMutableDictionary new];
-	    if(element != nil)
-		{
-			[postParams setObject:element.opaqueId forKey:@"element"];
-		}
-	    [postParams setObject: [NSNumber numberWithInteger:xOffset] forKey:@"xoffset"];
-	    [postParams setObject: [NSNumber numberWithInteger:yOffset] forKey:@"yOffset"];
+        NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId , @"element", [NSNumber numberWithInteger:xOffset] , @"xoffset", [NSNumber numberWithInteger:yOffset] , @"yoffset", nil];
 	    [SEUtility performPostRequestToUrl: urlString postParams:postParams error:error];
 }
 
@@ -811,16 +803,184 @@
 }
 
 // POST /session/:sessionId/touch/flick
+-(void) postFlickFromParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset  speed:(NSInteger)speed session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/flick", self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId , @"element", [NSNumber numberWithInteger:xOffset] , @"xoffset", [NSNumber numberWithInteger:yOffset] , @"yoffset", [NSNumber numberWithInteger:speed] , @"speed",nil];
+    [SEUtility performPostRequestToUrl: urlString postParams:postParams error:error];
+}
+
 // POST /session/:sessionId/touch/flick
-// /session/:sessionId/location
-// /session/:sessionId/local_storage
-// /session/:sessionId/local_storage/key/:key
-// /session/:sessionId/local_storage/size
-// /session/:sessionId/session_storage
-// /session/:sessionId/session_storage/key/:key
-// /session/:sessionId/session_storage/size
-// /session/:sessionId/log
-// /session/:sessionId/log/types
+-(void) postFlickFromAnywhere:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/flick", self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger:xSpeed] , @"xSpeed", [NSNumber numberWithInteger:ySpeed] , @"ySpeed",nil];
+    [SEUtility performPostRequestToUrl: urlString postParams:postParams error:error];
+}
+
+
+// GET /session/:sessionId/location
+-(SELocation*) getLocationAndReturnError:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/location", self.httpCommandExecutor,sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	SELocation *currentGeoLocation = [[SELocation alloc] initWithDictionary:json];
+	return currentGeoLocation ;
+}
+
+// POST /session/:sessionId/location
+-(void) postLocation:(SELocation*)location session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/location", self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: location, @"location", nil];
+    [SEUtility performPostRequestToUrl: urlString postParams:postParams error:error];
+}
+
+
+// GET /session/:sessionId/local_storage
+-(NSArray*) getAllLocalStorageKeys:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/local_storage",self.httpCommandExecutor,sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    NSMutableArray *keysList = [NSMutableArray new];
+    NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+    for(int i =0; i < [jsonItems count]; i++)
+    {
+        NSString *key = [[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+        [keysList addObject:key];
+    }
+    
+    return keysList;
+}
+
+//POST /session/:sessionId/local_storage
+-(void) postSetLocalStorageItemForKey:(NSString*)key value:(NSString*)value session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/local_storage",self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:key, @"key",value, @"value", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+    
+}
+
+// DELETE /session/:sessionId/local_storage
+-(void) deleteLocalStorage:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/local_storage",self.httpCommandExecutor,sessionId];
+    [SEUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+// GET /session/:sessionId/local_storage/key/:key
+-(void) getLocalStorageItemForKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/local_storage/key/%@",self.httpCommandExecutor,sessionId,key];
+    [SEUtility performGetRequestToUrl:urlString error:error];
+}
+
+//DELETE /session/:sessionId/local_storage/key/:key
+-(void) deleteLocalStorageItemForGivenKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString=[NSString stringWithFormat:@"%@/session/%@/local_storage/key/%@",self.httpCommandExecutor,sessionId,key];
+    [SEUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+// GET /session/:sessionId/local_storage/size
+-(NSInteger) getLocalStorageSize:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString=[NSString stringWithFormat:@"%@/session/%@/local_storage/size",self.httpCommandExecutor,sessionId];
+    NSDictionary *json=[SEUtility performGetRequestToUrl:urlString error:error];
+    NSInteger numOfItemsInLocalStorage = [[json objectForKey:@"value"] integerValue];
+    return numOfItemsInLocalStorage;
+}
+
+// GET /session/:sessionId/session_storage
+-(NSArray*) getAllStorageKeys:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/session_storage",self.httpCommandExecutor,sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];        
+    NSMutableArray *keysList = [NSMutableArray new];
+    NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+        for(int i =0; i < [jsonItems count]; i++)
+        {
+            NSString *key = [[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+            [keysList addObject:key];
+        }
+
+    return keysList;
+}
+
+//POST /session/:sessionId/session_storage
+-(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/session_storage",self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:key, @"key",value, @"value", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+
+}
+
+// DELETE /session/:sessionId/session_storage
+-(void) deleteStorage:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/session_storage",self.httpCommandExecutor,sessionId];
+    [SEUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+// GET /session/:sessionId/session_storage/key/:key
+-(void) getStorageItemForKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/session_storage/key/%@",self.httpCommandExecutor,sessionId,key];
+    [SEUtility performGetRequestToUrl:urlString error:error];
+}
+
+//DELETE /session/:sessionId/session_storage/key/:key
+-(void) deleteStorageItemForGivenKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString=[NSString stringWithFormat:@"%@/session/%@/session_storage/key/%@",self.httpCommandExecutor,sessionId,key];
+    [SEUtility performDeleteRequestToUrl:urlString error:error];
+}
+
+
+// GET /session/:sessionId/session_storage/size
+-(NSInteger) getStorageSize:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString=[NSString stringWithFormat:@"%@/session/%@/session_storage/size",self.httpCommandExecutor,sessionId];
+    NSDictionary *json=[SEUtility performGetRequestToUrl:urlString error:error];
+    NSInteger numOfItemsInStorage = [[json objectForKey:@"value"] integerValue];
+    return numOfItemsInStorage;
+}
+
+
+// POST /session/:sessionId/log
+-(NSArray*) getLogForGivenLogType:(NSString*)logType session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString  *urlString = [NSString stringWithFormat:@"%@/session/%@/log",self.httpCommandExecutor,sessionId];
+    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:logType,@"type", nil];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+    NSMutableArray *logEntries =[NSMutableArray new];
+    NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
+    for(int i=0; i < [jsonItems count]; i++)
+    {
+        NSString *logEntry =[[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+        [logEntries addObject:logEntry];
+    }
+    return logEntries;
+}
+
+
+// GET /session/:sessionId/log/types
+-(NSArray*) getLogTypes:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/log/types",self.httpCommandExecutor,sessionId];
+    NSDictionary *json =[SEUtility performGetRequestToUrl:urlString error:error];
+    NSMutableArray *logTypes = [NSMutableArray new];
+    NSArray *jsonItems =(NSArray*)[json objectForKey:@"value"];
+    for(int i=0; i < [jsonItems count]; i++)
+    {
+        NSString *logType =[[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+        [logTypes addObject:logType];
+    }
+    return logTypes;    
+}
+
 
 // GET /session/:sessionId/application_cache/status
 -(SEApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error
