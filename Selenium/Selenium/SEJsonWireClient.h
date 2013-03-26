@@ -12,12 +12,14 @@
 #import "SEWebElement.h"
 #import "SEBy.h"
 #import "SEEnums.h"
+#import "SELocation.h"
 
 @class SEBy;
 @class SECapabilities;
 @class SEStatus;
 @class SESession;
 @class SEWebElement;
+@class SELocation;
 
 @interface SEJsonWireClient : NSObject
 
@@ -259,17 +261,59 @@
 // POST /session/:sessionId/touch/longclick
 -(void) postPressElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
-// /session/:sessionId/touch/flick
-// /session/:sessionId/touch/flick
-// /session/:sessionId/location
-// /session/:sessionId/local_storage
-// /session/:sessionId/local_storage/key/:key
-// /session/:sessionId/local_storage/size
-// /session/:sessionId/session_storage
-// /session/:sessionId/session_storage/key/:key
-// /session/:sessionId/session_storage/size
-// /session/:sessionId/log
-// /session/:sessionId/log/types
+// POST /session/:sessionId/touch/flick
+-(void) postFlickFromParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset  speed:(NSInteger)speed session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/flick
+-(void) postFlickFromAnywhere:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/location
+-(SELocation*) getLocationAndReturnError:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/location
+-(void) postLocation:(SELocation*)location session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/local_storage
+-(NSArray*) getAllLocalStorageKeys:(NSString*)sessionId error:(NSError**)error;
+
+//POST /session/:sessionId/local_storage
+-(void) postSetLocalStorageItemForKey:(NSString*)key value:(NSString*)value session:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/local_storage
+-(void) deleteLocalStorage:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/local_storage/key/:key
+-(void) getLocalStorageItemForKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error;
+
+//DELETE /session/:sessionId/local_storage/key/:key
+-(void) deleteLocalStorageItemForGivenKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/local_storage/size
+-(NSInteger) getLocalStorageSize:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/session_storage
+-(NSArray*) getAllStorageKeys:(NSString*)sessionId error:(NSError**)error;
+
+//POST /session/:sessionId/session_storage
+-(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value session:(NSString*)sessionId error:(NSError**)error;
+
+// DELETE /session/:sessionId/session_storage
+-(void) deleteStorage:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/session_storage/key/:key
+-(void) getStorageItemForKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error;
+
+//DELETE /session/:sessionId/session_storage/key/:key
+-(void) deleteStorageItemForGivenKey:(NSString*)key session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/session_storage/size
+-(NSInteger) getStorageSize:(NSString*) sessionId error:(NSError**) error;
+
+// POST /session/:sessionId/log
+-(NSArray*) getLogForGivenLogType:(NSString*)logType session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionId/log/types
+-(NSArray*) getLogTypes:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/application_cache/status
 -(SEApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error;
