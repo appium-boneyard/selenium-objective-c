@@ -310,7 +310,7 @@
 -(NSInteger) getStorageSize:(NSString*) sessionId error:(NSError**) error;
 
 // POST /session/:sessionId/log
--(NSArray*) getLogForGivenLogType:(NSString*)logType session:(NSString*)sessionId error:(NSError**)error;
+-(NSArray*) getLogForGivenLogType:(SELogType)type session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/log/types
 -(NSArray*) getLogTypes:(NSString*)sessionId error:(NSError**)error;
