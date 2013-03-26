@@ -604,7 +604,7 @@
 }
 
 
--(NSArray*) getLogForGivenType:(NSString*)type
+-(NSArray*) getLogForGivenType:(SELogType)type
 {
     NSError *error;
     NSArray *logsForType =[self.jsonWireClient  getLogForGivenLogType:type session:self.session.sessionId error:&error];
