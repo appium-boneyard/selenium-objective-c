@@ -61,4 +61,22 @@
     }
 }
 
++(NSString*) stringForLogType:(SELogType)logType
+{
+    switch (logType)
+    {
+        case SELENIUM_LOG_TYPE_CLIENT:
+            return @"client";
+        case SELENIUM_LOG_TYPE_DRIVER:
+            return @"driver";
+        case SELENIUM_LOG_TYPE_BROWSER:
+            return @"browser";
+        case SELENIUM_LOG_TYPE_SERVER:
+            return @"server";
+        default:
+            return nil;
+    }
+    
+}
+
 @end

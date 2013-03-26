@@ -102,7 +102,7 @@
 -(void) getStorageItemForKey:(NSString*)key;
 -(NSInteger) getNumberOfItemsInStorage;
 -(void) deleteStorageItemForGivenKey:(NSString*)key;
--(NSArray*) getLogForGivenType:(NSString*)type;
+-(NSArray*) getLogForGivenType:(SELogType)type;
 -(NSArray*) allLogTypes;
 -(SEApplicationCacheStatus) applicationCacheStatus;
 

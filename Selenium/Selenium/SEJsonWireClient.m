@@ -950,9 +950,10 @@
 
 
 // POST /session/:sessionId/log
--(NSArray*) getLogForGivenLogType:(NSString*)logType session:(NSString*)sessionId error:(NSError**)error
+-(NSArray*) getLogForGivenLogType:(SELogType)type session:(NSString*)sessionId error:(NSError**)error
 {
     NSString  *urlString = [NSString stringWithFormat:@"%@/session/%@/log",self.httpCommandExecutor,sessionId];
+    NSString *logType = [SEEnums stringForLogType:type];
     NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:logType,@"type", nil];
     NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
     NSMutableArray *logEntries =[NSMutableArray new];
