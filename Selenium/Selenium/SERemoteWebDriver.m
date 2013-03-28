@@ -491,14 +491,14 @@
     [self addError:error];
 }
 
--(void) flickFromAnywhere:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed
+-(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed
 {
     NSError *error;
     [self.jsonWireClient postFlickFromAnywhere:xSpeed ySpeed:ySpeed session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(SELocation*) getLocation
+-(SELocation*) location
 {
     NSError *error;
     SELocation *location =[self.jsonWireClient getLocationAndReturnError:self.session.sessionId error:&error];
@@ -506,7 +506,7 @@
     return location;
 }
 
--(void) getGeoLocation:(SELocation*)location
+-(void) setLocation:(SELocation*)location
 {
     NSError *error;
     [self.jsonWireClient postLocation:location session:self.session.sessionId error:&error];
@@ -514,7 +514,7 @@
 }
 
 
--(NSArray*) getAllLocalStorageKeys
+-(NSArray*) allLocalStorageKeys
 {
     NSError *error;
     NSArray *allLocalStorageKeys =[self.jsonWireClient getAllLocalStorageKeys:self.session.sessionId error:&error];
@@ -522,14 +522,14 @@
     return allLocalStorageKeys;
     
 }
--(void) postSetLocalStorageItemForKey:(NSString*)key value:(NSString*)value
+-(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient postSetLocalStorageItemForKey:key value:value session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(void) deleteLocalStorage
+-(void) clearLocalStorage
 {
     NSError *error;
     [self.jsonWireClient deleteLocalStorage:self.session.sessionId error:&error];
@@ -537,21 +537,21 @@
 }
 
 
--(void) getLocalStorageItemForKey:(NSString*)key
+-(void) localStorageItemForKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient getLocalStorageItemForKey:key  session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(void) deleteLocalStorageItemForGivenKey:(NSString*)key
+-(void) deleteLocalStorageItemForKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient deleteLocalStorageItemForGivenKey:key session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(NSInteger) getNumberOfItemsInLocalStorage
+-(NSInteger) countOfItemsInLocalStorage
 {
     NSError *error;
     NSInteger numItems= [self.jsonWireClient getLocalStorageSize:self.session.sessionId error:&error];
@@ -559,7 +559,7 @@
     return numItems;
 }
 
--(NSArray*) getAllStorageKeys
+-(NSArray*) allSessionStorageKeys
 {
     NSError *error;
     NSArray *allStorageKeys =[self.jsonWireClient getAllStorageKeys:self.session.sessionId error:&error];
@@ -567,35 +567,35 @@
     return allStorageKeys;
     
 }
--(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value
+-(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient postSetStorageItemForKey:key value:value session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(void) deleteStorage
+-(void) clearSessionStorage
 {
     NSError *error;
     [self.jsonWireClient deleteStorage:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(void) getStorageItemForKey:(NSString*)key
+-(void) sessionStorageItemForKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient getStorageItemForKey:key  session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(void) deleteStorageItemForGivenKey:(NSString*)key
+-(void) deleteStorageItemForKey:(NSString*)key
 {
     NSError *error;
     [self.jsonWireClient deleteStorageItemForGivenKey:key session:self.session.sessionId error:&error];
     [self addError:error];
 }
 
--(NSInteger) getNumberOfItemsInStorage
+-(NSInteger) countOfItemsInStorage
 {
     NSError *error;
     NSInteger numItems= [self.jsonWireClient getStorageSize:self.session.sessionId error:&error];
@@ -604,7 +604,7 @@
 }
 
 
--(NSArray*) getLogForGivenType:(SELogType)type
+-(NSArray*) getLogForType:(SELogType)type
 {
     NSError *error;
     NSArray *logsForType =[self.jsonWireClient  getLogForGivenLogType:type session:self.session.sessionId error:&error];
