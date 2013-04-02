@@ -13,7 +13,7 @@
 		360609C416F5657600BADCDE /* SEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 360609C216F5657600BADCDE /* SEError.m */; };
 		36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A03F8F16FA0F2A00F61F08 /* NSData+Base64.h */; };
 		36A03F9216FA0F2A00F61F08 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */; };
-		36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* SEJsonWireClient.h */; };
+		36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* SEJsonWireClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		36A5B25D16F8EFAE00AB30AF /* SEJsonWireClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A5B25B16F8EFAE00AB30AF /* SEJsonWireClient.m */; };
 		36BB380516F268C2003A46FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		36BB380F16F268C2003A46FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36BB380D16F268C2003A46FD /* InfoPlist.strings */; };
@@ -261,8 +261,8 @@
 				36F3D75616F7E39100A5DD70 /* SEWebElement.h in Headers */,
 				36C3AFA216F9379C000E73C6 /* SEEnums.h in Headers */,
 				6B93026317011246003F4CFF /* SELocation.h in Headers */,
-				360486EF16F7C15100D968D8 /* SEUtility.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */,
+				360486EF16F7C15100D968D8 /* SEUtility.h in Headers */,
 				36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
