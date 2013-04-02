@@ -205,8 +205,8 @@
 -(void) deactivateInputMethodEngine;
 -(void) activateInputMethodEngine:(NSString*)engine;
 -(void) setFrame:(id)name;
--(void) setWindow:(NSString*)windowHandle;
--(void) closeWindow:(NSString*)windowHandle;
+-(void) setWindow:(NSNumber*)windowHandle;
+-(void) closeWindow:(NSNumber*)windowHandle;
 -(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle;
 -(NSSize) windowSizeForWindow:(NSString*)windowHandle;
 -(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle;
