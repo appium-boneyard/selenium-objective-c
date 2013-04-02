@@ -91,7 +91,7 @@
 
  @return The current window handle.
  */
--(NSString*) window;
+-(NSNumber*) window;
 
 
 /**

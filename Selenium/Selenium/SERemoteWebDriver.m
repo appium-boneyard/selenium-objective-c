@@ -78,10 +78,10 @@
 	[self addError:error];
 }
 
--(NSString*) window
+-(NSNumber*) window
 {
 	NSError *error;
-	NSString* window = [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:&error];
+	NSNumber* window = [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:&error];
 	[self addError:error];
 	return window;
 }
@@ -208,28 +208,28 @@
 	[self addError:error];
 }
 
--(void) setWindow:(NSString*)windowHandle
+-(void) setWindow:(NSNumber*)windowHandle
 {
 	NSError* error;
 	[self.jsonWireClient postSetWindow:windowHandle session:self.session.sessionId error:&error];
 	[self addError:error];
 }
 
--(void) closeWindow:(NSString*)windowHandle
+-(void) closeWindow:(NSNumber*)windowHandle
 {
 	NSError* error;
 	[self.jsonWireClient deleteWindowWithSession:self.session.sessionId error:&error];
 	[self addError:error];
 }
 
--(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle
+-(void) setWindowSize:(NSSize)size window:(NSNumber*)windowHandle
 {
 	NSError *error;
 	[self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:&error];
 	[self addError:error];
 }
 
--(NSSize) windowSizeForWindow:(NSString*)windowHandle
+-(NSSize) windowSizeForWindow:(NSNumber*)windowHandle
 {
 	NSError *error;
 	NSSize size = [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:&error];
@@ -237,14 +237,14 @@
 	return size;
 }
 
--(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle
+-(void) setWindowPosition:(NSPoint)position window:(NSNumber*)windowHandle
 {
 	NSError *error;
 	[self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:&error];
 	[self addError:error];
 }
 
--(NSPoint) windowPositionForWindow:(NSString*)windowHandle
+-(NSPoint) windowPositionForWindow:(NSNumber*)windowHandle
 {
 	NSError *error;
 	NSPoint position = [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:&error];
@@ -252,7 +252,7 @@
 	return position;
 }
 
--(void) maximizeWindow:(NSString*)windowHandle
+-(void) maximizeWindow:(NSNumber*)windowHandle
 {
 	NSError *error;
 	[self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:&error];
