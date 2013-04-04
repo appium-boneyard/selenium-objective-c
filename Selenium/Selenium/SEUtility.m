@@ -9,12 +9,14 @@
 #import "SEUtility.h"
 #import "SEError.h"
 
+#define DEFAULT_TIMEOUT 120
+
 @implementation SEUtility
 
 +(NSDictionary*) performGetRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
 	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:DEFAULT_TIMEOUT];
     
     NSURLResponse *response;
     NSData *urlData = [NSURLConnection sendSynchronousRequest:request
@@ -39,7 +41,8 @@
 +(NSDictionary*) performPostRequestToUrl:(NSString*)urlString postParams:(NSDictionary*)postParams error:(NSError**)error
 {
 	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-	NSMutableURLRequest *request =[NSMutableURLRequest requestWithURL:url];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:DEFAULT_TIMEOUT];
+	
 	[request setHTTPMethod:@"POST"];
 	
 	if (postParams == nil)
@@ -80,7 +83,7 @@
 +(NSDictionary*) performDeleteRequestToUrl:(NSString*)urlString error:(NSError**)error
 {
 	NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:DEFAULT_TIMEOUT];
    	[request setHTTPMethod:@"DELETE"];
 	
     NSURLResponse *response;
