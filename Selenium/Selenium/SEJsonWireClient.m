@@ -19,9 +19,7 @@
 
 @implementation SEJsonWireClient
 
-
-
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port error:(NSError**)error
 {
     self = [super init];
     if (self) {

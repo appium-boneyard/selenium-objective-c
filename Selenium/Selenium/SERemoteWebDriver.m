@@ -24,18 +24,29 @@
     return nil;
 }
 
--(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
+-(id) initWithServerAddress:(NSString *)address port:(NSInteger)port
 {
-    self = [super init];
+	self = [super init];
     if (self) {
 		[self setErrors:[NSMutableArray new]];
-        [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port desiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:error]];
+		NSError *error;
+        [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port error:&error]];
+		[self addError:error];
+    }
+    return self;
+}
+
+-(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
+{
+    self = [self initWithServerAddress:address port:port];
+    if (self) {
+		[self setErrors:[NSMutableArray new]];
+        [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port error:error]];
 		[self addError:*error];
 		
 		// get session
-		[self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error]];
-		[self addError:*error];
-        if ([*error code] != 0)
+		[self setSession:[self startSessionWithDesiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites]];
+        if (self.session == nil)
             return nil;
     }
     return self;
@@ -55,6 +66,25 @@
     NSError *error;
 	[self.jsonWireClient deleteSessionWithSession:self.session.sessionId error:&error];
 	[self addError:error];
+}
+
+-(SESession*) startSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites
+{
+	// get session
+	NSError *error;
+	[self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:&error]];
+	[self addError:error];
+	if ([error code] != 0)
+		return nil;
+	return [self session];
+}
+
+-(NSArray*) allSessions
+{
+	NSError *error;
+    NSArray *sessions = [self.jsonWireClient getSessionsAndReturnError:&error];
+	[self addError:error];
+	return sessions;
 }
 
 -(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type

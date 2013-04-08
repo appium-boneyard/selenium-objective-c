@@ -14,8 +14,16 @@
 {
     self = [super init];
     if (self) {
-		[self setCapabilities:[[SECapabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
-		[self setSessionId:[dict objectForKey:@"sessionId"]];
+		if ([dict objectForKey:@"sessionId"] != nil)
+		{
+			[self setCapabilities:[[SECapabilities alloc] initWithDictionary:[dict objectForKey:@"value"]]];
+			[self setSessionId:[dict objectForKey:@"sessionId"]];
+		}
+		else
+		{
+			[self setCapabilities:[[SECapabilities alloc] initWithDictionary:[dict objectForKey:@"capabilities"]]];
+			[self setSessionId:[dict objectForKey:@"id"]];
+		}
     }
     return self;
 }
