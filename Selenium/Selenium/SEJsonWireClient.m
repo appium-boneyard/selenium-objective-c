@@ -145,7 +145,7 @@
 	NSArray *jsonItems = (NSArray*)[json objectForKey:@"value"];
 	for(int i =0; i < [jsonItems count]; i++)
 	{
-		NSNumber *handle = [NSNumber numberWithInt:[[jsonItems objectAtIndex:i] intValue]];
+		NSString *handle = [[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
 		[handles addObject:handle];
 	}
 	return handles;
@@ -289,7 +289,7 @@
 }
 
 // POST /session/:sessionId/window
--(void) postSetWindow:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: windowHandle, @"name", nil];
@@ -304,7 +304,7 @@
 }
 
 // POST /session/:sessionId/window/:windowHandle/size
--(void) postSetWindowSize:(NSSize)size window:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(size.width/1)], @"width", [NSNumber numberWithInt:(size.height/1)], @"height", nil];
@@ -312,7 +312,7 @@
 }
 
 // GET /session/:sessionId/window/:windowHandle/size
--(NSSize) getWindowSizeWithWindow:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
@@ -324,7 +324,7 @@
 }
 
 // POST /session/:sessionId/window/:windowHandle/position
--(void) postSetWindowPosition:(NSPoint)position window:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(position.x / 1)], @"x", [NSNumber numberWithInt:(position.y/1)], @"y", nil];
@@ -332,7 +332,7 @@
 }
 
 // GET /session/:sessionId/window/:windowHandle/position
--(NSPoint) getWindowPositionWithWindow:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
@@ -344,7 +344,7 @@
 }
 
 // POST /session/:sessionId/window/:windowHandle/maximize
--(void) postMaximizeWindow:(NSNumber*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/maximize", self.httpCommandExecutor, sessionId, windowHandle];
 	[SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
