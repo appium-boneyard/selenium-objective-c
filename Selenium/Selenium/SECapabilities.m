@@ -44,6 +44,7 @@ NSMutableDictionary* _dict;
 {
     self = [super init];
     if (self) {
+        _dict = [NSMutableDictionary new];
         [self setBrowserName:[dict objectForKey:BROWSER_NAME]];
 		[self setVersion:[dict objectForKey:VERSION]];
 		[self setPlatform:[dict objectForKey:PLATFORM]];
