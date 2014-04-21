@@ -27,6 +27,12 @@
 @property BOOL nativeEvents;
 // TODO: add proxy object
 
+@property NSString *app;
+@property NSString *automationName;
+@property NSString *deviceName;
+@property NSString *platformName;
+@property NSString *platformVersion;
+
 -(id) initWithDictionary:(NSDictionary*)dict;
 -(id) getCapabilityForKey:(NSString*)key;
 -(void) addCapabilityForKey:(NSString*)key andValue:(id)value;

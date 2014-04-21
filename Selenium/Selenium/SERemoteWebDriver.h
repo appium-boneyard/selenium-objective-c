@@ -280,4 +280,16 @@
 -(NSArray*) allLogTypes;
 -(SEApplicationCacheStatus) applicationCacheStatus;
 
+
+#pragma mark - 3.0 methods
+/////////////////
+// 3.0 METHODS //
+/////////////////
+
+-(BOOL) airplaneMode;
+-(void) setAirplaneMode:(BOOL)airplaneMode;
+-(NSArray*) allContexts;
+-(NSString*) context;
+-(void) setContext:(NSString*)context;
+
 @end

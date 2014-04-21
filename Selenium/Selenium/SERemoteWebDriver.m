@@ -597,6 +597,7 @@
     return allStorageKeys;
     
 }
+
 -(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key
 {
     NSError *error;
@@ -656,6 +657,50 @@
     SEApplicationCacheStatus status = [self.jsonWireClient getApplicationCacheStatusWithSession:self.session.sessionId error:&error];
 	[self addError:error];
 	return status;
+}
+
+
+#pragma mark - 3.0 methods
+/////////////////
+// 3.0 METHODS //
+/////////////////
+
+-(BOOL) airplaneMode
+{
+	NSError *error;
+	BOOL airplaneMode = [self.jsonWireClient getAirplaneModeForSession:self.session.sessionId error:&error];
+	[self addError:error];
+	return airplaneMode;
+}
+
+-(void) setAirplaneMode:(BOOL)airplaneMode
+{
+	NSError *error;
+	[self.jsonWireClient postAirplaneMode:airplaneMode session:self.session.sessionId error:&error];
+	[self addError:error];
+}
+
+-(NSArray*) allContexts
+{
+	NSError *error;
+	NSArray * windows = [self.jsonWireClient getContextsForSession:self.session.sessionId error:&error];
+	[self addError:error];
+	return windows;
+}
+
+-(NSString*) context
+{
+	NSError *error;
+	NSString* context = [self.jsonWireClient getContextForSession:self.session.sessionId error:&error];
+	[self addError:error];
+	return context;
+}
+
+-(void) setContext:(NSString*)context
+{
+	NSError *error;
+	[self.jsonWireClient postContext:context session:self.session.sessionId error:&error];
+	[self addError:error];
 }
 
 @end

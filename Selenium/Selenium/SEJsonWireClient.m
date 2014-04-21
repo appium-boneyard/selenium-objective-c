@@ -906,7 +906,7 @@
     return keysList;
 }
 
-//POST /session/:sessionId/session_storage
+// POST /session/:sessionId/session_storage
 -(void) postSetStorageItemForKey:(NSString*)key value:(NSString*)value session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/session_storage",self.httpCommandExecutor,sessionId];
@@ -988,7 +988,59 @@
     NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	 NSInteger appCacheStatus = [[json objectForKey:@"value"] integerValue];
     return [SEEnums applicationCacheStatusWithInt:appCacheStatus];
+}
 
+
+#pragma mark - 3.0 methods
+  /////////////////
+ // 3.0 METHODS //
+/////////////////
+
+// GET /session/:sessionid/airplane_mode
+-(BOOL) getAirplaneModeForSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/airplane_mode", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	return [[json objectForKey:@"value"] boolValue];
+}
+
+// POST /session/:sessionid/airplane_mode
+-(void) postAirplaneMode:(BOOL)airplaneMode session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:airplaneMode], @"airplane_mode", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// GET /session/:sessionid/contexts
+-(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/contexts", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	NSMutableArray *contexts = [NSMutableArray new];
+    NSArray *jsonItems =(NSArray*)[json objectForKey:@"value"];
+    for(int i=0; i < [jsonItems count]; i++)
+    {
+        NSString *context =[[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+        [contexts addObject:context];
+    }
+    return contexts;
+}
+
+// GET /session/:sessionid/context
+-(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
+	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+	return [json objectForKey:@"value"];
+}
+
+// POST /session/:sessionid/context
+-(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error
+{
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
+	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:context, @"context", nil];
+	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 @end
