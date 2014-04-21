@@ -317,4 +317,25 @@
 // GET /session/:sessionId/application_cache/status
 -(SEApplicationCacheStatus) getApplicationCacheStatusWithSession:(NSString*)sessionId error:(NSError**)error;
 
+
+#pragma mark - 3.0 methods
+/////////////////
+// 3.0 METHODS //
+/////////////////
+
+// GET /session/:sessionid/airplane_mode
+-(BOOL) getAirplaneModeForSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionid/airplane_mode
+-(void) postAirplaneMode:(BOOL)airplaneMode session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionid/contexts
+-(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionid/context
+-(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionid/context
+-(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error;
+
 @end

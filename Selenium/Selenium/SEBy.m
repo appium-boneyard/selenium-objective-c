@@ -60,4 +60,20 @@
 	return [[SEBy alloc] initWithLocationStrategy:@"xpath" value:xPath];
 }
 
++(SEBy*) accessibilityId:(NSString*)accessibilityId
+{
+	return [[SEBy alloc] initWithLocationStrategy:@"accessibility id" value:accessibilityId];
+}
+
++(SEBy*) androidUIAutomator:(NSString*)uiAutomatorExpression
+{
+	return [[SEBy alloc] initWithLocationStrategy:@"-android uiautomator" value:uiAutomatorExpression];
+}
+
+
++(SEBy*) iOSUIAutomation:(NSString*)uiAutomationExpression
+{
+	return [[SEBy alloc] initWithLocationStrategy:@"-ios uiautomation" value:uiAutomationExpression];
+}
+
 @end

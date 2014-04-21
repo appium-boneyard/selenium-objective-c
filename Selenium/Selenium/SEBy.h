@@ -24,4 +24,8 @@
 +(SEBy*) tagName:(NSString*)tagName;
 +(SEBy*) xPath:(NSString*)xPath;
 
++(SEBy*) accessibilityId:(NSString*)accessibilityId;
++(SEBy*) androidUIAutomator:(NSString*)uiAutomatorExpression;
++(SEBy*) iOSUIAutomation:(NSString*)uiAutomationExpression;
+
 @end

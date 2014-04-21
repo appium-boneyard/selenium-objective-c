@@ -23,6 +23,12 @@
 #define NATIVE_EVENTS @"nativeEvents"
 #define PROXY @"proxy"
 
+#define APP @"app"
+#define AUTOMATION_NAME @"automationName"
+#define DEVICE_NAME @"deviceName"
+#define PLATFORM_NAME @"platformName"
+#define PLATFORM_VERSION @"platformVersion"
+
 #import "SECapabilities.h"
 
 NSMutableDictionary* _dict;
@@ -44,8 +50,8 @@ NSMutableDictionary* _dict;
 {
     self = [super init];
     if (self) {
-        _dict = [NSMutableDictionary new];
-        [self setBrowserName:[dict objectForKey:BROWSER_NAME]];
+		_dict = [NSMutableDictionary new];
+		[self setBrowserName:[dict objectForKey:BROWSER_NAME]];
 		[self setVersion:[dict objectForKey:VERSION]];
 		[self setPlatform:[dict objectForKey:PLATFORM]];
 		[self setJavascriptEnabled:[[dict objectForKey:JAVASCRIPT_ENABLED] boolValue]];
@@ -58,6 +64,11 @@ NSMutableDictionary* _dict;
 		[self setCssSelectorsEnabled:[[dict objectForKey:CSS_SELECTORS_ENABLED] boolValue]];
 		[self setWebStorageEnabled:[[dict objectForKey:WEB_STORAGE_ENABLED] boolValue]];
 		
+		[self setApp:[dict objectForKey:APP]];
+		[self setAutomationName:[dict objectForKey:AUTOMATION_NAME]];
+		[self setDeviceName:[dict objectForKey:DEVICE_NAME]];
+		[self setPlatformName:[dict objectForKey:PLATFORM_NAME]];
+		[self setPlatformVersion:[dict objectForKey:PLATFORM_VERSION]];
     }
     return self;
 }
