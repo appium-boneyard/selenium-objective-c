@@ -292,4 +292,11 @@
 -(NSString*) context;
 -(void) setContext:(NSString*)context;
 
+
+// Appium specific extras
+-(void) runAppInBackground:(int) seconds;
+-(void) resetApp;
+-(void) closeApp;
+-(void) launchApp;
+
 @end

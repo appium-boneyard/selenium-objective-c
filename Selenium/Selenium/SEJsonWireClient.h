@@ -338,4 +338,15 @@
 // POST /session/:sessionid/context
 -(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error;
 
+// POST /session/:sessionId/appium/app/background
+- (void)postRunAppInBackground:(int)seconds session:(NSString *)sessionId error:(NSError **)error;
+
+// POST /session/:sessionId/appium/app/reset
+- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error;
+
+// POST /session/:sessionId/appium/app/close
+- (void)postCloseAppWithSession:(NSString *)sessionId error:(NSError **)error;
+
+//POST /session/:sessionId/appium/app/launch
+- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error;
 @end
