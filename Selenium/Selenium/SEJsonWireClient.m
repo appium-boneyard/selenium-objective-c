@@ -1044,7 +1044,7 @@
 }
 
 // POST /session/:sessionId/appium/app/background
-- (void)postRunAppInBackground:(int)seconds session:(NSString *)sessionId error:(NSError **)error
+- (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/background", self.httpCommandExecutor, sessionId];
     NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:seconds], @"seconds", nil];

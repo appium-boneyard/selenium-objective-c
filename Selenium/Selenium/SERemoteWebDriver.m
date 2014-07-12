@@ -704,7 +704,7 @@
 }
 
 // Appium specific extras
--(void) runAppInBackground:(int) seconds
+-(void)runAppInBackground:(NSInteger) seconds
 {
     NSError *error;
     [self.jsonWireClient postRunAppInBackground:seconds session:self.session.sessionId error:&error];
