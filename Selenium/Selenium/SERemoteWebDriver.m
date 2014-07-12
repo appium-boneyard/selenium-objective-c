@@ -43,7 +43,7 @@
 		[self setErrors:[NSMutableArray new]];
         [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port error:error]];
 		[self addError:*error];
-		
+
 		// get session
 		[self setSession:[self startSessionWithDesiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites]];
         if (self.session == nil)
@@ -550,7 +550,7 @@
     NSArray *allLocalStorageKeys =[self.jsonWireClient getAllLocalStorageKeys:self.session.sessionId error:&error];
     [self addError:error];
     return allLocalStorageKeys;
-    
+
 }
 -(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key
 {
@@ -595,7 +595,7 @@
     NSArray *allStorageKeys =[self.jsonWireClient getAllStorageKeys:self.session.sessionId error:&error];
     [self addError:error];
     return allStorageKeys;
-    
+
 }
 
 -(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key
@@ -701,6 +701,35 @@
 	NSError *error;
 	[self.jsonWireClient postContext:context session:self.session.sessionId error:&error];
 	[self addError:error];
+}
+
+// Appium specific extras
+-(void) runAppInBackground:(int) seconds
+{
+    NSError *error;
+    [self.jsonWireClient postRunAppInBackground:seconds session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) resetApp
+{
+    NSError *error;
+    [self.jsonWireClient postResetAppWithSession:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) closeApp
+{
+    NSError *error;
+    [self.jsonWireClient postCloseAppWithSession:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void) launchApp
+{
+    NSError *error;
+    [self.jsonWireClient launchAppWithSession:self.session.sessionId error:&error];
+    [self addError:error];
 }
 
 @end

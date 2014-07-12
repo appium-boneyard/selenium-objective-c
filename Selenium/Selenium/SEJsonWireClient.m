@@ -1043,4 +1043,32 @@
 	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
+// POST /session/:sessionId/appium/app/background
+- (void)postRunAppInBackground:(int)seconds session:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/background", self.httpCommandExecutor, sessionId];
+    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:seconds], @"seconds", nil];
+    [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// POST /session/:sessionId/appium/app/reset
+- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/reset", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /session/:sessionId/appium/app/close
+- (void)postCloseAppWithSession:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/close", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+//POST /session/:sessionId/appium/app/launch
+- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/launch", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
 @end
