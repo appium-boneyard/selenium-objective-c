@@ -294,7 +294,7 @@
 
 
 // Appium specific extras
--(void) runAppInBackground:(int) seconds;
+-(void)runAppInBackground:(NSInteger) seconds;
 -(void) resetApp;
 -(void) closeApp;
 -(void) launchApp;
