@@ -289,6 +289,13 @@
 	[self addError:error];
 }
 
+-(void) rotate:(NSString*)orientation
+{
+    NSError *error;
+    [self.jsonWireClient postRotate:orientation session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
 -(NSArray*) cookies
 {
 	NSError *error;

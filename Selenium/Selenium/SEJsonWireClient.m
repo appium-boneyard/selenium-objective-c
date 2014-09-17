@@ -1051,6 +1051,15 @@
     [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
+// POST /session/:sessionId/appium/app/rotate
+- (void)postRotate:(NSString *)orientation session:(NSString*)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/rotate", self.httpCommandExecutor, sessionId];
+    NSDictionary *postDictionary = @{@"orientation" : orientation};
+    [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+
 // POST /session/:sessionId/appium/app/reset
 - (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error
 {
