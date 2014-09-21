@@ -289,7 +289,7 @@
 	[self addError:error];
 }
 
--(void) rotate:(NSString*)orientation
+-(void) rotate:(SEScreenOrientation)orientation
 {
     NSError *error;
     [self.jsonWireClient postRotate:orientation session:self.session.sessionId error:&error];
@@ -711,7 +711,7 @@
 }
 
 // Appium specific extras
--(void)runAppInBackground:(NSInteger) seconds
+-(void) runAppInBackground:(NSInteger)seconds
 {
     NSError *error;
     [self.jsonWireClient postRunAppInBackground:seconds session:self.session.sessionId error:&error];

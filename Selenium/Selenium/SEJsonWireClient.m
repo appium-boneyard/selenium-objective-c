@@ -11,6 +11,7 @@
 #import "SEStatus.h"
 #import "NSData+Base64.h"
 
+
 @interface SEJsonWireClient ()
 	@property (readonly) NSString *httpCommandExecutor;
 	@property NSString *serverAddress;
@@ -1047,15 +1048,15 @@
 - (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/background", self.httpCommandExecutor, sessionId];
-    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:seconds], @"seconds", nil];
+    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger:seconds], @"seconds", nil];
     [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
 // POST /session/:sessionId/appium/app/rotate
-- (void)postRotate:(NSString *)orientation session:(NSString*)sessionId error:(NSError **)error
+- (void)postRotate:(SEScreenOrientation)orientation session:(NSString*)sessionId error:(NSError **)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/rotate", self.httpCommandExecutor, sessionId];
-    NSDictionary *postDictionary = @{@"orientation" : orientation};
+    NSDictionary *postDictionary = @{@"orientation" : orientation == SELENIUM_SCREEN_ORIENTATION_LANDSCAPE ? @"LANDSCAPE" : @"PORTRAIT" };
     [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 

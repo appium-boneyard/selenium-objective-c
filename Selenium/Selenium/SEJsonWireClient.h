@@ -342,7 +342,7 @@
 - (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error;
 
 // POST /session/:sessionId/appium/app/rotate
-- (void)postRotate:(NSString *)orientation session:(NSString*)sessionId error:(NSError **)error;
+- (void)postRotate:(SEScreenOrientation)orientation session:(NSString*)sessionId error:(NSError **)error;
 
 // POST /session/:sessionId/appium/app/reset
 - (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error;

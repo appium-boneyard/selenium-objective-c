@@ -294,9 +294,9 @@
 
 
 // Appium specific extras
--(void)runAppInBackground:(NSInteger) seconds;
+-(void) runAppInBackground:(NSInteger)seconds;
 -(void) resetApp;
--(void) rotate:(NSString*)orientation;
+-(void) rotate:(SEScreenOrientation)orientation;
 -(void) closeApp;
 -(void) launchApp;
 

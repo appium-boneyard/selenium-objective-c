@@ -17,7 +17,6 @@
 		36A5B25D16F8EFAE00AB30AF /* SEJsonWireClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A5B25B16F8EFAE00AB30AF /* SEJsonWireClient.m */; };
 		36BB380516F268C2003A46FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		36BB380F16F268C2003A46FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36BB380D16F268C2003A46FD /* InfoPlist.strings */; };
-		36BB381B16F268C2003A46FD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB381A16F268C2003A46FD /* SenTestingKit.framework */; };
 		36BB381C16F268C2003A46FD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		36BB381F16F268C2003A46FD /* Selenium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380116F268C2003A46FD /* Selenium.framework */; };
 		36BB382516F268C2003A46FD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36BB382316F268C2003A46FD /* InfoPlist.strings */; };
@@ -93,7 +92,6 @@
 		36BB380E16F268C2003A46FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36BB381016F268C2003A46FD /* Selenium-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Selenium-Prefix.pch"; sourceTree = "<group>"; };
 		36BB381916F268C2003A46FD /* SeleniumTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeleniumTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		36BB381A16F268C2003A46FD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		36BB382216F268C2003A46FD /* SeleniumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SeleniumTests-Info.plist"; sourceTree = "<group>"; };
 		36BB382416F268C2003A46FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36BB382616F268C2003A46FD /* SeleniumTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeleniumTests.h; sourceTree = "<group>"; };
@@ -131,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36BB381B16F268C2003A46FD /* SenTestingKit.framework in Frameworks */,
 				36BB381C16F268C2003A46FD /* Cocoa.framework in Frameworks */,
 				36BB381F16F268C2003A46FD /* Selenium.framework in Frameworks */,
 			);
@@ -192,7 +189,6 @@
 			isa = PBXGroup;
 			children = (
 				36BB380416F268C2003A46FD /* Cocoa.framework */,
-				36BB381A16F268C2003A46FD /* SenTestingKit.framework */,
 				DB922EBF18BC803C005C2F1E /* XCTest.framework */,
 				36BB380616F268C2003A46FD /* Other Frameworks */,
 			);
@@ -361,7 +357,7 @@
 			name = SeleniumTests;
 			productName = SeleniumTests;
 			productReference = 36BB381916F268C2003A46FD /* SeleniumTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		DB922EB118BC803C005C2F1E /* libSelenium */ = {
 			isa = PBXNativeTarget;
@@ -386,7 +382,8 @@
 		36BB37F816F268C2003A46FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastTestingUpgradeCheck = 0600;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Appium;
 			};
 			buildConfigurationList = 36BB37FB16F268C2003A46FD /* Build configuration list for PBXProject "Selenium" */;
@@ -580,7 +577,6 @@
 		36BB382C16F268C2003A46FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -599,7 +595,6 @@
 		36BB382D16F268C2003A46FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -619,12 +614,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Selenium/Selenium-Prefix.pch";
 				INFOPLIST_FILE = "SeleniumTests/SeleniumTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -632,18 +629,21 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Selenium/Selenium-Prefix.pch";
 				INFOPLIST_FILE = "SeleniumTests/SeleniumTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
 		DB922ECD18BC803C005C2F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Selenium/Selenium-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -653,6 +653,7 @@
 		DB922ECE18BC803C005C2F1E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Selenium/Selenium-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,6 +697,7 @@
 				DB922ECE18BC803C005C2F1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

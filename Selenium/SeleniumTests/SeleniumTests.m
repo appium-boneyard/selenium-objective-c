@@ -44,7 +44,7 @@ SERemoteWebDriver *driver;
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://www.zoosk.com"]];
 	NSString *oldUrl = [[driver url] absoluteString];
 	[driver setUrl:[[NSURL alloc] initWithString:@"http://appium.io/selenium-objective-c/index.html"]];
-	STAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Url");
+	XCTAssertFalse(([[[driver url] absoluteString] isEqualToString:oldUrl]), @"Url");
 }
 
 -(void) testSendKeys
@@ -54,7 +54,7 @@ SERemoteWebDriver *driver;
 	NSString *textToType = @"Hello World";
 	[a sendKeys:textToType];
 	NSString *typedText = [a text];
-	STAssertTrue([typedText isEqualToString:textToType], @"SendKeys");
+	XCTAssertTrue([typedText isEqualToString:textToType], @"SendKeys");
 }
 
 @end
