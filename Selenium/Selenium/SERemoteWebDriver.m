@@ -553,12 +553,13 @@
 	NSError *error;
     SEWebElement *element = [self findElementBy:by error:&error];
 	[self addError:error];
-	return element;
+    return element;
 }
 
 -(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error
 {
-    return [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
+    SEWebElement *element = [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
+    return element != nil && element.opaqueId != nil ? element : nil;
 }
 
 -(NSArray*) findElementsBy:(SEBy*)by
@@ -571,7 +572,15 @@
 
 -(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error
 {
-    return [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
+    NSArray *elements = [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
+    if (elements == nil || elements.count < 1) {
+        return [NSArray new];
+    }
+    SEWebElement *element = [elements objectAtIndex:0];
+    if (element == nil || element.opaqueId == nil) {
+        return [NSArray new];
+    }
+    return elements;
 }
 
 -(SEWebElement*) activeElement
