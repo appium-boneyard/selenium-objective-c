@@ -28,7 +28,6 @@
 {
 	self = [super init];
     if (self) {
-		[self setErrors:[NSMutableArray new]];
 		NSError *error;
         [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port error:&error]];
 		[self addError:error];
@@ -40,7 +39,6 @@
 {
     self = [self initWithServerAddress:address port:port];
     if (self) {
-		[self setErrors:[NSMutableArray new]];
         [self setJsonWireClient:[[SEJsonWireClient alloc] initWithServerAddress:address port:port error:error]];
 		[self addError:*error];
 
@@ -54,11 +52,15 @@
 
 -(void)addError:(NSError*)error
 {
-	if (error == nil || error.code == 0)
-		return;
-	NSLog(@"Selenium Error: %ld - %@", error.code, error.description);
-	[self setLastError:error];
-	[[self errors] addObject:error];
+    [self.jsonWireClient addError:error];
+}
+
+-(NSArray*) errors {
+    return self.jsonWireClient.errors;
+}
+
+-(NSError*) lastError {
+    return self.jsonWireClient.lastError;
 }
 
 -(void)quit

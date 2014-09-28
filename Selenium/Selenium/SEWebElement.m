@@ -29,6 +29,7 @@
 {
 	NSError *error;
 	[self clickAndReturnError:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) clickAndReturnError:(NSError**)error
@@ -40,6 +41,7 @@
 {
 	NSError *error;
 	[self submitAndReturnError:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) submitAndReturnError:(NSError**)error
@@ -50,7 +52,9 @@
 -(NSString*) text
 {
 	NSError *error;
-	return [self textAndReturnError:&error];
+	NSString *text = [self textAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return text;
 }
 
 -(NSString*) textAndReturnError:(NSError**)error
@@ -62,6 +66,7 @@
 {
 	NSError *error;
 	[self sendKeys:keyString error:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) sendKeys:(NSString*)keyString error:(NSError**)error
@@ -76,7 +81,9 @@
 -(NSString*) tagName
 {
 	NSError *error;
-	return [self tagNameAndReturnError:&error];
+	NSString *tagName = [self tagNameAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return tagName;
 }
 
 -(NSString*) tagNameAndReturnError:(NSError**)error
@@ -88,6 +95,7 @@
 {
 	NSError *error;
 	[self clearAndReturnError:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) clearAndReturnError:(NSError**)error
@@ -99,6 +107,7 @@
 {
 	NSError *error;
 	return [self isSelectedAndReturnError:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(BOOL) isSelectedAndReturnError:(NSError**)error
@@ -110,6 +119,7 @@
 {
 	NSError *error;
 	return [self isEnabledAndReturnError:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(BOOL) isEnabledAndReturnError:(NSError**)error
@@ -120,7 +130,9 @@
 -(NSString*) attribute:(NSString*)attributeName
 {
 	NSError *error;
-	return [self attribute:attributeName error:&error];
+	NSString *attribute = [self attribute:attributeName error:&error];
+    [self.jsonWireClient addError:error];
+    return attribute;
 }
 
 -(NSString*) attribute:(NSString*)attributeName error:(NSError**)error
@@ -131,7 +143,9 @@
 -(BOOL) isEqualToElement:(SEWebElement*)element
 {
 	NSError *error;
-	return [self isEqualToElement:element error:&error];
+	BOOL result = [self isEqualToElement:element error:&error];
+    [self.jsonWireClient addError:error];
+    return result;
 }
 
 -(BOOL) isEqualToElement:(SEWebElement*)element error:(NSError**)error
@@ -142,7 +156,9 @@
 -(BOOL) isDisplayed
 {
 	NSError *error;
-	return [self isDisplayedAndReturnError:&error];
+	BOOL isDisplayed = [self isDisplayedAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return isDisplayed;
 }
 
 -(BOOL) isDisplayedAndReturnError:(NSError**)error
@@ -153,7 +169,9 @@
 -(NSPoint) location
 {
 	NSError *error;
-	return [self locationAndReturnError:&error];
+    NSPoint location = [self locationAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return location;
 }
 
 -(NSPoint) locationAndReturnError:(NSError**)error
@@ -164,7 +182,9 @@
 -(NSPoint) locationInView
 {
 	NSError *error;
-	return [self locationInViewAndReturnError:&error];
+	NSPoint locationInView = [self locationInViewAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return locationInView;
 }
 
 -(NSPoint) locationInViewAndReturnError:(NSError**)error
@@ -175,7 +195,9 @@
 -(NSSize) size
 {
 	NSError *error;
-	return [self sizeAndReturnError:&error];
+	NSSize size = [self sizeAndReturnError:&error];
+    [self.jsonWireClient addError:error];
+    return size;
 }
 
 -(NSSize) sizeAndReturnError:(NSError**)error
@@ -186,7 +208,9 @@
 -(NSString*) cssProperty:(NSString*)propertyName
 {
 	NSError *error;
-	return [self cssProperty:propertyName error:&error];
+	NSString *property = [self cssProperty:propertyName error:&error];
+    [self.jsonWireClient addError:error];
+    return property;
 }
 
 -(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error
@@ -197,23 +221,36 @@
 -(SEWebElement*) findElementBy:(SEBy*)by
 {
 	NSError *error;
-	return [self findElementBy:by error:&error];
+	SEWebElement *element = [self findElementBy:by error:&error];
+    [self.jsonWireClient addError:error];
+    return element;
 }
 
 -(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error
 {
-	return [self.jsonWireClient postElementFromElement:self by:by session:self.sessionId error:error];
+	SEWebElement *element = [self.jsonWireClient postElementFromElement:self by:by session:self.sessionId error:error];
+    return element != nil && element.opaqueId != nil ? element : nil;
 }
 
 -(NSArray*) findElementsBy:(SEBy*)by
 {
 	NSError *error;
-	return [self findElementsBy:by error:&error];
+	NSArray *elements = [self findElementsBy:by error:&error];
+    [self.jsonWireClient addError:error];
+    return elements;
 }
 
 -(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error
 {
-	return [self.jsonWireClient postElementsFromElement:self by:by session:self.sessionId error:error];
+	NSArray *elements = [self.jsonWireClient postElementsFromElement:self by:by session:self.sessionId error:error];
+    if (elements == nil || elements.count < 1) {
+        return [NSArray new];
+    }
+    SEWebElement *element = [elements objectAtIndex:0];
+    if (element == nil || element.opaqueId == nil) {
+        return [NSArray new];
+    }
+    return elements;
 }
 
 -(NSDictionary*)elementJson
@@ -229,6 +266,7 @@
 -(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode {
     NSError *error;
     [self setValue:value isUnicode:isUnicode error:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error
@@ -243,12 +281,12 @@
 -(void) replaceValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
     NSError *error;
     [self replaceValue:value isUnicode:isUnicode error:&error];
+    [self.jsonWireClient addError:error];
 }
 
 -(void) replaceValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error
 {
     [self.jsonWireClient postReplaceValueForElement:self value:value isUnicode:isUnicode session:self.sessionId error:error];
-    
 }
 
 @end

@@ -26,6 +26,7 @@
     if (self) {
         [self setServerAddress:address];
         [self setServerPort:port];
+        [self setErrors:[NSMutableArray new]];
 		
         // get status
         [self getStatusAndReturnError:error];
@@ -33,6 +34,15 @@
             return nil;
     }
     return self;
+}
+
+-(void)addError:(NSError*)error
+{
+    if (error == nil || error.code == 0)
+        return;
+    NSLog(@"Selenium Error: %ld - %@", error.code, error.description);
+    [self setLastError:error];
+    [self.errors addObject:error];
 }
 
 -(NSString*) httpCommandExecutor

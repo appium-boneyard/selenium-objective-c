@@ -22,7 +22,12 @@
 @class SELocation;
 
 @interface SEJsonWireClient : NSObject
+
+@property NSError *lastError;
+@property NSMutableArray *errors;
+
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port error:(NSError**)error;
+-(void) addError:(NSError*)error;
 
 #pragma mark - JSON-Wire Protocol Implementation
 

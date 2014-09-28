@@ -21,8 +21,8 @@
 @interface SERemoteWebDriver : NSObject
 
 @property SESession *session;
-@property NSError *lastError;
-@property NSMutableArray *errors;
+@property (readonly) NSError *lastError;
+@property (readonly) NSArray *errors;
 
 @property (readonly) NSString *alertText;
 @property (readonly) NSArray *allContexts;
