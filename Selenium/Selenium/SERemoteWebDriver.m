@@ -64,123 +64,203 @@
 -(void)quit
 {
     NSError *error;
-	[self.jsonWireClient deleteSessionWithSession:self.session.sessionId error:&error];
+    [self quitWithError:&error];
 	[self addError:error];
+}
+
+-(void)quitWithError:(NSError**)error {
+    [self.jsonWireClient deleteSessionWithSession:self.session.sessionId error:error];
 }
 
 -(SESession*) startSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites
 {
 	// get session
 	NSError *error;
-	[self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:&error]];
+    SESession* session = [self startSessionWithDesiredCapabilities:desiredCapabilities requiredCapabilities:requiredCapabilites error:&error];
 	[self addError:error];
-	if ([error code] != 0)
-		return nil;
-	return [self session];
+    return session;
+}
+
+-(SESession*) startSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error
+{
+    // get session
+    [self setSession:[self.jsonWireClient postSessionWithDesiredCapabilities:desiredCapabilities andRequiredCapabilities:requiredCapabilites error:error]];
+    if ([*error code] != 0)
+        return nil;
+    return [self session];
 }
 
 -(NSArray*) allSessions
 {
 	NSError *error;
-    NSArray *sessions = [self.jsonWireClient getSessionsAndReturnError:&error];
+    NSArray *sessions = [self allSessionsWithError:&error];
 	[self addError:error];
 	return sessions;
 }
 
--(NSArray*) allContexts
-{
+-(NSArray*) allSessionsWithError:(NSError**)error {
+    return [self.jsonWireClient getSessionsAndReturnError:error];
+}
+
+-(NSArray*) allContexts {
     NSError *error;
-    NSArray * windows = [self.jsonWireClient getContextsForSession:self.session.sessionId error:&error];
+    NSArray *contexts = [self allContextsWithError:&error];
     [self addError:error];
-    return windows;
+    return contexts;
+}
+
+-(NSArray*) allContextsWithError:(NSError**)error
+{
+    return [self.jsonWireClient getContextsForSession:self.session.sessionId error:error];
 }
 
 -(NSString*) context
 {
     NSError *error;
-    NSString* context = [self.jsonWireClient getContextForSession:self.session.sessionId error:&error];
+    NSString* context = [self contextWithError:&error];
     [self addError:error];
     return context;
+}
+
+-(NSString*) contextWithError:(NSError**)error
+{
+    return [self.jsonWireClient getContextForSession:self.session.sessionId error:error];
 }
 
 -(void) setContext:(NSString*)context
 {
     NSError *error;
-    [self.jsonWireClient postContext:context session:self.session.sessionId error:&error];
+    [self setContext:context error:&error];
     [self addError:error];
+}
+
+-(void) setContext:(NSString*)context error:(NSError**)error
+{
+    [self.jsonWireClient postContext:context session:self.session.sessionId error:error];
 }
 
 -(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type
 {
     NSError *error;
-    [self.jsonWireClient postTimeout:timeoutInMilliseconds forType:type session:self.session.sessionId error:&error];
+    [self setTimeout:timeoutInMilliseconds forType:type error:&error];
 	[self addError:error];
+}
+
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type error:(NSError**)error
+{
+
+    [self.jsonWireClient postTimeout:timeoutInMilliseconds forType:type session:self.session.sessionId error:error];
 }
 
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds
 {
 	NSError *error;
-	[self.jsonWireClient postAsyncScriptWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:&error];
+    [self setAsyncScriptTimeout:timeoutInMilliseconds error:&error];
 	[self addError:error];
+}
+
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
+{
+    [self.jsonWireClient postAsyncScriptWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:error];
 }
 
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds
 {
 	NSError *error;
-	[self.jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:&error];
+    [self setImplicitWaitTimeout:timeoutInMilliseconds error:&error];
 	[self addError:error];
+}
+
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error
+{
+    [self.jsonWireClient postImplicitWaitTimeout:timeoutInMilliseconds session:self.session.sessionId error:error];
 }
 
 -(NSString*) window
 {
 	NSError *error;
-	NSString* window = [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:&error];
+    NSString* window = [self windowWithError:&error];
 	[self addError:error];
 	return window;
+}
+
+-(NSString*) windowWithError:(NSError**)error
+{
+    return [self.jsonWireClient getWindowHandleWithSession:self.session.sessionId error:error];
 }
 
 -(NSArray*) allWindows
 {
 	NSError *error;
-	NSArray * windows = [self.jsonWireClient getWindowHandlesWithSession:self.session.sessionId error:&error];
+    NSArray * windows = [self allWindowsWithError:&error];
 	[self addError:error];
 	return windows;
+}
+
+-(NSArray*) allWindowsWithError:(NSError**)error
+{
+    return [self.jsonWireClient getWindowHandlesWithSession:self.session.sessionId error:error];
 }
 
 -(NSURL*) url
 {
 	NSError *error;
-    NSURL *url = [self.jsonWireClient getURLWithSession:self.session.sessionId error:&error];
-	[self addError:error];
+    NSURL *url = [self urlWithError:&error];
 	return url;
+}
+
+-(NSURL*) urlWithError:(NSError**)error
+{
+    return [self.jsonWireClient getURLWithSession:self.session.sessionId error:error];
 }
 
 -(void) setUrl:(NSURL*)url
 {
 	NSError *error;
-	[self.jsonWireClient postURL:url session:self.session.sessionId error:&error];
+    [self urlWithError:&error];
 	[self addError:error];
+}
+
+-(void) setUrl:(NSURL*)url error:(NSError**)error
+{
+    [self.jsonWireClient postURL:url session:self.session.sessionId error:error];
+
 }
 
 -(void) forward
 {
 	NSError *error;
-	[self.jsonWireClient postForwardWithSession:self.session.sessionId error:&error];
+    [self forwardWithError:&error];
 	[self addError:error];
+}
+
+-(void) forwardWithError:(NSError**)error
+{
+    [self.jsonWireClient postForwardWithSession:self.session.sessionId error:error];
 }
 
 -(void) back
 {
 	NSError *error;
-	[self.jsonWireClient postBackWithSession:self.session.sessionId error:&error];
+    [self backWithError:&error];
 	[self addError:error];
+}
+
+-(void) backWithError:(NSError**)error
+{
+    [self.jsonWireClient postBackWithSession:self.session.sessionId error:error];
 }
 
 -(void) refresh
 {
 	NSError *error;
-	[self.jsonWireClient postRefreshWithSession:self.session.sessionId error:&error];
+    [self refreshWithError:&error];
 	[self addError:error];
+}
+
+-(void) refreshWithError:(NSError**)error
+{
+    [self.jsonWireClient postRefreshWithSession:self.session.sessionId error:error];
 }
 
 -(NSDictionary*) executeScript:(NSString*)script
@@ -191,9 +271,14 @@
 -(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments
 {
 	NSError *error;
-	NSDictionary *output = [self.jsonWireClient postExecuteScript:script arguments:arguments session:self.session.sessionId error:&error];
+    NSDictionary *output = [self executeScript:script arguments:arguments error:&error];
 	[self addError:error];
 	return output;
+}
+
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error
+{
+    return [self.jsonWireClient postExecuteScript:script arguments:arguments session:self.session.sessionId error:error];
 }
 
 -(NSDictionary*) executeAnsynchronousScript:(NSString*)script
@@ -204,236 +289,392 @@
 -(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments
 {
 	NSError *error;
-	NSDictionary *output = [self.jsonWireClient postExecuteAsyncScript:script arguments:arguments session:self.session.sessionId error:&error];
+    NSDictionary *output = [self executeAnsynchronousScript:script arguments:arguments error:&error];
 	[self addError:error];
 	return output;
+}
+
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error
+{
+
+    return [self.jsonWireClient postExecuteAsyncScript:script arguments:arguments session:self.session.sessionId error:error];
 }
 
 -(NSImage*) screenshot
 {
 	NSError *error;
-	NSImage *image = [self.jsonWireClient getScreenshotWithSession:self.session.sessionId error:&error];
+    NSImage *image = [self screenshotWithError:&error];
 	return image;
+}
+
+-(NSImage*) screenshotWithError:(NSError**)error
+{
+    return [self.jsonWireClient getScreenshotWithSession:self.session.sessionId error:error];
 }
 
 -(NSArray*) availableInputMethodEngines
 {
 	NSError *error;
-	NSArray *engines = [self.jsonWireClient getAvailableInputMethodEnginesWithSession:self.session.sessionId error:&error];
+    NSArray *engines = [self availableInputMethodEnginesWithError:&error];
 	[self addError:error];
 	return engines;
+}
+
+-(NSArray*) availableInputMethodEnginesWithError:(NSError**)error
+{
+
+    return[self.jsonWireClient getAvailableInputMethodEnginesWithSession:self.session.sessionId error:error];
 }
 
 -(NSString*) activeInputMethodEngine
 {
     NSError *error;
-	NSString *engine = [self.jsonWireClient getActiveInputMethodEngineWithSession:self.session.sessionId error:&error];
+    NSString *engine = [self activeInputMethodEngineWithError:&error];
 	[self addError:error];
 	return engine;
+}
+
+-(NSString*) activeInputMethodEngineWithError:(NSError**)error
+{
+    return [self.jsonWireClient getActiveInputMethodEngineWithSession:self.session.sessionId error:error];
 }
 
 -(BOOL) inputMethodEngineIsActive
 {
     NSError *error;
-	BOOL isActive = [self.jsonWireClient getInputMethodEngineIsActivatedWithSession:self.session.sessionId error:&error];
+    BOOL isActive = [self inputMethodEngineIsActiveWithError:&error];
 	[self addError:error];
 	return isActive;
+}
+
+-(BOOL) inputMethodEngineIsActiveWithError:(NSError**)error
+{
+    return [self.jsonWireClient getInputMethodEngineIsActivatedWithSession:self.session.sessionId error:error];
 }
 
 -(void) deactivateInputMethodEngine
 {
     NSError *error;
-	[self.jsonWireClient postDeactivateInputMethodEngineWithSession:self.session.sessionId error:&error];
+    [self deactivateInputMethodEngineWithError:&error];
 	[self addError:error];
+}
+
+-(void) deactivateInputMethodEngineWithError:(NSError**)error
+{
+    [self.jsonWireClient postDeactivateInputMethodEngineWithSession:self.session.sessionId error:error];
 }
 
 -(void) activateInputMethodEngine:(NSString*)engine
 {
     NSError *error;
-	[self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:&error];
+    [self activateInputMethodEngine:engine error:&error];
 	[self addError:error];
 }
 
--(void) setFrame:(id)name
+-(void) activateInputMethodEngine:(NSString*)engine error:(NSError**)error
+{
+    [self.jsonWireClient postActivateInputMethodEngine:engine session:self.session.sessionId error:error];
+}
+
+-(void) setFrame:(NSString*)name
 {
 	NSError* error;
-	[self.jsonWireClient postSetFrame:name session:self.session.sessionId error:&error];
+    [self setFrame:name error:&error];
 	[self addError:error];
+}
+
+-(void) setFrame:(NSString*)name error:(NSError**)error
+{
+    [self.jsonWireClient postSetFrame:name session:self.session.sessionId error:error];
 }
 
 -(void) setWindow:(NSString*)windowHandle
 {
 	NSError* error;
-	[self.jsonWireClient postSetWindow:windowHandle session:self.session.sessionId error:&error];
+    [self setWindow:windowHandle error:&error];
 	[self addError:error];
+}
+
+-(void) setWindow:(NSString*)windowHandle error:(NSError**)error
+{
+    [self.jsonWireClient postSetWindow:windowHandle session:self.session.sessionId error:error];
 }
 
 -(void) closeWindow:(NSString*)windowHandle
 {
 	NSError* error;
-	[self.jsonWireClient deleteWindowWithSession:self.session.sessionId error:&error];
+    [self closeWindow:windowHandle error:&error];
 	[self addError:error];
+}
+
+-(void) closeWindow:(NSString*)windowHandle error:(NSError**)error
+{
+    [self.jsonWireClient deleteWindowWithSession:self.session.sessionId error:error];
 }
 
 -(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle
 {
 	NSError *error;
-	[self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:&error];
+    [self setWindowSize:size window:windowHandle error:&error];
 	[self addError:error];
+}
+
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle error:(NSError**)error
+{
+    [self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:error];
 }
 
 -(NSSize) windowSizeForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-	NSSize size = [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:&error];
+    NSSize size = [self windowSizeForWindow:windowHandle error:&error];
 	[self addError:error];
 	return size;
+}
+
+-(NSSize) windowSizeForWindow:(NSString*)windowHandle error:(NSError**)error
+{
+    return [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:error];
 }
 
 -(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle
 {
 	NSError *error;
-	[self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:&error];
+    [self setWindowPosition:position window:windowHandle error:&error];
 	[self addError:error];
+}
+
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle error:(NSError**)error
+{
+    [self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:error];
 }
 
 -(NSPoint) windowPositionForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-	NSPoint position = [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:&error];
+    NSPoint position = [self windowPositionForWindow:windowHandle error:&error];
 	[self addError:error];
 	return position;
+}
+
+-(NSPoint) windowPositionForWindow:(NSString*)windowHandle error:(NSError**)error
+{
+    return [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:error];
 }
 
 -(void) maximizeWindow:(NSString*)windowHandle
 {
 	NSError *error;
-	[self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:&error];
+    [self maximizeWindow:windowHandle error:&error];
 	[self addError:error];
+}
+
+-(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error
+{
+    [self.jsonWireClient postMaximizeWindow:windowHandle session:self.session.sessionId error:error];
 }
 
 -(NSArray*) cookies
 {
 	NSError *error;
-	NSArray *cookies = [self.jsonWireClient getCookiesWithSession:self.session.sessionId error:&error];
+    NSArray *cookies = [self cookiesWithError:&error];
 	[self addError:error];
 	return cookies;
+}
+
+-(NSArray*) cookiesWithError:(NSError**)error
+{
+    return [self.jsonWireClient getCookiesWithSession:self.session.sessionId error:error];
 }
 
 -(void) setCookie:(NSHTTPCookie*)cookie
 {
 	NSError *error;
-	[self.jsonWireClient postCookie:cookie session:self.session.sessionId error:&error];
+    [self setCookie:cookie error:&error];
 	[self addError:error];
+}
+
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error
+{
+    [self.jsonWireClient postCookie:cookie session:self.session.sessionId error:error];
 }
 
 -(void) deleteCookies
 {
 	NSError *error;
-	[self.jsonWireClient deleteCookiesWithSession:self.session.sessionId error:&error];
+    [self deleteCookiesWithError:&error];
 	[self addError:error];
+}
+
+-(void) deleteCookiesWithError:(NSError**)error
+{
+    [self.jsonWireClient deleteCookiesWithSession:self.session.sessionId error:error];
 }
 
 -(void) deleteCookie:(NSString*)cookieName
 {
 	NSError *error;
-	[self.jsonWireClient deleteCookie:cookieName session:self.session.sessionId error:&error];
+    [self deleteCookie:cookieName error:&error];
 	[self addError:error];
+}
+
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error
+{
+    [self.jsonWireClient deleteCookie:cookieName session:self.session.sessionId error:error];
 }
 
 -(NSString*) pageSource
 {
     NSError *error;
-    NSString *source = [self.jsonWireClient getSourceWithSession:self.session.sessionId error:&error];
+    NSString *source = [self pageSourceWithError:&error];
 	[self addError:error];
 	return source;
+}
+
+-(NSString*) pageSourceWithError:(NSError**)error
+{
+    return [self.jsonWireClient getSourceWithSession:self.session.sessionId error:error];
 }
 
 -(NSString*) title
 {
     NSError *error;
-	NSString *title = [self.jsonWireClient getTitleWithSession:self.session.sessionId error:&error];
-	[self addError:error];
+    NSString *title = [self titleWithError:&error];
 	return title;
+}
+
+-(NSString*) titleWithError:(NSError**)error
+{
+    return [self.jsonWireClient getTitleWithSession:self.session.sessionId error:error];
 }
 
 -(SEWebElement*) findElementBy:(SEBy*)by
 {
 	NSError *error;
-	SEWebElement *element = [self.jsonWireClient postElement:by session:self.session.sessionId error:&error];
+    SEWebElement *element = [self findElementBy:by error:&error];
 	[self addError:error];
 	return element;
+}
+
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error
+{
+    return [self.jsonWireClient postElement:by session:self.session.sessionId error:error];
 }
 
 -(NSArray*) findElementsBy:(SEBy*)by
 {
 	NSError *error;
-	NSArray *elements = [self.jsonWireClient postElements:by session:self.session.sessionId error:&error];
+    NSArray *elements = [self findElementsBy:by error:&error];
 	[self addError:error];
 	return elements;
+}
+
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error
+{
+    return [self.jsonWireClient postElements:by session:self.session.sessionId error:error];
 }
 
 -(SEWebElement*) activeElement
 {
 	NSError *error;
-	SEWebElement *element = [self.jsonWireClient postActiveElementWithSession:self.session.sessionId error:&error];
+    SEWebElement *element = [self activeElementWithError:&error];
 	[self addError:error];
 	return element;
+}
+
+-(SEWebElement*) activeElementWithError:(NSError**)error
+{
+    return [self.jsonWireClient postActiveElementWithSession:self.session.sessionId error:error];
 }
 
 -(void) sendKeys:(NSString*)keyString
 {
 	NSError *error;
-	unichar keys[keyString.length+1];
-	for(int i=0; i < keyString.length; i++)
-		keys[i] = [keyString characterAtIndex:i];
-	keys[keyString.length] = '\0';
-	[self.jsonWireClient postKeys:keys session:self.session.sessionId error:&error];
+    [self sendKeys:keyString error:&error];
 	[self addError:error];
+}
+
+-(void) sendKeys:(NSString*)keyString error:(NSError**)error
+{
+    unichar keys[keyString.length+1];
+    for(int i=0; i < keyString.length; i++)
+        keys[i] = [keyString characterAtIndex:i];
+    keys[keyString.length] = '\0';
+    [self.jsonWireClient postKeys:keys session:self.session.sessionId error:error];
 }
 
 -(SEScreenOrientation) orientation
 {
 	NSError *error;
-	SEScreenOrientation orientation = [self.jsonWireClient getOrientationWithSession:self.session.sessionId error:&error];
+    SEScreenOrientation orientation = [self orientationWithError:&error];
 	[self addError:error];
 	return orientation;
+}
+
+-(SEScreenOrientation) orientationWithError:(NSError**)error
+{
+    return [self.jsonWireClient getOrientationWithSession:self.session.sessionId error:error];
 }
 
 -(void) setOrientation:(SEScreenOrientation)orientation
 {
 	NSError* error;
-	[self.jsonWireClient postOrientation:orientation session:self.session.sessionId error:&error];
+    [self setOrientation:orientation error:&error];
 	[self addError:error];
+}
+
+-(void) setOrientation:(SEScreenOrientation)orientation error:(NSError**)error
+{
+    [self.jsonWireClient postOrientation:orientation session:self.session.sessionId error:error];
 }
 
 -(NSString*)alertText
 {
     NSError *error;
-	NSString *alertText = [self.jsonWireClient getAlertTextWithSession:self.session.sessionId error:&error];
+	NSString *alertText = [self alertTextWithError:&error];
 	[self addError:error];
 	return alertText;
+}
+
+-(NSString*)alertTextWithError:(NSError**)error
+{
+    return [self.jsonWireClient getAlertTextWithSession:self.session.sessionId error:error];
 }
 
 -(void) setAlertText:(NSString*)text
 {
 	NSError* error;
-	[self.jsonWireClient postAlertText:text session:self.session.sessionId error:&error];
+    [self setAlertText:text error:&error];
 	[self addError:error];
+}
+
+-(void) setAlertText:(NSString*)text error:(NSError**)error
+{
+    [self.jsonWireClient postAlertText:text session:self.session.sessionId error:error];
 }
 
 -(void) acceptAlert
 {
 	NSError *error;
-	[self.jsonWireClient postAcceptAlertWithSession:self.session.sessionId error:&error];
+    [self acceptAlertWithError:&error];
 	[self addError:error];
+}
+
+-(void) acceptAlertWithError:(NSError**)error
+{
+    [self.jsonWireClient postAcceptAlertWithSession:self.session.sessionId error:error];
 }
 
 -(void) dismissAlert
 {
 	NSError *error;
-	[self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:&error];
+    [self dismissAlertWithError:&error];
 	[self addError:error];
+}
+
+-(void) dismissAlertWithError:(NSError**)error
+{
+    [self.jsonWireClient postDismissAlertWithSession:self.session.sessionId error:error];
 }
 
 -(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
@@ -444,11 +685,16 @@
 -(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
 {
 	NSError *error;
-	[self.jsonWireClient postMoveMouseToElement:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:&error];
+    [self moveMouseToElement:element xOffset:xOffset yOffset:yOffset error:&error];
 	[self addError:error];
 }
 
--(void) click
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
+                     error:(NSError**)error {
+    [self.jsonWireClient postMoveMouseToElement:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:error];
+}
+
+-(void) clickPrimaryMouseButton
 {
 	[self clickMouseButton:SELENIUM_MOUSE_LEFT_BUTTON];
 }
@@ -456,230 +702,381 @@
 -(void) clickMouseButton:(SEMouseButton)button
 {
 	NSError *error;
-	[self.jsonWireClient postClickMouseButton:button session:self.session.sessionId error:&error];
+    [self clickMouseButton:button error:&error];
 	[self addError:error];
+}
+
+-(void) clickMouseButton:(SEMouseButton)button error:(NSError**)error
+{
+    [self.jsonWireClient postClickMouseButton:button session:self.session.sessionId error:error];
 }
 
 -(void) mouseButtonDown:(SEMouseButton)button
 {
 	NSError *error;
-	[self.jsonWireClient postMouseButtonDown:button session:self.session.sessionId error:&error];
+    [self mouseButtonDown:button error:&error];
 	[self addError:error];
+}
+
+-(void) mouseButtonDown:(SEMouseButton)button error:(NSError**)error
+{
+    [self.jsonWireClient postMouseButtonDown:button session:self.session.sessionId error:error];
 }
 
 -(void) mouseButtonUp:(SEMouseButton)button
 {
 	NSError *error;
-	[self.jsonWireClient postMouseButtonUp:button session:self.session.sessionId error:&error];
+    [self mouseButtonUp:button error:&error];
 	[self addError:error];
+}
+
+-(void) mouseButtonUp:(SEMouseButton)button error:(NSError**)error
+{
+    [self.jsonWireClient postMouseButtonUp:button session:self.session.sessionId error:error];
 }
 
 -(void) doubleclick
 {
 	NSError *error;
-	[self.jsonWireClient postDoubleClickWithSession:self.session.sessionId error:&error];
+    [self doubleclickWithError:&error];
 	[self addError:error];
+}
+
+-(void) doubleclickWithError:(NSError**)error
+{
+    [self.jsonWireClient postDoubleClickWithSession:self.session.sessionId error:error];
 }
 
 -(void) tapElement:(SEWebElement*)element
 {
 	NSError *error;
-	[self.jsonWireClient postTapElement:element session:self.session.sessionId error:&error];
+    [self tapElement:element error:&error];
 	[self addError:error];
+}
+
+-(void) tapElement:(SEWebElement*)element error:(NSError**)error
+{
+    [self.jsonWireClient postTapElement:element session:self.session.sessionId error:error];
 }
 
 -(void) fingerDownAt:(NSPoint)point
 {
 	NSError *error;
-	[self.jsonWireClient postFingerDownAt:point session:self.session.sessionId error:&error];
+    [self fingerDownAt:point error:&error];
 	[self addError:error];
+}
+
+-(void) fingerDownAt:(NSPoint)point error:(NSError**)error
+{
+    [self.jsonWireClient postFingerDownAt:point session:self.session.sessionId error:error];
 }
 
 -(void) fingerUpAt:(NSPoint)point
 {
 	NSError *error;
-	[self.jsonWireClient postFingerUpAt:point session:self.session.sessionId error:&error];
+    [self fingerUpAt:point error:&error];
 	[self addError:error];
+}
+
+-(void) fingerUpAt:(NSPoint)point error:(NSError**)error
+{
+    [self.jsonWireClient postFingerUpAt:point session:self.session.sessionId error:error];
 }
 
 -(void) moveFingerTo:(NSPoint)point
 {
 	NSError *error;
-	[self.jsonWireClient postMoveFingerTo:point session:self.session.sessionId error:&error];
+    [self moveFingerTo:point error:&error];
 	[self addError:error];
+}
+
+-(void) moveFingerTo:(NSPoint)point error:(NSError**)error
+{
+    [self.jsonWireClient postMoveFingerTo:point session:self.session.sessionId error:error];
 }
 
 -(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset
 {
     NSError *error;
-    [self.jsonWireClient postStartScrollingAtParticularLocation:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:&error];
+    [self scrollfromElement:element xOffset:xOffset yOffset:yOffset error:&error];
     [self addError:error];
+}
+
+-(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error
+{
+    [self.jsonWireClient postStartScrollingAtParticularLocation:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:error];
 }
 
 -(void) scrollTo:(NSPoint)position
 {
     NSError *error;
-    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:&error];
+    [self scrollTo:position error:&error];
     [self addError:error];
+}
+
+-(void) scrollTo:(NSPoint)position error:(NSError**)error
+{
+    [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:error];
 }
 
 -(void) doubletapElement:(SEWebElement*)element
 {
 	NSError *error;
-	[self.jsonWireClient postDoubleTapElement:element session:self.session.sessionId error:&error];
+    [self doubletapElement:element error:&error];
 	[self addError:error];
+}
+
+-(void) doubletapElement:(SEWebElement*)element error:(NSError**)error
+{
+    [self.jsonWireClient postDoubleTapElement:element session:self.session.sessionId error:error];
 }
 
 -(void) pressElement:(SEWebElement*)element
 {
 	NSError *error;
-	[self.jsonWireClient postPressElement:element session:self.session.sessionId error:&error];
+    [self pressElement:element error:&error];
 	[self addError:error];
+}
+
+-(void) pressElement:(SEWebElement*)element error:(NSError**)error
+{
+    [self.jsonWireClient postPressElement:element session:self.session.sessionId error:error];
 }
 
 -(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed
 {
     NSError *error;
-    [self.jsonWireClient postFlickFromParticularLocation:element xOffset:xOffset yOffset:yOffset speed:speed session:self.session.sessionId error:&error];
+    [self flickfromElement:element xOffset:xOffset yOffset:yOffset speed:speed error:&error];
     [self addError:error];
+}
+
+-(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed error:(NSError**)error
+{
+    [self.jsonWireClient postFlickFromParticularLocation:element xOffset:xOffset yOffset:yOffset speed:speed session:self.session.sessionId error:error];
 }
 
 -(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed
 {
     NSError *error;
-    [self.jsonWireClient postFlickFromAnywhere:xSpeed ySpeed:ySpeed session:self.session.sessionId error:&error];
+    [self flickWithXSpeed:xSpeed ySpeed:ySpeed error:&error];
     [self addError:error];
+}
+
+-(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed error:(NSError**)error
+{
+    [self.jsonWireClient postFlickFromAnywhere:xSpeed ySpeed:ySpeed session:self.session.sessionId error:error];
 }
 
 -(SELocation*) location
 {
     NSError *error;
-    SELocation *location =[self.jsonWireClient getLocationAndReturnError:self.session.sessionId error:&error];
+    SELocation *location = [self locationWithError:&error];
     [self addError:error];
     return location;
+}
+
+-(SELocation*) locationWithError:(NSError**)error
+{
+    return [self.jsonWireClient getLocationAndReturnError:self.session.sessionId error:error];
 }
 
 -(void) setLocation:(SELocation*)location
 {
     NSError *error;
-    [self.jsonWireClient postLocation:location session:self.session.sessionId error:&error];
+    [self setLocation:location error:&error];
     [self addError:error];
 }
 
+-(void) setLocation:(SELocation*)location error:(NSError**)error
+{
+    [self.jsonWireClient postLocation:location session:self.session.sessionId error:error];
+}
 
 -(NSArray*) allLocalStorageKeys
 {
     NSError *error;
-    NSArray *allLocalStorageKeys =[self.jsonWireClient getAllLocalStorageKeys:self.session.sessionId error:&error];
+    NSArray *allLocalStorageKeys = [self allLocalStorageKeysWithError:&error];
     [self addError:error];
     return allLocalStorageKeys;
 
 }
+
+-(NSArray*) allLocalStorageKeysWithError:(NSError**)error
+{
+    return [self.jsonWireClient getAllLocalStorageKeys:self.session.sessionId error:error];
+}
+
 -(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient postSetLocalStorageItemForKey:key value:value session:self.session.sessionId error:&error];
+    [self setLocalStorageValue:value forKey:key error:&error];
     [self addError:error];
+}
+
+-(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient postSetLocalStorageItemForKey:key value:value session:self.session.sessionId error:error];
 }
 
 -(void) clearLocalStorage
 {
     NSError *error;
-    [self.jsonWireClient deleteLocalStorage:self.session.sessionId error:&error];
+    [self clearLocalStorageWithError:&error];
     [self addError:error];
 }
 
+-(void) clearLocalStorageWithError:(NSError**)error
+{
+    [self.jsonWireClient deleteLocalStorage:self.session.sessionId error:error];
+}
 
 -(void) localStorageItemForKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient getLocalStorageItemForKey:key  session:self.session.sessionId error:&error];
+    [self localStorageItemForKey:key error:&error];
     [self addError:error];
+}
+
+-(void) localStorageItemForKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient getLocalStorageItemForKey:key session:self.session.sessionId error:error];
 }
 
 -(void) deleteLocalStorageItemForKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient deleteLocalStorageItemForGivenKey:key session:self.session.sessionId error:&error];
+    [self deleteLocalStorageItemForKey:key error:&error];
     [self addError:error];
+}
+
+-(void) deleteLocalStorageItemForKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient deleteLocalStorageItemForGivenKey:key session:self.session.sessionId error:error];
 }
 
 -(NSInteger) countOfItemsInLocalStorage
 {
     NSError *error;
-    NSInteger numItems= [self.jsonWireClient getLocalStorageSize:self.session.sessionId error:&error];
+    NSInteger numItems = [self countOfItemsInLocalStorageWithError:&error];
     [self addError:error];
     return numItems;
+}
+
+-(NSInteger) countOfItemsInLocalStorageWithError:(NSError**)error
+{
+    return [self.jsonWireClient getLocalStorageSize:self.session.sessionId error:error];
 }
 
 -(NSArray*) allSessionStorageKeys
 {
     NSError *error;
-    NSArray *allStorageKeys =[self.jsonWireClient getAllStorageKeys:self.session.sessionId error:&error];
-    [self addError:error];
+    NSArray *allStorageKeys = [self allLocalStorageKeysWithError:&error];
     return allStorageKeys;
+}
 
+-(NSArray*) allSessionStorageKeysWithError:(NSError**)error
+{
+    return [self.jsonWireClient getAllStorageKeys:self.session.sessionId error:error];
 }
 
 -(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient postSetStorageItemForKey:key value:value session:self.session.sessionId error:&error];
+    [self setSessionStorageValue:value forKey:key error:&error];
     [self addError:error];
+}
+
+-(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient postSetStorageItemForKey:key value:value session:self.session.sessionId error:error];
 }
 
 -(void) clearSessionStorage
 {
     NSError *error;
-    [self.jsonWireClient deleteStorage:self.session.sessionId error:&error];
+    [self clearSessionStorageWithError:&error];
     [self addError:error];
+}
+
+-(void) clearSessionStorageWithError:(NSError**)error
+{
+    [self.jsonWireClient deleteStorage:self.session.sessionId error:error];
 }
 
 -(void) sessionStorageItemForKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient getStorageItemForKey:key  session:self.session.sessionId error:&error];
+    [self sessionStorageItemForKey:key error:&error];
     [self addError:error];
+}
+
+-(void) sessionStorageItemForKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient getStorageItemForKey:key  session:self.session.sessionId error:error];
 }
 
 -(void) deleteStorageItemForKey:(NSString*)key
 {
     NSError *error;
-    [self.jsonWireClient deleteStorageItemForGivenKey:key session:self.session.sessionId error:&error];
+    [self deleteStorageItemForKey:key error:&error];
     [self addError:error];
+}
+
+-(void) deleteStorageItemForKey:(NSString*)key error:(NSError**)error
+{
+    [self.jsonWireClient deleteStorageItemForGivenKey:key session:self.session.sessionId error:error];
 }
 
 -(NSInteger) countOfItemsInStorage
 {
     NSError *error;
-    NSInteger numItems= [self.jsonWireClient getStorageSize:self.session.sessionId error:&error];
+    NSInteger numItems = [self countOfItemsInStorageWithError:&error];
     [self addError:error];
     return numItems;
 }
 
+-(NSInteger) countOfItemsInStorageWithError:(NSError**)error
+{
+    return [self.jsonWireClient getStorageSize:self.session.sessionId error:error];
+}
 
 -(NSArray*) getLogForType:(SELogType)type
 {
     NSError *error;
-    NSArray *logsForType =[self.jsonWireClient  getLogForGivenLogType:type session:self.session.sessionId error:&error];
+    NSArray *logsForType = [self getLogForType:type error:&error];
     [self addError:error];
     return logsForType;
+}
+
+-(NSArray*) getLogForType:(SELogType)type error:(NSError**)error
+{
+    return [self.jsonWireClient  getLogForGivenLogType:type session:self.session.sessionId error:error];
 }
 
 -(NSArray*) allLogTypes
 {
     NSError *error;
-    NSArray *logTypes =[self.jsonWireClient getLogTypes:self.session.sessionId error:&error];
+    NSArray *logTypes = [self allLogTypesWithError:&error];
     [self addError:error];
     return logTypes;
+}
+
+-(NSArray*) allLogTypesWithError:(NSError**)error
+{
+    return [self.jsonWireClient getLogTypes:self.session.sessionId error:error];
 }
 
 -(SEApplicationCacheStatus) applicationCacheStatus
 {
     NSError* error;
-    SEApplicationCacheStatus status = [self.jsonWireClient getApplicationCacheStatusWithSession:self.session.sessionId error:&error];
+    SEApplicationCacheStatus status = [self applicationCacheStatusWithError:&error];
 	[self addError:error];
 	return status;
+}
+
+-(SEApplicationCacheStatus) applicationCacheStatusWithError:(NSError**)error
+{
+    return [self.jsonWireClient getApplicationCacheStatusWithSession:self.session.sessionId error:error];
 }
 
 
@@ -973,38 +1370,6 @@
 
 -(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error {
     return [self.jsonWireClient getAppStringsWithBundleId:bundleId session:self.session.sessionId error:error];
-}
-
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element {
-    [self setElementValue:value element:element isUnicode:NO];
-}
-
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
-    NSError *error;
-    [self setElementValue:value element:element isUnicode:isUnicode error:&error];
-    [self addError:error];
-}
-
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error
-{
-    [self.jsonWireClient postSetValueForElement:element value:value isUnicode:isUnicode session:self.session.sessionId error:error];
-
-}
-
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element {
-    [self replaceElementValue:value element:element isUnicode:NO];
-}
-
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
-    NSError *error;
-    [self replaceElementValue:value element:element isUnicode:isUnicode error:&error];
-    [self addError:error];
-}
-
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error
-{
-    [self.jsonWireClient postReplaceValueForElement:element value:value isUnicode:isUnicode session:self.session.sessionId error:error];
-    
 }
 
 -(void) setAppiumSettings:(NSDictionary*)settings {

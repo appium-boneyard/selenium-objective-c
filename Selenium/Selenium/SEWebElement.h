@@ -17,6 +17,14 @@
 
 @property NSString *opaqueId;
 @property NSString *sessionId;
+@property (readonly) NSString *text;
+@property (readonly) BOOL isDisplayed;
+@property (readonly) BOOL isEnabled;
+@property (readonly) BOOL isSelected;
+@property (readonly) NSPoint location;
+@property (readonly) NSPoint locationInView;
+@property (readonly) NSSize size;
+@property (readonly) NSDictionary *elementJson;
 
 -(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(SEJsonWireClient*)jsonWireClient session:(NSString*)sessionId;
 
@@ -51,12 +59,19 @@
 -(NSString*) cssProperty:(NSString*)propertyName;
 -(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error;
 
-
 -(SEWebElement*) findElementBy:(SEBy*)by;
 -(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error;
 -(NSArray*) findElementsBy:(SEBy*)by;
 -(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error;
 
 -(NSDictionary*)elementJson;
+
+-(void) setValue:(NSString*)value;
+-(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode;
+-(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error;
+
+-(void) replaceValue:(NSString*)value element:(SEWebElement*)element;
+-(void) replaceValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode;
+-(void) replaceValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error;
 
 @end

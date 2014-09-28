@@ -18,272 +18,194 @@
 @class SEWebElement;
 @class SESession;
 
-/**
- The `SERemoteWebDriver` class controls a webdriver session against a remote webdriver server
- */
 @interface SERemoteWebDriver : NSObject
 
-
-/**
- The session on which the `SERemoteWebDriver` will operate.
- */
 @property SESession *session;
-
-
-/**
- The last error thrown by an operation performed on this class
- */
 @property NSError *lastError;
-
-
-/**
- All errors thrown by this class
- */
 @property NSMutableArray *errors;
 
+@property (readonly) NSString *alertText;
+@property (readonly) NSArray *allContexts;
+@property (readonly) NSArray *allLogTypes;
+@property (readonly) NSArray *allSessions;
+@property (readonly) NSArray *allWindows;
+@property (readonly) NSDictionary *appiumSettings;
+@property NSString *context;
+@property (readonly) NSArray *cookies;
+@property SELocation *location;
+@property (readonly) SEScreenOrientation orientation;
+@property (readonly) NSString *pageSource;
+@property (readonly) NSImage *screenshot;
+@property (readonly) NSString *title;
+@property NSURL *url;
+@property NSString *window;
 
-/**
- Initializes the webdriver with server configuration and capabilities
- 
- @param address The IP address of the remote web driver server
- @param port The TCP port on which the remote web driver server is running
- @return The remote web driver, initialized with server configuraion and tied to a newly created session
- */
 -(id) initWithServerAddress:(NSString *)address port:(NSInteger)port;
-
-
-/**
- Initializes the webdriver with server configuration and capabilities
- 
- @param address The IP address of the remote web driver server
- @param port The TCP port on which the remote web driver server is running
- @param desiredCapabilities Capabilties desired for the server to implement
- @param requiredCapabilites Capabilties required for the server to implement
- @param error Storage for an error that may occur
- @return The remote web driver, initialized with server configuraion and tied to a newly created session
- */
 -(id) initWithServerAddress:(NSString*)address port:(NSInteger)port desiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error;
-
-
-/**
-  Quits the remote webdriver and deletes the session
- */
--(void) quit;
-
-
-
+-(void)quit;
+-(void)quitWithError:(NSError**)error;
 -(SESession*) startSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites;
-
-
+-(SESession*) startSessionWithDesiredCapabilities:(SECapabilities*)desiredCapabilities requiredCapabilities:(SECapabilities*)requiredCapabilites error:(NSError**)error;
 -(NSArray*) allSessions;
-
+-(NSArray*) allSessionsWithError:(NSError**)error;
 -(NSArray*) allContexts;
+-(NSArray*) allContextsWithError:(NSError**)error;
 -(NSString*) context;
+-(NSString*) contextWithError:(NSError**)error;
 -(void) setContext:(NSString*)context;
-
-
-/**
- Configure the amount of time that a particular type of operation can execute for before they are aborted and a |Timeout| error is returned to the client. 
- @param timeoutInMilliseconds The amount of time, in milliseconds, that time-limited commands are permitted to run.
- @param type The type of operation to set the timeout for. Valid values are: "script" for script timeouts, "implicit" for modifying the implicit wait timeout and "page load" for setting a page load timeout.
- */
+-(void) setContext:(NSString*)context error:(NSError**)error;
 -(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type;
-
-/**
- Set the amount of time, in milliseconds, that asynchronous scripts executed by /session/:sessionId/execute_async are permitted to run before they are aborted and a |Timeout| error is returned to the client
- 
- @param timeoutInMilliseconds The amount of time, in milliseconds, that time-limited commands are permitted to run.
- */
+-(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type error:(NSError**)error;
 -(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds;
-
-
-/**
- Set the amount of time the driver should wait when searching for elements. When searching for a single element, the driver should poll the page until an element is found or the timeout expires, whichever occurs first. When searching for multiple elements, the driver should poll the page until at least one element is found or the timeout expires, at which point it should return an empty list.
- 
- If this command is never sent, the driver should default to an implicit wait of 0ms.
- 
- @param timeoutInMilliseconds The amount of time to wait, in milliseconds. This value has a lower bound of 0
- */
+-(void) setAsyncScriptTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
 -(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds;
-
-
-/**
- Retrieve the current window handle.
-
- @return The current window handle.
- */
+-(void) setImplicitWaitTimeout:(NSInteger)timeoutInMilliseconds error:(NSError**)error;
 -(NSString*) window;
-
-
-/**
- Retrieve the list of all window handles available to the session.
- 
- @return An array of window handles.
- */
+-(NSString*) windowWithError:(NSError**)error;
 -(NSArray*) allWindows;
-
-
-/**
- Retrieve the URL of the current page.
- 
- @return The current URL.
- */
+-(NSArray*) allWindowsWithError:(NSError**)error;
 -(NSURL*) url;
-
-
-/**
- Navigate to a new URL.
- 
- @param url The URL to navigate to.
- */
+-(NSURL*) urlWithError:(NSError**)error;
 -(void) setUrl:(NSURL*)url;
-
-
-/**
- Navigate forwards in the browser history, if possible.
- */
+-(void) setUrl:(NSURL*)url error:(NSError**)error;
 -(void) forward;
-
-
-/**
- Navigate backwards in the browser history, if possible.
- */
+-(void) forwardWithError:(NSError**)error;
 -(void) back;
-
-
-/**
- Refresh the current page.
- */
+-(void) backWithError:(NSError**)error;
 -(void) refresh;
-
-
-/**
- Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.
- The script argument defines the script to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided args array and the values may be accessed via the arguments object in the order specified.
- 
- Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
- 
- @param script The script to execute.
- @return The script result.
- */
+-(void) refreshWithError:(NSError**)error;
 -(NSDictionary*) executeScript:(NSString*)script;
-
-
-/**
- Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be synchronous and the result of evaluating the script is returned to the client.
- The script argument defines the script to execute in the form of a function body. The value returned by that function will be returned to the client. The function will be invoked with the provided args array and the values may be accessed via the arguments object in the order specified.
- 
- Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
- 
- @param script The script to execute.
- @param arguments The arguments for the script
- @return The script result.
- */
 -(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments;
-
-
-/**
- Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback, which is always provided as the final argument to the function. The value to this callback will be returned to the client.
- Asynchronous script commands may not span page loads. If an unload event is fired while waiting for a script result, an error should be returned to the client.
- 
- The script argument defines the script to execute in teh form of a function body. The function will be invoked with the provided args array and the values may be accessed via the arguments object in the order specified. The final argument will always be a callback function that must be invoked to signal that the script has finished.
- 
- Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
- 
- @param script The script to execute.
- @return The script result.
- */
+-(NSDictionary*) executeScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error;
 -(NSDictionary*) executeAnsynchronousScript:(NSString*)script;
-
-
-/**
- Inject a snippet of JavaScript into the page for execution in the context of the currently selected frame. The executed script is assumed to be asynchronous and must signal that is done by invoking the provided callback, which is always provided as the final argument to the function. The value to this callback will be returned to the client.
- Asynchronous script commands may not span page loads. If an unload event is fired while waiting for a script result, an error should be returned to the client.
- 
- The script argument defines the script to execute in teh form of a function body. The function will be invoked with the provided args array and the values may be accessed via the arguments object in the order specified. The final argument will always be a callback function that must be invoked to signal that the script has finished.
- 
- Arguments may be any JSON-primitive, array, or JSON object. JSON objects that define a WebElement reference will be converted to the corresponding DOM element. Likewise, any WebElements in the script result will be returned to the client as WebElement JSON objects.
- 
- @param script The script to execute.
- @param arguments The arguments for the script
- @return The script result.
- */
 -(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments;
-
-
-/**
- Take a screenshot of the current page.
- 
- @return The PNG screenshot as an NSImage.
- */
+-(NSDictionary*) executeAnsynchronousScript:(NSString*)script arguments:(NSArray*)arguments error:(NSError**)error;
 -(NSImage*) screenshot;
-
-
-
+-(NSImage*) screenshotWithError:(NSError**)error;
 -(NSArray*) availableInputMethodEngines;
+-(NSArray*) availableInputMethodEnginesWithError:(NSError**)error;
 -(NSString*) activeInputMethodEngine;
+-(NSString*) activeInputMethodEngineWithError:(NSError**)error;
 -(BOOL) inputMethodEngineIsActive;
+-(BOOL) inputMethodEngineIsActiveWithError:(NSError**)error;
 -(void) deactivateInputMethodEngine;
+-(void) deactivateInputMethodEngineWithError:(NSError**)error;
 -(void) activateInputMethodEngine:(NSString*)engine;
--(void) setFrame:(id)name;
+-(void) activateInputMethodEngine:(NSString*)engine error:(NSError**)error;
+-(void) setFrame:(NSString*)name;
+-(void) setFrame:(NSString*)name error:(NSError**)error;
 -(void) setWindow:(NSString*)windowHandle;
+-(void) setWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) closeWindow:(NSString*)windowHandle;
+-(void) closeWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle;
+-(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle error:(NSError**)error;
 -(NSSize) windowSizeForWindow:(NSString*)windowHandle;
+-(NSSize) windowSizeForWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle;
+-(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle error:(NSError**)error;
 -(NSPoint) windowPositionForWindow:(NSString*)windowHandle;
+-(NSPoint) windowPositionForWindow:(NSString*)windowHandle error:(NSError**)error;
 -(void) maximizeWindow:(NSString*)windowHandle;
+-(void) maximizeWindow:(NSString*)windowHandle error:(NSError**)error;
 -(NSArray*) cookies;
+-(NSArray*) cookiesWithError:(NSError**)error;
 -(void) setCookie:(NSHTTPCookie*)cookie;
+-(void) setCookie:(NSHTTPCookie*)cookie error:(NSError**)error;
 -(void) deleteCookies;
+-(void) deleteCookiesWithError:(NSError**)error;
 -(void) deleteCookie:(NSString*)cookieName;
+-(void) deleteCookie:(NSString*)cookieName error:(NSError**)error;
 -(NSString*) pageSource;
+-(NSString*) pageSourceWithError:(NSError**)error;
 -(NSString*) title;
+-(NSString*) titleWithError:(NSError**)error;
 -(SEWebElement*) findElementBy:(SEBy*)by;
+-(SEWebElement*) findElementBy:(SEBy*)by error:(NSError**)error;
 -(NSArray*) findElementsBy:(SEBy*)by;
+-(NSArray*) findElementsBy:(SEBy*)by error:(NSError**)error;
 -(SEWebElement*) activeElement;
+-(SEWebElement*) activeElementWithError:(NSError**)error;
 -(void) sendKeys:(NSString*)keyString;
+-(void) sendKeys:(NSString*)keyString error:(NSError**)error;
 -(SEScreenOrientation) orientation;
+-(SEScreenOrientation) orientationWithError:(NSError**)error;
 -(void) setOrientation:(SEScreenOrientation)orientation;
+-(void) setOrientation:(SEScreenOrientation)orientation error:(NSError**)error;
 -(NSString*)alertText;
+-(NSString*)alertTextWithError:(NSError**)error;
 -(void) setAlertText:(NSString*)text;
+-(void) setAlertText:(NSString*)text error:(NSError**)error;
 -(void) acceptAlert;
+-(void) acceptAlertWithError:(NSError**)error;
 -(void) dismissAlert;
+-(void) dismissAlertWithError:(NSError**)error;
 -(void) moveMouseWithXOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
 -(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
--(void) click;
+-(void) moveMouseToElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
+-(void) clickPrimaryMouseButton;
 -(void) clickMouseButton:(SEMouseButton)button;
+-(void) clickMouseButton:(SEMouseButton)button error:(NSError**)error;
 -(void) mouseButtonDown:(SEMouseButton)button;
+-(void) mouseButtonDown:(SEMouseButton)button error:(NSError**)error;
 -(void) mouseButtonUp:(SEMouseButton)button;
+-(void) mouseButtonUp:(SEMouseButton)button error:(NSError**)error;
 -(void) doubleclick;
+-(void) doubleclickWithError:(NSError**)error;
 -(void) tapElement:(SEWebElement*)element;
+-(void) tapElement:(SEWebElement*)element error:(NSError**)error;
 -(void) fingerDownAt:(NSPoint)point;
+-(void) fingerDownAt:(NSPoint)point error:(NSError**)error;
 -(void) fingerUpAt:(NSPoint)point;
+-(void) fingerUpAt:(NSPoint)point error:(NSError**)error;
 -(void) moveFingerTo:(NSPoint)point;
+-(void) moveFingerTo:(NSPoint)point error:(NSError**)error;
 -(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset;
+-(void) scrollfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset error:(NSError**)error;
 -(void) scrollTo:(NSPoint)position;
+-(void) scrollTo:(NSPoint)position error:(NSError**)error;
 -(void) doubletapElement:(SEWebElement*)element;
+-(void) doubletapElement:(SEWebElement*)element error:(NSError**)error;
 -(void) pressElement:(SEWebElement*)element;
+-(void) pressElement:(SEWebElement*)element error:(NSError**)error;
 -(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed;
+-(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed error:(NSError**)error;
 -(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed;
+-(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed error:(NSError**)error;
 -(SELocation*) location;
+-(SELocation*) locationWithError:(NSError**)error;
 -(void) setLocation:(SELocation*)location;
+-(void) setLocation:(SELocation*)location error:(NSError**)error;
 -(NSArray*) allLocalStorageKeys;
+-(NSArray*) allLocalStorageKeysWithError:(NSError**)error;
 -(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key;
+-(void) setLocalStorageValue:(NSString*)value forKey:(NSString*)key error:(NSError**)error;
 -(void) clearLocalStorage;
+-(void) clearLocalStorageWithError:(NSError**)error;
 -(void) localStorageItemForKey:(NSString*)key;
+-(void) localStorageItemForKey:(NSString*)key error:(NSError**)error;
 -(void) deleteLocalStorageItemForKey:(NSString*)key;
+-(void) deleteLocalStorageItemForKey:(NSString*)key error:(NSError**)error;
 -(NSInteger) countOfItemsInLocalStorage;
+-(NSInteger) countOfItemsInLocalStorageWithError:(NSError**)error;
 -(NSArray*) allSessionStorageKeys;
+-(NSArray*) allSessionStorageKeysWithError:(NSError**)error;
 -(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key;
+-(void) setSessionStorageValue:(NSString*)value forKey:(NSString*)key error:(NSError**)error;
 -(void) clearSessionStorage;
+-(void) clearSessionStorageWithError:(NSError**)error;
 -(void) sessionStorageItemForKey:(NSString*)key;
--(NSInteger) countOfItemsInStorage;
+-(void) sessionStorageItemForKey:(NSString*)key error:(NSError**)error;
 -(void) deleteStorageItemForKey:(NSString*)key;
+-(void) deleteStorageItemForKey:(NSString*)key error:(NSError**)error;
+-(NSInteger) countOfItemsInStorage;
+-(NSInteger) countOfItemsInStorageWithError:(NSError**)error;
 -(NSArray*) getLogForType:(SELogType)type;
+-(NSArray*) getLogForType:(SELogType)type error:(NSError**)error;
 -(NSArray*) allLogTypes;
+-(NSArray*) allLogTypesWithError:(NSError**)error;
 -(SEApplicationCacheStatus) applicationCacheStatus;
-
+-(SEApplicationCacheStatus) applicationCacheStatusWithError:(NSError**)error;
 
 #pragma mark - 3.0 methods
 /////////////////
@@ -344,12 +266,6 @@
 -(void) endTestCodeCoverageWithError:(NSError**)error;
 -(NSString*)stringsForApp:(NSString*)bundleId;
 -(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error;
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element;
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode;
--(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error;
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element;
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode;
--(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error;
 -(void) setAppiumSettings:(NSDictionary*)settings;
 -(void) setAppiumSettings:(NSDictionary*)settings error:(NSError**)error;
 -(NSDictionary*) appiumSettings;

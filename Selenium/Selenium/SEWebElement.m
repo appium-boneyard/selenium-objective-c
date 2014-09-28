@@ -222,4 +222,33 @@
 	return json;
 }
 
+-(void) setValue:(NSString*)value {
+    [self setValue:value isUnicode:NO];
+}
+
+-(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode {
+    NSError *error;
+    [self setValue:value isUnicode:isUnicode error:&error];
+}
+
+-(void) setValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error
+{
+    [self.jsonWireClient postSetValueForElement:self value:value isUnicode:isUnicode session:self.sessionId error:error];
+}
+
+-(void) replaceValue:(NSString*)value element:(SEWebElement*)element {
+    [self replaceValue:value element:element isUnicode:NO];
+}
+
+-(void) replaceValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
+    NSError *error;
+    [self replaceValue:value isUnicode:isUnicode error:&error];
+}
+
+-(void) replaceValue:(NSString*)value isUnicode:(BOOL)isUnicode error:(NSError**)error
+{
+    [self.jsonWireClient postReplaceValueForElement:self value:value isUnicode:isUnicode session:self.sessionId error:error];
+    
+}
+
 @end
