@@ -77,6 +77,10 @@
 
 -(NSArray*) allSessions;
 
+-(NSArray*) allContexts;
+-(NSString*) context;
+-(void) setContext:(NSString*)context;
+
 
 /**
  Configure the amount of time that a particular type of operation can execute for before they are aborted and a |Timeout| error is returned to the client. 
@@ -285,12 +289,6 @@
 /////////////////
 // 3.0 METHODS //
 /////////////////
-
--(BOOL) airplaneMode;
--(void) setAirplaneMode:(BOOL)airplaneMode;
--(NSArray*) allContexts;
--(NSString*) context;
--(void) setContext:(NSString*)context;
 
 
 // Appium specific extras

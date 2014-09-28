@@ -84,6 +84,37 @@
 	return sessions;
 }
 
+// GET /session/:sessionid/contexts
+-(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/contexts", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    NSMutableArray *contexts = [NSMutableArray new];
+    NSArray *jsonItems =(NSArray*)[json objectForKey:@"value"];
+    for(int i=0; i < [jsonItems count]; i++)
+    {
+        NSString *context =[[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
+        [contexts addObject:context];
+    }
+    return contexts;
+}
+
+// GET /session/:sessionid/context
+-(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    return [json objectForKey:@"value"];
+}
+
+// POST /session/:sessionid/context
+-(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
+    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:context, @"context", nil];
+    [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
 // GET /session/:sessionId
 -(SESession*) getSessionWithSession:(NSString*)sessionId error:(NSError**)error
 {
@@ -997,59 +1028,67 @@
  // 3.0 METHODS //
 /////////////////
 
-// GET /session/:sessionid/airplane_mode
--(BOOL) getAirplaneModeForSession:(NSString*)sessionId error:(NSError**)error
+// POST /wd/hub/session/:sessionId/appium/device/shake
+-(void) postShakeDeviceWithSession:(NSString*)sessionId error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/airplane_mode", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
-	return [[json objectForKey:@"value"] boolValue];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/shake", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// POST /session/:sessionid/airplane_mode
--(void) postAirplaneMode:(BOOL)airplaneMode session:(NSString*)sessionId error:(NSError**)error
+// POST /wd/hub/session/:sessionId/appium/device/lock
+-(void) postLockDeviceWithSession:(NSString*)sessionId seconds:(NSInteger)seconds error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
-	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:airplaneMode], @"airplane_mode", nil];
-	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/lock", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"seconds" : [NSNumber numberWithInteger:seconds]} error:error];
 }
 
-// GET /session/:sessionid/contexts
--(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error
+// POST /wd/hub/session/:sessionId/appium/device/unlock
+-(void) postUnlockDeviceWithSession:(NSString*)sessionId error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/contexts", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
-	NSMutableArray *contexts = [NSMutableArray new];
-    NSArray *jsonItems =(NSArray*)[json objectForKey:@"value"];
-    for(int i=0; i < [jsonItems count]; i++)
-    {
-        NSString *context =[[NSString alloc] initWithString:(NSString*)[jsonItems objectAtIndex:i]];
-        [contexts addObject:context];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/unlock", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/is_locked
+-(BOOL) postIsDeviceLockedWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/is_locked", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+    return [[json objectForKey:@"value"] boolValue];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/press_keycode
+-(void) postPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/press_keycode", self.httpCommandExecutor, sessionId];
+    NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
+    if (metaState > 0) {
+        [postParams setObject:[NSNumber numberWithInteger:metaState] forKey:@"metastate"];
     }
-    return contexts;
+    [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
-// GET /session/:sessionid/context
--(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error
+
+// POST /wd/hub/session/:sessionId/appium/device/long_press_keycode
+-(void) postLongPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
-	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
-	return [json objectForKey:@"value"];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/long_press_keycode", self.httpCommandExecutor, sessionId];
+    NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
+    if (metaState > 0) {
+        [postParams setObject:[NSNumber numberWithInteger:metaState] forKey:@"metastate"];
+    }
+    [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
-// POST /session/:sessionid/context
--(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error
+// POST /wd/hub/session/:sessionId/appium/device/keyevent
+-(void) postKeyEvent:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
 {
-	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
-	NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:context, @"context", nil];
-	[SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
-}
-
-// POST /session/:sessionId/appium/app/background
-- (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error
-{
-    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/background", self.httpCommandExecutor, sessionId];
-    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger:seconds], @"seconds", nil];
-    [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/keyevent", self.httpCommandExecutor, sessionId];
+    NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
+    if (metaState > 0) {
+        [postParams setObject:[NSNumber numberWithInteger:metaState] forKey:@"metastate"];
+    }
+    [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
 
 // POST /session/:sessionId/appium/app/rotate
@@ -1060,11 +1099,118 @@
     [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
-
-// POST /session/:sessionId/appium/app/reset
-- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error
+// GET /wd/hub/session/:sessionId/appium/device/current_activity
+-(NSString*) getCurrentActivityForDeviceForSession:(NSString*)sessionId error:(NSError**)error
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/reset", self.httpCommandExecutor, sessionId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/current_activity", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    return [json objectForKey:@"value"];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/install_app
+- (void)postInstallApp:(NSString*)appPath session:(NSString*)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/install_app", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"appPath" : appPath } error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/remove_app
+- (void)postRemoveApp:(NSString*)appPath session:(NSString*)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/remove_app", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"appPath" : appPath } error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/app_installed
+-(BOOL) postIsAppInstalledWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/app_installed", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams: @{ @"bundleId" : bundleId } error:error];
+    return [[json objectForKey:@"value"] boolValue];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/hide_keyboard
+-(void) postHideKeyboardWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/hide_keyboard", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/push_file
+- (void)postPushFileToPath:(NSString*)path data:(NSData*)data session:(NSString*)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/push_file", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"path" : path, @"data": [data base64EncodedString]} error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/pull_file
+-(NSData*) postPullFileAtPath:(NSString*)path session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/pull_file", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams: @{ @"path" : path } error:error];
+    return [NSData dataFromBase64String:(NSString*)[json objectForKey:@"value"]];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/pull_folder
+-(NSData*) postPullFolderAtPath:(NSString*)path session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/pull_folder", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams: @{ @"path" : path } error:error];
+    return [NSData dataFromBase64String:(NSString*)[json objectForKey:@"value"]];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_airplane_mode
+-(void) postToggleAirplaneModeWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/toggle_airplane_mode", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_data
+-(void) postToggleDataWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/toggle_data", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_wifi
+-(void) postToggleWifiWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/toggle_wifi", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_location_services
+-(void) postToggleLocationServicesWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/toggle_location_services", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/open_notifications
+-(void) postOpenNotificationsWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/open_notifications", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/device/start_activity
+-(void) postStartActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/start_activity", self.httpCommandExecutor, sessionId];
+    NSMutableDictionary *postParams = [NSMutableDictionary new];
+    [postParams setObject:activity forKey:@"appActivity"];
+    [postParams setObject:package forKey:@"appPackage"];
+    if (waitActivity != nil ) { [postParams setObject:waitActivity forKey:@"appWaitActivity"]; }
+    if (waitPackage != nil ) { [postParams setObject:waitPackage forKey:@"appWaitPackage"]; }
+    
+    [SEUtility performPostRequestToUrl:urlString postParams: postParams error:error];
+}
+
+// POST /session/:sessionId/appium/app/launch
+- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/launch", self.httpCommandExecutor, sessionId];
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
@@ -1075,10 +1221,71 @@
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-//POST /session/:sessionId/appium/app/launch
-- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error
+// POST /session/:sessionId/appium/app/reset
+- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error
 {
-    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/launch", self.httpCommandExecutor, sessionId];
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/reset", self.httpCommandExecutor, sessionId];
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
+
+// POST /session/:sessionId/appium/app/background
+- (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/background", self.httpCommandExecutor, sessionId];
+    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInteger:seconds], @"seconds", nil];
+    [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/app/end_test_coverage
+- (void)postEndTestCoverageWithSession:(NSString *)sessionId error:(NSError **)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/end_test_coverage", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/app/strings
+-(NSString*) postAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/strings", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+    return [[json objectForKey:@"value"] stringValue];
+}
+
+// POST /wd/hub/session/:sessionId/appium/element/:elementId?/value
+-(void) postSetValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/element/%@/value", self.httpCommandExecutor, sessionId, element.opaqueId];
+    NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:value, @"text", nil];
+    if (isUnicode) {
+        [postParams setObject:[NSNumber numberWithBool:isUnicode] forKey:@"unicodeKeyboard"];
+    }
+    [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/element/:elementId?/replace_value
+-(void) postReplaceValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/element/%@/replace_value", self.httpCommandExecutor, sessionId, element.opaqueId];
+    NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:value, @"text", nil];
+    if (isUnicode) {
+        [postParams setObject:[NSNumber numberWithBool:isUnicode] forKey:@"unicodeKeyboard"];
+    }
+    [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
+// POST /wd/hub/session/:sessionId/appium/settings
+-(void) postAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/settings", self.httpCommandExecutor, sessionId];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"settings":settings} error:error];
+}
+
+// GET /wd/hub/session/:sessionId/appium/settings
+-(NSDictionary*) getAppiumSettingsWithSession:(NSString*)sessionId error:(NSError**)error
+{
+    NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/settings", self.httpCommandExecutor, sessionId];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    return [[json objectForKey:@"value"] dictionaryRepresentation];
+}
+
 @end

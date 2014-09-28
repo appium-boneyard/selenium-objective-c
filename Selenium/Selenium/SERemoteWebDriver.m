@@ -87,6 +87,29 @@
 	return sessions;
 }
 
+-(NSArray*) allContexts
+{
+    NSError *error;
+    NSArray * windows = [self.jsonWireClient getContextsForSession:self.session.sessionId error:&error];
+    [self addError:error];
+    return windows;
+}
+
+-(NSString*) context
+{
+    NSError *error;
+    NSString* context = [self.jsonWireClient getContextForSession:self.session.sessionId error:&error];
+    [self addError:error];
+    return context;
+}
+
+-(void) setContext:(NSString*)context
+{
+    NSError *error;
+    [self.jsonWireClient postContext:context session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
 -(void) setTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type
 {
     NSError *error;
@@ -671,44 +694,6 @@
 /////////////////
 // 3.0 METHODS //
 /////////////////
-
--(BOOL) airplaneMode
-{
-	NSError *error;
-	BOOL airplaneMode = [self.jsonWireClient getAirplaneModeForSession:self.session.sessionId error:&error];
-	[self addError:error];
-	return airplaneMode;
-}
-
--(void) setAirplaneMode:(BOOL)airplaneMode
-{
-	NSError *error;
-	[self.jsonWireClient postAirplaneMode:airplaneMode session:self.session.sessionId error:&error];
-	[self addError:error];
-}
-
--(NSArray*) allContexts
-{
-	NSError *error;
-	NSArray * windows = [self.jsonWireClient getContextsForSession:self.session.sessionId error:&error];
-	[self addError:error];
-	return windows;
-}
-
--(NSString*) context
-{
-	NSError *error;
-	NSString* context = [self.jsonWireClient getContextForSession:self.session.sessionId error:&error];
-	[self addError:error];
-	return context;
-}
-
--(void) setContext:(NSString*)context
-{
-	NSError *error;
-	[self.jsonWireClient postContext:context session:self.session.sessionId error:&error];
-	[self addError:error];
-}
 
 // Appium specific extras
 -(void) runAppInBackground:(NSInteger)seconds

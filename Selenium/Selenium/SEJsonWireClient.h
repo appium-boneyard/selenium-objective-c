@@ -41,6 +41,15 @@
 // DELETE /session/:sessionId
 -(void) deleteSessionWithSession:(NSString*)sessionId error:(NSError**)error;
 
+// GET /session/:sessionid/contexts
+-(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error;
+
+// GET /session/:sessionid/context
+-(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionid/context
+-(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error;
+
 // POST /session/:sessionId/timeouts
 -(void) postTimeout:(NSInteger)timeoutInMilliseconds forType:(SETimeoutType)type session:(NSString*)sessionId error:(NSError**)error;
 
@@ -323,33 +332,100 @@
 // 3.0 METHODS //
 /////////////////
 
-// GET /session/:sessionid/airplane_mode
--(BOOL) getAirplaneModeForSession:(NSString*)sessionId error:(NSError**)error;
+// POST /wd/hub/session/:sessionId/appium/device/shake
+-(void) postShakeDeviceWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// POST /session/:sessionid/airplane_mode
--(void) postAirplaneMode:(BOOL)airplaneMode session:(NSString*)sessionId error:(NSError**)error;
+// POST /wd/hub/session/:sessionId/appium/device/lock
+-(void) postLockDeviceWithSession:(NSString*)sessionId seconds:(NSInteger)seconds error:(NSError**)error;
 
-// GET /session/:sessionid/contexts
--(NSArray*) getContextsForSession:(NSString*)sessionId error:(NSError**)error;
+// POST /wd/hub/session/:sessionId/appium/device/unlock
+-(void) postUnlockDeviceWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// GET /session/:sessionid/context
--(NSString*) getContextForSession:(NSString*)sessionId error:(NSError**)error;
+// POST /wd/hub/session/:sessionId/appium/device/is_locked
+-(BOOL) postIsDeviceLockedWithSession:(NSString*)sessionId error:(NSError**)error;
 
-// POST /session/:sessionid/context
--(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error;
+// POST /wd/hub/session/:sessionId/appium/device/press_keycode
+-(void) postPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
 
-// POST /session/:sessionId/appium/app/background
-- (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error;
+// POST /wd/hub/session/:sessionId/appium/device/long_press_keycode
+-(void) postLongPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/keyevent
+-(void) postKeyEvent:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/appium/app/rotate
 - (void)postRotate:(SEScreenOrientation)orientation session:(NSString*)sessionId error:(NSError **)error;
 
-// POST /session/:sessionId/appium/app/reset
-- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error;
+// GET /wd/hub/session/:sessionId/appium/device/current_activity
+-(NSString*) getCurrentActivityForDeviceForSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/install_app
+- (void)postInstallApp:(NSString*)appPath session:(NSString*)sessionId error:(NSError **)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/remove_app
+- (void)postRemoveApp:(NSString*)appPath session:(NSString*)sessionId error:(NSError **)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/app_installed
+-(BOOL) postIsAppInstalledWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/hide_keyboard
+-(void) postHideKeyboardWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/push_file
+- (void)postPushFileToPath:(NSString*)path data:(NSData*)data session:(NSString*)sessionId error:(NSError **)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/pull_file
+-(NSData*) postPullFileAtPath:(NSString*)path session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/pull_folder
+-(NSData*) postPullFolderAtPath:(NSString*)path session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_airplane_mode
+-(void) postToggleAirplaneModeWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_data
+-(void) postToggleDataWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_wifi
+-(void) postToggleWifiWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/toggle_location_services
+-(void) postToggleLocationServicesWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/open_notifications
+-(void) postOpenNotificationsWithSession:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/device/start_activity
+-(void) postStartActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/appium/app/launch
+- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error;
 
 // POST /session/:sessionId/appium/app/close
 - (void)postCloseAppWithSession:(NSString *)sessionId error:(NSError **)error;
 
-//POST /session/:sessionId/appium/app/launch
-- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error;
+// POST /session/:sessionId/appium/app/reset
+- (void)postResetAppWithSession:(NSString *)sessionId error:(NSError **)error;
+
+// POST /session/:sessionId/appium/app/background
+- (void)postRunAppInBackground:(NSInteger)seconds session:(NSString *)sessionId error:(NSError **)error;
+
+// POST /wd/hub/session/:sessionId/appium/app/end_test_coverage
+- (void)postEndTestCoverageWithSession:(NSString *)sessionId error:(NSError **)error;
+
+// POST /wd/hub/session/:sessionId/appium/app/strings
+-(NSString*) postAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/element/:elementId?/value
+-(void) postSetValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/element/:elementId?/replace_value
+-(void) postReplaceValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /wd/hub/session/:sessionId/appium/settings
+-(void) postAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error;
+
+// GET /wd/hub/session/:sessionId/appium/settings
+-(NSDictionary*) getAppiumSettingsWithSession:(NSString*)sessionId error:(NSError**)error;
+
 @end
