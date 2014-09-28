@@ -1253,11 +1253,12 @@
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// GET /wd/hub/session/:sessionId/appium/app/strings
--(NSString*) getAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error
+// POST /wd/hub/session/:sessionId/appium/app/strings
+-(NSString*) getAppStringsForLanguage:(NSString*)languageCode session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/strings", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
+    NSDictionary *postParams = languageCode == nil ? [NSDictionary new] : @{@"language" : languageCode};
+    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
     return [[json objectForKey:@"value"] stringValue];
 }
 

@@ -227,10 +227,10 @@
 -(void) rotateDevice:(SEScreenOrientation)orientation error:(NSError**)error;
 -(NSString*)currentActivity;
 -(NSString*)currentActivityWithError:(NSError**)error;
--(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId;
--(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId error:(NSError**)error;
--(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId;
--(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+-(void)installAppAtPath:(NSString*)appPath;
+-(void)installAppAtPath:(NSString*)appPath error:(NSError**)error;
+-(void)removeApp:(NSString*)bundleId;
+-(void)removeApp:(NSString*)bundleId error:(NSError**)error;
 -(BOOL)isAppInstalled:(NSString*)bundleId;
 -(BOOL)isAppInstalled:(NSString*)bundleId error:(NSError**)error;
 -(void) hideKeyboard;
@@ -264,8 +264,9 @@
 -(void) runAppInBackground:(NSInteger)seconds error:(NSError**)error;
 -(void) endTestCodeCoverage;
 -(void) endTestCodeCoverageWithError:(NSError**)error;
--(NSString*)stringsForApp:(NSString*)bundleId;
--(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error;
+-(NSString*)appStrings;
+-(NSString*)appStringsForLanguage:(NSString*)languageCode;
+-(NSString*)appStringsForLanguage:(NSString*)languageCode error:(NSError**)error;
 -(void) setAppiumSettings:(NSDictionary*)settings;
 -(void) setAppiumSettings:(NSDictionary*)settings error:(NSError**)error;
 -(NSDictionary*) appiumSettings;

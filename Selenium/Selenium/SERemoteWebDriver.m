@@ -1172,23 +1172,23 @@
     return [self.jsonWireClient getCurrentActivityForDeviceForSession:self.session.sessionId error:error];
 }
 
--(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId {
+-(void)installAppAtPath:(NSString*)appPath {
     NSError *error;
-    [self installAppAtPath:appPath session:self.session.sessionId error:&error];
+    [self installAppAtPath:appPath error:&error];
     [self addError:error];
 }
 
--(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId error:(NSError**)error {
+-(void)installAppAtPath:(NSString*)appPath error:(NSError**)error {
     [self.jsonWireClient postInstallApp:appPath session:self.session.sessionId error:error];
 }
 
--(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId {
+-(void)removeApp:(NSString*)bundleId {
     NSError *error;
-    [self removeApp:bundleId session:self.session.sessionId error:&error];
+    [self removeApp:bundleId error:&error];
     [self addError:error];
 }
 
--(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error {
+-(void)removeApp:(NSString*)bundleId error:(NSError**)error {
     [self.jsonWireClient postRemoveApp:bundleId session:self.session.sessionId error:error];
 }
 
@@ -1371,16 +1371,20 @@
     [self.jsonWireClient postEndTestCoverageWithSession:self.session.sessionId error:error];
 }
 
--(NSString*)stringsForApp:(NSString*)bundleId
+-(NSString*)appStrings {
+    return [self appStringsForLanguage:nil];
+}
+
+-(NSString*)appStringsForLanguage:(NSString *)languageCode
 {
     NSError *error;
-    NSString *strings = [self stringsForApp:bundleId error:&error];
+    NSString *strings = [self appStringsForLanguage:languageCode error:&error];
     [self addError:error];
     return strings;
 }
 
--(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error {
-    return [self.jsonWireClient getAppStringsWithBundleId:bundleId session:self.session.sessionId error:error];
+-(NSString*)appStringsForLanguage:(NSString*)languageCode error:(NSError**)error {
+    return [self.jsonWireClient getAppStringsForLanguage:languageCode session:self.session.sessionId error:error];
 }
 
 -(void) setAppiumSettings:(NSDictionary*)settings {

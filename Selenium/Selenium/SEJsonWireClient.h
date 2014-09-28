@@ -419,7 +419,7 @@
 - (void)postEndTestCoverageWithSession:(NSString *)sessionId error:(NSError **)error;
 
 // GET /wd/hub/session/:sessionId/appium/app/strings
--(NSString*) getAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+-(NSString*) getAppStringsForLanguage:(NSString*)languageCode session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/element/:elementId?/value
 -(void) postSetValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error;
