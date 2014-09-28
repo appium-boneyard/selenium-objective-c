@@ -345,13 +345,13 @@
 -(BOOL) postIsDeviceLockedWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/device/press_keycode
--(void) postPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
+-(void) postPressKeycode:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/device/long_press_keycode
--(void) postLongPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
+-(void) postLongPressKeycode:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/device/keyevent
--(void) postKeyEvent:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
+-(void) postKeyEvent:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/appium/app/rotate
 - (void)postRotate:(SEScreenOrientation)orientation session:(NSString*)sessionId error:(NSError **)error;
@@ -399,7 +399,7 @@
 -(void) postStartActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/appium/app/launch
-- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error;
+- (void)postLaunchAppWithSession:(NSString *)sessionId error:(NSError **)error;
 
 // POST /session/:sessionId/appium/app/close
 - (void)postCloseAppWithSession:(NSString *)sessionId error:(NSError **)error;
@@ -413,8 +413,8 @@
 // POST /wd/hub/session/:sessionId/appium/app/end_test_coverage
 - (void)postEndTestCoverageWithSession:(NSString *)sessionId error:(NSError **)error;
 
-// POST /wd/hub/session/:sessionId/appium/app/strings
--(NSString*) postAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+// GET /wd/hub/session/:sessionId/appium/app/strings
+-(NSString*) getAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/element/:elementId?/value
 -(void) postSetValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error;
@@ -423,7 +423,7 @@
 -(void) postReplaceValueForElement:(SEWebElement*)element value:(NSString*)value isUnicode:(BOOL)isUnicode session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /wd/hub/session/:sessionId/appium/settings
--(void) postAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error;
+-(void) postSetAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /wd/hub/session/:sessionId/appium/settings
 -(NSDictionary*) getAppiumSettingsWithSession:(NSString*)sessionId error:(NSError**)error;

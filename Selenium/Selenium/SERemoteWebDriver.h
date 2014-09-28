@@ -290,12 +290,69 @@
 // 3.0 METHODS //
 /////////////////
 
-
-// Appium specific extras
--(void) runAppInBackground:(NSInteger)seconds;
--(void) resetApp;
--(void) rotate:(SEScreenOrientation)orientation;
--(void) closeApp;
+-(void) shakeDevice;
+-(void) shakeDeviceWithError:(NSError**)error;
+-(void) lockDeviceScreen:(NSInteger)seconds;
+-(void) lockDeviceScreen:(NSInteger)seconds error:(NSError**)error;
+-(void) unlockDeviceScreen:(NSInteger)seconds;
+-(void) unlockDeviceScreen:(NSInteger)seconds error:(NSError**)error;
+-(BOOL) isDeviceLocked;
+-(BOOL) isDeviceLockedWithError:(NSError**)error;
+-(void) pressKeycode:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error;
+-(void) longPressKeycode:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error;
+-(void) triggerKeyEvent:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error;
+-(void) rotateDevice:(SEScreenOrientation)orientation;
+-(void) rotateDevice:(SEScreenOrientation)orientation error:(NSError**)error;
+-(NSString*)currentActivity;
+-(NSString*)currentActivityWithError:(NSError**)error;
+-(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId;
+-(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId error:(NSError**)error;
+-(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId;
+-(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error;
+-(BOOL)isAppInstalled:(NSString*)bundleId;
+-(BOOL)isAppInstalled:(NSString*)bundleId error:(NSError**)error;
+-(void) hideKeyboard;
+-(void) hideKeyboardWithError:(NSError**)error;
+-(void) pushFileToPath:(NSString*)filePath data:(NSData*)data;
+-(void) pushFileToPath:(NSString*)filePath data:(NSData*)data error:(NSError**) error;
+-(NSData*) pullFileAtPath:(NSString*)filePath;
+-(NSData*) pullFileAtPath:(NSString*)filePath error:(NSError**) error;
+-(NSData*) pullFolderAtPath:(NSString*)filePath;
+-(NSData*) pullFolderAtPath:(NSString*)filePath error:(NSError**) error;
+-(void) toggleAirplaneMode;
+-(void) toggleAirplaneModeWithError:(NSError**)error;
+-(void) toggleCellularData;
+-(void) toggleCellularDataWithError:(NSError**)error;
+-(void) toggleWifi;
+-(void) toggleWifiWithError:(NSError**)error;
+-(void) toggleLocationServices;
+-(void) toggleLocationServicesWithError:(NSError**)error;
+-(void) openNotifications;
+-(void) openNotificationsWithError:(NSError**)error;
+-(void) startActivity:(NSString*)activity package:(NSString*)package;
+-(void) startActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage;
+-(void) startActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage error:(NSError**)error;
 -(void) launchApp;
+-(void) launchAppWithError:(NSError**)error;
+-(void) closeApp;
+-(void) closeAppWithError:(NSError**)error;
+-(void) resetApp;
+-(void) resetAppWithError:(NSError**)error;
+-(void) runAppInBackground:(NSInteger)seconds;
+-(void) runAppInBackground:(NSInteger)seconds error:(NSError**)error;
+-(void) endTestCodeCoverage;
+-(void) endTestCodeCoverageWithError:(NSError**)error;
+-(NSString*)stringsForApp:(NSString*)bundleId;
+-(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error;
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element;
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode;
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error;
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element;
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode;
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error;
+-(void) setAppiumSettings:(NSDictionary*)settings;
+-(void) setAppiumSettings:(NSDictionary*)settings error:(NSError**)error;
+-(NSDictionary*) appiumSettings;
+-(NSDictionary*) appiumSettingsWithError:(NSError**)error;
 
 @end

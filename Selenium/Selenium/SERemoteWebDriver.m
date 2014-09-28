@@ -312,13 +312,6 @@
 	[self addError:error];
 }
 
--(void) rotate:(SEScreenOrientation)orientation
-{
-    NSError *error;
-    [self.jsonWireClient postRotate:orientation session:self.session.sessionId error:&error];
-    [self addError:error];
-}
-
 -(NSArray*) cookies
 {
 	NSError *error;
@@ -695,33 +688,344 @@
 // 3.0 METHODS //
 /////////////////
 
-// Appium specific extras
--(void) runAppInBackground:(NSInteger)seconds
-{
+-(void) shakeDevice {
     NSError *error;
-    [self.jsonWireClient postRunAppInBackground:seconds session:self.session.sessionId error:&error];
+    [self shakeDeviceWithError:&error];
     [self addError:error];
 }
 
--(void) resetApp
-{
+-(void) shakeDeviceWithError:(NSError**)error {
+    [self.jsonWireClient postShakeDeviceWithSession:self.session.sessionId error:error];
+}
+
+-(void) lockDeviceScreen:(NSInteger)seconds {
     NSError *error;
-    [self.jsonWireClient postResetAppWithSession:self.session.sessionId error:&error];
+    [self lockDeviceScreen:seconds error:&error];
     [self addError:error];
 }
 
--(void) closeApp
+-(void) lockDeviceScreen:(NSInteger)seconds error:(NSError**)error {
+    [self.jsonWireClient postLockDeviceWithSession:self.session.sessionId seconds:seconds error:error];
+}
+
+-(void) unlockDeviceScreen:(NSInteger)seconds {
+    NSError *error;
+    [self unlockDeviceScreen:seconds error:&error];
+    [self addError:error];
+}
+
+-(void) unlockDeviceScreen:(NSInteger)seconds error:(NSError**)error {
+    [self.jsonWireClient postUnlockDeviceWithSession:self.session.sessionId error:error];
+}
+
+-(BOOL) isDeviceLocked {
+    NSError *error;
+    BOOL locked = [self isDeviceLockedWithError:&error];
+    [self addError:error];
+    return locked;
+}
+
+-(BOOL) isDeviceLockedWithError:(NSError**)error {
+    return [self.jsonWireClient postIsDeviceLockedWithSession:self.session.sessionId error:error];
+}
+
+-(void) pressKeycode:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error {
+    [self.jsonWireClient postPressKeycode:keycode metastate:metastate session:self.session.sessionId error:error];
+}
+
+-(void) longPressKeycode:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error {
+    [self.jsonWireClient postLongPressKeycode:keycode metastate:metastate session:self.session.sessionId error:error];
+}
+
+-(void) triggerKeyEvent:(NSInteger)keycode metaState:(NSInteger)metastate error:(NSError**)error {
+    [self.jsonWireClient postKeyEvent:keycode metastate:metastate session:self.session.sessionId error:error];
+}
+
+-(void) rotateDevice:(SEScreenOrientation)orientation
 {
     NSError *error;
-    [self.jsonWireClient postCloseAppWithSession:self.session.sessionId error:&error];
+    [self rotateDevice:orientation error:&error];
     [self addError:error];
+}
+
+-(void) rotateDevice:(SEScreenOrientation)orientation error:(NSError**)error {
+    [self.jsonWireClient postRotate:orientation session:self.session.sessionId error:error];
+}
+
+-(NSString*)currentActivity
+{
+    NSError *error;
+    NSString *currentActivity = [self currentActivityWithError:&error];
+    [self addError:error];
+    return currentActivity;
+}
+
+-(NSString*)currentActivityWithError:(NSError**)error {
+    return [self.jsonWireClient getCurrentActivityForDeviceForSession:self.session.sessionId error:error];
+}
+
+-(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId {
+    NSError *error;
+    [self installAppAtPath:appPath session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void)installAppAtPath:(NSString*)appPath session:(NSString*)sessionId error:(NSError**)error {
+    [self.jsonWireClient postInstallApp:appPath session:self.session.sessionId error:error];
+}
+
+-(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId {
+    NSError *error;
+    [self removeApp:bundleId session:self.session.sessionId error:&error];
+    [self addError:error];
+}
+
+-(void)removeApp:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error {
+    [self.jsonWireClient postRemoveApp:bundleId session:self.session.sessionId error:error];
+}
+
+-(BOOL)isAppInstalled:(NSString*)bundleId
+{
+    NSError *error;
+    BOOL installed = [self isAppInstalled:bundleId error:&error];
+    [self addError:error];
+    return installed;
+}
+
+-(BOOL)isAppInstalled:(NSString*)bundleId error:(NSError**)error {
+    return [self.jsonWireClient postIsAppInstalledWithBundleId:bundleId session:self.session.sessionId error:error];
+}
+
+-(void) hideKeyboard {
+    NSError *error;
+    [self hideKeyboardWithError:&error];
+    [self addError:error];
+}
+
+-(void) hideKeyboardWithError:(NSError**)error {
+    [self.jsonWireClient postHideKeyboardWithSession:self.session.sessionId error:error];
+}
+
+-(void) pushFileToPath:(NSString*)filePath data:(NSData*)data {
+    NSError *error;
+    [self pushFileToPath:filePath data:data error:&error];
+    [self addError:error];
+}
+
+-(void) pushFileToPath:(NSString*)filePath data:(NSData*)data error:(NSError**) error {
+    [self.jsonWireClient postPushFileToPath:filePath data:data session:self.session.sessionId error:error];
+}
+
+-(NSData*) pullFileAtPath:(NSString*)filePath {
+    NSError *error;
+    NSData *data = [self pullFileAtPath:filePath error:&error];
+    [self addError:error];
+    return data;
+}
+
+-(NSData*) pullFileAtPath:(NSString*)filePath error:(NSError**) error {
+    return [self.jsonWireClient postPullFileAtPath:filePath session:self.session.sessionId error:error];
+}
+
+
+-(NSData*) pullFolderAtPath:(NSString*)filePath {
+    NSError *error;
+    NSData *data = [self pullFolderAtPath:filePath error:&error];
+    [self addError:error];
+    return data;
+}
+
+-(NSData*) pullFolderAtPath:(NSString*)filePath error:(NSError**) error {
+    return [self.jsonWireClient postPullFolderAtPath:filePath session:self.session.sessionId error:error];
+}
+
+-(void) toggleAirplaneMode {
+    NSError *error;
+    [self toggleAirplaneModeWithError:&error];
+    [self addError:error];
+}
+
+-(void) toggleAirplaneModeWithError:(NSError**)error {
+    [self.jsonWireClient postToggleAirplaneModeWithSession:self.session.sessionId error:error];
+}
+
+-(void) toggleCellularData {
+    NSError *error;
+    [self toggleCellularDataWithError:&error];
+    [self addError:error];
+}
+
+-(void) toggleCellularDataWithError:(NSError**)error {
+    [self.jsonWireClient postToggleDataWithSession:self.session.sessionId error:error];
+}
+
+-(void) toggleWifi {
+    NSError *error;
+    [self toggleWifiWithError:&error];
+    [self addError:error];
+}
+
+-(void) toggleWifiWithError:(NSError**)error {
+    [self.jsonWireClient postToggleWifiWithSession:self.session.sessionId error:error];
+}
+
+-(void) toggleLocationServices {
+    NSError *error;
+    [self toggleLocationServicesWithError:&error];
+    [self addError:error];
+}
+
+-(void) toggleLocationServicesWithError:(NSError**)error {
+    [self.jsonWireClient postToggleLocationServicesWithSession:self.session.sessionId error:error];
+}
+
+-(void) openNotifications {
+    NSError *error;
+    [self openNotificationsWithError:&error];
+    [self addError:error];
+}
+
+-(void) openNotificationsWithError:(NSError**)error {
+    [self.jsonWireClient postOpenNotificationsWithSession:self.session.sessionId error:error];
+}
+
+-(void) startActivity:(NSString*)activity package:(NSString*)package {
+    [self startActivity:activity package:package waitActivity:nil waitPackage:nil];
+}
+
+-(void) startActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage {
+    NSError *error;
+    [self startActivity:activity package:package waitActivity:waitActivity waitPackage:waitPackage error:&error];
+    [self addError:error];
+}
+
+-(void) startActivity:(NSString*)activity package:(NSString*)package waitActivity:(NSString*)waitActivity waitPackage:(NSString*)waitPackage error:(NSError**)error {
+    [self.jsonWireClient postStartActivity:activity package:package waitActivity:waitActivity waitPackage:waitPackage session:self.session.sessionId error:error];
 }
 
 -(void) launchApp
 {
     NSError *error;
-    [self.jsonWireClient launchAppWithSession:self.session.sessionId error:&error];
+    [self launchAppWithError:&error];
     [self addError:error];
+}
+
+-(void) launchAppWithError:(NSError**)error
+{
+    [self.jsonWireClient postLaunchAppWithSession:self.session.sessionId error:error];
+}
+
+-(void) closeApp
+{
+    NSError *error;
+    [self closeAppWithError:&error];
+    [self addError:error];
+}
+
+-(void) closeAppWithError:(NSError**)error
+{
+    [self.jsonWireClient postCloseAppWithSession:self.session.sessionId error:error];
+}
+
+-(void) resetApp
+{
+    NSError *error;
+    [self resetAppWithError:&error];
+    [self addError:error];
+}
+
+-(void) resetAppWithError:(NSError**)error
+{
+    [self.jsonWireClient postResetAppWithSession:self.session.sessionId error:error];
+}
+
+-(void) runAppInBackground:(NSInteger)seconds
+{
+    NSError *error;
+    [self runAppInBackground:seconds error:&error];
+    [self addError:error];
+}
+
+-(void) runAppInBackground:(NSInteger)seconds error:(NSError**)error
+{
+    [self.jsonWireClient postRunAppInBackground:seconds session:self.session.sessionId error:error];
+}
+
+-(void) endTestCodeCoverage
+{
+    NSError *error;
+    [self endTestCodeCoverageWithError:&error];
+    [self addError:error];
+}
+
+-(void) endTestCodeCoverageWithError:(NSError**)error
+{
+    [self.jsonWireClient postEndTestCoverageWithSession:self.session.sessionId error:error];
+}
+
+-(NSString*)stringsForApp:(NSString*)bundleId
+{
+    NSError *error;
+    NSString *strings = [self stringsForApp:bundleId error:&error];
+    [self addError:error];
+    return strings;
+}
+
+-(NSString*)stringsForApp:(NSString*)bundleId error:(NSError**)error {
+    return [self.jsonWireClient getAppStringsWithBundleId:bundleId session:self.session.sessionId error:error];
+}
+
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element {
+    [self setElementValue:value element:element isUnicode:NO];
+}
+
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
+    NSError *error;
+    [self setElementValue:value element:element isUnicode:isUnicode error:&error];
+    [self addError:error];
+}
+
+-(void) setElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error
+{
+    [self.jsonWireClient postSetValueForElement:element value:value isUnicode:isUnicode session:self.session.sessionId error:error];
+
+}
+
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element {
+    [self replaceElementValue:value element:element isUnicode:NO];
+}
+
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode {
+    NSError *error;
+    [self replaceElementValue:value element:element isUnicode:isUnicode error:&error];
+    [self addError:error];
+}
+
+-(void) replaceElementValue:(NSString*)value element:(SEWebElement*)element isUnicode:(BOOL)isUnicode error:(NSError**)error
+{
+    [self.jsonWireClient postReplaceValueForElement:element value:value isUnicode:isUnicode session:self.session.sessionId error:error];
+    
+}
+
+-(void) setAppiumSettings:(NSDictionary*)settings {
+    NSError *error;
+    [self setAppiumSettings:settings error:&error];
+    [self addError:error];
+}
+
+-(void) setAppiumSettings:(NSDictionary*)settings error:(NSError**)error {
+    [self.jsonWireClient postSetAppiumSettings:settings session:self.session.sessionId error:error];
+}
+
+-(NSDictionary*) appiumSettings {
+    NSError *error;
+    NSDictionary *settings = [self appiumSettingsWithError:&error];
+    [self addError:error];
+    return settings;
+}
+
+-(NSDictionary*) appiumSettingsWithError:(NSError**)error {
+    return [self.jsonWireClient getAppiumSettingsWithSession:self.session.sessionId error:error];
 }
 
 @end

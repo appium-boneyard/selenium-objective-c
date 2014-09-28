@@ -1058,7 +1058,7 @@
 }
 
 // POST /wd/hub/session/:sessionId/appium/device/press_keycode
--(void) postPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
+-(void) postPressKeycode:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/press_keycode", self.httpCommandExecutor, sessionId];
     NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
@@ -1070,7 +1070,7 @@
 
 
 // POST /wd/hub/session/:sessionId/appium/device/long_press_keycode
--(void) postLongPressKeycode:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
+-(void) postLongPressKeycode:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/long_press_keycode", self.httpCommandExecutor, sessionId];
     NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
@@ -1081,7 +1081,7 @@
 }
 
 // POST /wd/hub/session/:sessionId/appium/device/keyevent
--(void) postKeyEvent:(int)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
+-(void) postKeyEvent:(NSInteger)keycode metastate:(NSInteger)metaState session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/keyevent", self.httpCommandExecutor, sessionId];
     NSMutableDictionary *postParams = [NSMutableDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:keycode], @"keycode", nil];
@@ -1115,10 +1115,10 @@
 }
 
 // POST /wd/hub/session/:sessionId/appium/device/remove_app
-- (void)postRemoveApp:(NSString*)appPath session:(NSString*)sessionId error:(NSError **)error
+- (void)postRemoveApp:(NSString*)bundleId session:(NSString*)sessionId error:(NSError **)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/device/remove_app", self.httpCommandExecutor, sessionId];
-    [SEUtility performPostRequestToUrl:urlString postParams:@{@"appPath" : appPath } error:error];
+    [SEUtility performPostRequestToUrl:urlString postParams:@{@"bundleId" : bundleId } error:error];
 }
 
 // POST /wd/hub/session/:sessionId/appium/device/app_installed
@@ -1208,7 +1208,7 @@
 }
 
 // POST /session/:sessionId/appium/app/launch
-- (void)launchAppWithSession:(NSString *)sessionId error:(NSError **)error
+- (void)postLaunchAppWithSession:(NSString *)sessionId error:(NSError **)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/launch", self.httpCommandExecutor, sessionId];
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
@@ -1243,11 +1243,11 @@
     [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
 }
 
-// POST /wd/hub/session/:sessionId/appium/app/strings
--(NSString*) postAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error
+// GET /wd/hub/session/:sessionId/appium/app/strings
+-(NSString*) getAppStringsWithBundleId:(NSString*)bundleId session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/app/strings", self.httpCommandExecutor, sessionId];
-    NSDictionary *json = [SEUtility performPostRequestToUrl:urlString postParams:nil error:error];
+    NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
     return [[json objectForKey:@"value"] stringValue];
 }
 
@@ -1274,7 +1274,7 @@
 }
 
 // POST /wd/hub/session/:sessionId/appium/settings
--(void) postAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetAppiumSettings:(NSDictionary*)settings session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/appium/settings", self.httpCommandExecutor, sessionId];
     [SEUtility performPostRequestToUrl:urlString postParams:@{@"settings":settings} error:error];
