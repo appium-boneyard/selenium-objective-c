@@ -9,7 +9,7 @@ To embed in your project take a look at [Appium.app](https://github.com/appium/a
 
 To use this framework, you will need to compile it using Xcode:
 
-1. Clone this repository or download it as a ZIP.
+1. Clone this repository or download it as a [ZIP](https://github.com/appium/selenium-objective-c/releases/download/v1.0.1/Selenium.framework.zip).
 1. Open the `Selenium.xcodeproj` from the `Selenium` directory.
 1. Ensure that the `Selenium` framework is chosen as the target (not `libSelenium`).
 1. Go to Product > Build For > Running.
