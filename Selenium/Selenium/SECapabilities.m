@@ -120,6 +120,22 @@ NSMutableDictionary* _dict;
 -(BOOL) nativeEvents { return [[_dict objectForKey:NATIVE_EVENTS] boolValue]; }
 -(void) setNativeEvents:(BOOL)nativeEvents { [_dict setValue:[NSNumber numberWithBool:nativeEvents] forKey:NATIVE_EVENTS]; }
 
+#pragma mark - Appium Capabilities
+
+- (NSString *)app { return [_dict objectForKey:APP]; }
+- (void)setApp:(NSString *)app { [_dict setObject:app forKey:APP]; }
+
+- (NSString *)automationName { return [_dict objectForKey:AUTOMATION_NAME]; }
+- (void)setAutomationName:(NSString *)automationName { [_dict setObject:automationName forKey:AUTOMATION_NAME]; }
+
+- (NSString *)deviceName { return [_dict objectForKey:DEVICE_NAME]; }
+- (void)setDeviceName:(NSString *)deviceName { [_dict setObject:deviceName forKey:DEVICE_NAME]; }
+
+- (NSString *)platformName { return [_dict objectForKey:PLATFORM_NAME]; }
+- (void)setPlatformName:(NSString *)platformName { [_dict setObject:platformName forKey:PLATFORM_NAME]; }
+
+- (NSString *)platformVersion { return [_dict objectForKey:PLATFORM_VERSION]; }
+- (void)setPlatformVersion:(NSString *)platformVersion { [_dict setObject:platformVersion forKey:PLATFORM_VERSION]; }
 
 #pragma mark - Custom Capabilities
 
