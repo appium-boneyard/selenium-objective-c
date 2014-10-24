@@ -51,24 +51,69 @@ NSMutableDictionary* _dict;
     self = [super init];
     if (self) {
 		_dict = [NSMutableDictionary new];
-		[self setBrowserName:[dict objectForKey:BROWSER_NAME]];
-		[self setVersion:[dict objectForKey:VERSION]];
-		[self setPlatform:[dict objectForKey:PLATFORM]];
-		[self setJavascriptEnabled:[[dict objectForKey:JAVASCRIPT_ENABLED] boolValue]];
-		[self setTakesScreenShot:[[dict objectForKey:TAKES_SCREENSHOT] boolValue]];
-		[self setHandlesAlerts:[[dict objectForKey:HANDLES_ALERTS] boolValue]];
-		[self setDatabaseEnabled:[[dict objectForKey:DATABASE_ENABLED] boolValue]];
-		[self setLocationContextEnabled:[[dict objectForKey:LOCATION_CONTEXT_ENABLED] boolValue]];
-		[self setApplicationCacheEnabled:[[dict objectForKey:APPLICATION_CACHE_ENABLED] boolValue]];
-		[self setBrowserConnectionEnabled:[[dict objectForKey:BROWSER_CONNECTION_ENABLED] boolValue]];
-		[self setCssSelectorsEnabled:[[dict objectForKey:CSS_SELECTORS_ENABLED] boolValue]];
-		[self setWebStorageEnabled:[[dict objectForKey:WEB_STORAGE_ENABLED] boolValue]];
+		if ([dict objectForKey:BROWSER_NAME]) {
+            [self setBrowserName:[dict objectForKey:BROWSER_NAME]];
+        }
+        
+        if ([dict objectForKey:VERSION]) {
+            [self setVersion:[dict objectForKey:VERSION]];
+        }
+
+        if ([dict objectForKey:PLATFORM]) {
+            [self setPlatform:[dict objectForKey:PLATFORM]];
+        }
+        
+        if ([dict objectForKey:JAVASCRIPT_ENABLED]) {
+            [self setJavascriptEnabled:[[dict objectForKey:JAVASCRIPT_ENABLED] boolValue]];
+        }
+        
+        if ([dict objectForKey:TAKES_SCREENSHOT]) {
+            [self setTakesScreenShot:[[dict objectForKey:TAKES_SCREENSHOT] boolValue]];
+        }
+        
+        if ([dict objectForKey:HANDLES_ALERTS]) {
+            [self setHandlesAlerts:[[dict objectForKey:HANDLES_ALERTS] boolValue]];
+        }
+        
+        if ([dict objectForKey:DATABASE_ENABLED]) {
+            [self setDatabaseEnabled:[[dict objectForKey:DATABASE_ENABLED] boolValue]];
+        }
+        
+        if ([dict objectForKey:LOCATION_CONTEXT_ENABLED]) {
+            [self setLocationContextEnabled:[[dict objectForKey:LOCATION_CONTEXT_ENABLED] boolValue]];
+        }
+        
+        if ([dict objectForKey:APPLICATION_CACHE_ENABLED]) {
+            [self setApplicationCacheEnabled:[[dict objectForKey:APPLICATION_CACHE_ENABLED] boolValue]];
+        }
+        
+        if ([dict objectForKey:BROWSER_CONNECTION_ENABLED]) {
+            [self setBrowserConnectionEnabled:[[dict objectForKey:BROWSER_CONNECTION_ENABLED] boolValue]];
+        }
+    
+        if ([dict objectForKey:CSS_SELECTORS_ENABLED]) {
+            [self setCssSelectorsEnabled:[[dict objectForKey:CSS_SELECTORS_ENABLED] boolValue]];
+        }
+        
+        if ([dict objectForKey:WEB_STORAGE_ENABLED]) {
+            [self setWebStorageEnabled:[[dict objectForKey:WEB_STORAGE_ENABLED] boolValue]];
+        }
 		
-		[self setApp:[dict objectForKey:APP]];
-		[self setAutomationName:[dict objectForKey:AUTOMATION_NAME]];
-		[self setDeviceName:[dict objectForKey:DEVICE_NAME]];
-		[self setPlatformName:[dict objectForKey:PLATFORM_NAME]];
-		[self setPlatformVersion:[dict objectForKey:PLATFORM_VERSION]];
+        if ([dict objectForKey:APP]) {
+            [self setApp:[dict objectForKey:APP]];
+        }
+        if ([dict objectForKey:AUTOMATION_NAME]) {
+            [self setAutomationName:[dict objectForKey:AUTOMATION_NAME]];
+        }
+        if ([dict objectForKey:DEVICE_NAME]) {
+            [self setDeviceName:[dict objectForKey:DEVICE_NAME]];
+        }
+        if ([dict objectForKey:PLATFORM_NAME]) {
+            [self setPlatformName:[dict objectForKey:PLATFORM_NAME]];
+        }
+        if ([dict objectForKey:PLATFORM_VERSION]) {
+            [self setPlatformVersion:[dict objectForKey:PLATFORM_VERSION]];
+        }
     }
     return self;
 }
