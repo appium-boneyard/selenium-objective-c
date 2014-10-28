@@ -258,13 +258,13 @@
 }
 
 // GET /session/:sessionId/screenshot
--(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error
+-(IMAGE_TYPE*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/screenshot", self.httpCommandExecutor, sessionId];
     NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSString *pngString = [json objectForKey:@"value"];
 	NSData *pngData = [NSData dataFromBase64String:pngString];
-	NSImage *image = [[NSImage alloc] initWithData:pngData];
+	IMAGE_TYPE *image = [[IMAGE_TYPE alloc] initWithData:pngData];
 	return image;
 }
 
@@ -344,7 +344,7 @@
 }
 
 // POST /session/:sessionId/window/:windowHandle/size
--(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetWindowSize:(SIZE_TYPE)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(size.width/1)], @"width", [NSNumber numberWithInt:(size.height/1)], @"height", nil];
@@ -352,19 +352,19 @@
 }
 
 // GET /session/:sessionId/window/:windowHandle/size
--(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(SIZE_TYPE) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/size", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float width = [[valueJson objectForKey:@"width"] floatValue];
 	float height = [[valueJson objectForKey:@"height"] floatValue];
-	NSSize size = NSMakeSize(width,height);
+	SIZE_TYPE size = SIZE_TYPE_MAKE(width,height);
 	return size;
 }
 
 // POST /session/:sessionId/window/:windowHandle/position
--(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(void) postSetWindowPosition:(POINT_TYPE)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(position.x / 1)], @"x", [NSNumber numberWithInt:(position.y/1)], @"y", nil];
@@ -372,14 +372,14 @@
 }
 
 // GET /session/:sessionId/window/:windowHandle/position
--(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
+-(POINT_TYPE) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/window/%@/position", self.httpCommandExecutor, sessionId, windowHandle];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
-	NSPoint position = NSMakePoint(x,y);
+	POINT_TYPE position = POINT_TYPE_MAKE(x,y);
 	return position;
 }
 
@@ -636,38 +636,38 @@
 }
 
 // GET /session/:sessionId/element/:id/location
--(NSPoint) getElementLocation:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(POINT_TYPE) getElementLocation:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
-	NSPoint point = NSMakePoint(x,y);
+	POINT_TYPE point = POINT_TYPE_MAKE(x,y);
 	return point;
 }
 
 // GET /session/:sessionId/element/:id/location_in_view
--(NSPoint) getElementLocationInView:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(POINT_TYPE) getElementLocationInView:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/location_in_view", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"x"] floatValue];
 	float y = [[valueJson objectForKey:@"y"] floatValue];
-	NSPoint point = NSMakePoint(x,y);
+	POINT_TYPE point = POINT_TYPE_MAKE(x,y);
 	return point;
 }
 
 // GET /session/:sessionId/element/:id/size
--(NSSize) getElementSize:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
+-(SIZE_TYPE) getElementSize:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/element/%@/size", self.httpCommandExecutor, sessionId, element.opaqueId];
 	NSDictionary *json = [SEUtility performGetRequestToUrl:urlString error:error];
 	NSDictionary *valueJson = [json objectForKey:@"value"];
 	float x = [[valueJson objectForKey:@"width"] floatValue];
 	float y = [[valueJson objectForKey:@"height"] floatValue];
-	NSSize size = NSMakeSize(x,y);
+	SIZE_TYPE size = SIZE_TYPE_MAKE(x,y);
 	return size;
 }
 
@@ -786,7 +786,7 @@
 }
 
 // POST /session/:sessionId/touch/down
--(void) postFingerDownAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+-(void) postFingerDownAt:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/down", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
@@ -794,7 +794,7 @@
 }
 
 // POST /session/:sessionId/touch/up
--(void) postFingerUpAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+-(void) postFingerUpAt:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/up", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
@@ -802,7 +802,7 @@
 }
 
 // POST /session/:sessionId/touch/move
--(void) postMoveFingerTo:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+-(void) postMoveFingerTo:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error
 {
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/move", self.httpCommandExecutor, sessionId];
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: [NSNumber numberWithInt:(int)point.x] , @"x", [NSNumber numberWithInt:(int)point.y] , @"y", nil];
@@ -818,7 +818,7 @@
 }
 
 // POST /session/:sessionId/touch/scroll
--(void) postScrollfromAnywhereOnTheScreenWithSession:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error
+-(void) postScrollfromAnywhereOnTheScreenWithSession:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error
 {
 	    NSString *urlString =[NSString stringWithFormat:@"%@/session/%@/touch/scroll", self.httpCommandExecutor, sessionId];
 	    NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:(int)point.x], @"x" ,[NSNumber numberWithInt:(int)point.y],@"y",nil];

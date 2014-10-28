@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SEJsonWireClient.h"
 #import "SEBy.h"
+#import "SEEnums.h"
 
 @class SEJsonWireClient;
 @class SEBy;
@@ -21,9 +22,9 @@
 @property (readonly) BOOL isDisplayed;
 @property (readonly) BOOL isEnabled;
 @property (readonly) BOOL isSelected;
-@property (readonly) NSPoint location;
-@property (readonly) NSPoint locationInView;
-@property (readonly) NSSize size;
+@property (readonly) POINT_TYPE location;
+@property (readonly) POINT_TYPE locationInView;
+@property (readonly) SIZE_TYPE size;
 @property (readonly) NSDictionary *elementJson;
 
 -(id) initWithOpaqueId:(NSString*)opaqueId jsonWireClient:(SEJsonWireClient*)jsonWireClient session:(NSString*)sessionId;
@@ -50,12 +51,12 @@
 -(BOOL) isEqualToElement:(SEWebElement*)element error:(NSError**)error;
 -(BOOL) isDisplayed;
 -(BOOL) isDisplayedAndReturnError:(NSError**)error;
--(NSPoint) location;
--(NSPoint) locationAndReturnError:(NSError**)error;
--(NSPoint) locationInView;
--(NSPoint) locationInViewAndReturnError:(NSError**)error;
--(NSSize) size;
--(NSSize) sizeAndReturnError:(NSError**)error;
+-(POINT_TYPE) location;
+-(POINT_TYPE) locationAndReturnError:(NSError**)error;
+-(POINT_TYPE) locationInView;
+-(POINT_TYPE) locationInViewAndReturnError:(NSError**)error;
+-(SIZE_TYPE) size;
+-(SIZE_TYPE) sizeAndReturnError:(NSError**)error;
 -(NSString*) cssProperty:(NSString*)propertyName;
 -(NSString*) cssProperty:(NSString*)propertyName error:(NSError**)error;
 

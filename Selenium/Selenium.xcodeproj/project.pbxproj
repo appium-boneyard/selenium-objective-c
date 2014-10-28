@@ -37,6 +37,33 @@
 		36F3D75716F7E39100A5DD70 /* SEWebElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75516F7E39100A5DD70 /* SEWebElement.m */; };
 		6B93026317011246003F4CFF /* SELocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B93026217011246003F4CFF /* SELocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6B93026517011418003F4CFF /* SELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93026417011418003F4CFF /* SELocation.m */; };
+		C77BC83219FFC16B008979E5 /* SeleniumForiOS.h in Headers */ = {isa = PBXBuildFile; fileRef = C77BC83119FFC16B008979E5 /* SeleniumForiOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC83819FFC16B008979E5 /* SeleniumForiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C77BC82D19FFC16B008979E5 /* SeleniumForiOS.framework */; };
+		C77BC83F19FFC16B008979E5 /* SeleniumForiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C77BC83E19FFC16B008979E5 /* SeleniumForiOSTests.m */; };
+		C77BC84619FFC196008979E5 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */; };
+		C77BC84719FFC196008979E5 /* SEBy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75116F7DFE700A5DD70 /* SEBy.m */; };
+		C77BC84819FFC196008979E5 /* SESession.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383C16F26945003A46FD /* SESession.m */; };
+		C77BC84919FFC196008979E5 /* SELocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B93026417011418003F4CFF /* SELocation.m */; };
+		C77BC84A19FFC196008979E5 /* SEStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB384016F26951003A46FD /* SEStatus.m */; };
+		C77BC84B19FFC196008979E5 /* SECapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383816F26926003A46FD /* SECapabilities.m */; };
+		C77BC84C19FFC196008979E5 /* SEEnums.m in Sources */ = {isa = PBXBuildFile; fileRef = 36C3AFA116F9379C000E73C6 /* SEEnums.m */; };
+		C77BC84D19FFC196008979E5 /* SEError.m in Sources */ = {isa = PBXBuildFile; fileRef = 360609C216F5657600BADCDE /* SEError.m */; };
+		C77BC84E19FFC196008979E5 /* SEWebElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75516F7E39100A5DD70 /* SEWebElement.m */; };
+		C77BC84F19FFC196008979E5 /* SEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 360486EE16F7C15100D968D8 /* SEUtility.m */; };
+		C77BC85019FFC196008979E5 /* SEJsonWireClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A5B25B16F8EFAE00AB30AF /* SEJsonWireClient.m */; };
+		C77BC85119FFC196008979E5 /* SERemoteWebDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB383416F26907003A46FD /* SERemoteWebDriver.m */; };
+		C77BC85219FFC1A5008979E5 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A03F8F16FA0F2A00F61F08 /* NSData+Base64.h */; };
+		C77BC85319FFC1A5008979E5 /* SEUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 360486ED16F7C15100D968D8 /* SEUtility.h */; };
+		C77BC85419FFC1B6008979E5 /* SEBy.h in Headers */ = {isa = PBXBuildFile; fileRef = 36F3D75016F7DFE700A5DD70 /* SEBy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85519FFC1B6008979E5 /* SESession.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383B16F26945003A46FD /* SESession.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85619FFC1B6008979E5 /* SELocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B93026217011246003F4CFF /* SELocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85719FFC1B6008979E5 /* SEStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383F16F26951003A46FD /* SEStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85819FFC1B6008979E5 /* SECapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383716F26926003A46FD /* SECapabilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85919FFC1B6008979E5 /* SEEnums.h in Headers */ = {isa = PBXBuildFile; fileRef = 36C3AFA016F9379C000E73C6 /* SEEnums.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85A19FFC1B6008979E5 /* SEError.h in Headers */ = {isa = PBXBuildFile; fileRef = 360609C116F5657600BADCDE /* SEError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85B19FFC1B6008979E5 /* SEWebElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 36F3D75416F7E39100A5DD70 /* SEWebElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85C19FFC1B6008979E5 /* SEJsonWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* SEJsonWireClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C77BC85D19FFC1B6008979E5 /* SERemoteWebDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383316F26907003A46FD /* SERemoteWebDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DB922EB318BC803C005C2F1E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		DB922ED318BC8075005C2F1E /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */; };
 		DB922ED418BC8075005C2F1E /* SEBy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75116F7DFE700A5DD70 /* SEBy.m */; };
@@ -72,6 +99,13 @@
 			remoteGlobalIDString = 36BB380016F268C2003A46FD;
 			remoteInfo = Selenium;
 		};
+		C77BC83919FFC16B008979E5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 36BB37F816F268C2003A46FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C77BC82C19FFC16B008979E5;
+			remoteInfo = SeleniumForiOS;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -91,7 +125,7 @@
 		36BB380C16F268C2003A46FD /* Selenium-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Selenium-Info.plist"; sourceTree = "<group>"; };
 		36BB380E16F268C2003A46FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36BB381016F268C2003A46FD /* Selenium-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Selenium-Prefix.pch"; sourceTree = "<group>"; };
-		36BB381916F268C2003A46FD /* SeleniumTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SeleniumTests.octest; path = SeleniumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		36BB381916F268C2003A46FD /* SeleniumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeleniumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36BB382216F268C2003A46FD /* SeleniumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SeleniumTests-Info.plist"; sourceTree = "<group>"; };
 		36BB382416F268C2003A46FD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		36BB382616F268C2003A46FD /* SeleniumTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeleniumTests.h; sourceTree = "<group>"; };
@@ -112,6 +146,12 @@
 		36F3D75516F7E39100A5DD70 /* SEWebElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SEWebElement.m; sourceTree = "<group>"; };
 		6B93026217011246003F4CFF /* SELocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SELocation.h; sourceTree = "<group>"; };
 		6B93026417011418003F4CFF /* SELocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SELocation.m; sourceTree = "<group>"; };
+		C77BC82D19FFC16B008979E5 /* SeleniumForiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SeleniumForiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C77BC83019FFC16B008979E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C77BC83119FFC16B008979E5 /* SeleniumForiOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeleniumForiOS.h; sourceTree = "<group>"; };
+		C77BC83719FFC16B008979E5 /* SeleniumForiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeleniumForiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C77BC83D19FFC16B008979E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C77BC83E19FFC16B008979E5 /* SeleniumForiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeleniumForiOSTests.m; sourceTree = "<group>"; };
 		DB922EB218BC803C005C2F1E /* liblibSelenium.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibSelenium.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB922EBF18BC803C005C2F1E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -131,6 +171,21 @@
 			files = (
 				36BB381C16F268C2003A46FD /* Cocoa.framework in Frameworks */,
 				36BB381F16F268C2003A46FD /* Selenium.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC82919FFC16B008979E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC83419FFC16B008979E5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C77BC83819FFC16B008979E5 /* SeleniumForiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +225,8 @@
 			children = (
 				36BB380A16F268C2003A46FD /* Selenium */,
 				36BB382016F268C2003A46FD /* SeleniumTests */,
+				C77BC82E19FFC16B008979E5 /* SeleniumForiOS */,
+				C77BC83B19FFC16B008979E5 /* SeleniumForiOSTests */,
 				36BB380316F268C2003A46FD /* Frameworks */,
 				36BB380216F268C2003A46FD /* Products */,
 			);
@@ -179,8 +236,10 @@
 			isa = PBXGroup;
 			children = (
 				36BB380116F268C2003A46FD /* Selenium.framework */,
-				36BB381916F268C2003A46FD /* SeleniumTests.octest */,
+				36BB381916F268C2003A46FD /* SeleniumTests.xctest */,
 				DB922EB218BC803C005C2F1E /* liblibSelenium.a */,
+				C77BC82D19FFC16B008979E5 /* SeleniumForiOS.framework */,
+				C77BC83719FFC16B008979E5 /* SeleniumForiOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -278,6 +337,40 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		C77BC82E19FFC16B008979E5 /* SeleniumForiOS */ = {
+			isa = PBXGroup;
+			children = (
+				C77BC83119FFC16B008979E5 /* SeleniumForiOS.h */,
+				C77BC82F19FFC16B008979E5 /* Supporting Files */,
+			);
+			path = SeleniumForiOS;
+			sourceTree = "<group>";
+		};
+		C77BC82F19FFC16B008979E5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C77BC83019FFC16B008979E5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C77BC83B19FFC16B008979E5 /* SeleniumForiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				C77BC83E19FFC16B008979E5 /* SeleniumForiOSTests.m */,
+				C77BC83C19FFC16B008979E5 /* Supporting Files */,
+			);
+			path = SeleniumForiOSTests;
+			sourceTree = "<group>";
+		};
+		C77BC83C19FFC16B008979E5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C77BC83D19FFC16B008979E5 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -297,6 +390,26 @@
 				6B93026317011246003F4CFF /* SELocation.h in Headers */,
 				360486EF16F7C15100D968D8 /* SEUtility.h in Headers */,
 				36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC82A19FFC16B008979E5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C77BC83219FFC16B008979E5 /* SeleniumForiOS.h in Headers */,
+				C77BC85419FFC1B6008979E5 /* SEBy.h in Headers */,
+				C77BC85519FFC1B6008979E5 /* SESession.h in Headers */,
+				C77BC85619FFC1B6008979E5 /* SELocation.h in Headers */,
+				C77BC85719FFC1B6008979E5 /* SEStatus.h in Headers */,
+				C77BC85819FFC1B6008979E5 /* SECapabilities.h in Headers */,
+				C77BC85919FFC1B6008979E5 /* SEEnums.h in Headers */,
+				C77BC85A19FFC1B6008979E5 /* SEError.h in Headers */,
+				C77BC85B19FFC1B6008979E5 /* SEWebElement.h in Headers */,
+				C77BC85C19FFC1B6008979E5 /* SEJsonWireClient.h in Headers */,
+				C77BC85D19FFC1B6008979E5 /* SERemoteWebDriver.h in Headers */,
+				C77BC85219FFC1A5008979E5 /* NSData+Base64.h in Headers */,
+				C77BC85319FFC1A5008979E5 /* SEUtility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,7 +469,43 @@
 			);
 			name = SeleniumTests;
 			productName = SeleniumTests;
-			productReference = 36BB381916F268C2003A46FD /* SeleniumTests.octest */;
+			productReference = 36BB381916F268C2003A46FD /* SeleniumTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C77BC82C19FFC16B008979E5 /* SeleniumForiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C77BC84419FFC16B008979E5 /* Build configuration list for PBXNativeTarget "SeleniumForiOS" */;
+			buildPhases = (
+				C77BC82819FFC16B008979E5 /* Sources */,
+				C77BC82919FFC16B008979E5 /* Frameworks */,
+				C77BC82A19FFC16B008979E5 /* Headers */,
+				C77BC82B19FFC16B008979E5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeleniumForiOS;
+			productName = SeleniumForiOS;
+			productReference = C77BC82D19FFC16B008979E5 /* SeleniumForiOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		C77BC83619FFC16B008979E5 /* SeleniumForiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C77BC84519FFC16B008979E5 /* Build configuration list for PBXNativeTarget "SeleniumForiOSTests" */;
+			buildPhases = (
+				C77BC83319FFC16B008979E5 /* Sources */,
+				C77BC83419FFC16B008979E5 /* Frameworks */,
+				C77BC83519FFC16B008979E5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C77BC83A19FFC16B008979E5 /* PBXTargetDependency */,
+			);
+			name = SeleniumForiOSTests;
+			productName = SeleniumForiOSTests;
+			productReference = C77BC83719FFC16B008979E5 /* SeleniumForiOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		DB922EB118BC803C005C2F1E /* libSelenium */ = {
@@ -385,6 +534,14 @@
 				LastTestingUpgradeCheck = 0600;
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Appium;
+				TargetAttributes = {
+					C77BC82C19FFC16B008979E5 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					C77BC83619FFC16B008979E5 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
 			};
 			buildConfigurationList = 36BB37FB16F268C2003A46FD /* Build configuration list for PBXProject "Selenium" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -401,6 +558,8 @@
 				36BB380016F268C2003A46FD /* Selenium */,
 				36BB381816F268C2003A46FD /* SeleniumTests */,
 				DB922EB118BC803C005C2F1E /* libSelenium */,
+				C77BC82C19FFC16B008979E5 /* SeleniumForiOS */,
+				C77BC83619FFC16B008979E5 /* SeleniumForiOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -419,6 +578,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				36BB382516F268C2003A46FD /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC82B19FFC16B008979E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC83519FFC16B008979E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +641,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C77BC82819FFC16B008979E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C77BC84619FFC196008979E5 /* NSData+Base64.m in Sources */,
+				C77BC84719FFC196008979E5 /* SEBy.m in Sources */,
+				C77BC84819FFC196008979E5 /* SESession.m in Sources */,
+				C77BC84919FFC196008979E5 /* SELocation.m in Sources */,
+				C77BC84A19FFC196008979E5 /* SEStatus.m in Sources */,
+				C77BC84B19FFC196008979E5 /* SECapabilities.m in Sources */,
+				C77BC84C19FFC196008979E5 /* SEEnums.m in Sources */,
+				C77BC84D19FFC196008979E5 /* SEError.m in Sources */,
+				C77BC84E19FFC196008979E5 /* SEWebElement.m in Sources */,
+				C77BC84F19FFC196008979E5 /* SEUtility.m in Sources */,
+				C77BC85019FFC196008979E5 /* SEJsonWireClient.m in Sources */,
+				C77BC85119FFC196008979E5 /* SERemoteWebDriver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C77BC83319FFC16B008979E5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C77BC83F19FFC16B008979E5 /* SeleniumForiOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DB922EAE18BC803C005C2F1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -494,6 +694,11 @@
 			isa = PBXTargetDependency;
 			target = 36BB380016F268C2003A46FD /* Selenium */;
 			targetProxy = 36BB381D16F268C2003A46FD /* PBXContainerItemProxy */;
+		};
+		C77BC83A19FFC16B008979E5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C77BC82C19FFC16B008979E5 /* SeleniumForiOS */;
+			targetProxy = C77BC83919FFC16B008979E5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -640,6 +845,136 @@
 			};
 			name = Release;
 		};
+		C77BC84019FFC16B008979E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SeleniumForiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		C77BC84119FFC16B008979E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SeleniumForiOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		C77BC84219FFC16B008979E5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SeleniumForiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C77BC84319FFC16B008979E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = SeleniumForiOSTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		DB922ECD18BC803C005C2F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -689,6 +1024,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C77BC84419FFC16B008979E5 /* Build configuration list for PBXNativeTarget "SeleniumForiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C77BC84019FFC16B008979E5 /* Debug */,
+				C77BC84119FFC16B008979E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C77BC84519FFC16B008979E5 /* Build configuration list for PBXNativeTarget "SeleniumForiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C77BC84219FFC16B008979E5 /* Debug */,
+				C77BC84319FFC16B008979E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		DB922ED118BC803C005C2F1E /* Build configuration list for PBXNativeTarget "libSelenium" */ = {
 			isa = XCConfigurationList;

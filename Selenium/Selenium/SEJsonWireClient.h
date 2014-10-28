@@ -92,7 +92,7 @@
 -(NSDictionary*) postExecuteAsyncScript:(NSString*)script arguments:(NSArray*)arguments session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/screenshot
--(NSImage*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
+-(IMAGE_TYPE*) getScreenshotWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/ime/available_engines
 -(NSArray*) getAvailableInputMethodEnginesWithSession:(NSString*)sessionId error:(NSError**)error;
@@ -119,16 +119,16 @@
 -(void) deleteWindowWithSession:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/window/:windowHandle/size
--(void) postSetWindowSize:(NSSize)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+-(void) postSetWindowSize:(SIZE_TYPE)size window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/window/:windowHandle/size
--(NSSize) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+-(SIZE_TYPE) getWindowSizeWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/window/:windowHandle/position
--(void) postSetWindowPosition:(NSPoint)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+-(void) postSetWindowPosition:(POINT_TYPE)position window:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/window/:windowHandle/position
--(NSPoint) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
+-(POINT_TYPE) getWindowPositionWithWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/window/:windowHandle/maximize
 -(void) postMaximizeWindow:(NSString*)windowHandle session:(NSString*)sessionId error:(NSError**)error;
@@ -206,13 +206,13 @@
 -(BOOL) getElementIsDisplayed:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/location
--(NSPoint) getElementLocation:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(POINT_TYPE) getElementLocation:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/location_in_view
--(NSPoint) getElementLocationInView:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(POINT_TYPE) getElementLocationInView:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/size
--(NSSize) getElementSize:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+-(SIZE_TYPE) getElementSize:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // GET /session/:sessionId/element/:id/css/:propertyName
 -(NSString*) getCSSProperty:(NSString*)propertyName element:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
@@ -254,19 +254,19 @@
 -(void) postTapElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/down
--(void) postFingerDownAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+-(void) postFingerDownAt:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/up
--(void) postFingerUpAt:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+-(void) postFingerUpAt:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/move
--(void) postMoveFingerTo:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+-(void) postMoveFingerTo:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/scroll
 -(void) postStartScrollingAtParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/scroll
--(void) postScrollfromAnywhereOnTheScreenWithSession:(NSPoint)point session:(NSString*)sessionId error:(NSError**)error;
+-(void) postScrollfromAnywhereOnTheScreenWithSession:(POINT_TYPE)point session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/doubleclick
 -(void) postDoubleTapElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;

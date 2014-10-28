@@ -302,14 +302,14 @@
     return [self.jsonWireClient postExecuteAsyncScript:script arguments:arguments session:self.session.sessionId error:error];
 }
 
--(NSImage*) screenshot
+-(IMAGE_TYPE*) screenshot
 {
 	NSError *error;
-    NSImage *image = [self screenshotWithError:&error];
+    IMAGE_TYPE *image = [self screenshotWithError:&error];
 	return image;
 }
 
--(NSImage*) screenshotWithError:(NSError**)error
+-(IMAGE_TYPE*) screenshotWithError:(NSError**)error
 {
     return [self.jsonWireClient getScreenshotWithSession:self.session.sessionId error:error];
 }
@@ -414,52 +414,52 @@
     [self.jsonWireClient deleteWindowWithSession:self.session.sessionId error:error];
 }
 
--(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle
+-(void) setWindowSize:(SIZE_TYPE)size window:(NSString*)windowHandle
 {
 	NSError *error;
     [self setWindowSize:size window:windowHandle error:&error];
 	[self addError:error];
 }
 
--(void) setWindowSize:(NSSize)size window:(NSString*)windowHandle error:(NSError**)error
+-(void) setWindowSize:(SIZE_TYPE)size window:(NSString*)windowHandle error:(NSError**)error
 {
     [self.jsonWireClient postSetWindowSize:size window:windowHandle session:self.session.sessionId error:error];
 }
 
--(NSSize) windowSizeForWindow:(NSString*)windowHandle
+-(SIZE_TYPE) windowSizeForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-    NSSize size = [self windowSizeForWindow:windowHandle error:&error];
+    SIZE_TYPE size = [self windowSizeForWindow:windowHandle error:&error];
 	[self addError:error];
 	return size;
 }
 
--(NSSize) windowSizeForWindow:(NSString*)windowHandle error:(NSError**)error
+-(SIZE_TYPE) windowSizeForWindow:(NSString*)windowHandle error:(NSError**)error
 {
     return [self.jsonWireClient getWindowSizeWithWindow:windowHandle session:self.session.sessionId error:error];
 }
 
--(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle
+-(void) setWindowPosition:(POINT_TYPE)position window:(NSString*)windowHandle
 {
 	NSError *error;
     [self setWindowPosition:position window:windowHandle error:&error];
 	[self addError:error];
 }
 
--(void) setWindowPosition:(NSPoint)position window:(NSString*)windowHandle error:(NSError**)error
+-(void) setWindowPosition:(POINT_TYPE)position window:(NSString*)windowHandle error:(NSError**)error
 {
     [self.jsonWireClient postSetWindowPosition:position window:windowHandle session:self.session.sessionId error:error];
 }
 
--(NSPoint) windowPositionForWindow:(NSString*)windowHandle
+-(POINT_TYPE) windowPositionForWindow:(NSString*)windowHandle
 {
 	NSError *error;
-    NSPoint position = [self windowPositionForWindow:windowHandle error:&error];
+    POINT_TYPE position = [self windowPositionForWindow:windowHandle error:&error];
 	[self addError:error];
 	return position;
 }
 
--(NSPoint) windowPositionForWindow:(NSString*)windowHandle error:(NSError**)error
+-(POINT_TYPE) windowPositionForWindow:(NSString*)windowHandle error:(NSError**)error
 {
     return [self.jsonWireClient getWindowPositionWithWindow:windowHandle session:self.session.sessionId error:error];
 }
@@ -770,38 +770,38 @@
     [self.jsonWireClient postTapElement:element session:self.session.sessionId error:error];
 }
 
--(void) fingerDownAt:(NSPoint)point
+-(void) fingerDownAt:(POINT_TYPE)point
 {
 	NSError *error;
     [self fingerDownAt:point error:&error];
 	[self addError:error];
 }
 
--(void) fingerDownAt:(NSPoint)point error:(NSError**)error
+-(void) fingerDownAt:(POINT_TYPE)point error:(NSError**)error
 {
     [self.jsonWireClient postFingerDownAt:point session:self.session.sessionId error:error];
 }
 
--(void) fingerUpAt:(NSPoint)point
+-(void) fingerUpAt:(POINT_TYPE)point
 {
 	NSError *error;
     [self fingerUpAt:point error:&error];
 	[self addError:error];
 }
 
--(void) fingerUpAt:(NSPoint)point error:(NSError**)error
+-(void) fingerUpAt:(POINT_TYPE)point error:(NSError**)error
 {
     [self.jsonWireClient postFingerUpAt:point session:self.session.sessionId error:error];
 }
 
--(void) moveFingerTo:(NSPoint)point
+-(void) moveFingerTo:(POINT_TYPE)point
 {
 	NSError *error;
     [self moveFingerTo:point error:&error];
 	[self addError:error];
 }
 
--(void) moveFingerTo:(NSPoint)point error:(NSError**)error
+-(void) moveFingerTo:(POINT_TYPE)point error:(NSError**)error
 {
     [self.jsonWireClient postMoveFingerTo:point session:self.session.sessionId error:error];
 }
@@ -818,14 +818,14 @@
     [self.jsonWireClient postStartScrollingAtParticularLocation:element xOffset:xOffset yOffset:yOffset session:self.session.sessionId error:error];
 }
 
--(void) scrollTo:(NSPoint)position
+-(void) scrollTo:(POINT_TYPE)position
 {
     NSError *error;
     [self scrollTo:position error:&error];
     [self addError:error];
 }
 
--(void) scrollTo:(NSPoint)position error:(NSError**)error
+-(void) scrollTo:(POINT_TYPE)position error:(NSError**)error
 {
     [self.jsonWireClient postScrollfromAnywhereOnTheScreenWithSession:position session:self.session.sessionId error:error];
 }

@@ -107,7 +107,6 @@
 {
 	NSError *error;
 	return [self isSelectedAndReturnError:&error];
-    [self.jsonWireClient addError:error];
 }
 
 -(BOOL) isSelectedAndReturnError:(NSError**)error
@@ -119,7 +118,6 @@
 {
 	NSError *error;
 	return [self isEnabledAndReturnError:&error];
-    [self.jsonWireClient addError:error];
 }
 
 -(BOOL) isEnabledAndReturnError:(NSError**)error
@@ -166,41 +164,41 @@
 	return [self.jsonWireClient getElementIsDisplayed:self session:self.sessionId error:error];
 }
 
--(NSPoint) location
+-(POINT_TYPE) location
 {
 	NSError *error;
-    NSPoint location = [self locationAndReturnError:&error];
+    POINT_TYPE location = [self locationAndReturnError:&error];
     [self.jsonWireClient addError:error];
     return location;
 }
 
--(NSPoint) locationAndReturnError:(NSError**)error
+-(POINT_TYPE) locationAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getElementLocation:self session:self.sessionId error:error];
 }
 
--(NSPoint) locationInView
+-(POINT_TYPE) locationInView
 {
 	NSError *error;
-	NSPoint locationInView = [self locationInViewAndReturnError:&error];
+	POINT_TYPE locationInView = [self locationInViewAndReturnError:&error];
     [self.jsonWireClient addError:error];
     return locationInView;
 }
 
--(NSPoint) locationInViewAndReturnError:(NSError**)error
+-(POINT_TYPE) locationInViewAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getElementLocationInView:self session:self.sessionId error:error];
 }
 
--(NSSize) size
+-(SIZE_TYPE) size
 {
 	NSError *error;
-	NSSize size = [self sizeAndReturnError:&error];
+	SIZE_TYPE size = [self sizeAndReturnError:&error];
     [self.jsonWireClient addError:error];
     return size;
 }
 
--(NSSize) sizeAndReturnError:(NSError**)error
+-(SIZE_TYPE) sizeAndReturnError:(NSError**)error
 {
 	return [self.jsonWireClient getElementSize:self session:self.sessionId error:error];
 }

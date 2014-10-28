@@ -8,6 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE
+#define POINT_TYPE CGPoint
+#define SIZE_TYPE CGSize
+#define IMAGE_TYPE UIImage
+#define POINT_TYPE_MAKE CGPointMake
+#define SIZE_TYPE_MAKE CGSizeMake
+#import <UIKit/UIKit.h>
+#else
+#define POINT_TYPE NSPoint
+#define SIZE_TYPE NSSize
+#define IMAGE_TYPE NSImage
+#define POINT_TYPE_MAKE NSMakePoint
+#define SIZE_TYPE_MAKE NSMakeSize
+#endif
+
+
 @interface SEEnums : NSObject
 
 typedef enum seleniumScreenOrientationTypes
