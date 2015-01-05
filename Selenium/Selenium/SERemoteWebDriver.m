@@ -219,7 +219,7 @@
 -(void) setUrl:(NSURL*)url
 {
 	NSError *error;
-    [self urlWithError:&error];
+    [self setUrl:url error:&error];
 	[self addError:error];
 }
 
