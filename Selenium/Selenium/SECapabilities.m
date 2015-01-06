@@ -31,7 +31,11 @@
 
 #import "SECapabilities.h"
 
-NSMutableDictionary* _dict;
+@interface SECapabilities() {
+    @private
+    NSMutableDictionary* _dict;
+}
+@end
 
 @implementation SECapabilities
 
