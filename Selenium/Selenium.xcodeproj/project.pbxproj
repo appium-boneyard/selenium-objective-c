@@ -1064,6 +1064,7 @@
 				C77BC84119FFC16B008979E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C77BC84519FFC16B008979E5 /* Build configuration list for PBXNativeTarget "SeleniumForiOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1072,6 +1073,7 @@
 				C77BC84319FFC16B008979E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DB922ED118BC803C005C2F1E /* Build configuration list for PBXNativeTarget "libSelenium" */ = {
 			isa = XCConfigurationList;
