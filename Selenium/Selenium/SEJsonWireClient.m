@@ -10,6 +10,8 @@
 #import "SEUtility.h"
 #import "SEStatus.h"
 #import "NSData+Base64.h"
+#import "SETouchAction.h"
+#import "SETouchActionCommand.h"
 
 
 @interface SEJsonWireClient ()
@@ -841,6 +843,26 @@
 	NSDictionary *postParams = [[NSDictionary alloc] initWithObjectsAndKeys: element.opaqueId, @"element", nil];
 	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
 }
+
+// POST /session/:sessionId/touch/perform
+-(void) postTouchAction:(SETouchAction *)touchAction session:(NSString*)sessionId error:(NSError**)error
+{
+
+	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/perform", self.httpCommandExecutor, sessionId];
+
+	NSMutableArray *actionsJson = [NSMutableArray array];
+	for (SETouchActionCommand *command in touchAction.commands) {
+		NSDictionary *action = @{
+				@"action": command.name,
+				@"options": [command.options copy]
+		};
+		[actionsJson addObject:action];
+	}
+
+	NSDictionary *postParams = @{@"actions": actionsJson};
+	[SEUtility performPostRequestToUrl:urlString postParams:postParams error:error];
+}
+
 
 // POST /session/:sessionId/touch/flick
 -(void) postFlickFromParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset  speed:(NSInteger)speed session:(NSString*)sessionId error:(NSError**)error
