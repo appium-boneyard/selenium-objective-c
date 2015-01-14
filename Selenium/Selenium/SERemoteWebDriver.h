@@ -12,6 +12,7 @@
 #import "SEWebElement.h"
 #import "SESession.h"
 #import "SEEnums.h"
+#import "SETouchAction.h"
 
 @class SECapabilities;
 @class SEBy;
@@ -168,6 +169,8 @@
 -(void) doubletapElement:(SEWebElement*)element error:(NSError**)error;
 -(void) pressElement:(SEWebElement*)element;
 -(void) pressElement:(SEWebElement*)element error:(NSError**)error;
+-(void) performTouchAction:(SETouchAction *)touchAction;
+-(void) performTouchAction:(SETouchAction *)touchAction error:(NSError**)error;
 -(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed;
 -(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed error:(NSError**)error;
 -(void) flickWithXSpeed:(NSInteger)xSpeed ySpeed:(NSInteger)ySpeed;

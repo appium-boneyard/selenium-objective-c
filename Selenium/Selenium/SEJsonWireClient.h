@@ -20,6 +20,7 @@
 @class SESession;
 @class SEWebElement;
 @class SELocation;
+@class SETouchAction;
 
 @interface SEJsonWireClient : NSObject
 
@@ -273,6 +274,9 @@
 
 // POST /session/:sessionId/touch/longclick
 -(void) postPressElement:(SEWebElement*)element session:(NSString*)sessionId error:(NSError**)error;
+
+// POST /session/:sessionId/touch/perform
+-(void) postTouchAction:(SETouchAction *)touchAction session:(NSString*)sessionId error:(NSError**)error;
 
 // POST /session/:sessionId/touch/flick
 -(void) postFlickFromParticularLocation:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset  speed:(NSInteger)speed session:(NSString*)sessionId error:(NSError**)error;

@@ -854,6 +854,18 @@
     [self.jsonWireClient postPressElement:element session:self.session.sessionId error:error];
 }
 
+-(void) performTouchAction:(SETouchAction *)touchAction
+{
+    NSError *error;
+    [self performTouchAction:touchAction error:&error];
+    [self addError:error];
+}
+
+- (void)performTouchAction:(SETouchAction *)touchAction error:(NSError **)error {
+    [self.jsonWireClient postTouchAction:touchAction session:self.session.sessionId error:error];
+}
+
+
 -(void) flickfromElement:(SEWebElement*)element xOffset:(NSInteger)xOffset yOffset:(NSInteger)yOffset speed:(NSInteger)speed
 {
     NSError *error;
