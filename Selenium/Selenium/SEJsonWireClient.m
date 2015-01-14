@@ -845,7 +845,8 @@
 }
 
 // POST /session/:sessionId/touch/perform
--(void) postTouchAction:(SETouchAction *)touchAction session:(NSString*)sessionId error:(NSError**)error {
+-(void) postTouchAction:(SETouchAction *)touchAction session:(NSString*)sessionId error:(NSError**)error
+{
 
 	NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/touch/perform", self.httpCommandExecutor, sessionId];
 

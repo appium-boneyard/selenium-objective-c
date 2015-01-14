@@ -20,23 +20,25 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 
 @implementation SETouchAction
 
-- (instancetype)init {
+- (instancetype) init
+{
     self = [super init];
-    if (!self) return nil;
-
-    self.commands = [NSMutableArray array];
-
+    if (self) {
+        self.commands = [NSMutableArray array];
+    }
     return self;
 }
 
 #pragma mark - Standard Press
--(void)pressElement:(SEWebElement *)element {
+-(void) pressElement:(SEWebElement *)element
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchPressKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [self.commands addObject:actionEvent];
 }
 
--(void)pressAtX:(NSInteger)x y:(NSInteger)y {
+-(void) pressAtX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchPressKey];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
     [actionEvent addParameterWithKey:@"y" value:@(y)];
@@ -44,7 +46,8 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 
--(void)pressElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y {
+-(void) pressElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchPressKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
@@ -53,26 +56,30 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 #pragma mark - Withdraw/Release
--(void)withdrawTouch {
+-(void) withdrawTouch
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchWithdrawKey];
     [self.commands addObject:actionEvent];
 }
 
 #pragma mark - Move To
--(void)moveToElement:(SEWebElement *)element {
+-(void) moveToElement:(SEWebElement *)element
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchMoveToKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [self.commands addObject:actionEvent];
 }
 
--(void)moveToX:(NSInteger)x y:(NSInteger)y {
+-(void) moveToX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchMoveToKey];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
     [actionEvent addParameterWithKey:@"y" value:@(y)];
     [self.commands addObject:actionEvent];
 }
 
--(void)moveToElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y {
+-(void) moveToElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchMoveToKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
@@ -81,25 +88,29 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 // An alias of moveToX:y
-- (void)moveByX:(NSInteger)x y:(NSInteger)y {
+- (void) moveByX:(NSInteger)x y:(NSInteger)y
+{
     [self moveToX:x y:y];
 }
 
 #pragma mark - Tap
--(void)tapElement:(SEWebElement *)element {
+-(void) tapElement:(SEWebElement *)element
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchTapKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [self.commands addObject:actionEvent];
 }
 
--(void)tapAtX:(NSInteger)x y:(NSInteger)y {
+-(void) tapAtX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchTapKey];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
     [actionEvent addParameterWithKey:@"y" value:@(y)];
     [self.commands addObject:actionEvent];
 }
 
--(void)tapElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y {
+-(void) tapElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchTapKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
@@ -109,12 +120,14 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 
 
 #pragma mark - Wait
--(void)wait {
+-(void) wait
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchWaitKey];
     [self.commands addObject:actionEvent];
 }
 
--(void)waitForTimeInterval:(NSTimeInterval)timeInterval {
+-(void) waitForTimeInterval:(NSTimeInterval)timeInterval
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchWaitKey];
 
     double milliseconds = timeInterval * 1000;
@@ -124,13 +137,15 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 #pragma mark - Long Press
--(void)longPressElement:(SEWebElement *)element {
+-(void) longPressElement:(SEWebElement *)element
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchLongPressKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [self.commands addObject:actionEvent];
 }
 
--(void)longPressAtX:(NSInteger)x y:(NSInteger)y {
+-(void) longPressAtX:(NSInteger)x y:(NSInteger)y
+{
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchLongPressKey];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
     [actionEvent addParameterWithKey:@"y" value:@(y)];
@@ -138,7 +153,7 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 
--(void)longPressElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y {
+-(void) longPressElement:(SEWebElement *)element atX:(NSInteger)x y:(NSInteger)y {
     SETouchActionCommand *actionEvent = [[SETouchActionCommand alloc] initWithName:SETouchLongPressKey];
     [actionEvent addParameterWithKey:@"element" value:[element opaqueId]];
     [actionEvent addParameterWithKey:@"x" value:@(x)];
@@ -147,7 +162,8 @@ static NSString * const SETouchLongPressKey     = @"longPress";
 }
 
 #pragma mark - Cancel
--(void)cancel {
+-(void) cancel
+{
     [self wait];
 }
 

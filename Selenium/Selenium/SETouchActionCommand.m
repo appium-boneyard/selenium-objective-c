@@ -12,16 +12,17 @@
 @implementation SETouchActionCommand {
 }
 
-- (instancetype)init {
+- (instancetype) init
+{
     self = [super init];
-    if (!self) return nil;
-
-    self.options = [NSMutableDictionary dictionary];
-
+    if (self) {
+        self.options = [NSMutableDictionary dictionary];
+    }
     return self;
 }
 
--(instancetype)initWithName:(NSString *)name {
+-(instancetype) initWithName:(NSString *)name
+{
     self = [self init];
     if (!self) return nil;
 
@@ -30,7 +31,8 @@
     return self;
 }
 
--(void)addParameterWithKey:(NSString *)keyName value:(id)value {
+-(void) addParameterWithKey:(NSString *)keyName value:(id)value
+{
     self.options[keyName] = value;
 }
 

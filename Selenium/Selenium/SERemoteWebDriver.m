@@ -861,7 +861,7 @@
     [self addError:error];
 }
 
-- (void)performTouchAction:(SETouchAction *)touchAction error:(NSError **)error {
+- (void) performTouchAction:(SETouchAction *)touchAction error:(NSError **)error {
     [self.jsonWireClient postTouchAction:touchAction session:self.session.sessionId error:error];
 }
 

@@ -11,8 +11,8 @@
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSMutableDictionary *options;
 
--(instancetype)initWithName:(NSString *)name;
+-(instancetype) initWithName:(NSString *)name;
 
--(void)addParameterWithKey:(NSString *)keyName value:(id)value;
+-(void) addParameterWithKey:(NSString *)keyName value:(id)value;
 
 @end
