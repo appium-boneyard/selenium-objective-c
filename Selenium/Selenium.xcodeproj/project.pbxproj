@@ -12,8 +12,8 @@
 		3306C2207766F6F5641E1139 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; };
 		3306C25385EBB6FB712F89AC /* SETouchActionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306C85130394E2A870D3523 /* SETouchActionCommand.m */; };
 		3306C2C2D1FBC84E7CA81F0B /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; };
-		3306C7298F878854FC02FF25 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; };
-		3306C8ECD336D7F85965A2B8 /* SETouchAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CF39008C00178B67B5F0 /* SETouchAction.h */; };
+		3306C7298F878854FC02FF25 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3306C8ECD336D7F85965A2B8 /* SETouchAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CF39008C00178B67B5F0 /* SETouchAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3306C91EBB90E1044C1A5BEC /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
 		3306CB27EB13953DC52AFB08 /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
 		3306CC5CC19595180868C882 /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
@@ -408,10 +408,10 @@
 				36C3AFA216F9379C000E73C6 /* SEEnums.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */,
 				6B93026317011246003F4CFF /* SELocation.h in Headers */,
+				3306C7298F878854FC02FF25 /* SETouchActionCommand.h in Headers */,
+				3306C8ECD336D7F85965A2B8 /* SETouchAction.h in Headers */,
 				360486EF16F7C15100D968D8 /* SEUtility.h in Headers */,
 				36A03F9116FA0F2A00F61F08 /* NSData+Base64.h in Headers */,
-				3306C8ECD336D7F85965A2B8 /* SETouchAction.h in Headers */,
-				3306C7298F878854FC02FF25 /* SETouchActionCommand.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
