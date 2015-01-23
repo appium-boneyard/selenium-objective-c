@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		3306C04E47AD5DFE0B556AE1 /* SETouchAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CF39008C00178B67B5F0 /* SETouchAction.h */; };
 		3306C1B353B30C0B4774A7C2 /* SETouchActionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306C85130394E2A870D3523 /* SETouchActionCommand.m */; };
-		3306C2207766F6F5641E1139 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; };
+		3306C2207766F6F5641E1139 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3306C25385EBB6FB712F89AC /* SETouchActionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306C85130394E2A870D3523 /* SETouchActionCommand.m */; };
 		3306C2C2D1FBC84E7CA81F0B /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; };
 		3306C7298F878854FC02FF25 /* SETouchActionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CEC56CDA44DE1E180E56 /* SETouchActionCommand.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -17,7 +17,7 @@
 		3306C91EBB90E1044C1A5BEC /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
 		3306CB27EB13953DC52AFB08 /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
 		3306CC5CC19595180868C882 /* SETouchAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306CF33E2A88D2218E6D0AB /* SETouchAction.m */; };
-		3306CCD4AF5152CD586E8334 /* SETouchAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CF39008C00178B67B5F0 /* SETouchAction.h */; };
+		3306CCD4AF5152CD586E8334 /* SETouchAction.h in Headers */ = {isa = PBXBuildFile; fileRef = 3306CF39008C00178B67B5F0 /* SETouchAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3306CE10F8694DF632AFE416 /* SETouchActionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3306C85130394E2A870D3523 /* SETouchActionCommand.m */; };
 		360486EF16F7C15100D968D8 /* SEUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 360486ED16F7C15100D968D8 /* SEUtility.h */; };
 		360486F016F7C15100D968D8 /* SEUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 360486EE16F7C15100D968D8 /* SEUtility.m */; };
@@ -76,6 +76,8 @@
 		C77BC85B19FFC1B6008979E5 /* SEWebElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 36F3D75416F7E39100A5DD70 /* SEWebElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C77BC85C19FFC1B6008979E5 /* SEJsonWireClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A5B25A16F8EFAE00AB30AF /* SEJsonWireClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C77BC85D19FFC1B6008979E5 /* SERemoteWebDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 36BB383316F26907003A46FD /* SERemoteWebDriver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7BF1A551A72BAE200016840 /* Selenium.h in Headers */ = {isa = PBXBuildFile; fileRef = C7BF1A541A72BAE200016840 /* Selenium.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C7BF1A561A72BAE200016840 /* Selenium.h in Headers */ = {isa = PBXBuildFile; fileRef = C7BF1A541A72BAE200016840 /* Selenium.h */; };
 		DB922EB318BC803C005C2F1E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36BB380416F268C2003A46FD /* Cocoa.framework */; };
 		DB922ED318BC8075005C2F1E /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A03F9016FA0F2A00F61F08 /* NSData+Base64.m */; };
 		DB922ED418BC8075005C2F1E /* SEBy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F3D75116F7DFE700A5DD70 /* SEBy.m */; };
@@ -168,6 +170,7 @@
 		C77BC83719FFC16B008979E5 /* SeleniumForiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeleniumForiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C77BC83D19FFC16B008979E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C77BC83E19FFC16B008979E5 /* SeleniumForiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeleniumForiOSTests.m; sourceTree = "<group>"; };
+		C7BF1A541A72BAE200016840 /* Selenium.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Selenium.h; sourceTree = "<group>"; };
 		DB922EB218BC803C005C2F1E /* liblibSelenium.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibSelenium.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB922EBF18BC803C005C2F1E /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -288,6 +291,7 @@
 				36BB384316F2695D003A46FD /* Utility */,
 				36A5B25916F8EF8F00AB30AF /* WebDriver */,
 				36BB380B16F268C2003A46FD /* Supporting Files */,
+				C7BF1A541A72BAE200016840 /* Selenium.h */,
 			);
 			path = Selenium;
 			sourceTree = "<group>";
@@ -404,6 +408,7 @@
 				36BB384116F26951003A46FD /* SEStatus.h in Headers */,
 				360609C316F5657600BADCDE /* SEError.h in Headers */,
 				36F3D75216F7DFE700A5DD70 /* SEBy.h in Headers */,
+				C7BF1A551A72BAE200016840 /* Selenium.h in Headers */,
 				36F3D75616F7E39100A5DD70 /* SEWebElement.h in Headers */,
 				36C3AFA216F9379C000E73C6 /* SEEnums.h in Headers */,
 				36A5B25C16F8EFAE00AB30AF /* SEJsonWireClient.h in Headers */,
@@ -428,12 +433,12 @@
 				C77BC85919FFC1B6008979E5 /* SEEnums.h in Headers */,
 				C77BC85A19FFC1B6008979E5 /* SEError.h in Headers */,
 				C77BC85B19FFC1B6008979E5 /* SEWebElement.h in Headers */,
+				3306C2207766F6F5641E1139 /* SETouchActionCommand.h in Headers */,
+				3306CCD4AF5152CD586E8334 /* SETouchAction.h in Headers */,
 				C77BC85C19FFC1B6008979E5 /* SEJsonWireClient.h in Headers */,
 				C77BC85D19FFC1B6008979E5 /* SERemoteWebDriver.h in Headers */,
 				C77BC85219FFC1A5008979E5 /* NSData+Base64.h in Headers */,
 				C77BC85319FFC1A5008979E5 /* SEUtility.h in Headers */,
-				3306CCD4AF5152CD586E8334 /* SETouchAction.h in Headers */,
-				3306C2207766F6F5641E1139 /* SETouchActionCommand.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +453,7 @@
 				DB922EE318BC807D005C2F1E /* SEStatus.h in Headers */,
 				DB922EE418BC807D005C2F1E /* SECapabilities.h in Headers */,
 				DB922EE518BC807D005C2F1E /* SEEnums.h in Headers */,
+				C7BF1A561A72BAE200016840 /* Selenium.h in Headers */,
 				DB922EE618BC807D005C2F1E /* SEError.h in Headers */,
 				DB922EE718BC807D005C2F1E /* SEWebElement.h in Headers */,
 				DB922EE818BC807D005C2F1E /* SEUtility.h in Headers */,
