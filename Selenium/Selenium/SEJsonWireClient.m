@@ -123,7 +123,7 @@
 -(void) postContext:(NSString*)context session:(NSString*)sessionId error:(NSError**)error
 {
     NSString *urlString = [NSString stringWithFormat:@"%@/session/%@/context", self.httpCommandExecutor, sessionId];
-    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:context, @"context", nil];
+    NSDictionary *postDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:context, @"name", nil];
     [SEUtility performPostRequestToUrl:urlString postParams:postDictionary error:error];
 }
 
