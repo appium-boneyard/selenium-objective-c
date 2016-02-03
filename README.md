@@ -3,7 +3,7 @@
 Selenium WebDriver Bindings for Objective-C
 
 To embed in your project take a look at [Appium.app](https://github.com/appium/appium-dot-app) or follow the instructions
-[here](http://wiki.remobjects.com/wiki/Linking_Custom_Frameworks_from_your_Xcode_Projects_(Xcode_(Mac))).
+[here](http://old.wiki.remobjects.com/wiki/How_to_link_Custom_Frameworks_from_your_Xcode_Projects).
 
 ## Getting It
 
